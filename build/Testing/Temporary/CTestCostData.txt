@@ -1,5 +1,0 @@
-test_nuts 18 0.000246776
-qa_ngham_framer 16 0.0128394
-qa_ngham_encoder 3 0
-qa_ngham_codeword_generator 18 0.0114478
----
