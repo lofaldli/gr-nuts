@@ -1,0 +1,332 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.9.1">
+  <compound refid="structdotprod" kind="struct"><name>dotprod</name>
+    <member refid="structdotprod_1adbf1e521fd1d119675dbfe11d8fa1e9e" kind="variable"><name>len</name></member>
+    <member refid="structdotprod_1af8e4b8f970f03563ce29cb5dacf82835" kind="variable"><name>coeffs</name></member>
+  </compound>
+  <compound refid="classgr_1_1nuts_1_1ngham__encoder" kind="class"><name>gr::nuts::ngham_encoder</name>
+    <member refid="classgr_1_1nuts_1_1ngham__encoder_1ac3ce665c23110e8f1942a834e59b1899" kind="typedef"><name>sptr</name></member>
+    <member refid="classgr_1_1nuts_1_1ngham__encoder_1a21232ce1b89066b5e14b1eb3e528362b" kind="function"><name>make</name></member>
+  </compound>
+  <compound refid="classgr_1_1nuts_1_1ngham__encoder__impl" kind="class"><name>gr::nuts::ngham_encoder_impl</name>
+    <member refid="classgr_1_1nuts_1_1ngham__encoder__impl_1a2ac3955a1fd64b68fbfec160b1b8d3e4" kind="function"><name>calculate_output_stream_length</name></member>
+    <member refid="classgr_1_1nuts_1_1ngham__encoder__impl_1abf45fdcd4aebe6480d24727028770993" kind="function"><name>ngham_encoder_impl</name></member>
+    <member refid="classgr_1_1nuts_1_1ngham__encoder__impl_1aa2b6fa3a84d0bca31ff75aeefa4a4975" kind="function"><name>~ngham_encoder_impl</name></member>
+    <member refid="classgr_1_1nuts_1_1ngham__encoder__impl_1a33d854825f33f8e5279c4019639b4093" kind="function"><name>work</name></member>
+  </compound>
+  <compound refid="classgr_1_1nuts_1_1ngham__framer" kind="class"><name>gr::nuts::ngham_framer</name>
+    <member refid="classgr_1_1nuts_1_1ngham__framer_1a1f9c2c24ab60e407181e1ec166a7ec35" kind="typedef"><name>sptr</name></member>
+    <member refid="classgr_1_1nuts_1_1ngham__framer_1adcf7ab005aaeee7faadc1b0eed56526d" kind="function"><name>make</name></member>
+  </compound>
+  <compound refid="classgr_1_1nuts_1_1ngham__framer__impl" kind="class"><name>gr::nuts::ngham_framer_impl</name>
+    <member refid="classgr_1_1nuts_1_1ngham__framer__impl_1ab83aaa52af7b73c2a8120041afd2b9f9" kind="function"><name>calculate_output_stream_length</name></member>
+    <member refid="classgr_1_1nuts_1_1ngham__framer__impl_1aba6b438bdf42c5d3457cbe29ffdd4ba2" kind="function"><name>ngham_framer_impl</name></member>
+    <member refid="classgr_1_1nuts_1_1ngham__framer__impl_1a528905569cbc497a31aacde7d3b3a44d" kind="function"><name>~ngham_framer_impl</name></member>
+    <member refid="classgr_1_1nuts_1_1ngham__framer__impl_1a568ba0b4af32ecde9da21544ee7b9d86" kind="function"><name>work</name></member>
+  </compound>
+  <compound refid="structrs" kind="struct"><name>rs</name>
+    <member refid="structrs_1a692bedf9280094386944246735fe9082" kind="variable"><name>mm</name></member>
+    <member refid="structrs_1a09178d65d110e8591c30fa1abdae1eed" kind="variable"><name>nn</name></member>
+    <member refid="structrs_1ad6861982d4694b7a53fbe36cfb99b684" kind="variable"><name>alpha_to</name></member>
+    <member refid="structrs_1a5435bc2064709c1fd562e5af2adf1abc" kind="variable"><name>index_of</name></member>
+    <member refid="structrs_1a4df77a582ab49d8bc43e030807bead30" kind="variable"><name>genpoly</name></member>
+    <member refid="structrs_1a21b6327827ab5a03d308341a318c18a4" kind="variable"><name>nroots</name></member>
+    <member refid="structrs_1a67f90fb6c579022abecdbe88b7cbd20b" kind="variable"><name>fcr</name></member>
+    <member refid="structrs_1ab070a8891afee4ffec919bfec478dc31" kind="variable"><name>prim</name></member>
+    <member refid="structrs_1a2c958e14363ef64c0b33b130c6256783" kind="variable"><name>iprim</name></member>
+    <member refid="structrs_1a87fdf7cda262a5ca4d9d99ec8c532994" kind="variable"><name>pad</name></member>
+  </compound>
+  <compound refid="namespacegr" kind="namespace"><name>gr</name>
+  </compound>
+  <compound refid="namespacegr_1_1nuts" kind="namespace"><name>gr::nuts</name>
+  </compound>
+  <compound refid="namespacestd" kind="namespace"><name>std</name>
+  </compound>
+  <compound refid="api_8h" kind="file"><name>api.h</name>
+    <member refid="api_8h_1ab0b40b0685497082c6dce38640c241bb" kind="define"><name>NUTS_API</name></member>
+  </compound>
+  <compound refid="ccsds_8h" kind="file"><name>ccsds.h</name>
+    <member refid="ccsds_8h_1a170755e30c36be4904106b7bb279b1ec" kind="define"><name>NN</name></member>
+    <member refid="ccsds_8h_1a5f5b4d84f10e6a71bef7c65548a8e317" kind="define"><name>NROOTS</name></member>
+    <member refid="ccsds_8h_1ae91c9d70e1e2c8b657e51de1fff60ada" kind="typedef"><name>data_t</name></member>
+    <member refid="ccsds_8h_1ac91ed521380923edb62c01a1ad650152" kind="variable"><name>Taltab</name></member>
+    <member refid="ccsds_8h_1afa58e689b97e42deb51097e890e44f1c" kind="variable"><name>Tal1tab</name></member>
+  </compound>
+  <compound refid="ccsds__scrambler_8h" kind="file"><name>ccsds_scrambler.h</name>
+    <member refid="ccsds__scrambler_8h_1a84276c23542bc0b253a77740a4c709fc" kind="variable"><name>ccsds_poly</name></member>
+    <member refid="ccsds__scrambler_8h_1ada1509f284427575a0a508b84cb04ad6" kind="variable"><name>ccsds_poly_pos</name></member>
+    <member refid="ccsds__scrambler_8h_1ab2e7072cbadddfb18c910f693d5cd937" kind="function"><name>ccsds_scrambler_init</name></member>
+    <member refid="ccsds__scrambler_8h_1ae73d72a128ac11c5489dd2c6ffb07f25" kind="function"><name>ccsds_scrambler_xor</name></member>
+  </compound>
+  <compound refid="char_8h" kind="file"><name>char.h</name>
+    <member refid="char_8h_1a3ed9b2483e4d6616a203769ad381c97c" kind="define"><name>MODNN</name></member>
+    <member refid="char_8h_1afdc383f8992f4a960bb22998f57b6d37" kind="define"><name>MM</name></member>
+    <member refid="char_8h_1a170755e30c36be4904106b7bb279b1ec" kind="define"><name>NN</name></member>
+    <member refid="char_8h_1afae14aea58e6520b2057147833c699de" kind="define"><name>ALPHA_TO</name></member>
+    <member refid="char_8h_1a690b4c8564b1cb507383e7a78f4cd6dc" kind="define"><name>INDEX_OF</name></member>
+    <member refid="char_8h_1a90fbc87e4b99a54543c8f37087cb4f03" kind="define"><name>GENPOLY</name></member>
+    <member refid="char_8h_1a5f5b4d84f10e6a71bef7c65548a8e317" kind="define"><name>NROOTS</name></member>
+    <member refid="char_8h_1a264b36b13386e3f62fe69e04711bc006" kind="define"><name>FCR</name></member>
+    <member refid="char_8h_1a6dd0302d2b9ced6e396b9182a6287b9e" kind="define"><name>PRIM</name></member>
+    <member refid="char_8h_1a8487c20a46e1e08f7aeabec7cef80945" kind="define"><name>IPRIM</name></member>
+    <member refid="char_8h_1a323d60150d94a9f5f599bb97726ac384" kind="define"><name>PAD</name></member>
+    <member refid="char_8h_1a0d158f1e3af2ab523eb8423db3e5bd6e" kind="define"><name>A0</name></member>
+    <member refid="char_8h_1ae91c9d70e1e2c8b657e51de1fff60ada" kind="typedef"><name>data_t</name></member>
+  </compound>
+  <compound refid="crc__ccitt_8h" kind="file"><name>crc_ccitt.h</name>
+    <member refid="crc__ccitt_8h_1ab9dd68997cbf413f56b91c02ce31f551" kind="variable"><name>crc_ccitt_table</name></member>
+    <member refid="crc__ccitt_8h_1a6339d4ab87d51e14c1621d9d0fcf799f" kind="function"><name>crc_ccitt_byte</name></member>
+    <member refid="crc__ccitt_8h_1aafc45e79cb970d486d22cc440cbabc9c" kind="function"><name>crc_ccitt</name></member>
+  </compound>
+  <compound refid="decode__rs_8h" kind="file"><name>decode_rs.h</name>
+    <member refid="decode__rs_8h_1a070d2ce7b6bb7e5c05602aa8c308d0c4" kind="define"><name>NULL</name></member>
+    <member refid="decode__rs_8h_1a3acffbd305ee72dcd4593c0d8af64a4f" kind="define"><name>MIN</name></member>
+    <member refid="decode__rs_8h_1a0d158f1e3af2ab523eb8423db3e5bd6e" kind="define"><name>A0</name></member>
+    <member refid="decode__rs_8h_1acb559820d9ca11295b4500f179ef6392" kind="variable"><name>i</name></member>
+    <member refid="decode__rs_8h_1a37d972ae0b47b9099e30983131d31916" kind="variable"><name>j</name></member>
+    <member refid="decode__rs_8h_1a514f1b439f404f86f77090fa9edc96ce" kind="variable"><name>r</name></member>
+    <member refid="decode__rs_8h_1ab66ed8e0098c0a86b458672a55a9cca9" kind="variable"><name>k</name></member>
+    <member refid="decode__rs_8h_1aa618de75d7820ddda91b88246e523d10" kind="variable"><name>u</name></member>
+    <member refid="decode__rs_8h_1a014485d6d3ba69fd978734a3aef883f6" kind="variable"><name>q</name></member>
+    <member refid="decode__rs_8h_1aaa0bf71c967ce2d0fe808214487e2286" kind="variable"><name>tmp</name></member>
+    <member refid="decode__rs_8h_1a23b307dd3a59a9b48d2b5948c743f1ee" kind="variable"><name>num1</name></member>
+    <member refid="decode__rs_8h_1a0d09ad3c04c1353e2ed68bea879109fd" kind="variable"><name>num2</name></member>
+    <member refid="decode__rs_8h_1a53d06e1f9e7c6e9e592e818a727133c0" kind="variable"><name>den</name></member>
+    <member refid="decode__rs_8h_1a826a6ba6bc6e89f002f3f957cda0f739" kind="variable"><name>discr_r</name></member>
+    <member refid="decode__rs_8h_1a18439fef8436c4f198a9073ecead2304" kind="variable"><name>lambda</name></member>
+    <member refid="decode__rs_8h_1a9fe0cea89380e465db342c2fed1cb7f1" kind="variable"><name>s</name></member>
+    <member refid="decode__rs_8h_1aeb84ba6ff2f5fdf9fbcba57eafc59a9c" kind="variable"><name>b</name></member>
+    <member refid="decode__rs_8h_1ab1d5e9361f18abb156f5a587153a8f54" kind="variable"><name>t</name></member>
+    <member refid="decode__rs_8h_1ad0d4cae4388ee97e9af0df5253f7d577" kind="variable"><name>omega</name></member>
+    <member refid="decode__rs_8h_1addb824cea713bddf6ebeefecb60b18e7" kind="variable"><name>root</name></member>
+    <member refid="decode__rs_8h_1a27324c8833d1b63fa7210986cb09dd1e" kind="variable"><name>reg</name></member>
+    <member refid="decode__rs_8h_1a324cc5e00ff6541a980009c72a651304" kind="variable"><name>loc</name></member>
+    <member refid="decode__rs_8h_1a4456b784db8d22d9f39b7e8315ae0889" kind="variable"><name>syn_error</name></member>
+    <member refid="decode__rs_8h_1ae11b3deb3de3df7dc48e439074023e35" kind="variable"><name>count</name></member>
+    <member refid="decode__rs_8h_1a986b778410d6a4079821be3fac3fa459" kind="variable"><name>el</name></member>
+    <member refid="decode__rs_8h_1ae35392cc6371b9dbb4d078dababc27af" kind="variable"><name>deg_lambda</name></member>
+    <member refid="decode__rs_8h_1a5668fb9d0b0fbaa9a0511d5172978408" kind="variable"><name>deg_omega</name></member>
+    <member refid="decode__rs_8h_1ad7067614e92ce39d7a3849623bd365f2" kind="variable"><name>__pad0__</name></member>
+    <member refid="decode__rs_8h_1a9be235427e1493bed46ef53739925f03" kind="function"><name>for</name></member>
+    <member refid="decode__rs_8h_1a98745e18037be270ce6b00eba751eb3b" kind="function"><name>if</name></member>
+    <member refid="decode__rs_8h_1a80e1b801d02ba0892e2a55e181672988" kind="function"><name>lambda</name></member>
+    <member refid="decode__rs_8h_1a59570fcdd4cdd417e212bf6a97f0630e" kind="function"><name>if</name></member>
+    <member refid="decode__rs_8h_1a033e3a1f711c8349cbe6d247a8d4ea48" kind="function"><name>while</name></member>
+    <member refid="decode__rs_8h_1a99b5f8166060fedc2cb6562e969667f7" kind="function"><name>reg</name></member>
+    <member refid="decode__rs_8h_1afd2cb6e14ef7913cc9d1e80729ea87cf" kind="function"><name>for</name></member>
+    <member refid="decode__rs_8h_1abd1bb729cc2e34bac9e4a239bd16d8e1" kind="function"><name>if</name></member>
+    <member refid="decode__rs_8h_1a6c05916b4baa39d0debcbffbab2e0c74" kind="function"><name>for</name></member>
+    <member refid="decode__rs_8h_1aed90c1bb1b06ce023b8511251398df2f" kind="function"><name>for</name></member>
+  </compound>
+  <compound refid="dotprod_8h" kind="file"><name>dotprod.h</name>
+  </compound>
+  <compound refid="encode__rs_8h" kind="file"><name>encode_rs.h</name>
+    <member refid="encode__rs_8h_1a0d158f1e3af2ab523eb8423db3e5bd6e" kind="define"><name>A0</name></member>
+    <member refid="encode__rs_8h_1a6badf32ecca7859c0c4689a31fd3759b" kind="variable"><name>feedback</name></member>
+    <member refid="encode__rs_8h_1a7c39a293c22ca2cb0dc54667d07ac132" kind="function"><name>memset</name></member>
+    <member refid="encode__rs_8h_1a84ccc0ca468fe4078e072defdfda38db" kind="function"><name>for</name></member>
+  </compound>
+  <compound refid="fec_8h" kind="file"><name>fec.h</name>
+    <member refid="fec_8h_1ac4de755dd1e3f60b5cbf8743e9259d63" kind="define"><name>V27POLYA</name></member>
+    <member refid="fec_8h_1a48615fae3ecf1c3874e893702629e6f6" kind="define"><name>V27POLYB</name></member>
+    <member refid="fec_8h_1a140861f14a9276b844759287895c8da2" kind="define"><name>V29POLYA</name></member>
+    <member refid="fec_8h_1ad47336f0512134b30ff0d0ba1daf7ea7" kind="define"><name>V29POLYB</name></member>
+    <member refid="fec_8h_1a4ac4845a19b85e6e4790295cc00b18a6" kind="define"><name>V39POLYA</name></member>
+    <member refid="fec_8h_1a23350c0ff686beabd0f7befc2048042e" kind="define"><name>V39POLYB</name></member>
+    <member refid="fec_8h_1a36a2a522d734a74fd087dc39d9080e16" kind="define"><name>V39POLYC</name></member>
+    <member refid="fec_8h_1a125513495de9ab0ad020bccf5fcb9a2b" kind="define"><name>V615POLYA</name></member>
+    <member refid="fec_8h_1af007a92daa0a085d2e562915db8a0557" kind="define"><name>V615POLYB</name></member>
+    <member refid="fec_8h_1aeb5e074edb614d0c8f3ca6c58a9336f1" kind="define"><name>V615POLYC</name></member>
+    <member refid="fec_8h_1a5fa89b9587dfd125383f7b85a8b8fca6" kind="define"><name>V615POLYD</name></member>
+    <member refid="fec_8h_1affa6f5e77d16e52bdcb2e62b312e44aa" kind="define"><name>V615POLYE</name></member>
+    <member refid="fec_8h_1a2bbade098cde0a42772c9c8f99667d79" kind="define"><name>V615POLYF</name></member>
+    <member refid="fec_8h_1aa1fc3805dac6f71f457fbbc263105bf6" kind="enum"><name>cpu_mode</name></member>
+    <member refid="fec_8h_1aa1fc3805dac6f71f457fbbc263105bf6a6ce26a62afab55d7606ad4e92428b30c" kind="enumvalue"><name>UNKNOWN</name></member>
+    <member refid="fec_8h_1aa1fc3805dac6f71f457fbbc263105bf6a8268527d969e4ef493d3f35844a0b841" kind="enumvalue"><name>PORT</name></member>
+    <member refid="fec_8h_1aa1fc3805dac6f71f457fbbc263105bf6aca3af98d4c9f6368a03b5a0e3fc16d92" kind="enumvalue"><name>MMX</name></member>
+    <member refid="fec_8h_1aa1fc3805dac6f71f457fbbc263105bf6a403b03371fd04961f31f99b254cf8e57" kind="enumvalue"><name>SSE</name></member>
+    <member refid="fec_8h_1aa1fc3805dac6f71f457fbbc263105bf6a8d896e4fb625a47eaa49059a390971df" kind="enumvalue"><name>SSE2</name></member>
+    <member refid="fec_8h_1aa1fc3805dac6f71f457fbbc263105bf6aeea66ae42c678f5f715cab106ddcd1cc" kind="enumvalue"><name>ALTIVEC</name></member>
+    <member refid="fec_8h_1ac91ed521380923edb62c01a1ad650152" kind="variable"><name>Taltab</name></member>
+    <member refid="fec_8h_1afa58e689b97e42deb51097e890e44f1c" kind="variable"><name>Tal1tab</name></member>
+    <member refid="fec_8h_1a12c7264de9c22b083f784b5a48a1cd7f" kind="variable"><name>Cpu_mode</name></member>
+    <member refid="fec_8h_1ad6f19d6e6bad261d9b8ccb437b346625" kind="variable"><name>Bitcnt</name></member>
+    <member refid="fec_8h_1a7f7a123501da03eb24bc830b143ff58f" kind="function"><name>create_viterbi27</name></member>
+    <member refid="fec_8h_1a0d4492fb5eb045ca5f7ab8cb640fe5e1" kind="function"><name>set_viterbi27_polynomial</name></member>
+    <member refid="fec_8h_1aea28e56719f577828e1b0683af502fe9" kind="function"><name>init_viterbi27</name></member>
+    <member refid="fec_8h_1afd64fa8698596be1f1e2b6adc72bd592" kind="function"><name>update_viterbi27_blk</name></member>
+    <member refid="fec_8h_1a9ae21effe928405fb2422d723bb1474b" kind="function"><name>chainback_viterbi27</name></member>
+    <member refid="fec_8h_1a526e3258ce45e0a8d01ce987859383fa" kind="function"><name>delete_viterbi27</name></member>
+    <member refid="fec_8h_1a35cffdef2be2bb47a97cb93353b96740" kind="function"><name>create_viterbi27_port</name></member>
+    <member refid="fec_8h_1af52e69ab19930745b40054045cb9bece" kind="function"><name>set_viterbi27_polynomial_port</name></member>
+    <member refid="fec_8h_1a0581e2c456eddeedb2cb3bc97e48b06b" kind="function"><name>init_viterbi27_port</name></member>
+    <member refid="fec_8h_1aa4de932c94486ce4bc854321f9330078" kind="function"><name>chainback_viterbi27_port</name></member>
+    <member refid="fec_8h_1a5207ad187be781f099c8fea095879100" kind="function"><name>delete_viterbi27_port</name></member>
+    <member refid="fec_8h_1ae62e7998ed2e146fe61233b9e506b375" kind="function"><name>update_viterbi27_blk_port</name></member>
+    <member refid="fec_8h_1a25ca846f286c73d7c083599a9e18c382" kind="function"><name>create_viterbi29</name></member>
+    <member refid="fec_8h_1a79decff937a3f3011a79fa3e698b0a6b" kind="function"><name>set_viterbi29_polynomial</name></member>
+    <member refid="fec_8h_1a2d3f3bdd16d0760d102cf3b34119253f" kind="function"><name>init_viterbi29</name></member>
+    <member refid="fec_8h_1a96e9962184214886fd8a4f8bec29d229" kind="function"><name>update_viterbi29_blk</name></member>
+    <member refid="fec_8h_1a1927cdc2b565904aff60786bf30bfda5" kind="function"><name>chainback_viterbi29</name></member>
+    <member refid="fec_8h_1a0d23b3254d0e506bbdd6c5c1a39ac1aa" kind="function"><name>delete_viterbi29</name></member>
+    <member refid="fec_8h_1ac93bf880d3823e5f4cc16f44bc83867a" kind="function"><name>create_viterbi29_port</name></member>
+    <member refid="fec_8h_1abbb3dcb7111c424479b2bdc3dbd6465a" kind="function"><name>set_viterbi29_polynomial_port</name></member>
+    <member refid="fec_8h_1ab778f35882f795ee7b004de9be92d063" kind="function"><name>init_viterbi29_port</name></member>
+    <member refid="fec_8h_1ad6348e6f3a0b8b502409dc6015df8238" kind="function"><name>chainback_viterbi29_port</name></member>
+    <member refid="fec_8h_1aeaaf8f317b61bb4ca5d7f8ac3d94f119" kind="function"><name>delete_viterbi29_port</name></member>
+    <member refid="fec_8h_1a8b789412246c4432f6b1363874928c10" kind="function"><name>update_viterbi29_blk_port</name></member>
+    <member refid="fec_8h_1a788da27ccdd182a20a6aa26d2cdc1e3a" kind="function"><name>create_viterbi39</name></member>
+    <member refid="fec_8h_1a5b3415443f0bf1f9f7315874a03b08d4" kind="function"><name>set_viterbi39_polynomial</name></member>
+    <member refid="fec_8h_1a1f954500c8fd62de923d17dd40c08e63" kind="function"><name>init_viterbi39</name></member>
+    <member refid="fec_8h_1ac501bb963a712a2170f1d517184e96de" kind="function"><name>update_viterbi39_blk</name></member>
+    <member refid="fec_8h_1a1d7271b81642b7380d2a439cba4f4641" kind="function"><name>chainback_viterbi39</name></member>
+    <member refid="fec_8h_1a3b38c821760b2e7c65833755198779b4" kind="function"><name>delete_viterbi39</name></member>
+    <member refid="fec_8h_1afd583e542eef8bf1f4d733efc8581d8a" kind="function"><name>create_viterbi39_port</name></member>
+    <member refid="fec_8h_1a8711f8bb399a0ff3e7ddeca076844fe4" kind="function"><name>set_viterbi39_polynomial_port</name></member>
+    <member refid="fec_8h_1afeeee2632aa5aa7251706003dd744bc6" kind="function"><name>init_viterbi39_port</name></member>
+    <member refid="fec_8h_1ac7828b11aa37790d1c95a572f3cd2c71" kind="function"><name>chainback_viterbi39_port</name></member>
+    <member refid="fec_8h_1a63290db888b94e1f87ec1c2f16b33785" kind="function"><name>delete_viterbi39_port</name></member>
+    <member refid="fec_8h_1a9b8a1e50e6286a88ea9b4b99ff80d584" kind="function"><name>update_viterbi39_blk_port</name></member>
+    <member refid="fec_8h_1a3c71bdf2e9d3c826b08eb0f807ab1b36" kind="function"><name>create_viterbi615</name></member>
+    <member refid="fec_8h_1a7268189d8a02a37f86554e7349d2384d" kind="function"><name>set_viterbi615_polynomial</name></member>
+    <member refid="fec_8h_1a354dcd3d224bef3e82c12f83e5ce5110" kind="function"><name>init_viterbi615</name></member>
+    <member refid="fec_8h_1a6922e18db42997dfb74293f9162ca4e8" kind="function"><name>update_viterbi615_blk</name></member>
+    <member refid="fec_8h_1a1412e420e64845ce82eb973a3f191b14" kind="function"><name>chainback_viterbi615</name></member>
+    <member refid="fec_8h_1ac0f01e72b87df968eb411df698e06796" kind="function"><name>delete_viterbi615</name></member>
+    <member refid="fec_8h_1a90bf75ab4ed6d54866dbb231b6f81735" kind="function"><name>create_viterbi615_port</name></member>
+    <member refid="fec_8h_1af7bebf8f65b0b0626e9a29870abb25ea" kind="function"><name>set_viterbi615_polynomial_port</name></member>
+    <member refid="fec_8h_1aa862f0dbf080b2ebf706c29802a8bc71" kind="function"><name>init_viterbi615_port</name></member>
+    <member refid="fec_8h_1ae6ace2d7ea7e4be190bfe638a408ae5c" kind="function"><name>chainback_viterbi615_port</name></member>
+    <member refid="fec_8h_1a7ebe8fbd679a9fa66ba08c2b7d15723e" kind="function"><name>delete_viterbi615_port</name></member>
+    <member refid="fec_8h_1aab2d1699da7d2dfb6e78fb00a1fb479d" kind="function"><name>update_viterbi615_blk_port</name></member>
+    <member refid="fec_8h_1a64c5daf48aa16761366e07823f84bc3c" kind="function"><name>encode_rs_char</name></member>
+    <member refid="fec_8h_1ac4f31b6633ff37c2ae589b7528d4b7c5" kind="function"><name>decode_rs_char</name></member>
+    <member refid="fec_8h_1aac0382165456441265496dcdc5af41f2" kind="function"><name>init_rs_char</name></member>
+    <member refid="fec_8h_1a82141d4143ac934bbf272499b80ddc28" kind="function"><name>free_rs_char</name></member>
+    <member refid="fec_8h_1afa0ac643153749daadac1f163f8b3949" kind="function"><name>encode_rs_int</name></member>
+    <member refid="fec_8h_1a17e0b0fa3b43e7bf8b7dd1240a1ebdf0" kind="function"><name>decode_rs_int</name></member>
+    <member refid="fec_8h_1ab2e98c42ab48cbe89da0f63331826359" kind="function"><name>init_rs_int</name></member>
+    <member refid="fec_8h_1ab49b083d2ef6bb1b6792a6394eab3ed8" kind="function"><name>free_rs_int</name></member>
+    <member refid="fec_8h_1ab16dfe7ded52a874b2e9300fdd6af6f1" kind="function"><name>encode_rs_8</name></member>
+    <member refid="fec_8h_1af2264400220dc930c2650e9460e56992" kind="function"><name>decode_rs_8</name></member>
+    <member refid="fec_8h_1a00782a606217966cc0a027873e61f935" kind="function"><name>encode_rs_ccsds</name></member>
+    <member refid="fec_8h_1a3f388cd43b65101565555afa6ad27e23" kind="function"><name>decode_rs_ccsds</name></member>
+    <member refid="fec_8h_1ac388494b8c3d360e1294c0321f25b3c4" kind="function"><name>find_cpu_mode</name></member>
+    <member refid="fec_8h_1ab0deb1010711c14125350654bd5cbdd2" kind="function"><name>partab_init</name></member>
+    <member refid="fec_8h_1adc4c211dbd6879064fcaa96808969a47" kind="function"><name>parityb</name></member>
+    <member refid="fec_8h_1a1b4b877dd9c858c9c0d6c4d7492fa443" kind="function"><name>parity</name></member>
+    <member refid="fec_8h_1ad9046cddd5f85c2a64ebec07a7bb6b3e" kind="function"><name>normal_rand</name></member>
+    <member refid="fec_8h_1a40b594ab88754729c99247df68bc43ef" kind="function"><name>addnoise</name></member>
+    <member refid="fec_8h_1a8054c7acddf1f1e291540547830c09f8" kind="function"><name>initdp</name></member>
+    <member refid="fec_8h_1a8990dc97058dc6dd45e93dda30fa994d" kind="function"><name>freedp</name></member>
+    <member refid="fec_8h_1a4eb6cd196756b9484318932e2fa46a5f" kind="function"><name>dotprod</name></member>
+    <member refid="fec_8h_1a609179f9652f8e5ecaad73f584f94654" kind="function"><name>initdp_port</name></member>
+    <member refid="fec_8h_1a169650ef19ba6c25c55b9a4797c83170" kind="function"><name>freedp_port</name></member>
+    <member refid="fec_8h_1aecc47693e6b76417dab4d5728521f002" kind="function"><name>dotprod_port</name></member>
+    <member refid="fec_8h_1a6a365fbc0c7eb968ea4b911fab650017" kind="function"><name>sumsq</name></member>
+    <member refid="fec_8h_1a5c19ea010cb5f2ccbbfb508435223de4" kind="function"><name>sumsq_port</name></member>
+    <member refid="fec_8h_1a41066826b999228b8e55caf213f1ff04" kind="function"><name>cpu_features</name></member>
+  </compound>
+  <compound refid="fixed_8h" kind="file"><name>fixed.h</name>
+    <member refid="fixed_8h_1a3ed9b2483e4d6616a203769ad381c97c" kind="define"><name>MODNN</name></member>
+    <member refid="fixed_8h_1afdc383f8992f4a960bb22998f57b6d37" kind="define"><name>MM</name></member>
+    <member refid="fixed_8h_1a170755e30c36be4904106b7bb279b1ec" kind="define"><name>NN</name></member>
+    <member refid="fixed_8h_1afae14aea58e6520b2057147833c699de" kind="define"><name>ALPHA_TO</name></member>
+    <member refid="fixed_8h_1a690b4c8564b1cb507383e7a78f4cd6dc" kind="define"><name>INDEX_OF</name></member>
+    <member refid="fixed_8h_1a90fbc87e4b99a54543c8f37087cb4f03" kind="define"><name>GENPOLY</name></member>
+    <member refid="fixed_8h_1a5f5b4d84f10e6a71bef7c65548a8e317" kind="define"><name>NROOTS</name></member>
+    <member refid="fixed_8h_1a264b36b13386e3f62fe69e04711bc006" kind="define"><name>FCR</name></member>
+    <member refid="fixed_8h_1a6dd0302d2b9ced6e396b9182a6287b9e" kind="define"><name>PRIM</name></member>
+    <member refid="fixed_8h_1a8487c20a46e1e08f7aeabec7cef80945" kind="define"><name>IPRIM</name></member>
+    <member refid="fixed_8h_1a323d60150d94a9f5f599bb97726ac384" kind="define"><name>PAD</name></member>
+    <member refid="fixed_8h_1ae91c9d70e1e2c8b657e51de1fff60ada" kind="typedef"><name>data_t</name></member>
+    <member refid="fixed_8h_1a14a85122be7172ed71942e67ad319614" kind="variable"><name>CCSDS_alpha_to</name></member>
+    <member refid="fixed_8h_1abac8e71dc4c8bac4fd78e980795d70fe" kind="variable"><name>CCSDS_index_of</name></member>
+    <member refid="fixed_8h_1a376f3a990417103eb776e171d140eb9c" kind="variable"><name>CCSDS_poly</name></member>
+    <member refid="fixed_8h_1aa185022967929586fd5824ec159594af" kind="function"><name>mod255</name></member>
+  </compound>
+  <compound refid="group__defs_8dox" kind="file"><name>group_defs.dox</name>
+  </compound>
+  <compound refid="init__rs_8h" kind="file"><name>init_rs.h</name>
+    <member refid="init__rs_8h_1a070d2ce7b6bb7e5c05602aa8c308d0c4" kind="define"><name>NULL</name></member>
+    <member refid="init__rs_8h_1ab6ffbb9e1859687ca71ea09405ea7e77" kind="variable"><name>rs</name></member>
+    <member refid="init__rs_8h_1a38c678ade0cb1e468f32549d397c3524" kind="variable"><name>mm</name></member>
+    <member refid="init__rs_8h_1a7fe6b3714af8244b99f26444466e3a30" kind="variable"><name>nn</name></member>
+    <member refid="init__rs_8h_1a270356b7bc46be2aef3f93d1b50334cf" kind="variable"><name>pad</name></member>
+    <member refid="init__rs_8h_1ae88a145d67b81611af95ffac9f0f11ae" kind="variable"><name>alpha_to</name></member>
+    <member refid="init__rs_8h_1a3cf39c2e4c3f316754712609a006f230" kind="variable"><name>index_of</name></member>
+    <member refid="init__rs_8h_1a5fadda31e7cec09c1ba240ad18382e08" kind="variable"><name>sr</name></member>
+    <member refid="init__rs_8h_1a26f1c644a668db2007de40a0f805aad3" kind="variable"><name>genpoly</name></member>
+    <member refid="init__rs_8h_1ab4ae7230179da9414c46f5b56d06f306" kind="variable"><name>fcr</name></member>
+    <member refid="init__rs_8h_1ae521a53ea17f60017a90dfe34ddd92a1" kind="variable"><name>prim</name></member>
+    <member refid="init__rs_8h_1a768d1ecf1a597044e815f7979cf06581" kind="variable"><name>nroots</name></member>
+    <member refid="init__rs_8h_1af55452b9679adfaf3d688dc674f70051" kind="variable"><name>iprim</name></member>
+    <member refid="init__rs_8h_1ab1fcc91d3b232d34221e0ef32dc37cf8" kind="variable"><name>__pad0__</name></member>
+    <member refid="init__rs_8h_1a31ff0b4d17bdeb4bb6d5ebe5bd47dbbd" kind="function"><name>if</name></member>
+    <member refid="init__rs_8h_1ad8cba938c0471d0db9bd876543e4b7ad" kind="function"><name>if</name></member>
+    <member refid="init__rs_8h_1a2f3b87e04168372cae85dea06480ca69" kind="function"><name>if</name></member>
+    <member refid="init__rs_8h_1a971af2a5d83d963aa8c0d39d9c3bb8dc" kind="function"><name>if</name></member>
+    <member refid="init__rs_8h_1a12786c15469c02eff1ab920d286db9a8" kind="function"><name>if</name></member>
+    <member refid="init__rs_8h_1a73984bc348861ecceb29b68b96af95c0" kind="function"><name>if</name></member>
+    <member refid="init__rs_8h_1a49112bae97ea4c13ae04cd78bd20abdc" kind="function"><name>if</name></member>
+    <member refid="init__rs_8h_1a2cbec2f04bfe20c5d3da7ec3ab69700a" kind="function"><name>for</name></member>
+    <member refid="init__rs_8h_1adb3b70e5df89b215959edb5bd735b345" kind="function"><name>if</name></member>
+    <member refid="init__rs_8h_1a78a58a2e673f17f59aacb748ec1c1fc7" kind="function"><name>for</name></member>
+  </compound>
+  <compound refid="int_8h" kind="file"><name>int.h</name>
+    <member refid="int_8h_1a3ed9b2483e4d6616a203769ad381c97c" kind="define"><name>MODNN</name></member>
+    <member refid="int_8h_1afdc383f8992f4a960bb22998f57b6d37" kind="define"><name>MM</name></member>
+    <member refid="int_8h_1a170755e30c36be4904106b7bb279b1ec" kind="define"><name>NN</name></member>
+    <member refid="int_8h_1afae14aea58e6520b2057147833c699de" kind="define"><name>ALPHA_TO</name></member>
+    <member refid="int_8h_1a690b4c8564b1cb507383e7a78f4cd6dc" kind="define"><name>INDEX_OF</name></member>
+    <member refid="int_8h_1a90fbc87e4b99a54543c8f37087cb4f03" kind="define"><name>GENPOLY</name></member>
+    <member refid="int_8h_1a5f5b4d84f10e6a71bef7c65548a8e317" kind="define"><name>NROOTS</name></member>
+    <member refid="int_8h_1a264b36b13386e3f62fe69e04711bc006" kind="define"><name>FCR</name></member>
+    <member refid="int_8h_1a6dd0302d2b9ced6e396b9182a6287b9e" kind="define"><name>PRIM</name></member>
+    <member refid="int_8h_1a8487c20a46e1e08f7aeabec7cef80945" kind="define"><name>IPRIM</name></member>
+    <member refid="int_8h_1a323d60150d94a9f5f599bb97726ac384" kind="define"><name>PAD</name></member>
+    <member refid="int_8h_1a0d158f1e3af2ab523eb8423db3e5bd6e" kind="define"><name>A0</name></member>
+    <member refid="int_8h_1a00169c4388ae66427e4acba425f47459" kind="typedef"><name>data_t</name></member>
+  </compound>
+  <compound refid="main__page_8dox" kind="file"><name>main_page.dox</name>
+  </compound>
+  <compound refid="ngham_8h" kind="file"><name>ngham.h</name>
+    <member refid="ngham_8h_1a453b4e379294e1899b05312abee32efd" kind="define"><name>NGHAM_PREAMBLE_SIZE</name></member>
+    <member refid="ngham_8h_1aca33c047a4f9ab1664cf27df75dc2adc" kind="define"><name>NGHAM_SYNC_SIZE</name></member>
+    <member refid="ngham_8h_1a1c9c4dc8e28309b3b2803eefbef064d5" kind="define"><name>NGHAM_SIZE_TAG_SIZE</name></member>
+    <member refid="ngham_8h_1aa1319864ebbcac2becdc7178f8dc2877" kind="define"><name>NGHAM_MAX_CODEWORD_SIZE</name></member>
+    <member refid="ngham_8h_1a7ecdb6a926b2ad761f4b8119c182a4bf" kind="define"><name>NGHAM_MAX_TOTAL_SIZE</name></member>
+    <member refid="ngham_8h_1a6712264c3a335868fb9437aff3b63ec3" kind="define"><name>NGHAM_SIZES</name></member>
+    <member refid="ngham_8h_1ae1d5907e9fe3bf02311c370f19e6a699" kind="variable"><name>NGHAM_PL_SIZE</name></member>
+    <member refid="ngham_8h_1a1f1247c31e3e4fb0cd22b163862af2ea" kind="variable"><name>NGHAM_PL_SIZE_FULL</name></member>
+    <member refid="ngham_8h_1aabdfeb25b3ec8fbaf1e1111a52f05104" kind="variable"><name>NGHAM_CODEWORD_SIZE</name></member>
+    <member refid="ngham_8h_1a52d17af11d4d4710a497e2214d88976a" kind="variable"><name>NGHAM_PAR_SIZE</name></member>
+    <member refid="ngham_8h_1a2ac976f237763a7d052983102a456c52" kind="variable"><name>NGHAM_PREAMBLE</name></member>
+    <member refid="ngham_8h_1aa1099304b1e4c66e7141248db41bb78a" kind="variable"><name>NGHAM_SYNC</name></member>
+    <member refid="ngham_8h_1ade89eda9a3eb21c19aa9bfa10bea95a2" kind="variable"><name>NGHAM_SIZE_TAG</name></member>
+    <member refid="ngham_8h_1ab8c6413251419337c942d3fc223be4bd" kind="function"><name>ngham_calc_packet_size_index</name></member>
+  </compound>
+  <compound refid="ngham__encoder_8h" kind="file"><name>ngham_encoder.h</name>
+  </compound>
+  <compound refid="ngham__encoder__impl_8h" kind="file"><name>ngham_encoder_impl.h</name>
+  </compound>
+  <compound refid="ngham__framer_8h" kind="file"><name>ngham_framer.h</name>
+  </compound>
+  <compound refid="ngham__framer__impl_8h" kind="file"><name>ngham_framer_impl.h</name>
+  </compound>
+  <compound refid="rs-common_8h" kind="file"><name>rs-common.h</name>
+    <member refid="rs-common_8h_1aefb5ab2596455768608ddd4479d5ea98" kind="function"><name>modnn</name></member>
+  </compound>
+  <compound refid="group__block" kind="group"><name>block</name>
+  </compound>
+  <compound refid="dir_2e338b6c492bf18114a7e6c07e8ffe38" kind="dir"><name>fec-3.0.1</name>
+  </compound>
+  <compound refid="dir_d44c64559bbebec7f509842c48db8b23" kind="dir"><name>include</name>
+  </compound>
+  <compound refid="dir_97aefd0d527b934f1d99a682da8fe6a9" kind="dir"><name>lib</name>
+  </compound>
+  <compound refid="dir_f6ea7312e5e904f0bf7fd1eb8a6edd95" kind="dir"><name>nuts</name>
+  </compound>
+  <compound refid="indexpage" kind="page"><name>index</name>
+  </compound>
+</doxygenindex>

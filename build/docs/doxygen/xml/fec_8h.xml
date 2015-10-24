@@ -1,0 +1,1912 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="fec_8h" kind="file" language="C++">
+    <compoundname>fec.h</compoundname>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="fec_8h_1ac4de755dd1e3f60b5cbf8743e9259d63" prot="public" static="no">
+        <name>V27POLYA</name>
+        <initializer>0x6d</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="13" column="9" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="fec_8h_1a48615fae3ecf1c3874e893702629e6f6" prot="public" static="no">
+        <name>V27POLYB</name>
+        <initializer>0x4f</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="14" column="9" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="fec_8h_1a140861f14a9276b844759287895c8da2" prot="public" static="no">
+        <name>V29POLYA</name>
+        <initializer>0x1af</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="63" column="9" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="fec_8h_1ad47336f0512134b30ff0d0ba1daf7ea7" prot="public" static="no">
+        <name>V29POLYB</name>
+        <initializer>0x11d</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="64" column="9" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="fec_8h_1a4ac4845a19b85e6e4790295cc00b18a6" prot="public" static="no">
+        <name>V39POLYA</name>
+        <initializer>0x1ed</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="113" column="9" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="fec_8h_1a23350c0ff686beabd0f7befc2048042e" prot="public" static="no">
+        <name>V39POLYB</name>
+        <initializer>0x19b</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="114" column="9" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="fec_8h_1a36a2a522d734a74fd087dc39d9080e16" prot="public" static="no">
+        <name>V39POLYC</name>
+        <initializer>0x127</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="115" column="9" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="fec_8h_1a125513495de9ab0ad020bccf5fcb9a2b" prot="public" static="no">
+        <name>V615POLYA</name>
+        <initializer>042631</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="173" column="9" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" bodystart="173" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="fec_8h_1af007a92daa0a085d2e562915db8a0557" prot="public" static="no">
+        <name>V615POLYB</name>
+        <initializer>047245</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="174" column="9" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" bodystart="174" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="fec_8h_1aeb5e074edb614d0c8f3ca6c58a9336f1" prot="public" static="no">
+        <name>V615POLYC</name>
+        <initializer>056507</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="175" column="9" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" bodystart="175" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="fec_8h_1a5fa89b9587dfd125383f7b85a8b8fca6" prot="public" static="no">
+        <name>V615POLYD</name>
+        <initializer>073363</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="176" column="9" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" bodystart="176" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="fec_8h_1affa6f5e77d16e52bdcb2e62b312e44aa" prot="public" static="no">
+        <name>V615POLYE</name>
+        <initializer>077267</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="177" column="9" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" bodystart="177" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="fec_8h_1a2bbade098cde0a42772c9c8f99667d79" prot="public" static="no">
+        <name>V615POLYF</name>
+        <initializer>064537</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="178" column="9" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" bodystart="178" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="fec_8h_1aa1fc3805dac6f71f457fbbc263105bf6" prot="public" static="no">
+        <name>cpu_mode</name>
+        <enumvalue id="fec_8h_1aa1fc3805dac6f71f457fbbc263105bf6a6ce26a62afab55d7606ad4e92428b30c" prot="public">
+          <name>UNKNOWN</name>
+          <initializer>=0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="fec_8h_1aa1fc3805dac6f71f457fbbc263105bf6a8268527d969e4ef493d3f35844a0b841" prot="public">
+          <name>PORT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="fec_8h_1aa1fc3805dac6f71f457fbbc263105bf6aca3af98d4c9f6368a03b5a0e3fc16d92" prot="public">
+          <name>MMX</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="fec_8h_1aa1fc3805dac6f71f457fbbc263105bf6a403b03371fd04961f31f99b254cf8e57" prot="public">
+          <name>SSE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="fec_8h_1aa1fc3805dac6f71f457fbbc263105bf6a8d896e4fb625a47eaa49059a390971df" prot="public">
+          <name>SSE2</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="fec_8h_1aa1fc3805dac6f71f457fbbc263105bf6aeea66ae42c678f5f715cab106ddcd1cc" prot="public">
+          <name>ALTIVEC</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="261" column="1" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" bodystart="261" bodyend="261"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="fec_8h_1ac91ed521380923edb62c01a1ad650152" prot="public" static="no" mutable="no">
+        <type>unsigned char</type>
+        <definition>unsigned char Taltab[]</definition>
+        <argsstring>[]</argsstring>
+        <name>Taltab</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="257" column="1"/>
+      </memberdef>
+      <memberdef kind="variable" id="fec_8h_1afa58e689b97e42deb51097e890e44f1c" prot="public" static="no" mutable="no">
+        <type>unsigned char</type>
+        <definition>unsigned char Tal1tab[]</definition>
+        <argsstring>[]</argsstring>
+        <name>Tal1tab</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="257" column="1"/>
+      </memberdef>
+      <memberdef kind="variable" id="fec_8h_1a12c7264de9c22b083f784b5a48a1cd7f" prot="public" static="no" mutable="no">
+        <type>enum <ref refid="fec_8h_1aa1fc3805dac6f71f457fbbc263105bf6" kindref="member">cpu_mode</ref></type>
+        <definition>enum cpu_mode  Cpu_mode</definition>
+        <argsstring></argsstring>
+        <name>Cpu_mode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="261" column="1"/>
+      </memberdef>
+      <memberdef kind="variable" id="fec_8h_1ad6f19d6e6bad261d9b8ccb437b346625" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Bitcnt[]</definition>
+        <argsstring>[]</argsstring>
+        <name>Bitcnt</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="295" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="fec_8h_1a7f7a123501da03eb24bc830b143ff58f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void* create_viterbi27</definition>
+        <argsstring>(int len)</argsstring>
+        <name>create_viterbi27</name>
+        <param>
+          <type>int</type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="16" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a0d4492fb5eb045ca5f7ab8cb640fe5e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void set_viterbi27_polynomial</definition>
+        <argsstring>(int polys[2])</argsstring>
+        <name>set_viterbi27_polynomial</name>
+        <param>
+          <type>int</type>
+          <declname>polys</declname>
+          <array>[2]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="17" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1aea28e56719f577828e1b0683af502fe9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int init_viterbi27</definition>
+        <argsstring>(void *vp, int starting_state)</argsstring>
+        <name>init_viterbi27</name>
+        <param>
+          <type>void *</type>
+          <declname>vp</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>starting_state</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="18" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1afd64fa8698596be1f1e2b6adc72bd592" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int update_viterbi27_blk</definition>
+        <argsstring>(void *vp, unsigned char sym[], int npairs)</argsstring>
+        <name>update_viterbi27_blk</name>
+        <param>
+          <type>void *</type>
+          <declname>vp</declname>
+        </param>
+        <param>
+          <type>unsigned char</type>
+          <declname>sym</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>npairs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="19" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a9ae21effe928405fb2422d723bb1474b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int chainback_viterbi27</definition>
+        <argsstring>(void *vp, unsigned char *data, unsigned int nbits, unsigned int endstate)</argsstring>
+        <name>chainback_viterbi27</name>
+        <param>
+          <type>void *</type>
+          <declname>vp</declname>
+        </param>
+        <param>
+          <type>unsigned char *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>nbits</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>endstate</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="20" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a526e3258ce45e0a8d01ce987859383fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void delete_viterbi27</definition>
+        <argsstring>(void *vp)</argsstring>
+        <name>delete_viterbi27</name>
+        <param>
+          <type>void *</type>
+          <declname>vp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="21" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a35cffdef2be2bb47a97cb93353b96740" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void* create_viterbi27_port</definition>
+        <argsstring>(int len)</argsstring>
+        <name>create_viterbi27_port</name>
+        <param>
+          <type>int</type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="55" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1af52e69ab19930745b40054045cb9bece" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void set_viterbi27_polynomial_port</definition>
+        <argsstring>(int polys[2])</argsstring>
+        <name>set_viterbi27_polynomial_port</name>
+        <param>
+          <type>int</type>
+          <declname>polys</declname>
+          <array>[2]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="56" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a0581e2c456eddeedb2cb3bc97e48b06b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int init_viterbi27_port</definition>
+        <argsstring>(void *p, int starting_state)</argsstring>
+        <name>init_viterbi27_port</name>
+        <param>
+          <type>void *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>starting_state</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="57" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1aa4de932c94486ce4bc854321f9330078" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int chainback_viterbi27_port</definition>
+        <argsstring>(void *p, unsigned char *data, unsigned int nbits, unsigned int endstate)</argsstring>
+        <name>chainback_viterbi27_port</name>
+        <param>
+          <type>void *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>unsigned char *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>nbits</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>endstate</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="58" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a5207ad187be781f099c8fea095879100" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void delete_viterbi27_port</definition>
+        <argsstring>(void *p)</argsstring>
+        <name>delete_viterbi27_port</name>
+        <param>
+          <type>void *</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="59" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1ae62e7998ed2e146fe61233b9e506b375" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int update_viterbi27_blk_port</definition>
+        <argsstring>(void *p, unsigned char *syms, int nbits)</argsstring>
+        <name>update_viterbi27_blk_port</name>
+        <param>
+          <type>void *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>unsigned char *</type>
+          <declname>syms</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nbits</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="60" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a25ca846f286c73d7c083599a9e18c382" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void* create_viterbi29</definition>
+        <argsstring>(int len)</argsstring>
+        <name>create_viterbi29</name>
+        <param>
+          <type>int</type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="66" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a79decff937a3f3011a79fa3e698b0a6b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void set_viterbi29_polynomial</definition>
+        <argsstring>(int polys[2])</argsstring>
+        <name>set_viterbi29_polynomial</name>
+        <param>
+          <type>int</type>
+          <declname>polys</declname>
+          <array>[2]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="67" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a2d3f3bdd16d0760d102cf3b34119253f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int init_viterbi29</definition>
+        <argsstring>(void *vp, int starting_state)</argsstring>
+        <name>init_viterbi29</name>
+        <param>
+          <type>void *</type>
+          <declname>vp</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>starting_state</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="68" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a96e9962184214886fd8a4f8bec29d229" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int update_viterbi29_blk</definition>
+        <argsstring>(void *vp, unsigned char syms[], int nbits)</argsstring>
+        <name>update_viterbi29_blk</name>
+        <param>
+          <type>void *</type>
+          <declname>vp</declname>
+        </param>
+        <param>
+          <type>unsigned char</type>
+          <declname>syms</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nbits</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="69" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a1927cdc2b565904aff60786bf30bfda5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int chainback_viterbi29</definition>
+        <argsstring>(void *vp, unsigned char *data, unsigned int nbits, unsigned int endstate)</argsstring>
+        <name>chainback_viterbi29</name>
+        <param>
+          <type>void *</type>
+          <declname>vp</declname>
+        </param>
+        <param>
+          <type>unsigned char *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>nbits</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>endstate</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="70" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a0d23b3254d0e506bbdd6c5c1a39ac1aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void delete_viterbi29</definition>
+        <argsstring>(void *vp)</argsstring>
+        <name>delete_viterbi29</name>
+        <param>
+          <type>void *</type>
+          <declname>vp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="71" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1ac93bf880d3823e5f4cc16f44bc83867a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void* create_viterbi29_port</definition>
+        <argsstring>(int len)</argsstring>
+        <name>create_viterbi29_port</name>
+        <param>
+          <type>int</type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="105" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1abbb3dcb7111c424479b2bdc3dbd6465a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void set_viterbi29_polynomial_port</definition>
+        <argsstring>(int polys[2])</argsstring>
+        <name>set_viterbi29_polynomial_port</name>
+        <param>
+          <type>int</type>
+          <declname>polys</declname>
+          <array>[2]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="106" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1ab778f35882f795ee7b004de9be92d063" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int init_viterbi29_port</definition>
+        <argsstring>(void *p, int starting_state)</argsstring>
+        <name>init_viterbi29_port</name>
+        <param>
+          <type>void *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>starting_state</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="107" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1ad6348e6f3a0b8b502409dc6015df8238" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int chainback_viterbi29_port</definition>
+        <argsstring>(void *p, unsigned char *data, unsigned int nbits, unsigned int endstate)</argsstring>
+        <name>chainback_viterbi29_port</name>
+        <param>
+          <type>void *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>unsigned char *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>nbits</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>endstate</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="108" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1aeaaf8f317b61bb4ca5d7f8ac3d94f119" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void delete_viterbi29_port</definition>
+        <argsstring>(void *p)</argsstring>
+        <name>delete_viterbi29_port</name>
+        <param>
+          <type>void *</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="109" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a8b789412246c4432f6b1363874928c10" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int update_viterbi29_blk_port</definition>
+        <argsstring>(void *p, unsigned char *syms, int nbits)</argsstring>
+        <name>update_viterbi29_blk_port</name>
+        <param>
+          <type>void *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>unsigned char *</type>
+          <declname>syms</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nbits</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="110" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a788da27ccdd182a20a6aa26d2cdc1e3a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void* create_viterbi39</definition>
+        <argsstring>(int len)</argsstring>
+        <name>create_viterbi39</name>
+        <param>
+          <type>int</type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="117" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a5b3415443f0bf1f9f7315874a03b08d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void set_viterbi39_polynomial</definition>
+        <argsstring>(int polys[3])</argsstring>
+        <name>set_viterbi39_polynomial</name>
+        <param>
+          <type>int</type>
+          <declname>polys</declname>
+          <array>[3]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="118" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a1f954500c8fd62de923d17dd40c08e63" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int init_viterbi39</definition>
+        <argsstring>(void *vp, int starting_state)</argsstring>
+        <name>init_viterbi39</name>
+        <param>
+          <type>void *</type>
+          <declname>vp</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>starting_state</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="119" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1ac501bb963a712a2170f1d517184e96de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int update_viterbi39_blk</definition>
+        <argsstring>(void *vp, unsigned char syms[], int nbits)</argsstring>
+        <name>update_viterbi39_blk</name>
+        <param>
+          <type>void *</type>
+          <declname>vp</declname>
+        </param>
+        <param>
+          <type>unsigned char</type>
+          <declname>syms</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nbits</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="120" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a1d7271b81642b7380d2a439cba4f4641" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int chainback_viterbi39</definition>
+        <argsstring>(void *vp, unsigned char *data, unsigned int nbits, unsigned int endstate)</argsstring>
+        <name>chainback_viterbi39</name>
+        <param>
+          <type>void *</type>
+          <declname>vp</declname>
+        </param>
+        <param>
+          <type>unsigned char *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>nbits</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>endstate</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="121" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a3b38c821760b2e7c65833755198779b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void delete_viterbi39</definition>
+        <argsstring>(void *vp)</argsstring>
+        <name>delete_viterbi39</name>
+        <param>
+          <type>void *</type>
+          <declname>vp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="122" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1afd583e542eef8bf1f4d733efc8581d8a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void* create_viterbi39_port</definition>
+        <argsstring>(int len)</argsstring>
+        <name>create_viterbi39_port</name>
+        <param>
+          <type>int</type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="156" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a8711f8bb399a0ff3e7ddeca076844fe4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void set_viterbi39_polynomial_port</definition>
+        <argsstring>(int polys[3])</argsstring>
+        <name>set_viterbi39_polynomial_port</name>
+        <param>
+          <type>int</type>
+          <declname>polys</declname>
+          <array>[3]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="157" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1afeeee2632aa5aa7251706003dd744bc6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int init_viterbi39_port</definition>
+        <argsstring>(void *p, int starting_state)</argsstring>
+        <name>init_viterbi39_port</name>
+        <param>
+          <type>void *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>starting_state</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="158" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1ac7828b11aa37790d1c95a572f3cd2c71" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int chainback_viterbi39_port</definition>
+        <argsstring>(void *p, unsigned char *data, unsigned int nbits, unsigned int endstate)</argsstring>
+        <name>chainback_viterbi39_port</name>
+        <param>
+          <type>void *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>unsigned char *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>nbits</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>endstate</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="159" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a63290db888b94e1f87ec1c2f16b33785" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void delete_viterbi39_port</definition>
+        <argsstring>(void *p)</argsstring>
+        <name>delete_viterbi39_port</name>
+        <param>
+          <type>void *</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="160" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a9b8a1e50e6286a88ea9b4b99ff80d584" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int update_viterbi39_blk_port</definition>
+        <argsstring>(void *p, unsigned char *syms, int nbits)</argsstring>
+        <name>update_viterbi39_blk_port</name>
+        <param>
+          <type>void *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>unsigned char *</type>
+          <declname>syms</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nbits</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="161" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a3c71bdf2e9d3c826b08eb0f807ab1b36" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void* create_viterbi615</definition>
+        <argsstring>(int len)</argsstring>
+        <name>create_viterbi615</name>
+        <param>
+          <type>int</type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="180" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a7268189d8a02a37f86554e7349d2384d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void set_viterbi615_polynomial</definition>
+        <argsstring>(int polys[6])</argsstring>
+        <name>set_viterbi615_polynomial</name>
+        <param>
+          <type>int</type>
+          <declname>polys</declname>
+          <array>[6]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="181" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a354dcd3d224bef3e82c12f83e5ce5110" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int init_viterbi615</definition>
+        <argsstring>(void *vp, int starting_state)</argsstring>
+        <name>init_viterbi615</name>
+        <param>
+          <type>void *</type>
+          <declname>vp</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>starting_state</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="182" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a6922e18db42997dfb74293f9162ca4e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int update_viterbi615_blk</definition>
+        <argsstring>(void *vp, unsigned char *syms, int nbits)</argsstring>
+        <name>update_viterbi615_blk</name>
+        <param>
+          <type>void *</type>
+          <declname>vp</declname>
+        </param>
+        <param>
+          <type>unsigned char *</type>
+          <declname>syms</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nbits</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="183" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a1412e420e64845ce82eb973a3f191b14" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int chainback_viterbi615</definition>
+        <argsstring>(void *vp, unsigned char *data, unsigned int nbits, unsigned int endstate)</argsstring>
+        <name>chainback_viterbi615</name>
+        <param>
+          <type>void *</type>
+          <declname>vp</declname>
+        </param>
+        <param>
+          <type>unsigned char *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>nbits</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>endstate</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="184" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1ac0f01e72b87df968eb411df698e06796" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void delete_viterbi615</definition>
+        <argsstring>(void *vp)</argsstring>
+        <name>delete_viterbi615</name>
+        <param>
+          <type>void *</type>
+          <declname>vp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="185" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a90bf75ab4ed6d54866dbb231b6f81735" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void* create_viterbi615_port</definition>
+        <argsstring>(int len)</argsstring>
+        <name>create_viterbi615_port</name>
+        <param>
+          <type>int</type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="220" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1af7bebf8f65b0b0626e9a29870abb25ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void set_viterbi615_polynomial_port</definition>
+        <argsstring>(int polys[6])</argsstring>
+        <name>set_viterbi615_polynomial_port</name>
+        <param>
+          <type>int</type>
+          <declname>polys</declname>
+          <array>[6]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="221" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1aa862f0dbf080b2ebf706c29802a8bc71" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int init_viterbi615_port</definition>
+        <argsstring>(void *p, int starting_state)</argsstring>
+        <name>init_viterbi615_port</name>
+        <param>
+          <type>void *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>starting_state</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="222" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1ae6ace2d7ea7e4be190bfe638a408ae5c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int chainback_viterbi615_port</definition>
+        <argsstring>(void *p, unsigned char *data, unsigned int nbits, unsigned int endstate)</argsstring>
+        <name>chainback_viterbi615_port</name>
+        <param>
+          <type>void *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>unsigned char *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>nbits</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>endstate</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="223" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a7ebe8fbd679a9fa66ba08c2b7d15723e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void delete_viterbi615_port</definition>
+        <argsstring>(void *p)</argsstring>
+        <name>delete_viterbi615_port</name>
+        <param>
+          <type>void *</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="224" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1aab2d1699da7d2dfb6e78fb00a1fb479d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int update_viterbi615_blk_port</definition>
+        <argsstring>(void *p, unsigned char *syms, int nbits)</argsstring>
+        <name>update_viterbi615_blk_port</name>
+        <param>
+          <type>void *</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>unsigned char *</type>
+          <declname>syms</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nbits</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="225" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a64c5daf48aa16761366e07823f84bc3c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void encode_rs_char</definition>
+        <argsstring>(void *rs, unsigned char *data, unsigned char *parity)</argsstring>
+        <name>encode_rs_char</name>
+        <param>
+          <type>void *</type>
+          <declname>rs</declname>
+        </param>
+        <param>
+          <type>unsigned char *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>unsigned char *</type>
+          <declname>parity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="229" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1ac4f31b6633ff37c2ae589b7528d4b7c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int decode_rs_char</definition>
+        <argsstring>(void *rs, unsigned char *data, int *eras_pos, int no_eras)</argsstring>
+        <name>decode_rs_char</name>
+        <param>
+          <type>void *</type>
+          <declname>rs</declname>
+        </param>
+        <param>
+          <type>unsigned char *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>eras_pos</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>no_eras</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="230" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1aac0382165456441265496dcdc5af41f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void* init_rs_char</definition>
+        <argsstring>(int symsize, int gfpoly, int fcr, int prim, int nroots, int pad)</argsstring>
+        <name>init_rs_char</name>
+        <param>
+          <type>int</type>
+          <declname>symsize</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>gfpoly</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>fcr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>prim</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nroots</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>pad</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="232" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a82141d4143ac934bbf272499b80ddc28" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void free_rs_char</definition>
+        <argsstring>(void *rs)</argsstring>
+        <name>free_rs_char</name>
+        <param>
+          <type>void *</type>
+          <declname>rs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="235" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1afa0ac643153749daadac1f163f8b3949" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void encode_rs_int</definition>
+        <argsstring>(void *rs, int *data, int *parity)</argsstring>
+        <name>encode_rs_int</name>
+        <param>
+          <type>void *</type>
+          <declname>rs</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>parity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="238" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a17e0b0fa3b43e7bf8b7dd1240a1ebdf0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int decode_rs_int</definition>
+        <argsstring>(void *rs, int *data, int *eras_pos, int no_eras)</argsstring>
+        <name>decode_rs_int</name>
+        <param>
+          <type>void *</type>
+          <declname>rs</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>eras_pos</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>no_eras</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="239" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1ab2e98c42ab48cbe89da0f63331826359" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void* init_rs_int</definition>
+        <argsstring>(int symsize, int gfpoly, int fcr, int prim, int nroots, int pad)</argsstring>
+        <name>init_rs_int</name>
+        <param>
+          <type>int</type>
+          <declname>symsize</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>gfpoly</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>fcr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>prim</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>nroots</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>pad</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="240" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1ab49b083d2ef6bb1b6792a6394eab3ed8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void free_rs_int</definition>
+        <argsstring>(void *rs)</argsstring>
+        <name>free_rs_int</name>
+        <param>
+          <type>void *</type>
+          <declname>rs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="242" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1ab16dfe7ded52a874b2e9300fdd6af6f1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void encode_rs_8</definition>
+        <argsstring>(unsigned char *data, unsigned char *parity, int pad)</argsstring>
+        <name>encode_rs_8</name>
+        <param>
+          <type>unsigned char *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>unsigned char *</type>
+          <declname>parity</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>pad</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="247" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1af2264400220dc930c2650e9460e56992" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int decode_rs_8</definition>
+        <argsstring>(unsigned char *data, int *eras_pos, int no_eras, int pad)</argsstring>
+        <name>decode_rs_8</name>
+        <param>
+          <type>unsigned char *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>eras_pos</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>no_eras</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>pad</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="248" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a00782a606217966cc0a027873e61f935" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void encode_rs_ccsds</definition>
+        <argsstring>(unsigned char *data, unsigned char *parity, int pad)</argsstring>
+        <name>encode_rs_ccsds</name>
+        <param>
+          <type>unsigned char *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>unsigned char *</type>
+          <declname>parity</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>pad</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="251" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a3f388cd43b65101565555afa6ad27e23" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int decode_rs_ccsds</definition>
+        <argsstring>(unsigned char *data, int *eras_pos, int no_eras, int pad)</argsstring>
+        <name>decode_rs_ccsds</name>
+        <param>
+          <type>unsigned char *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>eras_pos</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>no_eras</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>pad</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="252" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1ac388494b8c3d360e1294c0321f25b3c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void find_cpu_mode</definition>
+        <argsstring>(void)</argsstring>
+        <name>find_cpu_mode</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="262" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1ab0deb1010711c14125350654bd5cbdd2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void partab_init</definition>
+        <argsstring>()</argsstring>
+        <name>partab_init</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="271" column="1"/>
+        <referencedby refid="fec_8h_1adc4c211dbd6879064fcaa96808969a47" compoundref="fec_8h" startline="273" endline="280">parityb</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1adc4c211dbd6879064fcaa96808969a47" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>static int parityb</definition>
+        <argsstring>(unsigned char x)</argsstring>
+        <name>parityb</name>
+        <param>
+          <type>unsigned char</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="273" column="1" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" bodystart="273" bodyend="280"/>
+        <references refid="fec_8h_1ab0deb1010711c14125350654bd5cbdd2">partab_init</references>
+        <referencedby refid="fec_8h_1a1b4b877dd9c858c9c0d6c4d7492fa443" compoundref="fec_8h" startline="284" endline="289">parity</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a1b4b877dd9c858c9c0d6c4d7492fa443" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>static int parity</definition>
+        <argsstring>(int x)</argsstring>
+        <name>parity</name>
+        <param>
+          <type>int</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="284" column="1" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" bodystart="284" bodyend="289"/>
+        <references refid="fec_8h_1adc4c211dbd6879064fcaa96808969a47" compoundref="fec_8h" startline="273" endline="280">parityb</references>
+        <referencedby refid="encode__rs_8h_1a84ccc0ca468fe4078e072defdfda38db" compoundref="encode__rs_8h" startline="39" endline="57">for</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1ad9046cddd5f85c2a64ebec07a7bb6b3e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double normal_rand</definition>
+        <argsstring>(double mean, double std_dev)</argsstring>
+        <name>normal_rand</name>
+        <param>
+          <type>double</type>
+          <declname>mean</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>std_dev</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="292" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a40b594ab88754729c99247df68bc43ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>unsigned char</type>
+        <definition>unsigned char addnoise</definition>
+        <argsstring>(int sym, double amp, double gain, double offset, int clip)</argsstring>
+        <name>addnoise</name>
+        <param>
+          <type>int</type>
+          <declname>sym</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>amp</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>gain</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>clip</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="293" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a8054c7acddf1f1e291540547830c09f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void* initdp</definition>
+        <argsstring>(signed short coeffs[], int len)</argsstring>
+        <name>initdp</name>
+        <param>
+          <type>signed short</type>
+          <declname>coeffs</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="298" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a8990dc97058dc6dd45e93dda30fa994d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void freedp</definition>
+        <argsstring>(void *dp)</argsstring>
+        <name>freedp</name>
+        <param>
+          <type>void *</type>
+          <declname>dp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="299" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a4eb6cd196756b9484318932e2fa46a5f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>long</type>
+        <definition>long dotprod</definition>
+        <argsstring>(void *dp, signed short a[])</argsstring>
+        <name>dotprod</name>
+        <param>
+          <type>void *</type>
+          <declname>dp</declname>
+        </param>
+        <param>
+          <type>signed short</type>
+          <declname>a</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="300" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a609179f9652f8e5ecaad73f584f94654" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void* initdp_port</definition>
+        <argsstring>(signed short coeffs[], int len)</argsstring>
+        <name>initdp_port</name>
+        <param>
+          <type>signed short</type>
+          <declname>coeffs</declname>
+          <array>[]</array>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="302" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a169650ef19ba6c25c55b9a4797c83170" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void freedp_port</definition>
+        <argsstring>(void *dp)</argsstring>
+        <name>freedp_port</name>
+        <param>
+          <type>void *</type>
+          <declname>dp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="303" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1aecc47693e6b76417dab4d5728521f002" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>long</type>
+        <definition>long dotprod_port</definition>
+        <argsstring>(void *dp, signed short a[])</argsstring>
+        <name>dotprod_port</name>
+        <param>
+          <type>void *</type>
+          <declname>dp</declname>
+        </param>
+        <param>
+          <type>signed short</type>
+          <declname>a</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="304" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a6a365fbc0c7eb968ea4b911fab650017" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>unsigned long long</type>
+        <definition>unsigned long long sumsq</definition>
+        <argsstring>(signed short *in, int cnt)</argsstring>
+        <name>sumsq</name>
+        <param>
+          <type>signed short *</type>
+          <declname>in</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>cnt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="327" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a5c19ea010cb5f2ccbbfb508435223de4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>unsigned long long</type>
+        <definition>unsigned long long sumsq_port</definition>
+        <argsstring>(signed short *in, int cnt)</argsstring>
+        <name>sumsq_port</name>
+        <param>
+          <type>signed short *</type>
+          <declname>in</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>cnt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="328" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="fec_8h_1a41066826b999228b8e55caf213f1ff04" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int cpu_features</definition>
+        <argsstring>(void)</argsstring>
+        <name>cpu_features</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h" line="342" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/fec.h"/>
+  </compounddef>
+</doxygen>

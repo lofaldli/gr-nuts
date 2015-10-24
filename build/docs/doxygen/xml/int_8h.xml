@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="int_8h" kind="file" language="C++">
+    <compoundname>int.h</compoundname>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="int_8h_1a3ed9b2483e4d6616a203769ad381c97c" prot="public" static="no">
+        <name>MODNN</name>
+        <param><defname>x</defname></param>
+        <initializer><ref refid="rs-common_8h_1aefb5ab2596455768608ddd4479d5ea98" kindref="member">modnn</ref>(<ref refid="structrs" kindref="compound">rs</ref>,x)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/int.h" line="8" column="9" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/int.h" bodystart="8" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="int_8h_1afdc383f8992f4a960bb22998f57b6d37" prot="public" static="no">
+        <name>MM</name>
+        <initializer>(<ref refid="structrs" kindref="compound">rs</ref>-&gt;<ref refid="init__rs_8h_1a38c678ade0cb1e468f32549d397c3524" kindref="member">mm</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/int.h" line="10" column="9" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/int.h" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="int_8h_1a170755e30c36be4904106b7bb279b1ec" prot="public" static="no">
+        <name>NN</name>
+        <initializer>(<ref refid="structrs" kindref="compound">rs</ref>-&gt;<ref refid="init__rs_8h_1a7fe6b3714af8244b99f26444466e3a30" kindref="member">nn</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/int.h" line="11" column="9" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/int.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="int_8h_1afae14aea58e6520b2057147833c699de" prot="public" static="no">
+        <name>ALPHA_TO</name>
+        <initializer>(<ref refid="structrs" kindref="compound">rs</ref>-&gt;<ref refid="init__rs_8h_1ae88a145d67b81611af95ffac9f0f11ae" kindref="member">alpha_to</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/int.h" line="12" column="9" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/int.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="int_8h_1a690b4c8564b1cb507383e7a78f4cd6dc" prot="public" static="no">
+        <name>INDEX_OF</name>
+        <initializer>(<ref refid="structrs" kindref="compound">rs</ref>-&gt;<ref refid="init__rs_8h_1a3cf39c2e4c3f316754712609a006f230" kindref="member">index_of</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/int.h" line="13" column="9" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/int.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="int_8h_1a90fbc87e4b99a54543c8f37087cb4f03" prot="public" static="no">
+        <name>GENPOLY</name>
+        <initializer>(<ref refid="structrs" kindref="compound">rs</ref>-&gt;<ref refid="init__rs_8h_1a26f1c644a668db2007de40a0f805aad3" kindref="member">genpoly</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/int.h" line="14" column="9" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/int.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="int_8h_1a5f5b4d84f10e6a71bef7c65548a8e317" prot="public" static="no">
+        <name>NROOTS</name>
+        <initializer>(<ref refid="structrs" kindref="compound">rs</ref>-&gt;<ref refid="init__rs_8h_1a768d1ecf1a597044e815f7979cf06581" kindref="member">nroots</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/int.h" line="15" column="9" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/int.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="int_8h_1a264b36b13386e3f62fe69e04711bc006" prot="public" static="no">
+        <name>FCR</name>
+        <initializer>(<ref refid="structrs" kindref="compound">rs</ref>-&gt;<ref refid="init__rs_8h_1ab4ae7230179da9414c46f5b56d06f306" kindref="member">fcr</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/int.h" line="16" column="9" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/int.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="int_8h_1a6dd0302d2b9ced6e396b9182a6287b9e" prot="public" static="no">
+        <name>PRIM</name>
+        <initializer>(<ref refid="structrs" kindref="compound">rs</ref>-&gt;<ref refid="init__rs_8h_1ae521a53ea17f60017a90dfe34ddd92a1" kindref="member">prim</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/int.h" line="17" column="9" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/int.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="int_8h_1a8487c20a46e1e08f7aeabec7cef80945" prot="public" static="no">
+        <name>IPRIM</name>
+        <initializer>(<ref refid="structrs" kindref="compound">rs</ref>-&gt;<ref refid="init__rs_8h_1af55452b9679adfaf3d688dc674f70051" kindref="member">iprim</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/int.h" line="18" column="9" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/int.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="int_8h_1a323d60150d94a9f5f599bb97726ac384" prot="public" static="no">
+        <name>PAD</name>
+        <initializer>(<ref refid="structrs" kindref="compound">rs</ref>-&gt;<ref refid="init__rs_8h_1a270356b7bc46be2aef3f93d1b50334cf" kindref="member">pad</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/int.h" line="19" column="9" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/int.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="int_8h_1a0d158f1e3af2ab523eb8423db3e5bd6e" prot="public" static="no">
+        <name>A0</name>
+        <initializer>(<ref refid="int_8h_1a170755e30c36be4904106b7bb279b1ec" kindref="member">NN</ref>)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/int.h" line="20" column="9" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/int.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="int_8h_1a00169c4388ae66427e4acba425f47459" prot="public" static="no">
+        <type>unsigned int</type>
+        <definition>typedef unsigned int data_t</definition>
+        <argsstring></argsstring>
+        <name>data_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/int.h" line="6" column="1" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/int.h" bodystart="6" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/int.h"/>
+  </compounddef>
+</doxygen>

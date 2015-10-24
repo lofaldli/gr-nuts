@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="ngham__encoder_8h" kind="file" language="C++">
+    <compoundname>ngham_encoder.h</compoundname>
+    <includes refid="api_8h" local="no">nuts/api.h</includes>
+    <includes local="no">gnuradio/tagged_stream_block.h</includes>
+    <includedby refid="ngham__encoder__impl_8h" local="no">ngham_encoder_impl.h</includedby>
+    <incdepgraph>
+      <node id="39">
+        <label>gnuradio/attributes.h</label>
+      </node>
+      <node id="38">
+        <label>nuts/api.h</label>
+        <link refid="api_8h"/>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>ngham_encoder.h</label>
+        <link refid="ngham_encoder.h"/>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>gnuradio/tagged_stream_block.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="42">
+        <label>ngham_encoder_impl.h</label>
+        <link refid="ngham__encoder__impl_8h"/>
+      </node>
+      <node id="41">
+        <label>ngham_encoder.h</label>
+        <link refid="ngham_encoder.h"/>
+        <childnode refid="42" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classgr_1_1nuts_1_1ngham__encoder" prot="public">gr::nuts::ngham_encoder</innerclass>
+    <innernamespace refid="namespacegr">gr</innernamespace>
+    <innernamespace refid="namespacegr_1_1nuts">gr::nuts</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/nuts/gr-nuts/include/nuts/ngham_encoder.h"/>
+  </compounddef>
+</doxygen>

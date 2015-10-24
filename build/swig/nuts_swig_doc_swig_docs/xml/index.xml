@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.9.1">
+  <compound refid="classgr_1_1nuts_1_1ngham__encoder" kind="class"><name>gr::nuts::ngham_encoder</name>
+    <member refid="classgr_1_1nuts_1_1ngham__encoder_1ac3ce665c23110e8f1942a834e59b1899" kind="typedef"><name>sptr</name></member>
+    <member refid="classgr_1_1nuts_1_1ngham__encoder_1a21232ce1b89066b5e14b1eb3e528362b" kind="function"><name>make</name></member>
+  </compound>
+  <compound refid="classgr_1_1nuts_1_1ngham__framer" kind="class"><name>gr::nuts::ngham_framer</name>
+    <member refid="classgr_1_1nuts_1_1ngham__framer_1a1f9c2c24ab60e407181e1ec166a7ec35" kind="typedef"><name>sptr</name></member>
+    <member refid="classgr_1_1nuts_1_1ngham__framer_1adcf7ab005aaeee7faadc1b0eed56526d" kind="function"><name>make</name></member>
+  </compound>
+  <compound refid="namespacegr" kind="namespace"><name>gr</name>
+  </compound>
+  <compound refid="namespacegr_1_1nuts" kind="namespace"><name>gr::nuts</name>
+  </compound>
+  <compound refid="namespacestd" kind="namespace"><name>std</name>
+  </compound>
+  <compound refid="api_8h" kind="file"><name>api.h</name>
+    <member refid="api_8h_1ab0b40b0685497082c6dce38640c241bb" kind="define"><name>NUTS_API</name></member>
+  </compound>
+  <compound refid="ngham__encoder_8h" kind="file"><name>ngham_encoder.h</name>
+  </compound>
+  <compound refid="ngham__framer_8h" kind="file"><name>ngham_framer.h</name>
+  </compound>
+  <compound refid="dir_d44c64559bbebec7f509842c48db8b23" kind="dir"><name>/home/nuts/gr-nuts/include</name>
+  </compound>
+  <compound refid="dir_f6ea7312e5e904f0bf7fd1eb8a6edd95" kind="dir"><name>/home/nuts/gr-nuts/include/nuts</name>
+  </compound>
+</doxygenindex>

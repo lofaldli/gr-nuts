@@ -1,0 +1,12 @@
+/home/nuts/gr-nuts/build/swig/CMakeFiles/_nuts_swig.dir
+/home/nuts/gr-nuts/build/swig/CMakeFiles/_nuts_swig_doc_tag.dir
+/home/nuts/gr-nuts/build/swig/CMakeFiles/_nuts_swig_swig_tag.dir
+/home/nuts/gr-nuts/build/docs/doxygen/CMakeFiles/doxygen_target.dir
+/home/nuts/gr-nuts/build/lib/CMakeFiles/gnuradio-nuts.dir
+/home/nuts/gr-nuts/build/swig/CMakeFiles/nuts_swig_swig_2d0df.dir
+/home/nuts/gr-nuts/build/swig/CMakeFiles/nuts_swig_swig_doc.dir
+/home/nuts/gr-nuts/build/apps/CMakeFiles/pygen_apps_9a6dd.dir
+/home/nuts/gr-nuts/build/python/CMakeFiles/pygen_python_83cbd.dir
+/home/nuts/gr-nuts/build/swig/CMakeFiles/pygen_swig_dfa3a.dir
+/home/nuts/gr-nuts/build/lib/CMakeFiles/test-nuts.dir
+/home/nuts/gr-nuts/build/CMakeFiles/uninstall.dir

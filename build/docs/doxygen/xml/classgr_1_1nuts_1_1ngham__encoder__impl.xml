@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="classgr_1_1nuts_1_1ngham__encoder__impl" kind="class" language="C++" prot="public">
+    <compoundname>gr::nuts::ngham_encoder_impl</compoundname>
+    <basecompoundref refid="classgr_1_1nuts_1_1ngham__encoder" prot="public" virt="non-virtual">gr::nuts::ngham_encoder</basecompoundref>
+    <includes refid="ngham__encoder__impl_8h" local="no">ngham_encoder_impl.h</includes>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classgr_1_1nuts_1_1ngham__encoder__impl_1a2ac3955a1fd64b68fbfec160b1b8d3e4" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gr::nuts::ngham_encoder_impl::calculate_output_stream_length</definition>
+        <argsstring>(const gr_vector_int &amp;ninput_items)</argsstring>
+        <name>calculate_output_stream_length</name>
+        <param>
+          <type>const gr_vector_int &amp;</type>
+          <declname>ninput_items</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/ngham_encoder_impl.h" line="35" column="1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgr_1_1nuts_1_1ngham__encoder__impl_1abf45fdcd4aebe6480d24727028770993" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::nuts::ngham_encoder_impl::ngham_encoder_impl</definition>
+        <argsstring>(const std::string &amp;len_tag_key)</argsstring>
+        <name>ngham_encoder_impl</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>len_tag_key</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/ngham_encoder_impl.h" line="38" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1nuts_1_1ngham__encoder__impl_1aa2b6fa3a84d0bca31ff75aeefa4a4975" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>gr::nuts::ngham_encoder_impl::~ngham_encoder_impl</definition>
+        <argsstring>()</argsstring>
+        <name>~ngham_encoder_impl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/ngham_encoder_impl.h" line="39" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classgr_1_1nuts_1_1ngham__encoder__impl_1a33d854825f33f8e5279c4019639b4093" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int gr::nuts::ngham_encoder_impl::work</definition>
+        <argsstring>(int noutput_items, gr_vector_int &amp;ninput_items, gr_vector_const_void_star &amp;input_items, gr_vector_void_star &amp;output_items)</argsstring>
+        <name>work</name>
+        <param>
+          <type>int</type>
+          <declname>noutput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_int &amp;</type>
+          <declname>ninput_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_const_void_star &amp;</type>
+          <declname>input_items</declname>
+        </param>
+        <param>
+          <type>gr_vector_void_star &amp;</type>
+          <declname>output_items</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/ngham_encoder_impl.h" line="42" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="8">
+        <label>gr::nuts::ngham_encoder</label>
+        <link refid="classgr_1_1nuts_1_1ngham__encoder"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>gr::tagged_stream_block</label>
+      </node>
+      <node id="7">
+        <label>gr::nuts::ngham_encoder_impl</label>
+        <link refid="classgr_1_1nuts_1_1ngham__encoder__impl"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="11">
+        <label>gr::nuts::ngham_encoder</label>
+        <link refid="classgr_1_1nuts_1_1ngham__encoder"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>gr::tagged_stream_block</label>
+      </node>
+      <node id="10">
+        <label>gr::nuts::ngham_encoder_impl</label>
+        <link refid="classgr_1_1nuts_1_1ngham__encoder__impl"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/nuts/gr-nuts/lib/ngham_encoder_impl.h" line="30" column="1" bodyfile="/home/nuts/gr-nuts/lib/ngham_encoder_impl.h" bodystart="29" bodyend="46"/>
+    <listofallmembers>
+      <member refid="classgr_1_1nuts_1_1ngham__encoder__impl_1a2ac3955a1fd64b68fbfec160b1b8d3e4" prot="protected" virt="non-virtual"><scope>gr::nuts::ngham_encoder_impl</scope><name>calculate_output_stream_length</name></member>
+      <member refid="classgr_1_1nuts_1_1ngham__encoder_1a21232ce1b89066b5e14b1eb3e528362b" prot="public" virt="non-virtual"><scope>gr::nuts::ngham_encoder_impl</scope><name>make</name></member>
+      <member refid="classgr_1_1nuts_1_1ngham__encoder__impl_1abf45fdcd4aebe6480d24727028770993" prot="public" virt="non-virtual"><scope>gr::nuts::ngham_encoder_impl</scope><name>ngham_encoder_impl</name></member>
+      <member refid="classgr_1_1nuts_1_1ngham__encoder_1ac3ce665c23110e8f1942a834e59b1899" prot="public" virt="non-virtual"><scope>gr::nuts::ngham_encoder_impl</scope><name>sptr</name></member>
+      <member refid="classgr_1_1nuts_1_1ngham__encoder__impl_1a33d854825f33f8e5279c4019639b4093" prot="public" virt="non-virtual"><scope>gr::nuts::ngham_encoder_impl</scope><name>work</name></member>
+      <member refid="classgr_1_1nuts_1_1ngham__encoder__impl_1aa2b6fa3a84d0bca31ff75aeefa4a4975" prot="public" virt="non-virtual"><scope>gr::nuts::ngham_encoder_impl</scope><name>~ngham_encoder_impl</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

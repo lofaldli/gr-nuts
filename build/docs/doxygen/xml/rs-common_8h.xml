@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="rs-common_8h" kind="file" language="C++">
+    <compoundname>rs-common.h</compoundname>
+    <innerclass refid="structrs" prot="public">rs</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="rs-common_8h_1aefb5ab2596455768608ddd4479d5ea98" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>static int modnn</definition>
+        <argsstring>(struct rs *rs, int x)</argsstring>
+        <name>modnn</name>
+        <param>
+          <type>struct <ref refid="structrs" kindref="compound">rs</ref> *</type>
+          <declname>rs</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/rs-common.h" line="25" column="1" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/rs-common.h" bodystart="25" bodyend="31"/>
+        <references refid="structrs_1a692bedf9280094386944246735fe9082" compoundref="rs-common_8h" startline="13">rs::mm</references>
+        <references refid="structrs_1a09178d65d110e8591c30fa1abdae1eed" compoundref="rs-common_8h" startline="14">rs::nn</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/rs-common.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="namespacegr_1_1nuts" kind="namespace" language="C++">
+    <compoundname>gr::nuts</compoundname>
+    <innerclass refid="classgr_1_1nuts_1_1ngham__encoder" prot="public">gr::nuts::ngham_encoder</innerclass>
+    <innerclass refid="classgr_1_1nuts_1_1ngham__framer" prot="public">gr::nuts::ngham_framer</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/nuts/gr-nuts/include/nuts/ngham_encoder.h" line="29" column="1"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="dir_2e338b6c492bf18114a7e6c07e8ffe38" kind="dir">
+    <compoundname>fec-3.0.1</compoundname>
+    <innerfile refid="ccsds_8h">ccsds.h</innerfile>
+    <innerfile refid="char_8h">char.h</innerfile>
+    <innerfile refid="decode__rs_8h">decode_rs.h</innerfile>
+    <innerfile refid="dotprod_8h">dotprod.h</innerfile>
+    <innerfile refid="encode__rs_8h">encode_rs.h</innerfile>
+    <innerfile refid="fec_8h">fec.h</innerfile>
+    <innerfile refid="fixed_8h">fixed.h</innerfile>
+    <innerfile refid="init__rs_8h">init_rs.h</innerfile>
+    <innerfile refid="int_8h">int.h</innerfile>
+    <innerfile refid="rs-common_8h">rs-common.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/"/>
+  </compounddef>
+</doxygen>

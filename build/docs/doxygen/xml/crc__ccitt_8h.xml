@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="crc__ccitt_8h" kind="file" language="C++">
+    <compoundname>crc_ccitt.h</compoundname>
+    <includes local="no">stdint.h</includes>
+    <incdepgraph>
+      <node id="15">
+        <label>stdint.h</label>
+      </node>
+      <node id="14">
+        <label>crc_ccitt.h</label>
+        <link refid="crc_ccitt.h"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="crc__ccitt_8h_1ab9dd68997cbf413f56b91c02ce31f551" prot="public" static="no" mutable="no">
+        <type>const uint16_t</type>
+        <definition>const uint16_t crc_ccitt_table[]</definition>
+        <argsstring>[]</argsstring>
+        <name>crc_ccitt_table</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/crc_ccitt.h" line="6" column="1" bodyfile="/home/nuts/gr-nuts/lib/crc_ccitt.h" bodystart="6" bodyend="-1"/>
+        <referencedby refid="crc__ccitt_8h_1aafc45e79cb970d486d22cc440cbabc9c" compoundref="crc__ccitt_8h" startline="45" endline="52">crc_ccitt</referencedby>
+        <referencedby refid="crc__ccitt_8h_1a6339d4ab87d51e14c1621d9d0fcf799f" compoundref="crc__ccitt_8h" startline="41" endline="43">crc_ccitt_byte</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="crc__ccitt_8h_1a6339d4ab87d51e14c1621d9d0fcf799f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint16_t</type>
+        <definition>uint16_t crc_ccitt_byte</definition>
+        <argsstring>(uint8_t buf, uint16_t crc)</argsstring>
+        <name>crc_ccitt_byte</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>buf</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>crc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/crc_ccitt.h" line="41" column="1" bodyfile="/home/nuts/gr-nuts/lib/crc_ccitt.h" bodystart="41" bodyend="43"/>
+        <references refid="crc__ccitt_8h_1ab9dd68997cbf413f56b91c02ce31f551" compoundref="crc__ccitt_8h" startline="6">crc_ccitt_table</references>
+      </memberdef>
+      <memberdef kind="function" id="crc__ccitt_8h_1aafc45e79cb970d486d22cc440cbabc9c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint16_t</type>
+        <definition>uint16_t crc_ccitt</definition>
+        <argsstring>(uint8_t *buf, uint16_t buf_len)</argsstring>
+        <name>crc_ccitt</name>
+        <param>
+          <type>uint8_t *</type>
+          <declname>buf</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>buf_len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/crc_ccitt.h" line="45" column="1" bodyfile="/home/nuts/gr-nuts/lib/crc_ccitt.h" bodystart="45" bodyend="52"/>
+        <references refid="crc__ccitt_8h_1ab9dd68997cbf413f56b91c02ce31f551" compoundref="crc__ccitt_8h" startline="6">crc_ccitt_table</references>
+        <references refid="decode__rs_8h_1a37d972ae0b47b9099e30983131d31916" compoundref="decode__rs_8h" startline="71">j</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/nuts/gr-nuts/lib/crc_ccitt.h"/>
+  </compounddef>
+</doxygen>

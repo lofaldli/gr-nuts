@@ -1,0 +1,27 @@
+Start testing: Oct 24 18:19 CEST
+----------------------------------------------------------
+3/3 Testing: qa_ngham_codeword_generator
+3/3 Test: qa_ngham_codeword_generator
+Command: "/bin/sh" "/home/nuts/gr-nuts/build/python/qa_ngham_codeword_generator_test.sh"
+Directory: /home/nuts/gr-nuts/build/python
+"qa_ngham_codeword_generator" start time: Oct 24 18:19 CEST
+Output:
+----------------------------------------------------------
+data (116, 101, 115, 116)
+codeword (24L, 116L, 101L, 115L, 116L, 218L, 65L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L)
+data (116, 101, 115, 116)
+codeword (24L, 116L, 101L, 115L, 116L, 218L, 65L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L)
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+OK
+<end of output>
+Test time =   0.21 sec
+----------------------------------------------------------
+Test Passed.
+"qa_ngham_codeword_generator" end time: Oct 24 18:20 CEST
+"qa_ngham_codeword_generator" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 24 18:20 CEST

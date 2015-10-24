@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="encode__rs_8h" kind="file" language="C++">
+    <compoundname>encode_rs.h</compoundname>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="encode__rs_8h_1a0d158f1e3af2ab523eb8423db3e5bd6e" prot="public" static="no">
+        <name>A0</name>
+        <initializer>(<ref refid="int_8h_1a170755e30c36be4904106b7bb279b1ec" kindref="member">NN</ref>) /* Special reserved value encoding zero in index form */</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/encode_rs.h" line="31" column="10" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/encode_rs.h" bodystart="31" bodyend="-1"/>
+        <referencedby refid="encode__rs_8h_1a84ccc0ca468fe4078e072defdfda38db" compoundref="encode__rs_8h" startline="39" endline="57">for</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="encode__rs_8h_1a6badf32ecca7859c0c4689a31fd3759b" prot="public" static="no" mutable="no">
+        <type><ref refid="ccsds_8h_1ae91c9d70e1e2c8b657e51de1fff60ada" kindref="member">data_t</ref></type>
+        <definition>data_t feedback</definition>
+        <argsstring></argsstring>
+        <name>feedback</name>
+        <initializer>{
+  int <ref refid="decode__rs_8h_1acb559820d9ca11295b4500f179ef6392" kindref="member">i</ref>, <ref refid="decode__rs_8h_1a37d972ae0b47b9099e30983131d31916" kindref="member">j</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/encode_rs.h" line="35" column="1" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/encode_rs.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="encode__rs_8h_1a7c39a293c22ca2cb0dc54667d07ac132" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>memset</definition>
+        <argsstring>(parity, 0, NROOTS *sizeof(data_t))</argsstring>
+        <name>memset</name>
+        <param>
+          <type><ref refid="fec_8h_1a1b4b877dd9c858c9c0d6c4d7492fa443" kindref="member">parity</ref></type>
+        </param>
+        <param>
+          <type>0</type>
+        </param>
+        <param>
+          <type><ref refid="int_8h_1a5f5b4d84f10e6a71bef7c65548a8e317" kindref="member">NROOTS</ref> *</type>
+          <declname>sizeof</declname>
+          <array>data_t</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/encode_rs.h" line="37" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="encode__rs_8h_1a84ccc0ca468fe4078e072defdfda38db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>for</definition>
+        <argsstring>(i=0;i&lt; NN-NROOTS-PAD;i++)</argsstring>
+        <name>for</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/encode_rs.h" line="39" column="1" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/encode_rs.h" bodystart="39" bodyend="57"/>
+        <references refid="encode__rs_8h_1a0d158f1e3af2ab523eb8423db3e5bd6e" compoundref="encode__rs_8h" startline="31">A0</references>
+        <references refid="char_8h_1afae14aea58e6520b2057147833c699de" compoundref="char_8h" startline="15">ALPHA_TO</references>
+        <references refid="char_8h_1a90fbc87e4b99a54543c8f37087cb4f03" compoundref="char_8h" startline="17">GENPOLY</references>
+        <references refid="decode__rs_8h_1acb559820d9ca11295b4500f179ef6392" compoundref="decode__rs_8h" startline="71">i</references>
+        <references refid="char_8h_1a690b4c8564b1cb507383e7a78f4cd6dc" compoundref="char_8h" startline="16">INDEX_OF</references>
+        <references refid="char_8h_1a3ed9b2483e4d6616a203769ad381c97c" compoundref="char_8h" startline="11">MODNN</references>
+        <references refid="ccsds_8h_1a170755e30c36be4904106b7bb279b1ec" compoundref="ccsds_8h" startline="3">NN</references>
+        <references refid="ccsds_8h_1a5f5b4d84f10e6a71bef7c65548a8e317" compoundref="ccsds_8h" startline="4">NROOTS</references>
+        <references refid="fec_8h_1a1b4b877dd9c858c9c0d6c4d7492fa443" compoundref="fec_8h" startline="284" endline="289">parity</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/encode_rs.h"/>
+  </compounddef>
+</doxygen>

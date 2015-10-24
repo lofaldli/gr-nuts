@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.9.1">
+  <compounddef id="structdotprod" kind="struct" language="C++" prot="public">
+    <compoundname>dotprod</compoundname>
+    <includes refid="dotprod_8h" local="no">dotprod.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structdotprod_1adbf1e521fd1d119675dbfe11d8fa1e9e" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int dotprod::len</definition>
+        <argsstring></argsstring>
+        <name>len</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/dotprod.h" line="4" column="1" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/dotprod.h" bodystart="4" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structdotprod_1af8e4b8f970f03563ce29cb5dacf82835" prot="public" static="no" mutable="no">
+        <type>signed short *</type>
+        <definition>signed short* dotprod::coeffs[8]</definition>
+        <argsstring>[8]</argsstring>
+        <name>coeffs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/dotprod.h" line="14" column="1" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/dotprod.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/nuts/gr-nuts/lib/fec-3.0.1/dotprod.h" line="3" column="1" bodyfile="/home/nuts/gr-nuts/lib/fec-3.0.1/dotprod.h" bodystart="3" bodyend="15"/>
+    <listofallmembers>
+      <member refid="structdotprod_1af8e4b8f970f03563ce29cb5dacf82835" prot="public" virt="non-virtual"><scope>dotprod</scope><name>coeffs</name></member>
+      <member refid="structdotprod_1adbf1e521fd1d119675dbfe11d8fa1e9e" prot="public" virt="non-virtual"><scope>dotprod</scope><name>len</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
