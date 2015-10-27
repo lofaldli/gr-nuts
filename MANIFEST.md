@@ -2,14 +2,15 @@ title: The NUTS OOT Module
 brief: Short description of gr-nuts
 tags: # Tags are arbitrary, but look at CGRAN what other authors are using
   - sdr
+  - satellite
 author:
-  - Author Name <authors@email.address>
+  - André Løfaldli <andrlof@stud.ntnu.no>
 copyright_owner:
   - Copyright Owner 1
 license:
-#repo: # Put the URL of the repository here, or leave blank for default
-#website: <module_website> # If you have a separate project website, put it here
-#icon: <icon_url> # Put a URL to a square image here that will be used as an icon on CGRAN
+repo: https://github.com/lofaldli/gr-nuts
+website: http://nuts.cubesat.no/
+icon: http://nuts.cubesat.no/site/gfx/satellitte.png
 ---
 A longer, multi-line description of gr-nuts.
 You may use some *basic* Markdown here.
