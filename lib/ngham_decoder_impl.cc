@@ -72,6 +72,7 @@ namespace gr {
 
       // tell runtime system how many output items we produced.
       return noutput_items;
+      
     }
 
   } /* namespace nuts */

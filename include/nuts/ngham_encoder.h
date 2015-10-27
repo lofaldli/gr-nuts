@@ -29,7 +29,7 @@ namespace gr {
   namespace nuts {
 
     /*!
-     * \brief <+description of block+>
+     * \brief ngham encoder block
      * \ingroup nuts
      *
      */

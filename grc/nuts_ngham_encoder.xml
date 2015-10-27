@@ -8,12 +8,14 @@
   <param>
     <name>len_tag_key</name>
     <key>len_tag_key</key>
-    <type>"packet_length"</type>
+    <value>"packet_len"</value>
+    <type>string</type>
   </param>
   <param>
     <name>scramble</name>
     <key>scramble</key>
-    <type>true</type>
+    <value>True</value>
+    <type>bool</type>
   </param>
   <sink>
     <name>in</name>
