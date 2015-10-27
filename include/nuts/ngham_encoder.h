@@ -19,8 +19,8 @@
  */
 
 
-#ifndef INCLUDED_NUTS_NGHAM_CODEWORD_GENERATOR_H
-#define INCLUDED_NUTS_NGHAM_CODEWORD_GENERATOR_H
+#ifndef INCLUDED_NUTS_NGHAM_ENCODER_H
+#define INCLUDED_NUTS_NGHAM_ENCODER_H
 
 #include <nuts/api.h>
 #include <gnuradio/tagged_stream_block.h>
@@ -33,24 +33,24 @@ namespace gr {
      * \ingroup nuts
      *
      */
-    class NUTS_API ngham_codeword_generator : virtual public gr::tagged_stream_block
+    class NUTS_API ngham_encoder : virtual public gr::tagged_stream_block
     {
      public:
-      typedef boost::shared_ptr<ngham_codeword_generator> sptr;
+      typedef boost::shared_ptr<ngham_encoder> sptr;
 
       /*!
-       * \brief Return a shared_ptr to a new instance of nuts::ngham_codeword_generator.
+       * \brief Return a shared_ptr to a new instance of nuts::ngham_encoder.
        *
-       * To avoid accidental use of raw pointers, nuts::ngham_codeword_generator's
+       * To avoid accidental use of raw pointers, nuts::ngham_encoder's
        * constructor is in a private implementation
-       * class. nuts::ngham_codeword_generator::make is the public interface for
+       * class. nuts::ngham_encoder::make is the public interface for
        * creating new instances.
        */
-      static sptr make(const std::string& len_tag_key);
+      static sptr make(const std::string& len_tag_key="packet_length", bool scramble=true);
     };
 
   } // namespace nuts
 } // namespace gr
 
-#endif /* INCLUDED_NUTS_NGHAM_CODEWORD_GENERATOR_H */
+#endif /* INCLUDED_NUTS_NGHAM_ENCODER_H */
 

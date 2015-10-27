@@ -17,6 +17,6 @@
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
 install(FILES
-    nuts_ngham_framer.xml
-    nuts_ngham_codeword_generator.xml DESTINATION share/gnuradio/grc/blocks
+    nuts_ngham_encoder.xml
+    nuts_ngham_decoder.xml DESTINATION share/gnuradio/grc/blocks
 )

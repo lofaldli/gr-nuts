@@ -41,5 +41,5 @@ include(GrTest)
 
 set(GR_TEST_TARGET_DEPS gnuradio-nuts)
 set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR}/swig)
-GR_ADD_TEST(qa_ngham_framer ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ngham_framer.py)
-GR_ADD_TEST(qa_ngham_codeword_generator ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ngham_codeword_generator.py)
+GR_ADD_TEST(qa_ngham_encoder ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ngham_encoder.py)
+GR_ADD_TEST(qa_ngham_decoder ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ngham_decoder.py)

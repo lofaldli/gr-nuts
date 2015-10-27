@@ -18,15 +18,15 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_NUTS_NGHAM_CODEWORD_GENERATOR_IMPL_H
-#define INCLUDED_NUTS_NGHAM_CODEWORD_GENERATOR_IMPL_H
+#ifndef INCLUDED_NUTS_NGHAM_DECODER_IMPL_H
+#define INCLUDED_NUTS_NGHAM_DECODER_IMPL_H
 
-#include <nuts/ngham_codeword_generator.h>
+#include <nuts/ngham_decoder.h>
 
 namespace gr {
   namespace nuts {
 
-    class ngham_codeword_generator_impl : public ngham_codeword_generator
+    class ngham_decoder_impl : public ngham_decoder
     {
      private:
       // Nothing to declare in this block.
@@ -35,8 +35,8 @@ namespace gr {
       int calculate_output_stream_length(const gr_vector_int &ninput_items);
 
      public:
-      ngham_codeword_generator_impl(const std::string& len_tag_key);
-      ~ngham_codeword_generator_impl();
+      ngham_decoder_impl(const std::string& len_tag_key);
+      ~ngham_decoder_impl();
 
       // Where all the action really happens
       int work(int noutput_items,
@@ -48,5 +48,5 @@ namespace gr {
   } // namespace nuts
 } // namespace gr
 
-#endif /* INCLUDED_NUTS_NGHAM_CODEWORD_GENERATOR_IMPL_H */
+#endif /* INCLUDED_NUTS_NGHAM_DECODER_IMPL_H */
 

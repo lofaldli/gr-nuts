@@ -23,28 +23,41 @@ from gnuradio import gr, gr_unittest
 from gnuradio import blocks
 import nuts_swig as nuts
 
-class qa_ngham_codeword_generator (gr_unittest.TestCase):
+class qa_ngham_encoder (gr_unittest.TestCase):
 
     def setUp (self):
         self.tb = gr.top_block ()
         self.tsb_key = "length"
-
     def tearDown (self):
         self.tb = None
 
     def test_001_t (self):
-        # set up fg
-        src_data = (0x74, 0x65, 0x73, 0x74)
+
+        src_data = (0x74,0x65,0x73,0x74)
+
         src = blocks.vector_source_b(src_data)
         s2ts = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, len(src_data), self.tsb_key)
-        cg = nuts.ngham_codeword_generator(self.tsb_key)
+
+        enc = nuts.ngham_encoder(len_tag_key=self.tsb_key, scramble=True)
+
         sink = blocks.tsb_vector_sink_b(tsb_key=self.tsb_key)
-        self.tb.connect(src, s2ts, cg, sink)
+
+        self.tb.connect(src, s2ts, enc, sink)
+
         self.tb.run ()
-        # check data
-        print "data", src_data
-        print "codeword", sink.data()[0]
+
+        sink_data = sink.data()[0]
+
+        print "=========================="
+        for j in range(0,len(sink_data),4):
+            line = "%i: \t" % j
+            for k in range(0,4):
+                if j+k < len(sink_data):
+                    line += "%i\t" % sink_data[j+k]
+                else:
+                    line += "    \t"
+            print line
 
 
 if __name__ == '__main__':
-    gr_unittest.run(qa_ngham_codeword_generator, "qa_ngham_codeword_generator.xml")
+    gr_unittest.run(qa_ngham_encoder, "qa_ngham_encoder.xml")

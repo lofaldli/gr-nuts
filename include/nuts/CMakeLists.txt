@@ -22,6 +22,6 @@
 ########################################################################
 install(FILES
     api.h
-    ngham_framer.h
-    ngham_codeword_generator.h DESTINATION include/nuts
+    ngham_encoder.h
+    ngham_decoder.h DESTINATION include/nuts
 )

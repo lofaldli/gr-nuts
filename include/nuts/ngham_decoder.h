@@ -18,35 +18,39 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_NUTS_NGHAM_FRAMER_IMPL_H
-#define INCLUDED_NUTS_NGHAM_FRAMER_IMPL_H
 
-#include <nuts/ngham_framer.h>
+#ifndef INCLUDED_NUTS_NGHAM_DECODER_H
+#define INCLUDED_NUTS_NGHAM_DECODER_H
+
+#include <nuts/api.h>
+#include <gnuradio/tagged_stream_block.h>
 
 namespace gr {
   namespace nuts {
 
-    class ngham_framer_impl : public ngham_framer
+    /*!
+     * \brief <+description of block+>
+     * \ingroup nuts
+     *
+     */
+    class NUTS_API ngham_decoder : virtual public gr::tagged_stream_block
     {
-     private:
-      // Nothing to declare in this block.
-
-     protected:
-      int calculate_output_stream_length(const gr_vector_int &ninput_items);
-
      public:
-      ngham_framer_impl(const std::string& len_tag_key);
-      ~ngham_framer_impl();
+      typedef boost::shared_ptr<ngham_decoder> sptr;
 
-      // Where all the action really happens
-      int work(int noutput_items,
-           gr_vector_int &ninput_items,
-           gr_vector_const_void_star &input_items,
-           gr_vector_void_star &output_items);
+      /*!
+       * \brief Return a shared_ptr to a new instance of nuts::ngham_decoder.
+       *
+       * To avoid accidental use of raw pointers, nuts::ngham_decoder's
+       * constructor is in a private implementation
+       * class. nuts::ngham_decoder::make is the public interface for
+       * creating new instances.
+       */
+      static sptr make(const std::string& len_tag_key="packet_length");
     };
 
   } // namespace nuts
 } // namespace gr
 
-#endif /* INCLUDED_NUTS_NGHAM_FRAMER_IMPL_H */
+#endif /* INCLUDED_NUTS_NGHAM_DECODER_H */
 

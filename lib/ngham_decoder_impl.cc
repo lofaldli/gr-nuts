@@ -23,26 +23,23 @@
 #endif
 
 #include <gnuradio/io_signature.h>
-#include "ngham_codeword_generator_impl.h"
-
-#include "ngham.h"
-#include "crc_ccitt.h"
+#include "ngham_decoder_impl.h"
 
 namespace gr {
   namespace nuts {
 
-    ngham_codeword_generator::sptr
-    ngham_codeword_generator::make(const std::string& len_tag_key)
+    ngham_decoder::sptr
+    ngham_decoder::make(const std::string& len_tag_key)
     {
       return gnuradio::get_initial_sptr
-        (new ngham_codeword_generator_impl(len_tag_key));
+        (new ngham_decoder_impl(len_tag_key));
     }
 
     /*
      * The private constructor
      */
-    ngham_codeword_generator_impl::ngham_codeword_generator_impl(const std::string& len_tag_key)
-      : gr::tagged_stream_block("ngham_codeword_generator",
+    ngham_decoder_impl::ngham_decoder_impl(const std::string & len_tag_key)
+      : gr::tagged_stream_block("ngham_decoder",
               gr::io_signature::make(1, 1, sizeof(unsigned char)),
               gr::io_signature::make(1, 1, sizeof(unsigned char)), 
               len_tag_key)
@@ -51,55 +48,30 @@ namespace gr {
     /*
      * Our virtual destructor.
      */
-    ngham_codeword_generator_impl::~ngham_codeword_generator_impl()
+    ngham_decoder_impl::~ngham_decoder_impl()
     {
     }
 
     int
-    ngham_codeword_generator_impl::calculate_output_stream_length(const gr_vector_int &ninput_items)
+    ngham_decoder_impl::calculate_output_stream_length(const gr_vector_int &ninput_items)
     {
-      const int pl_len = ninput_items[0];
-      int size_index = 0;
-      while (pl_len > NGHAM_PL_SIZE[size_index]) size_index++;
-
-      return NGHAM_PL_SIZE[size_index]; // should be NGHAM_PL_SIZE_FULL ??
+      int noutput_items = 0;
+      return noutput_items ;
     }
 
     int
-    ngham_codeword_generator_impl::work (int noutput_items,
+    ngham_decoder_impl::work (int noutput_items,
                        gr_vector_int &ninput_items,
                        gr_vector_const_void_star &input_items,
                        gr_vector_void_star &output_items)
     {
       const unsigned char *in = (const unsigned char *) input_items[0];
       unsigned char *out = (unsigned char *) output_items[0];
-      
 
-      int len = 0;
-      int j;
+      // Do <+signal processing+>
 
-      const int pl_len = ninput_items[0];
-      int size_index = 0;
-      while (pl_len > NGHAM_PL_SIZE[size_index]) size_index++;
-      
-      // insert padding size
-      char padding_size = NGHAM_PL_SIZE[size_index] - pl_len;
-      out[len++] = padding_size & 0x1f;
-
-      // insert data
-      for (j=0; j < pl_len; j++) out[len++] = in[j];
-
-      // insert crc
-      unsigned int crc = crc_ccitt(out, len); // was originally len+1
-      out[len++] = (crc >> 8) & 0xff;
-      out[len++] = crc & 0xff;
-
-      // insert padding
-      for (j=0; j < padding_size; j++) out[len++] = 0x00;
-
-
-      // Tell runtime system how many output items we produced.
-      return len;
+      // tell runtime system how many output items we produced.
+      return noutput_items;
     }
 
   } /* namespace nuts */

@@ -18,39 +18,35 @@
  * Boston, MA 02110-1301, USA.
  */
 
+#ifndef INCLUDED_NUTS_NGHAM_ENCODER_IMPL_H
+#define INCLUDED_NUTS_NGHAM_ENCODER_IMPL_H
 
-#ifndef INCLUDED_NUTS_NGHAM_FRAMER_H
-#define INCLUDED_NUTS_NGHAM_FRAMER_H
-
-#include <nuts/api.h>
-#include <gnuradio/tagged_stream_block.h>
+#include <nuts/ngham_encoder.h>
 
 namespace gr {
   namespace nuts {
 
-    /*!
-     * \brief <+description of block+>
-     * \ingroup nuts
-     *
-     */
-    class NUTS_API ngham_framer : virtual public gr::tagged_stream_block
+    class ngham_encoder_impl : public ngham_encoder
     {
-     public:
-      typedef boost::shared_ptr<ngham_framer> sptr;
+     private:
+         bool d_scramble;
 
-      /*!
-       * \brief Return a shared_ptr to a new instance of nuts::ngham_framer.
-       *
-       * To avoid accidental use of raw pointers, nuts::ngham_framer's
-       * constructor is in a private implementation
-       * class. nuts::ngham_framer::make is the public interface for
-       * creating new instances.
-       */
-      static sptr make(const std::string& len_tag_key="packet_len");
+     protected:
+      int calculate_output_stream_length(const gr_vector_int &ninput_items);
+
+     public:
+      ngham_encoder_impl(const std::string& len_tag_key, bool scramble);
+      ~ngham_encoder_impl();
+
+      // Where all the action really happens
+      int work(int noutput_items,
+           gr_vector_int &ninput_items,
+           gr_vector_const_void_star &input_items,
+           gr_vector_void_star &output_items);
     };
 
   } // namespace nuts
 } // namespace gr
 
-#endif /* INCLUDED_NUTS_NGHAM_FRAMER_H */
+#endif /* INCLUDED_NUTS_NGHAM_ENCODER_IMPL_H */
 

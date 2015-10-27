@@ -8,13 +8,11 @@
 %include "nuts_swig_doc.i"
 
 %{
-#include "nuts/ngham_framer.h"
-#include "nuts/ngham_codeword_generator.h"
+#include "nuts/ngham_encoder.h"
+#include "nuts/ngham_decoder.h"
 %}
 
-
-%include "nuts/ngham_framer.h"
-GR_SWIG_BLOCK_MAGIC2(nuts, ngham_framer);
-
-%include "nuts/ngham_codeword_generator.h"
-GR_SWIG_BLOCK_MAGIC2(nuts, ngham_codeword_generator);
+%include "nuts/ngham_encoder.h"
+GR_SWIG_BLOCK_MAGIC2(nuts, ngham_encoder);
+%include "nuts/ngham_decoder.h"
+GR_SWIG_BLOCK_MAGIC2(nuts, ngham_decoder);
