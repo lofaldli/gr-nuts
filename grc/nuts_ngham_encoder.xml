@@ -1,21 +1,29 @@
 <?xml version="1.0"?>
 <block>
-  <name>ngham_encoder</name>
+  <name>NGHAM Encoder</name>
   <key>nuts_ngham_encoder</key>
   <category>nuts</category>
   <import>import nuts</import>
   <make>nuts.ngham_encoder($len_tag_key, $scramble)</make>
   <param>
-    <name>len_tag_key</name>
+    <name>Length Tag Key</name>
     <key>len_tag_key</key>
     <value>"packet_len"</value>
     <type>string</type>
   </param>
   <param>
-    <name>scramble</name>
+    <name>Scramble</name>
     <key>scramble</key>
     <value>True</value>
-    <type>bool</type>
+    <type>enum</type>
+    <option>
+        <name>Yes</name>
+        <key>True</key>
+    </option>
+    <option>
+        <name>No</name>
+        <key>False</key>
+    </option>
   </param>
   <sink>
     <name>in</name>

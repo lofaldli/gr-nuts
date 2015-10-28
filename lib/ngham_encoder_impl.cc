@@ -22,6 +22,7 @@
 #include "config.h"
 #endif
 
+#include <stdio.h>
 #include <gnuradio/io_signature.h>
 #include "ngham_encoder_impl.h"
 
@@ -53,6 +54,7 @@ namespace gr {
               len_tag_key),
       d_scramble(scramble)
     {
+      printf("ngham_encoder_impl()\n");
       // initialize rs tables
       struct rs* rs_32 = (struct rs*)init_rs_char(8, 0x187, 112, 11, 32, 0);
       memcpy( (void*)&rs_cb[6], (void*)rs_32, sizeof(rs_cb[6]) );     
@@ -72,6 +74,9 @@ namespace gr {
       rs_cb[2].pad = 255-NGHAM_CODEWORD_SIZE[2];
       rs_cb[1].pad = 255-NGHAM_CODEWORD_SIZE[1];
       rs_cb[0].pad = 255-NGHAM_CODEWORD_SIZE[0];
+
+      delete rs_32;
+      delete rs_16;
     }
 
 
@@ -82,6 +87,15 @@ namespace gr {
     {
         // FIXME causes core dump 
         //free_rs_char(&rs_cb);
+        printf("~!!!!!!!!!!!ngham_encoder_impl()\n");
+        //for (int j=0; j<NGHAM_SIZES; j++) {
+            delete [] rs_cb[6].alpha_to;
+            delete [] rs_cb[6].index_of;
+            delete [] rs_cb[6].genpoly;
+            delete [] rs_cb[0].alpha_to;
+            delete [] rs_cb[0].index_of;
+            delete [] rs_cb[0].genpoly;
+        //}
     }
 
     int

@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Test
-# Generated: Tue Oct 27 16:25:44 2015
+# Generated: Wed Oct 28 14:19:04 2015
 ##################################################
 
 if __name__ == '__main__':
@@ -86,7 +86,7 @@ class test(gr.top_block, Qt.QWidget):
         )
         self.qtgui_time_sink_x_0 = qtgui.time_sink_c(
         	1024, #size
-        	samp_rate, #samp_rate
+        	data_rate*2, #samp_rate
         	"", #name
         	1 #number of inputs
         )
@@ -141,19 +141,17 @@ class test(gr.top_block, Qt.QWidget):
         	log=False,
         )
         self.blocks_vector_source_x_0 = blocks.vector_source_b((ord("t"), ord("e"), ord("s"),ord("t")), True, 1, [])
-        self.blocks_tag_gate_0 = blocks.tag_gate(gr.sizeof_gr_complex * 1, False)
         self.blocks_stream_to_tagged_stream_0 = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, 4, "packet_len")
 
         ##################################################
         # Connections
         ##################################################
         self.connect((self.blocks_stream_to_tagged_stream_0, 0), (self.nuts_ngham_encoder_0, 0))    
-        self.connect((self.blocks_tag_gate_0, 0), (self.uhd_usrp_sink_0, 0))    
         self.connect((self.blocks_vector_source_x_0, 0), (self.blocks_stream_to_tagged_stream_0, 0))    
         self.connect((self.digital_gmsk_mod_0, 0), (self.qtgui_time_sink_x_0, 0))    
         self.connect((self.digital_gmsk_mod_0, 0), (self.rational_resampler_xxx_0, 0))    
         self.connect((self.nuts_ngham_encoder_0, 0), (self.digital_gmsk_mod_0, 0))    
-        self.connect((self.rational_resampler_xxx_0, 0), (self.blocks_tag_gate_0, 0))    
+        self.connect((self.rational_resampler_xxx_0, 0), (self.uhd_usrp_sink_0, 0))    
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "test")
@@ -167,7 +165,6 @@ class test(gr.top_block, Qt.QWidget):
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
         self.uhd_usrp_sink_0.set_samp_rate(self.samp_rate)
-        self.qtgui_time_sink_x_0.set_samp_rate(self.samp_rate)
 
     def get_freq(self):
         return self.freq
@@ -181,6 +178,7 @@ class test(gr.top_block, Qt.QWidget):
 
     def set_data_rate(self, data_rate):
         self.data_rate = data_rate
+        self.qtgui_time_sink_x_0.set_samp_rate(self.data_rate*2)
 
 
 def main(top_block_cls=test, options=None):
