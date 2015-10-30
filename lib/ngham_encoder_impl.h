@@ -29,13 +29,14 @@ namespace gr {
     class ngham_encoder_impl : public ngham_encoder
     {
      private:
-         bool d_scramble;
+      bool d_rs_encode;
+      bool d_scramble;
 
      protected:
       int calculate_output_stream_length(const gr_vector_int &ninput_items);
 
      public:
-      ngham_encoder_impl(const std::string& len_tag_key, bool scramble);
+      ngham_encoder_impl(const std::string& len_tag_key, bool rs_encode, bool scramble);
       ~ngham_encoder_impl();
 
       // Where all the action really happens

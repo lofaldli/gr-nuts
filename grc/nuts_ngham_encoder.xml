@@ -4,12 +4,26 @@
   <key>nuts_ngham_encoder</key>
   <category>nuts</category>
   <import>import nuts</import>
-  <make>nuts.ngham_encoder($len_tag_key, $scramble)</make>
+  <make>nuts.ngham_encoder($len_tag_key, $rs_encode, $scramble)</make>
   <param>
     <name>Length Tag Key</name>
     <key>len_tag_key</key>
     <value>"packet_len"</value>
     <type>string</type>
+  </param>
+  <param>
+    <name>RS Encode</name>
+    <key>rs_encode</key>
+    <value>True</value>
+    <type>enum</type>
+    <option>
+        <name>Yes</name>
+        <key>True</key>
+    </option>
+    <option>
+        <name>No</name>
+        <key>False</key>
+    </option>
   </param>
   <param>
     <name>Scramble</name>

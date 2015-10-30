@@ -62,7 +62,7 @@
     </param>
     <param>
       <key>run_options</key>
-      <value>prompt</value>
+      <value>run</value>
     </param>
     <param>
       <key>run</key>
@@ -75,6 +75,33 @@
     <param>
       <key>title</key>
       <value></value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(184, 147)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>data</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>[ord(x) for x in message]</value>
     </param>
   </block>
   <block>
@@ -120,7 +147,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(768, 467)</value>
+      <value>(496, 11)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -179,7 +206,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(520, 11)</value>
+      <value>(40, 83)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -203,7 +230,34 @@
     </param>
     <param>
       <key>value</key>
-      <value>pmt.from_long(4)</value>
+      <value>pmt.from_long(len(data))</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(184, 83)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>message</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>"LA1NGS this is an NGHAM test message"</value>
     </param>
   </block>
   <block>
@@ -230,7 +284,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>1200</value>
+      <value>9600</value>
     </param>
   </block>
   <block>
@@ -261,6 +315,33 @@
     </param>
   </block>
   <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(400, 131)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>sps</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>10</value>
+    </param>
+  </block>
+  <block>
     <key>variable_qtgui_range</key>
     <param>
       <key>comment</key>
@@ -276,7 +357,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(896, 464)</value>
+      <value>(616, 11)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -343,7 +424,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(256, 299)</value>
+      <value>(256, 371)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -371,6 +452,57 @@
     </param>
   </block>
   <block>
+    <key>blocks_tagged_stream_align</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(440, 227)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_tagged_stream_align_0</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>byte</value>
+    </param>
+    <param>
+      <key>lengthtagname</key>
+      <value>packet_len</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+  </block>
+  <block>
     <key>blocks_unpack_k_bits_bb</key>
     <param>
       <key>alias</key>
@@ -390,7 +522,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(248, 243)</value>
+      <value>(248, 315)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -433,7 +565,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(24, 179)</value>
+      <value>(24, 211)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -469,7 +601,7 @@
     </param>
     <param>
       <key>vector</key>
-      <value>(ord("t"), ord("e"), ord("s"),ord("t"))</value>
+      <value>data</value>
     </param>
   </block>
   <block>
@@ -496,7 +628,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(448, 187)</value>
+      <value>(688, 219)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -520,7 +652,7 @@
     </param>
     <param>
       <key>samples_per_symbol</key>
-      <value>10</value>
+      <value>sps</value>
     </param>
     <param>
       <key>verbose</key>
@@ -547,7 +679,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(224, 187)</value>
+      <value>(224, 219)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -568,6 +700,10 @@
     <param>
       <key>minoutbuf</key>
       <value>0</value>
+    </param>
+    <param>
+      <key>rs_encode</key>
+      <value>True</value>
     </param>
     <param>
       <key>scramble</key>
@@ -606,7 +742,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(568, 323)</value>
+      <value>(880, 155)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -870,7 +1006,7 @@
     </param>
     <param>
       <key>name</key>
-      <value>""</value>
+      <value>"modulated"</value>
     </param>
     <param>
       <key>nconnections</key>
@@ -878,11 +1014,11 @@
     </param>
     <param>
       <key>size</key>
-      <value>5000</value>
+      <value>10000</value>
     </param>
     <param>
       <key>srate</key>
-      <value>10*ngham_rate</value>
+      <value>sps*ngham_rate</value>
     </param>
     <param>
       <key>tr_chan</key>
@@ -918,7 +1054,7 @@
     </param>
     <param>
       <key>ylabel</key>
-      <value>Amplitude</value>
+      <value>""</value>
     </param>
     <param>
       <key>yunit</key>
@@ -965,7 +1101,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(232, 355)</value>
+      <value>(232, 427)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -1229,7 +1365,7 @@
     </param>
     <param>
       <key>name</key>
-      <value>""</value>
+      <value>"encoded data"</value>
     </param>
     <param>
       <key>nconnections</key>
@@ -1237,7 +1373,7 @@
     </param>
     <param>
       <key>size</key>
-      <value>8*58</value>
+      <value>2000</value>
     </param>
     <param>
       <key>srate</key>
@@ -1257,7 +1393,7 @@
     </param>
     <param>
       <key>tr_mode</key>
-      <value>qtgui.TRIG_MODE_FREE</value>
+      <value>qtgui.TRIG_MODE_TAG</value>
     </param>
     <param>
       <key>tr_slope</key>
@@ -1265,7 +1401,7 @@
     </param>
     <param>
       <key>tr_tag</key>
-      <value>""</value>
+      <value>"packet_len"</value>
     </param>
     <param>
       <key>type</key>
@@ -1277,7 +1413,7 @@
     </param>
     <param>
       <key>ylabel</key>
-      <value>Amplitude</value>
+      <value>""</value>
     </param>
     <param>
       <key>yunit</key>
@@ -1308,7 +1444,7 @@
     </param>
     <param>
       <key>decim</key>
-      <value>12000</value>
+      <value>sps*ngham_rate</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -1320,66 +1456,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(656, 171)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>rational_resampler_xxx_0</value>
-    </param>
-    <param>
-      <key>interp</key>
-      <value>96000</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>taps</key>
-      <value></value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>ccc</value>
-    </param>
-  </block>
-  <block>
-    <key>rational_resampler_xxx</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>decim</key>
-      <value>96000</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>fbw</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(840, 171)</value>
+      <value>(880, 251)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1391,7 +1468,7 @@
     </param>
     <param>
       <key>interp</key>
-      <value>2000000</value>
+      <value>samp_rate</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -2082,7 +2159,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(832, 291)</value>
+      <value>(1064, 275)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2236,6 +2313,12 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
+    <source_block_id>blocks_tagged_stream_align_0</source_block_id>
+    <sink_block_id>digital_gmsk_mod_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
     <source_block_id>blocks_unpack_k_bits_bb_0_0_0</source_block_id>
     <sink_block_id>blocks_char_to_float_0_0_0</sink_block_id>
     <source_key>0</source_key>
@@ -2255,25 +2338,19 @@
   </connection>
   <connection>
     <source_block_id>digital_gmsk_mod_0</source_block_id>
-    <sink_block_id>rational_resampler_xxx_0</sink_block_id>
+    <sink_block_id>rational_resampler_xxx_1</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>nuts_ngham_encoder_0</source_block_id>
+    <sink_block_id>blocks_tagged_stream_align_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
     <source_block_id>nuts_ngham_encoder_0</source_block_id>
     <sink_block_id>blocks_unpack_k_bits_bb_0_0_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>nuts_ngham_encoder_0</source_block_id>
-    <sink_block_id>digital_gmsk_mod_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>rational_resampler_xxx_0</source_block_id>
-    <sink_block_id>rational_resampler_xxx_1</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

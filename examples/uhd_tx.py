@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Uhd Tx
-# Generated: Thu Oct 29 18:52:20 2015
+# Generated: Fri Oct 30 18:11:13 2015
 ##################################################
 
 if __name__ == '__main__':
@@ -63,10 +63,13 @@ class uhd_tx(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
+        self.message = message = "LA1NGS this is an NGHAM test message"
+        self.data = data = [ord(x) for x in message]
         self.tuner = tuner = 0
+        self.sps = sps = 10
         self.samp_rate = samp_rate = 2000000
-        self.ngham_rate = ngham_rate = 1200
-        self.length_tag = length_tag = gr.tag_utils.python_to_tag((0, pmt.intern("packet_len"), pmt.from_long(4), pmt.intern("src")))
+        self.ngham_rate = ngham_rate = 9600
+        self.length_tag = length_tag = gr.tag_utils.python_to_tag((0, pmt.intern("packet_len"), pmt.from_long(len(data)), pmt.intern("src")))
         self.gain = gain = 10
         self.freq = freq = 145980000
 
@@ -90,30 +93,24 @@ class uhd_tx(gr.top_block, Qt.QWidget):
         self.uhd_usrp_sink_0_0.set_center_freq(freq+tuner, 0)
         self.uhd_usrp_sink_0_0.set_gain(gain, 0)
         self.rational_resampler_xxx_1 = filter.rational_resampler_ccc(
-                interpolation=2000000,
-                decimation=96000,
-                taps=None,
-                fractional_bw=None,
-        )
-        self.rational_resampler_xxx_0 = filter.rational_resampler_ccc(
-                interpolation=96000,
-                decimation=12000,
+                interpolation=samp_rate,
+                decimation=sps*ngham_rate,
                 taps=None,
                 fractional_bw=None,
         )
         self.qtgui_time_sink_x_1_0_0 = qtgui.time_sink_f(
-        	8*58, #size
+        	2000, #size
         	ngham_rate, #samp_rate
-        	"", #name
+        	"encoded data", #name
         	1 #number of inputs
         )
         self.qtgui_time_sink_x_1_0_0.set_update_time(0.10)
         self.qtgui_time_sink_x_1_0_0.set_y_axis(-1, 2)
         
-        self.qtgui_time_sink_x_1_0_0.set_y_label("Amplitude", "")
+        self.qtgui_time_sink_x_1_0_0.set_y_label("", "")
         
         self.qtgui_time_sink_x_1_0_0.enable_tags(-1, True)
-        self.qtgui_time_sink_x_1_0_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "")
+        self.qtgui_time_sink_x_1_0_0.set_trigger_mode(qtgui.TRIG_MODE_TAG, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "packet_len")
         self.qtgui_time_sink_x_1_0_0.enable_autoscale(False)
         self.qtgui_time_sink_x_1_0_0.enable_grid(False)
         self.qtgui_time_sink_x_1_0_0.enable_control_panel(False)
@@ -148,15 +145,15 @@ class uhd_tx(gr.top_block, Qt.QWidget):
         self._qtgui_time_sink_x_1_0_0_win = sip.wrapinstance(self.qtgui_time_sink_x_1_0_0.pyqwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_time_sink_x_1_0_0_win)
         self.qtgui_time_sink_x_0 = qtgui.time_sink_c(
-        	5000, #size
-        	10*ngham_rate, #samp_rate
-        	"", #name
+        	10000, #size
+        	sps*ngham_rate, #samp_rate
+        	"modulated", #name
         	1 #number of inputs
         )
         self.qtgui_time_sink_x_0.set_update_time(0.10)
         self.qtgui_time_sink_x_0.set_y_axis(-5, 5)
         
-        self.qtgui_time_sink_x_0.set_y_label("Amplitude", "")
+        self.qtgui_time_sink_x_0.set_y_label("", "")
         
         self.qtgui_time_sink_x_0.enable_tags(-1, True)
         self.qtgui_time_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_TAG, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "packet_len")
@@ -196,28 +193,29 @@ class uhd_tx(gr.top_block, Qt.QWidget):
         
         self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.pyqwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_time_sink_x_0_win)
-        self.nuts_ngham_encoder_0 = nuts.ngham_encoder("packet_len", True)
+        self.nuts_ngham_encoder_0 = nuts.ngham_encoder("packet_len", True, True)
         self.digital_gmsk_mod_0 = digital.gmsk_mod(
-        	samples_per_symbol=10,
+        	samples_per_symbol=sps,
         	bt=0.35,
         	verbose=False,
         	log=False,
         )
-        self.blocks_vector_source_x_0_0 = blocks.vector_source_b((ord("t"), ord("e"), ord("s"),ord("t")), True, 1, [length_tag])
+        self.blocks_vector_source_x_0_0 = blocks.vector_source_b(data, True, 1, [length_tag])
         self.blocks_unpack_k_bits_bb_0_0_0 = blocks.unpack_k_bits_bb(8)
+        self.blocks_tagged_stream_align_0 = blocks.tagged_stream_align(gr.sizeof_char*1, "packet_len")
         self.blocks_char_to_float_0_0_0 = blocks.char_to_float(1, 1)
 
         ##################################################
         # Connections
         ##################################################
         self.connect((self.blocks_char_to_float_0_0_0, 0), (self.qtgui_time_sink_x_1_0_0, 0))    
+        self.connect((self.blocks_tagged_stream_align_0, 0), (self.digital_gmsk_mod_0, 0))    
         self.connect((self.blocks_unpack_k_bits_bb_0_0_0, 0), (self.blocks_char_to_float_0_0_0, 0))    
         self.connect((self.blocks_vector_source_x_0_0, 0), (self.nuts_ngham_encoder_0, 0))    
         self.connect((self.digital_gmsk_mod_0, 0), (self.qtgui_time_sink_x_0, 0))    
-        self.connect((self.digital_gmsk_mod_0, 0), (self.rational_resampler_xxx_0, 0))    
+        self.connect((self.digital_gmsk_mod_0, 0), (self.rational_resampler_xxx_1, 0))    
+        self.connect((self.nuts_ngham_encoder_0, 0), (self.blocks_tagged_stream_align_0, 0))    
         self.connect((self.nuts_ngham_encoder_0, 0), (self.blocks_unpack_k_bits_bb_0_0_0, 0))    
-        self.connect((self.nuts_ngham_encoder_0, 0), (self.digital_gmsk_mod_0, 0))    
-        self.connect((self.rational_resampler_xxx_0, 0), (self.rational_resampler_xxx_1, 0))    
         self.connect((self.rational_resampler_xxx_1, 0), (self.uhd_usrp_sink_0_0, 0))    
 
     def closeEvent(self, event):
@@ -226,12 +224,34 @@ class uhd_tx(gr.top_block, Qt.QWidget):
         event.accept()
 
 
+    def get_message(self):
+        return self.message
+
+    def set_message(self, message):
+        self.message = message
+        self.set_data([ord(x) for x in self.message])
+
+    def get_data(self):
+        return self.data
+
+    def set_data(self, data):
+        self.data = data
+        self.set_length_tag(gr.tag_utils.python_to_tag((0, pmt.intern("packet_len"), pmt.from_long(len(self.data)), pmt.intern("src"))))
+        self.blocks_vector_source_x_0_0.set_data(self.data, [self.length_tag])
+
     def get_tuner(self):
         return self.tuner
 
     def set_tuner(self, tuner):
         self.tuner = tuner
         self.uhd_usrp_sink_0_0.set_center_freq(self.freq+self.tuner, 0)
+
+    def get_sps(self):
+        return self.sps
+
+    def set_sps(self, sps):
+        self.sps = sps
+        self.qtgui_time_sink_x_0.set_samp_rate(self.sps*self.ngham_rate)
 
     def get_samp_rate(self):
         return self.samp_rate
@@ -245,7 +265,7 @@ class uhd_tx(gr.top_block, Qt.QWidget):
 
     def set_ngham_rate(self, ngham_rate):
         self.ngham_rate = ngham_rate
-        self.qtgui_time_sink_x_0.set_samp_rate(10*self.ngham_rate)
+        self.qtgui_time_sink_x_0.set_samp_rate(self.sps*self.ngham_rate)
         self.qtgui_time_sink_x_1_0_0.set_samp_rate(self.ngham_rate)
 
     def get_length_tag(self):
@@ -253,7 +273,7 @@ class uhd_tx(gr.top_block, Qt.QWidget):
 
     def set_length_tag(self, length_tag):
         self.length_tag = length_tag
-        self.blocks_vector_source_x_0_0.set_data((ord("t"), ord("e"), ord("s"),ord("t")), [self.length_tag])
+        self.blocks_vector_source_x_0_0.set_data(self.data, [self.length_tag])
 
     def get_gain(self):
         return self.gain

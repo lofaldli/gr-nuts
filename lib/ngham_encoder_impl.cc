@@ -38,20 +38,21 @@ namespace gr {
   namespace nuts {
 
     ngham_encoder::sptr
-    ngham_encoder::make(const std::string& len_tag_key, bool scramble)
+    ngham_encoder::make(const std::string& len_tag_key, bool rs_encode, bool scramble)
     {
       return gnuradio::get_initial_sptr
-        (new ngham_encoder_impl(len_tag_key, scramble));
+        (new ngham_encoder_impl(len_tag_key, rs_encode, scramble));
     }
     struct rs rs_cb[NGHAM_SIZES];
     /*
      * The private constructor
      */
-    ngham_encoder_impl::ngham_encoder_impl(const std::string& len_tag_key, bool scramble)
+    ngham_encoder_impl::ngham_encoder_impl(const std::string& len_tag_key, bool rs_encode, bool scramble)
       : gr::tagged_stream_block("ngham_encoder",
               gr::io_signature::make(1, 1, sizeof(unsigned char)),
               gr::io_signature::make(1, 1, sizeof(unsigned char)), 
               len_tag_key),
+      d_rs_encode(rs_encode),
       d_scramble(scramble)
     {
       printf("ngham_encoder_impl()\n");
@@ -153,11 +154,11 @@ namespace gr {
       // insert padding
       for (j=0; j<padding_size; j++) out[noutput_items++] = 0;
 
-      // encode parity data
-      encode_rs_char(&rs_cb[size_index], &out[codeword_start], &out[noutput_items]);
-    
-      // update packet length
-      noutput_items += NGHAM_PAR_SIZE[size_index];
+      // encode parity data and update packet length
+      if (d_rs_encode) {
+        encode_rs_char(&rs_cb[size_index], &out[codeword_start], &out[noutput_items]);
+        noutput_items += NGHAM_PAR_SIZE[size_index];
+      }
 
       // scramble data
       if (d_scramble) 
