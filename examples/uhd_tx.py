@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Uhd Tx
-# Generated: Fri Oct 30 18:11:13 2015
+# Generated: Mon Nov  2 16:01:02 2015
 ##################################################
 
 if __name__ == '__main__':
@@ -99,7 +99,7 @@ class uhd_tx(gr.top_block, Qt.QWidget):
                 fractional_bw=None,
         )
         self.qtgui_time_sink_x_1_0_0 = qtgui.time_sink_f(
-        	2000, #size
+        	1024, #size
         	ngham_rate, #samp_rate
         	"encoded data", #name
         	1 #number of inputs
@@ -193,7 +193,7 @@ class uhd_tx(gr.top_block, Qt.QWidget):
         
         self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.pyqwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_time_sink_x_0_win)
-        self.nuts_ngham_encoder_0 = nuts.ngham_encoder("packet_len", True, True)
+        self.nuts_ngham_encoder_0 = nuts.ngham_encoder("packet_len", True, True, True)
         self.digital_gmsk_mod_0 = digital.gmsk_mod(
         	samples_per_symbol=sps,
         	bt=0.35,

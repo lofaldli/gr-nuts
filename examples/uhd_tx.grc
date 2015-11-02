@@ -471,7 +471,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(440, 227)</value>
+      <value>(456, 235)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -628,7 +628,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(688, 219)</value>
+      <value>(704, 227)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -702,6 +702,10 @@
       <value>0</value>
     </param>
     <param>
+      <key>pad_for_usrp</key>
+      <value>True</value>
+    </param>
+    <param>
       <key>rs_encode</key>
       <value>True</value>
     </param>
@@ -742,7 +746,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(880, 155)</value>
+      <value>(896, 163)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -1373,7 +1377,7 @@
     </param>
     <param>
       <key>size</key>
-      <value>2000</value>
+      <value>1024</value>
     </param>
     <param>
       <key>srate</key>
@@ -1456,7 +1460,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(880, 251)</value>
+      <value>(896, 259)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2159,7 +2163,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1064, 275)</value>
+      <value>(1080, 283)</value>
     </param>
     <param>
       <key>_rotation</key>

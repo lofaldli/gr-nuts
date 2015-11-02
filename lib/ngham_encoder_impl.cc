@@ -38,22 +38,23 @@ namespace gr {
   namespace nuts {
 
     ngham_encoder::sptr
-    ngham_encoder::make(const std::string& len_tag_key, bool rs_encode, bool scramble)
+    ngham_encoder::make(const std::string& len_tag_key, bool rs_encode, bool scramble, bool pad_for_usrp)
     {
       return gnuradio::get_initial_sptr
-        (new ngham_encoder_impl(len_tag_key, rs_encode, scramble));
+        (new ngham_encoder_impl(len_tag_key, rs_encode, scramble, pad_for_usrp));
     }
     struct rs rs_cb[NGHAM_SIZES];
     /*
      * The private constructor
      */
-    ngham_encoder_impl::ngham_encoder_impl(const std::string& len_tag_key, bool rs_encode, bool scramble)
+    ngham_encoder_impl::ngham_encoder_impl(const std::string& len_tag_key, bool rs_encode, bool scramble, bool pad_for_usrp)
       : gr::tagged_stream_block("ngham_encoder",
               gr::io_signature::make(1, 1, sizeof(unsigned char)),
               gr::io_signature::make(1, 1, sizeof(unsigned char)), 
               len_tag_key),
       d_rs_encode(rs_encode),
-      d_scramble(scramble)
+      d_scramble(scramble),
+      d_pad_for_usrp(pad_for_usrp)
     {
       printf("ngham_encoder_impl()\n");
       // initialize rs tables
@@ -102,10 +103,22 @@ namespace gr {
     int
     ngham_encoder_impl::calculate_output_stream_length(const gr_vector_int &ninput_items)
     {
+      int header_size = NGHAM_PREAMBLE_SIZE + NGHAM_SYNC_SIZE + NGHAM_SIZE_TAG_SIZE;
       const int pl_len = ninput_items[0];
+
       int size_index = 0;
       while (pl_len > NGHAM_PL_SIZE[size_index]) size_index++;
-      return NGHAM_PL_SIZE[size_index];
+
+      int noutput_items = header_size + NGHAM_PL_SIZE[size_index];
+
+      if (d_pad_for_usrp) {
+        int total_padded_length = 128;
+        while (noutput_items > total_padded_length) total_padded_length += 128;
+
+        noutput_items = total_padded_length;
+      }
+
+      return noutput_items;
     }
 
     int
@@ -163,6 +176,15 @@ namespace gr {
       // scramble data
       if (d_scramble) 
         for (j=0; j<noutput_items; j++) out[codeword_start + j] ^= ccsds_poly[j];
+
+      // make sure packet is multiple of 128 bytes
+      if (d_pad_for_usrp) {
+        int total_padded_length = 128;
+        while (noutput_items > total_padded_length) total_padded_length += 128;
+
+        int usrp_padding_size = total_padded_length - (noutput_items % 128);
+        for (j=0; j<usrp_padding_size; j++) out[noutput_items++] = 0;
+      }
 
       // tell runtime system how many output items we produced.
       return noutput_items;

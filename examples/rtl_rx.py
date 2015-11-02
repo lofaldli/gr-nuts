@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Rtl Rx
-# Generated: Fri Oct 30 17:43:43 2015
+# Generated: Mon Nov  2 16:01:00 2015
 ##################################################
 
 if __name__ == '__main__':
@@ -17,6 +17,7 @@ if __name__ == '__main__':
             print "Warning: failed to XInitThreads()"
 
 from PyQt4 import Qt
+from gnuradio import analog
 from gnuradio import blocks
 from gnuradio import digital
 from gnuradio import eng_notation
@@ -61,7 +62,7 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         # Variables
         ##################################################
         self.xlat_decim = xlat_decim = 8
-        self.xlat_bandwidth = xlat_bandwidth = 7200
+        self.xlat_bandwidth = xlat_bandwidth = 10000
         self.tuner = tuner = -10000
         self.samp_rate = samp_rate = 2000000
         self.ngham_rate = ngham_rate = 9600
@@ -107,7 +108,7 @@ class rtl_rx(gr.top_block, Qt.QWidget):
                 fractional_bw=None,
         )
         self.qtgui_time_sink_x_1_0 = qtgui.time_sink_f(
-        	500, #size
+        	1000, #size
         	ngham_rate, #samp_rate
         	"", #name
         	1 #number of inputs
@@ -118,7 +119,7 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         self.qtgui_time_sink_x_1_0.set_y_label("", "")
         
         self.qtgui_time_sink_x_1_0.enable_tags(-1, True)
-        self.qtgui_time_sink_x_1_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 2, 0, "ngham_preamble")
+        self.qtgui_time_sink_x_1_0.set_trigger_mode(qtgui.TRIG_MODE_AUTO, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "ngham_preamble")
         self.qtgui_time_sink_x_1_0.enable_autoscale(False)
         self.qtgui_time_sink_x_1_0.enable_grid(False)
         self.qtgui_time_sink_x_1_0.enable_control_panel(True)
@@ -207,7 +208,7 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         	freq+tuner, #fc
         	samp_rate/xlat_decim, #bw
         	"", #name
-        	2 #number of inputs
+        	1 #number of inputs
         )
         self.qtgui_freq_sink_x_0.set_update_time(0.10)
         self.qtgui_freq_sink_x_0.set_y_axis(-200, 0)
@@ -220,7 +221,7 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         if not True:
           self.qtgui_freq_sink_x_0.disable_legend()
         
-        if complex == type(float()):
+        if "complex" == "float" or "complex" == "msg_float":
           self.qtgui_freq_sink_x_0.set_plot_pos_half(not True)
         
         labels = ["filtered", "raw", "", "", "",
@@ -231,7 +232,7 @@ class rtl_rx(gr.top_block, Qt.QWidget):
                   "magenta", "yellow", "dark red", "dark green", "dark blue"]
         alphas = [1.0, 0.25, 1.0, 1.0, 1.0,
                   1.0, 1.0, 1.0, 1.0, 1.0]
-        for i in xrange(2):
+        for i in xrange(1):
             if len(labels[i]) == 0:
                 self.qtgui_freq_sink_x_0.set_line_label(i, "Data {0}".format(i))
             else:
@@ -242,7 +243,6 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         
         self._qtgui_freq_sink_x_0_win = sip.wrapinstance(self.qtgui_freq_sink_x_0.pyqwidget(), Qt.QWidget)
         self.top_grid_layout.addWidget(self._qtgui_freq_sink_x_0_win, 0,0,1,1)
-        self.freq_xlating_fir_filter_xxx_0_0 = filter.freq_xlating_fir_filter_ccc(8, (firdes.low_pass(1, samp_rate, samp_rate/2, 1000)), tuner, samp_rate)
         self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_ccc(xlat_decim, (firdes.low_pass(1, samp_rate, xlat_bandwidth/2, 1000)), tuner, samp_rate)
         self.digital_gmsk_demod_0 = digital.gmsk_demod(
         	samples_per_symbol=10,
@@ -254,19 +254,19 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         	log=False,
         )
         self.blocks_char_to_float_0 = blocks.char_to_float(1, 1)
+        self.analog_pwr_squelch_xx_0 = analog.pwr_squelch_cc(-50, 1e-4, 0, False)
 
         ##################################################
         # Connections
         ##################################################
+        self.connect((self.analog_pwr_squelch_xx_0, 0), (self.digital_gmsk_demod_0, 0))    
         self.connect((self.blocks_char_to_float_0, 0), (self.qtgui_time_sink_x_1_0, 0))    
         self.connect((self.digital_gmsk_demod_0, 0), (self.blocks_char_to_float_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.qtgui_freq_sink_x_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.rational_resampler_xxx_0, 0))    
-        self.connect((self.freq_xlating_fir_filter_xxx_0_0, 0), (self.qtgui_freq_sink_x_0, 1))    
-        self.connect((self.rational_resampler_xxx_0, 0), (self.digital_gmsk_demod_0, 0))    
+        self.connect((self.rational_resampler_xxx_0, 0), (self.analog_pwr_squelch_xx_0, 0))    
         self.connect((self.rational_resampler_xxx_0, 0), (self.qtgui_time_sink_x_1, 0))    
         self.connect((self.rtl2832_source_0, 0), (self.freq_xlating_fir_filter_xxx_0, 0))    
-        self.connect((self.rtl2832_source_0, 0), (self.freq_xlating_fir_filter_xxx_0_0, 0))    
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "rtl_rx")
@@ -294,7 +294,6 @@ class rtl_rx(gr.top_block, Qt.QWidget):
     def set_tuner(self, tuner):
         self.tuner = tuner
         self.freq_xlating_fir_filter_xxx_0.set_center_freq(self.tuner)
-        self.freq_xlating_fir_filter_xxx_0_0.set_center_freq(self.tuner)
         self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
 
     def get_samp_rate(self):
@@ -303,7 +302,6 @@ class rtl_rx(gr.top_block, Qt.QWidget):
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
         self.freq_xlating_fir_filter_xxx_0.set_taps((firdes.low_pass(1, self.samp_rate, self.xlat_bandwidth/2, 1000)))
-        self.freq_xlating_fir_filter_xxx_0_0.set_taps((firdes.low_pass(1, self.samp_rate, self.samp_rate/2, 1000)))
         self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
         self.rtl2832_source_0.set_sample_rate(self.samp_rate)
 
