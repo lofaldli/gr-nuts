@@ -21,7 +21,7 @@ The RF-frontend consists of an antenna with a PA for uplink and an LNA for downl
 
 ## GNU Radio (v3.7.9)
 
-GNU Radio is a free software deeltopment toolkit tha tprovides signal procesing blocks to implement SDRs and signal processing systems. It communicates with the hardware over ethernet using raw I/Q samples. These samples are processed using module blocks written in either python or c++, and converted to and from a meaningful bitstream of data. 
+GNU Radio is a free software development toolkit that provides signal procesing blocks to implement SDRs and signal processing systems. It communicates with the hardware over ethernet using raw I/Q samples. These samples are processed using module blocks written in either python or c++, and converted to and from a meaningful bitstream of data. 
 
 These blocks include:
 
