@@ -29,17 +29,29 @@ namespace gr {
     class ngham_decoder_impl : public ngham_decoder
     {
      private:
-      // Nothing to declare in this block.
+      bool d_rs_decode;
+      bool d_descramble;
+      bool d_printing;
+      int d_decoder_state;
+      unsigned long d_data_reg;
+      int d_size_index;
+      int d_codeword_length;
+      int d_codeword[255]; // FIXME NGHAM_MAX_CODEWORD_SIZE
 
-     protected:
-      int calculate_output_stream_length(const gr_vector_int &ninput_items);
+
+      void enter_preamble();
+      void enter_sync();
+      void enter_size_tag();
+      void enter_codeword();
 
      public:
-      ngham_decoder_impl(const std::string& len_tag_key);
+      ngham_decoder_impl(bool rs_decode, bool descramble, bool printing);
       ~ngham_decoder_impl();
 
       // Where all the action really happens
-      int work(int noutput_items,
+      //void forecast (int noutput_items, gr_vector_int &ninput_items_required);
+
+      int general_work(int noutput_items,
            gr_vector_int &ninput_items,
            gr_vector_const_void_star &input_items,
            gr_vector_void_star &output_items);

@@ -23,7 +23,7 @@
 #define INCLUDED_NUTS_NGHAM_DECODER_H
 
 #include <nuts/api.h>
-#include <gnuradio/tagged_stream_block.h>
+#include <gnuradio/block.h>
 
 namespace gr {
   namespace nuts {
@@ -33,7 +33,7 @@ namespace gr {
      * \ingroup nuts
      *
      */
-    class NUTS_API ngham_decoder : virtual public gr::tagged_stream_block
+    class NUTS_API ngham_decoder : virtual public gr::block
     {
      public:
       typedef boost::shared_ptr<ngham_decoder> sptr;
@@ -46,7 +46,7 @@ namespace gr {
        * class. nuts::ngham_decoder::make is the public interface for
        * creating new instances.
        */
-      static sptr make(const std::string& len_tag_key="packet_length");
+      static sptr make(bool rs_decode=true, bool descramble=true, bool printing=false);
     };
 
   } // namespace nuts

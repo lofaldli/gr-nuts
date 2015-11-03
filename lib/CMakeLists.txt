@@ -29,8 +29,7 @@ list(APPEND nuts_sources
     fec-3.0.1/encode_rs_char.c 
     fec-3.0.1/decode_rs_char.c
     ngham_encoder_impl.cc
-    ngham_decoder_impl.cc
-)
+    ngham_decoder_impl.cc )
 
 set(nuts_sources "${nuts_sources}" PARENT_SCOPE)
 if(NOT nuts_sources)

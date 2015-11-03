@@ -56,7 +56,6 @@ namespace gr {
       d_scramble(scramble),
       d_pad_for_usrp(pad_for_usrp)
     {
-      printf("ngham_encoder_impl()\n");
       // initialize rs tables
       struct rs* rs_32 = (struct rs*)init_rs_char(8, 0x187, 112, 11, 32, 0);
       memcpy( (void*)&rs_cb[6], (void*)rs_32, sizeof(rs_cb[6]) );     
@@ -87,17 +86,12 @@ namespace gr {
      */
     ngham_encoder_impl::~ngham_encoder_impl()
     {
-        // FIXME causes core dump 
-        //free_rs_char(&rs_cb);
-        printf("~!!!!!!!!!!!ngham_encoder_impl()\n");
-        //for (int j=0; j<NGHAM_SIZES; j++) {
-            delete [] rs_cb[6].alpha_to;
-            delete [] rs_cb[6].index_of;
-            delete [] rs_cb[6].genpoly;
-            delete [] rs_cb[0].alpha_to;
-            delete [] rs_cb[0].index_of;
-            delete [] rs_cb[0].genpoly;
-        //}
+      delete [] rs_cb[6].alpha_to;
+      delete [] rs_cb[6].index_of;
+      delete [] rs_cb[6].genpoly;
+      delete [] rs_cb[0].alpha_to;
+      delete [] rs_cb[0].index_of;
+      delete [] rs_cb[0].genpoly;
     }
 
     int

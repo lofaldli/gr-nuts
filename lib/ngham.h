@@ -11,6 +11,8 @@
 #define NGHAM_MAX_TOTAL_SIZE (NGHAM_PREAMBLE_SIZE + NGHAM_SYNC_SIZE + NGHAM_SIZE_TAG_SIZE + NGHAM_MAX_CODEWORD_SIZE)
 
 #define NGHAM_SIZES 7
+
+#define NGHAM_SIZE_TAG_MAX_ERROR 6
 namespace gr {
     namespace nuts {
         const unsigned char NGHAM_PL_SIZE[NGHAM_SIZES]          = {28, 60, 92, 124, 156, 188, 220};
@@ -29,7 +31,6 @@ namespace gr {
             {0xd6, 0x6e, 0xf9},
             {0xed, 0x27, 0x34}
         };
-
 
         
     }
