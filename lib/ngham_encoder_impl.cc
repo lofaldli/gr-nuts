@@ -23,7 +23,10 @@
 #endif
 
 #include <stdio.h>
+#include <iostream>
+#include <string>
 #include <gnuradio/io_signature.h>
+//#include <gnuradio/logger.h>
 #include "ngham_encoder_impl.h"
 
 #include "fec-3.0.1/fec.h"
@@ -130,6 +133,9 @@ namespace gr {
       // initialize number of output items
       noutput_items = 0;
 
+      unsigned char d[NGHAM_MAX_TOTAL_SIZE];
+      int d_len = 0;
+
       // calculate size index
       const int pl_len = ninput_items[0];
       int size_index = 0;
@@ -138,49 +144,84 @@ namespace gr {
       // calc beginning of rs codeword
       int codeword_start = NGHAM_PREAMBLE_SIZE + NGHAM_SYNC_SIZE + NGHAM_SIZE_TAG_SIZE;
 
-      int j;
+      int j,k;
       // insert preamble, sync and size tag
-      for (j=0; j<NGHAM_PREAMBLE_SIZE; j++) out[noutput_items++] = NGHAM_PREAMBLE[j];
-      for (j=0; j<NGHAM_SYNC_SIZE; j++)     out[noutput_items++] = NGHAM_SYNC[j];
-      for (j=0; j<NGHAM_SIZE_TAG_SIZE; j++) out[noutput_items++] = NGHAM_SIZE_TAG[size_index][j];
+      for (j=0; j<NGHAM_PREAMBLE_SIZE; j++) d[d_len++] = NGHAM_PREAMBLE[j];
+      for (j=0; j<NGHAM_SYNC_SIZE; j++)     d[d_len++] = NGHAM_SYNC[j];
+      for (j=0; j<NGHAM_SIZE_TAG_SIZE; j++) d[d_len++] = NGHAM_SIZE_TAG[size_index][j];
       
       // calculate and insert padding size 
       unsigned char padding_size = (NGHAM_PL_SIZE[size_index] - pl_len) & 0x1f; // 0001 1111
       // TODO NGHAM flags
       unsigned char ngham_flags = (0x00 << 5) & 0xe0;
-      out[noutput_items++] = (ngham_flags | padding_size);
+      d[d_len++] = (ngham_flags | padding_size);
 
       // insert input elements
-      for (j=0; j<pl_len; j++) out[noutput_items++] = in[j];
+      for (j=0; j<pl_len; j++) d[d_len++] = in[j];
 
       // calculate and insert crc
-      const int crc = crc_ccitt(&out[codeword_start], pl_len+1);
-      out[noutput_items++] = (crc >> 8) & 0xff;
-      out[noutput_items++] = crc & 0xff;
+      const int crc = crc_ccitt(&d[codeword_start], pl_len+1);
+      d[d_len++] = (crc >> 8) & 0xff;
+      d[d_len++] = crc & 0xff;
 
       // insert padding
-      for (j=0; j<padding_size; j++) out[noutput_items++] = 0;
+      for (j=0; j<padding_size; j++) d[d_len++] = 0;
 
       // encode parity data and update packet length
       if (d_rs_encode) {
-        encode_rs_char(&rs_cb[size_index], &out[codeword_start], &out[noutput_items]);
-        noutput_items += NGHAM_PAR_SIZE[size_index];
+        encode_rs_char(&rs_cb[size_index], &d[codeword_start], &d[d_len]);
+        d_len += NGHAM_PAR_SIZE[size_index];
+      }
+
+      // print packet before scrambling
+      int d_printing = true; // FIXME make member variable
+      if (d_printing) {
+        //GR_LOG_INFO(d_logger, "NGHAM Encoder\n");
+        //printf("NGHAM Encoder\n"); fflush(stdout);
+        std::cout << "NGHAM Encoder" << std::endl;
+        //printf("d_len %i\n", d_len);fflush(stdout);
+        std::cout << "d_len " << d_len << std::endl;
+
+        std::stringstream packet;
+        for (j=codeword_start; j<d_len; j++) {
+          //packet << d[j];
+          //std::cout << d[j] << " ";
+          printf("0x%x%x ", (d[j] >> 4) & 0x0f, d[j] & 0x0f);fflush(stdout);
+          //std::cout << j << " ";
+          //for (k=0; k<4; k++) {
+            //if (k+j < d_len) {
+              //std::cerr << d[j+k] << "\t";
+            //} else {
+              //std::cerr << "\t\t";
+            //}
+          //}
+          //for (k=0; k<4 && k+j<d_len;k++) {
+          //  printf("%c ", d[j+k]);
+          //}
+          
+        }
+        std::cout /*<< packet.str()*/ << std::endl;
+        
       }
 
       // scramble data
       if (d_scramble) 
-        for (j=0; j<noutput_items; j++) out[codeword_start + j] ^= ccsds_poly[j];
+        for (j=0; j<d_len; j++) d[codeword_start + j] ^= ccsds_poly[j];
+
 
       // make sure packet is multiple of 128 bytes
       if (d_pad_for_usrp) {
         int total_padded_length = 128;
-        while (noutput_items > total_padded_length) total_padded_length += 128;
+        while (d_len > total_padded_length) total_padded_length += 128;
 
-        int usrp_padding_size = total_padded_length - (noutput_items % 128);
-        for (j=0; j<usrp_padding_size; j++) out[noutput_items++] = 0;
+        int usrp_padding_size = total_padded_length - (d_len % 128);
+        for (j=0; j<usrp_padding_size; j++) d[d_len++] = 0;
       }
 
+      memcpy(out, d, d_len);
+
       // tell runtime system how many output items we produced.
+      noutput_items = d_len;
       return noutput_items;
     }
 

@@ -32,6 +32,7 @@ namespace gr {
       bool d_rs_encode;
       bool d_scramble;
       bool d_pad_for_usrp;
+      
 
      protected:
       int calculate_output_stream_length(const gr_vector_int &ninput_items);

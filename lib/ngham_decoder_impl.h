@@ -36,8 +36,8 @@ namespace gr {
       unsigned long d_data_reg;
       int d_size_index;
       int d_codeword_length;
-      int d_codeword[255]; // FIXME NGHAM_MAX_CODEWORD_SIZE
-
+      unsigned char d_codeword[255]; // FIXME NGHAM_MAX_CODEWORD_SIZE
+      char d_bit_counter;
 
       void enter_preamble();
       void enter_sync();

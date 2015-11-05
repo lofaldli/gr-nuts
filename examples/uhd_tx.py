@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Uhd Tx
-# Generated: Mon Nov  2 19:21:03 2015
+# Generated: Thu Nov  5 11:39:13 2015
 ##################################################
 
 if __name__ == '__main__':
@@ -344,8 +344,8 @@ class uhd_tx(gr.top_block, Qt.QWidget):
     def set_tuner(self, tuner):
         self.tuner = tuner
         self.set_freq_label(self._freq_label_formatter(self.freq+self.tuner))
-        self.uhd_usrp_sink_0_0.set_center_freq(self.freq+self.tuner, 0)
         self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate)
+        self.uhd_usrp_sink_0_0.set_center_freq(self.freq+self.tuner, 0)
 
     def get_gain(self):
         return self.gain
@@ -361,10 +361,10 @@ class uhd_tx(gr.top_block, Qt.QWidget):
 
     def set_freq(self, freq):
         self.freq = freq
-        self.set_freq_label(self._freq_label_formatter(self.freq+self.tuner))
-        self.uhd_usrp_sink_0_0.set_center_freq(self.freq+self.tuner, 0)
-        self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate)
         self._freq_callback(self.freq)
+        self.set_freq_label(self._freq_label_formatter(self.freq+self.tuner))
+        self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate)
+        self.uhd_usrp_sink_0_0.set_center_freq(self.freq+self.tuner, 0)
 
     def get_data(self):
         return self.data
@@ -386,16 +386,16 @@ class uhd_tx(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.uhd_usrp_sink_0_0.set_samp_rate(self.samp_rate)
         self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate)
+        self.uhd_usrp_sink_0_0.set_samp_rate(self.samp_rate)
 
     def get_ngham_rate(self):
         return self.ngham_rate
 
     def set_ngham_rate(self, ngham_rate):
         self.ngham_rate = ngham_rate
-        self.qtgui_time_sink_x_1_0_0.set_samp_rate(self.ngham_rate)
         self.qtgui_time_sink_x_0.set_samp_rate(self.sps*self.ngham_rate)
+        self.qtgui_time_sink_x_1_0_0.set_samp_rate(self.ngham_rate)
 
     def get_length_tag(self):
         return self.length_tag

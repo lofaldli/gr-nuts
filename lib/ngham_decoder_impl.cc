@@ -65,7 +65,8 @@ namespace gr {
         d_printing(printing),
         d_decoder_state(STATE_PREAMBLE),
         d_data_reg(0),
-        d_size_index(0)
+        d_size_index(0),
+        d_bit_counter(0)
     {
 /*      // initialize rs tables
       struct rs* rs_32 = (struct rs*)init_rs_char(8, 0x187, 112, 11, 32, 0);
@@ -135,6 +136,7 @@ namespace gr {
     void ngham_decoder_impl::enter_codeword() {
       d_decoder_state = STATE_CODEWORD;
       d_codeword_length = 0;
+      d_bit_counter = 0;
     }
 
     uint8_t ngham_tag_check(uint32_t x, uint32_t y){
@@ -173,7 +175,7 @@ namespace gr {
               case STATE_PREAMBLE:
 
                   while (count < noutput_items) {
-                    out[count] = in[count];
+                    out[count] = 0;//in[count]; // dont propagate preamble
                     d_data_reg = (d_data_reg << 1) | ((in[count++]) & 0x01);
                     
                     uint32_t wrong_bits = 0;
@@ -196,7 +198,7 @@ namespace gr {
                   break;
               case STATE_SYNC:
                   while (count < noutput_items) {
-                    out[count] = in[count];
+                    out[count] = 0;//in[count]; // dont propagate sync
                     d_data_reg = (d_data_reg << 1) | ((in[count++]) & 0x01);
                     
                     uint32_t wrong_bits = 0;
@@ -220,7 +222,7 @@ namespace gr {
               case STATE_SIZE_TAG:
                   // FIXME leave this state in a proper way
                   while (d_decoder_state == STATE_SIZE_TAG && count < noutput_items) {
-                    out[count] = in[count];
+                    out[count] = 0;//in[count]; // dont propagate size tag
                     d_data_reg = (d_data_reg << 1) | ((in[count++]) & 0x01);
                     
                     d_size_index = 0;
@@ -243,6 +245,7 @@ namespace gr {
                         break;
                       }
                       d_size_index++;
+
                     }
                     
                     
@@ -252,9 +255,26 @@ namespace gr {
                   while (count < noutput_items) {
                     out[count] = in[count];
 
-                    d_codeword[d_codeword_length++] = in[count++];
+                    
+                      d_codeword[d_codeword_length] = (d_codeword[d_codeword_length] << 1) | (in[count++] & 0x01);
+                      d_bit_counter++;
+                      if (d_bit_counter == 8) {
+                        d_codeword_length++;
+                        d_bit_counter = 0;    
+                      }
+                      
+                    
+                    
+                    
                     if (d_codeword_length == NGHAM_CODEWORD_SIZE[d_size_index]) {
                       enter_preamble();
+                      printf("codeword length %i\n", d_codeword_length);
+                      for (j=0; j<d_codeword_length; j++) {
+                        //printf("%i ", d_codeword[j]);
+                        printf("0x%x%x ", (d_codeword[j] >> 4) & 0x0f, d_codeword[j] & 0x0f);fflush(stdout);
+                      }
+                      printf("\n");
+
                       break;
                     }
                   }

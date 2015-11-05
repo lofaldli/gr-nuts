@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Test
-# Generated: Tue Nov  3 21:35:29 2015
+# Generated: Thu Nov  5 10:39:48 2015
 ##################################################
 
 if __name__ == '__main__':
@@ -59,7 +59,7 @@ class test(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.message = message = "LA1NGS short message"
+        self.message = message = "LA1NGS message"
         self.data = data = [ord(x) for x in message]
         self.sps = sps = 10
         self.samp_rate = samp_rate = 96000
@@ -232,6 +232,7 @@ class test(gr.top_block, Qt.QWidget):
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, data_rate,True)
         self.blocks_tagged_stream_align_0 = blocks.tagged_stream_align(gr.sizeof_char*1, "packet_len")
         self.blocks_tag_gate_0 = blocks.tag_gate(gr.sizeof_gr_complex * 1, False)
+        self.blocks_null_sink_1 = blocks.null_sink(gr.sizeof_char*1)
         self.blocks_null_sink_0 = blocks.null_sink(gr.sizeof_char*1)
         self.blocks_char_to_float_0_0 = blocks.char_to_float(1, 1)
         self.blocks_char_to_float_0 = blocks.char_to_float(1, 1)
@@ -251,6 +252,7 @@ class test(gr.top_block, Qt.QWidget):
         self.connect((self.digital_gmsk_mod_0, 0), (self.blocks_tag_gate_0, 0))    
         self.connect((self.digital_gmsk_mod_0, 0), (self.qtgui_time_sink_x_1, 0))    
         self.connect((self.nuts_ngham_decoder_0, 0), (self.blocks_null_sink_0, 0))    
+        self.connect((self.nuts_ngham_encoder_0, 0), (self.blocks_null_sink_1, 0))    
         self.connect((self.nuts_ngham_encoder_0, 0), (self.blocks_tagged_stream_align_0, 0))    
         self.connect((self.nuts_ngham_encoder_0, 0), (self.blocks_unpack_k_bits_bb_0, 0))    
 

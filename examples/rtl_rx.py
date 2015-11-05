@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Rtl Rx
-# Generated: Tue Nov  3 21:23:50 2015
+# Generated: Wed Nov  4 14:00:35 2015
 ##################################################
 
 if __name__ == '__main__':
@@ -29,7 +29,6 @@ from gnuradio.filter import firdes
 from gnuradio.qtgui import Range, RangeWidget
 from optparse import OptionParser
 import baz
-import nuts
 import sip
 import sys
 
@@ -261,7 +260,6 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         
         self._qtgui_freq_sink_x_0_win = sip.wrapinstance(self.qtgui_freq_sink_x_0.pyqwidget(), Qt.QWidget)
         self.qtgui_layout_2.addWidget(self._qtgui_freq_sink_x_0_win)
-        self.nuts_ngham_decoder_0 = nuts.ngham_decoder(True, True, False)
         self.freq_xlating_fir_filter_xxx_0_0 = filter.freq_xlating_fir_filter_ccc(8, (firdes.low_pass(1, samp_rate, samp_rate/2, 1000)), tuner, samp_rate)
         self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_ccc(xlat_decim, (firdes.low_pass(1, samp_rate, xlat_bandwidth/2, 1000)), tuner, samp_rate)
         self.digital_gmsk_demod_0 = digital.gmsk_demod(
@@ -275,7 +273,6 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         )
         self.digital_correlate_access_code_tag_bb_1 = digital.correlate_access_code_tag_bb("1011101111001100010101001111110", 0, "ngham_sync")
         self.digital_correlate_access_code_tag_bb_0 = digital.correlate_access_code_tag_bb("10101010101010101010101010101010", 0, "ngham_preamble")
-        self.blocks_null_sink_0 = blocks.null_sink(gr.sizeof_char*1)
         self.blocks_char_to_float_0 = blocks.char_to_float(1, 1)
         self.analog_pwr_squelch_xx_0 = analog.pwr_squelch_cc(-50, 1e-4, 0, False)
 
@@ -287,11 +284,9 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         self.connect((self.digital_correlate_access_code_tag_bb_0, 0), (self.digital_correlate_access_code_tag_bb_1, 0))    
         self.connect((self.digital_correlate_access_code_tag_bb_1, 0), (self.blocks_char_to_float_0, 0))    
         self.connect((self.digital_gmsk_demod_0, 0), (self.digital_correlate_access_code_tag_bb_0, 0))    
-        self.connect((self.digital_gmsk_demod_0, 0), (self.nuts_ngham_decoder_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.qtgui_freq_sink_x_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.rational_resampler_xxx_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0_0, 0), (self.qtgui_freq_sink_x_0, 1))    
-        self.connect((self.nuts_ngham_decoder_0, 0), (self.blocks_null_sink_0, 0))    
         self.connect((self.rational_resampler_xxx_0, 0), (self.analog_pwr_squelch_xx_0, 0))    
         self.connect((self.rational_resampler_xxx_0, 0), (self.qtgui_time_sink_x_1, 0))    
         self.connect((self.rtl2832_source_0, 0), (self.freq_xlating_fir_filter_xxx_0, 0))    
