@@ -41,23 +41,24 @@ namespace gr {
   namespace nuts {
 
     ngham_encoder::sptr
-    ngham_encoder::make(const std::string& len_tag_key, bool rs_encode, bool scramble, bool pad_for_usrp)
+    ngham_encoder::make(const std::string& len_tag_key, bool rs_encode, bool scramble, bool pad_for_usrp, bool printing)
     {
       return gnuradio::get_initial_sptr
-        (new ngham_encoder_impl(len_tag_key, rs_encode, scramble, pad_for_usrp));
+        (new ngham_encoder_impl(len_tag_key, rs_encode, scramble, pad_for_usrp, printing));
     }
     struct rs rs_cb[NGHAM_SIZES];
     /*
      * The private constructor
      */
-    ngham_encoder_impl::ngham_encoder_impl(const std::string& len_tag_key, bool rs_encode, bool scramble, bool pad_for_usrp)
+    ngham_encoder_impl::ngham_encoder_impl(const std::string& len_tag_key, bool rs_encode, bool scramble, bool pad_for_usrp, bool printing)
       : gr::tagged_stream_block("ngham_encoder",
               gr::io_signature::make(1, 1, sizeof(unsigned char)),
               gr::io_signature::make(1, 1, sizeof(unsigned char)), 
               len_tag_key),
       d_rs_encode(rs_encode),
       d_scramble(scramble),
-      d_pad_for_usrp(pad_for_usrp)
+      d_pad_for_usrp(pad_for_usrp),
+      d_printing(printing)
     {
       // initialize rs tables
       struct rs* rs_32 = (struct rs*)init_rs_char(8, 0x187, 112, 11, 32, 0);
@@ -174,7 +175,6 @@ namespace gr {
       }
 
       // print packet before scrambling
-      int d_printing = true; // FIXME make member variable
       if (d_printing) {
         //GR_LOG_INFO(d_logger, "NGHAM Encoder\n");
         //printf("NGHAM Encoder\n"); fflush(stdout);

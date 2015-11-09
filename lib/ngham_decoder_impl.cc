@@ -53,7 +53,7 @@ namespace gr {
         (new ngham_decoder_impl(rs_decode, descramble, printing));
     }
 
-    struct rs rs_cb[NGHAM_SIZES];
+    struct rs rs_cb_rx[NGHAM_SIZES];
     /*
      * The private constructor
      */
@@ -71,23 +71,23 @@ namespace gr {
     {
       // initialize rs tables
       struct rs* rs_32 = (struct rs*)init_rs_char(8, 0x187, 112, 11, 32, 0);
-      memcpy( (void*)&rs_cb[6], (void*)rs_32, sizeof(rs_cb[6]) );     
-      memcpy( (void*)&rs_cb[5], (void*)rs_32, sizeof(rs_cb[5]) );     
-      memcpy( (void*)&rs_cb[4], (void*)rs_32, sizeof(rs_cb[4]) );     
-      memcpy( (void*)&rs_cb[3], (void*)rs_32, sizeof(rs_cb[3]) );     
+      memcpy( (void*)&rs_cb_rx[6], (void*)rs_32, sizeof(rs_cb_rx[6]) );     
+      memcpy( (void*)&rs_cb_rx[5], (void*)rs_32, sizeof(rs_cb_rx[5]) );     
+      memcpy( (void*)&rs_cb_rx[4], (void*)rs_32, sizeof(rs_cb_rx[4]) );     
+      memcpy( (void*)&rs_cb_rx[3], (void*)rs_32, sizeof(rs_cb_rx[3]) );     
     
       struct rs* rs_16 = (struct rs*)init_rs_char(8, 0x187, 112, 11, 16, 0);
-      memcpy( (void*)&rs_cb[2], (void*)rs_16, sizeof(rs_cb[2]) );     
-      memcpy( (void*)&rs_cb[1], (void*)rs_16, sizeof(rs_cb[1]) );     
-      memcpy( (void*)&rs_cb[0], (void*)rs_16, sizeof(rs_cb[0]) );     
+      memcpy( (void*)&rs_cb_rx[2], (void*)rs_16, sizeof(rs_cb_rx[2]) );     
+      memcpy( (void*)&rs_cb_rx[1], (void*)rs_16, sizeof(rs_cb_rx[1]) );     
+      memcpy( (void*)&rs_cb_rx[0], (void*)rs_16, sizeof(rs_cb_rx[0]) );     
 
-      rs_cb[6].pad = 255-NGHAM_CODEWORD_SIZE[6];
-      rs_cb[5].pad = 255-NGHAM_CODEWORD_SIZE[5];
-      rs_cb[4].pad = 255-NGHAM_CODEWORD_SIZE[4];
-      rs_cb[3].pad = 255-NGHAM_CODEWORD_SIZE[3];
-      rs_cb[2].pad = 255-NGHAM_CODEWORD_SIZE[2];
-      rs_cb[1].pad = 255-NGHAM_CODEWORD_SIZE[1];
-      rs_cb[0].pad = 255-NGHAM_CODEWORD_SIZE[0];
+      rs_cb_rx[6].pad = 255-NGHAM_CODEWORD_SIZE[6];
+      rs_cb_rx[5].pad = 255-NGHAM_CODEWORD_SIZE[5];
+      rs_cb_rx[4].pad = 255-NGHAM_CODEWORD_SIZE[4];
+      rs_cb_rx[3].pad = 255-NGHAM_CODEWORD_SIZE[3];
+      rs_cb_rx[2].pad = 255-NGHAM_CODEWORD_SIZE[2];
+      rs_cb_rx[1].pad = 255-NGHAM_CODEWORD_SIZE[1];
+      rs_cb_rx[0].pad = 255-NGHAM_CODEWORD_SIZE[0];
 
       delete rs_32;
       delete rs_16;
@@ -100,12 +100,12 @@ namespace gr {
     ngham_decoder_impl::~ngham_decoder_impl()
     { 
       
-      delete [] rs_cb[6].alpha_to;
-      delete [] rs_cb[6].index_of;
-      delete [] rs_cb[6].genpoly;
-      delete [] rs_cb[0].alpha_to;
-      delete [] rs_cb[0].index_of;
-      delete [] rs_cb[0].genpoly;
+      delete [] rs_cb_rx[6].alpha_to;
+      delete [] rs_cb_rx[6].index_of;
+      delete [] rs_cb_rx[6].genpoly;
+      delete [] rs_cb_rx[0].alpha_to;
+      delete [] rs_cb_rx[0].index_of;
+      delete [] rs_cb_rx[0].genpoly;
 
     }
 /*
@@ -282,7 +282,7 @@ namespace gr {
                 
                int nerrors = 0;
                if (d_rs_decode)
-                nerrors = decode_rs_char(&rs_cb[d_size_index], d_codeword, 0, 0);       
+                nerrors = decode_rs_char(&rs_cb_rx[d_size_index], d_codeword, 0, 0);       
                int pl_len = NGHAM_PL_SIZE[d_size_index] - (d_codeword[0] & 0x1f);
 
                if (d_printing)

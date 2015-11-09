@@ -4,9 +4,9 @@
 #include <stdint.h>
 #include <stdio.h>
 
-/*extern "C"*/ {
+//extern "C" {
 
-const uint16_t crc_ccitt_table[]; = {
+const uint16_t crc_ccitt_table[] = {
   0x0000, 0x1189, 0x2312, 0x329b, 0x4624, 0x57ad, 0x6536, 0x74bf,
   0x8c48, 0x9dc1, 0xaf5a, 0xbed3, 0xca6c, 0xdbe5, 0xe97e, 0xf8f7,
   0x1081, 0x0108, 0x3393, 0x221a, 0x56a5, 0x472c, 0x75b7, 0x643e,
@@ -44,5 +44,6 @@ const uint16_t crc_ccitt_table[]; = {
 uint16_t crc_ccitt_byte(uint8_t buf, uint16_t crc);
 
 uint16_t crc_ccitt(uint8_t *buf, uint16_t buf_len);
-}
+
+//}
 #endif

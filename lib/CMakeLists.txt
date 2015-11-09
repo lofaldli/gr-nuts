@@ -25,13 +25,13 @@ include(GrPlatform) #define LIB_SUFFIX
 include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 list(APPEND nuts_sources
+    ngham_encoder_impl.cc
+    ngham_decoder_impl.cc
     fec-3.0.1/init_rs_char.c
     fec-3.0.1/encode_rs_char.c 
     fec-3.0.1/decode_rs_char.c
     ccsds_scrambler.c
-    crc_ccitt.c
-    ngham_encoder_impl.cc
-    ngham_decoder_impl.cc )
+    crc_ccitt.c )
 
 set(nuts_sources "${nuts_sources}" PARENT_SCOPE)
 if(NOT nuts_sources)

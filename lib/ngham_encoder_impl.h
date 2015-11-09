@@ -32,13 +32,14 @@ namespace gr {
       bool d_rs_encode;
       bool d_scramble;
       bool d_pad_for_usrp;
+      bool d_printing;
       
 
      protected:
       int calculate_output_stream_length(const gr_vector_int &ninput_items);
 
      public:
-      ngham_encoder_impl(const std::string& len_tag_key, bool rs_encode, bool scramble, bool pad_for_usrp);
+      ngham_encoder_impl(const std::string& len_tag_key, bool rs_encode, bool scramble, bool pad_for_usrp, bool printing);
       ~ngham_encoder_impl();
 
       // Where all the action really happens
