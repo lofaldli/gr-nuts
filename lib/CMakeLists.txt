@@ -30,8 +30,9 @@ list(APPEND nuts_sources
     fec-3.0.1/init_rs_char.c
     fec-3.0.1/encode_rs_char.c 
     fec-3.0.1/decode_rs_char.c
-    ccsds_scrambler.c
-    crc_ccitt.c )
+    #ccsds_scrambler.c
+    #crc_ccitt.c 
+    )
 
 set(nuts_sources "${nuts_sources}" PARENT_SCOPE)
 if(NOT nuts_sources)

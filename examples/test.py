@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Test
-# Generated: Mon Nov  9 13:40:51 2015
+# Generated: Mon Nov  9 18:19:23 2015
 ##################################################
 
 if __name__ == '__main__':
@@ -210,7 +210,7 @@ class test(gr.top_block, Qt.QWidget):
         
         self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.pyqwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_time_sink_x_0_win)
-        self.nuts_ngham_encoder_0 = nuts.ngham_encoder("packet_len", True, False, True, False)
+        self.nuts_ngham_encoder_0 = nuts.ngham_encoder("packet_len", True, True, True, False)
         self.nuts_ngham_decoder_0 = nuts.ngham_decoder(True, True, True)
         self.digital_gmsk_mod_0 = digital.gmsk_mod(
         	samples_per_symbol=sps,
@@ -232,7 +232,6 @@ class test(gr.top_block, Qt.QWidget):
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, data_rate,True)
         self.blocks_tagged_stream_align_0 = blocks.tagged_stream_align(gr.sizeof_char*1, "packet_len")
         self.blocks_tag_gate_0 = blocks.tag_gate(gr.sizeof_gr_complex * 1, False)
-        self.blocks_null_sink_1 = blocks.null_sink(gr.sizeof_char*1)
         self.blocks_null_sink_0 = blocks.null_sink(gr.sizeof_char*1)
         self.blocks_char_to_float_0_0 = blocks.char_to_float(1, 1)
         self.blocks_char_to_float_0 = blocks.char_to_float(1, 1)
@@ -252,7 +251,6 @@ class test(gr.top_block, Qt.QWidget):
         self.connect((self.digital_gmsk_mod_0, 0), (self.blocks_tag_gate_0, 0))    
         self.connect((self.digital_gmsk_mod_0, 0), (self.qtgui_time_sink_x_1, 0))    
         self.connect((self.nuts_ngham_decoder_0, 0), (self.blocks_null_sink_0, 0))    
-        self.connect((self.nuts_ngham_encoder_0, 0), (self.blocks_null_sink_1, 0))    
         self.connect((self.nuts_ngham_encoder_0, 0), (self.blocks_tagged_stream_align_0, 0))    
         self.connect((self.nuts_ngham_encoder_0, 0), (self.blocks_unpack_k_bits_bb_0, 0))    
 
@@ -274,8 +272,8 @@ class test(gr.top_block, Qt.QWidget):
 
     def set_data(self, data):
         self.data = data
-        self.set_length_tag(gr.tag_utils.python_to_tag((0, pmt.intern("packet_len"), pmt.from_long(len(self.data)), pmt.intern("src"))))
         self.blocks_vector_source_x_0.set_data(self.data, [self.length_tag])
+        self.set_length_tag(gr.tag_utils.python_to_tag((0, pmt.intern("packet_len"), pmt.from_long(len(self.data)), pmt.intern("src"))))
 
     def get_sps(self):
         return self.sps
@@ -303,8 +301,8 @@ class test(gr.top_block, Qt.QWidget):
     def set_data_rate(self, data_rate):
         self.data_rate = data_rate
         self.blocks_throttle_0.set_sample_rate(self.data_rate)
-        self.qtgui_time_sink_x_0.set_samp_rate(self.data_rate)
         self.qtgui_time_sink_x_0_0.set_samp_rate(self.data_rate)
+        self.qtgui_time_sink_x_0.set_samp_rate(self.data_rate)
 
 
 def main(top_block_cls=test, options=None):

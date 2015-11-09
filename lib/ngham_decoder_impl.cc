@@ -32,8 +32,18 @@
 #include "fec-3.0.1/rs-common.h"
 
 #include "ngham.h"
-#include "crc_ccitt.h"
-#include "ccsds_scrambler.h"
+
+#define DEBUG
+
+#ifdef DEBUG
+#define PRINT(str) (printf(str))
+#define PRINT1(str,arg) (printf(str,arg))
+#define PRINT2(str,arg,arg1) (printf(str,arg,arg1))
+#else
+#define PRINT(str)
+#define PRINT1(str,arg)
+#define PRINT2(str,arg,arg1)
+#endif
 
 
 #define STATE_PREAMBLE 0
@@ -69,28 +79,28 @@ namespace gr {
         d_size_index(0),
         d_bit_counter(0)
     {
-      // initialize rs tables
-      struct rs* rs_32 = (struct rs*)init_rs_char(8, 0x187, 112, 11, 32, 0);
-      memcpy( (void*)&rs_cb_rx[6], (void*)rs_32, sizeof(rs_cb_rx[6]) );     
-      memcpy( (void*)&rs_cb_rx[5], (void*)rs_32, sizeof(rs_cb_rx[5]) );     
-      memcpy( (void*)&rs_cb_rx[4], (void*)rs_32, sizeof(rs_cb_rx[4]) );     
-      memcpy( (void*)&rs_cb_rx[3], (void*)rs_32, sizeof(rs_cb_rx[3]) );     
-    
-      struct rs* rs_16 = (struct rs*)init_rs_char(8, 0x187, 112, 11, 16, 0);
-      memcpy( (void*)&rs_cb_rx[2], (void*)rs_16, sizeof(rs_cb_rx[2]) );     
-      memcpy( (void*)&rs_cb_rx[1], (void*)rs_16, sizeof(rs_cb_rx[1]) );     
-      memcpy( (void*)&rs_cb_rx[0], (void*)rs_16, sizeof(rs_cb_rx[0]) );     
+        // initialize rs tables
+        struct rs* rs_32 = (struct rs*)init_rs_char(8, 0x187, 112, 11, 32, 0);
+        memcpy( (void*)&rs_cb_rx[6], (void*)rs_32, sizeof(rs_cb_rx[6]) );     
+        memcpy( (void*)&rs_cb_rx[5], (void*)rs_32, sizeof(rs_cb_rx[5]) );     
+        memcpy( (void*)&rs_cb_rx[4], (void*)rs_32, sizeof(rs_cb_rx[4]) );     
+        memcpy( (void*)&rs_cb_rx[3], (void*)rs_32, sizeof(rs_cb_rx[3]) );     
 
-      rs_cb_rx[6].pad = 255-NGHAM_CODEWORD_SIZE[6];
-      rs_cb_rx[5].pad = 255-NGHAM_CODEWORD_SIZE[5];
-      rs_cb_rx[4].pad = 255-NGHAM_CODEWORD_SIZE[4];
-      rs_cb_rx[3].pad = 255-NGHAM_CODEWORD_SIZE[3];
-      rs_cb_rx[2].pad = 255-NGHAM_CODEWORD_SIZE[2];
-      rs_cb_rx[1].pad = 255-NGHAM_CODEWORD_SIZE[1];
-      rs_cb_rx[0].pad = 255-NGHAM_CODEWORD_SIZE[0];
+        struct rs* rs_16 = (struct rs*)init_rs_char(8, 0x187, 112, 11, 16, 0);
+        memcpy( (void*)&rs_cb_rx[2], (void*)rs_16, sizeof(rs_cb_rx[2]) );     
+        memcpy( (void*)&rs_cb_rx[1], (void*)rs_16, sizeof(rs_cb_rx[1]) );     
+        memcpy( (void*)&rs_cb_rx[0], (void*)rs_16, sizeof(rs_cb_rx[0]) );     
 
-      delete rs_32;
-      delete rs_16;
+        rs_cb_rx[6].pad = 255-NGHAM_CODEWORD_SIZE[6];
+        rs_cb_rx[5].pad = 255-NGHAM_CODEWORD_SIZE[5];
+        rs_cb_rx[4].pad = 255-NGHAM_CODEWORD_SIZE[4];
+        rs_cb_rx[3].pad = 255-NGHAM_CODEWORD_SIZE[3];
+        rs_cb_rx[2].pad = 255-NGHAM_CODEWORD_SIZE[2];
+        rs_cb_rx[1].pad = 255-NGHAM_CODEWORD_SIZE[1];
+        rs_cb_rx[0].pad = 255-NGHAM_CODEWORD_SIZE[0];
+
+        delete rs_32;
+        delete rs_16;
 
     }
 
@@ -108,39 +118,44 @@ namespace gr {
       delete [] rs_cb_rx[0].genpoly;
 
     }
-/*
+
     void
     ngham_decoder_impl::forecast (int noutput_items, gr_vector_int &ninput_items_required)
     {
       switch (d_decoder_state) {
           case STATE_PREAMBLE:
-              ninput_items_required = 1
+              ninput_items_required[0] = noutput_items;
               break;
           case STATE_SYNC:
+              ninput_items_required[0] = noutput_items;
               break;
           case STATE_SIZE_TAG:
+              ninput_items_required[0] = noutput_items;
               break;
-          case STATE_PAYLOAD:
+          case STATE_CODEWORD:
+              ninput_items_required[0] = noutput_items;
               break;
+          case STATE_DECODE:
+              ninput_items_required[0] = noutput_items / 8;
       }
-    }*/
+    }
 
     void ngham_decoder_impl::enter_preamble() {
-      d_decoder_state = STATE_PREAMBLE;
+        d_decoder_state = STATE_PREAMBLE;
     }
     void ngham_decoder_impl::enter_sync() {
-      d_decoder_state = STATE_SYNC;
+        d_decoder_state = STATE_SYNC;
     }
     void ngham_decoder_impl::enter_size_tag() {
-      d_decoder_state = STATE_SIZE_TAG;
+        d_decoder_state = STATE_SIZE_TAG;
     }
     void ngham_decoder_impl::enter_codeword() {
-      d_decoder_state = STATE_CODEWORD;
-      d_codeword_length = 0;
-      d_bit_counter = 0;
+        d_decoder_state = STATE_CODEWORD;
+        d_codeword_length = 0;
+        d_bit_counter = 0;
     }
     void ngham_decoder_impl::enter_decode() {
-      d_decoder_state = STATE_DECODE;
+        d_decoder_state = STATE_DECODE;
     }
 
     uint8_t ngham_tag_check(uint32_t x, uint32_t y){
@@ -166,141 +181,186 @@ namespace gr {
                        gr_vector_const_void_star &input_items,
                        gr_vector_void_star &output_items)
     {
-      const unsigned char *in = (const unsigned char *) input_items[0];
-      unsigned char *out = (unsigned char *) output_items[0];
+        const unsigned char *in = (const unsigned char *) input_items[0];
+        unsigned char *out = (unsigned char *) output_items[0];
 
-      int count = 0;
-      int j,k;
-      unsigned long access_code;
+        int count = 0;
+        int j,k;
+        unsigned long access_code;
 
-      while (count < noutput_items) {
+        while (count < noutput_items) {
 
-          switch (d_decoder_state) {
-              case STATE_PREAMBLE:
+            switch (d_decoder_state) {
+                case STATE_PREAMBLE:
 
-                  while (count < noutput_items) {
-                    out[count] = 0;//in[count]; // dont propagate preamble
-                    d_data_reg = (d_data_reg << 1) | ((in[count++]) & 0x01);
+                    while (count < noutput_items) {
+                        out[count] = 0;//in[count]; // don't propagate preamble
+                        d_data_reg = (d_data_reg << 1) | ((in[count++]) & 0x01);
+
+                        uint32_t wrong_bits = 0;
+                        uint32_t nwrong = 1; // TODO threshold
+
+                        // FIXME make the conversion from byte array to long prettier
+                        for (j=0; j<NGHAM_PREAMBLE_SIZE; j++) {
+                            access_code = (access_code << 8) | (NGHAM_PREAMBLE[j] & 0xff);
+                        }
+
+                        wrong_bits = (d_data_reg ^ access_code);
+
+                        volk_32u_popcnt(&nwrong, wrong_bits);
+                        if (nwrong <= 0) {
+                            PRINT("\tpreamble found!\n");
+                            enter_sync();
+                            break;
+                        }
+                    }
+                    break;
+                case STATE_SYNC:
+                    while (count < noutput_items) {
+                        out[count] = 0;//in[count]; // don't propagate sync
+                        d_data_reg = (d_data_reg << 1) | ((in[count++]) & 0x01);
+
+                        uint32_t wrong_bits = 0;
+                        uint32_t nwrong = 1; 
+
+                        // FIXME make the conversion from byte array to long prettier
+                        for (j=0; j<NGHAM_SYNC_SIZE; j++) {
+                            access_code = (access_code << 8) | (NGHAM_SYNC[j] & 0xff);
+                        }
+
+                        wrong_bits = (d_data_reg ^ access_code);
+
+                        volk_32u_popcnt(&nwrong, wrong_bits);
+                        if (nwrong <= 0) {
+                            PRINT("\tsync found!\n");
+                            enter_size_tag();
+                            break;
+                        }
+                    }
+                    break;
+                case STATE_SIZE_TAG:
+                    // FIXME leave this state in a proper way
+                    while (d_decoder_state == STATE_SIZE_TAG && count < noutput_items) {
+                        out[count] = 0;//in[count]; // dont propagate size tag
+                        d_data_reg = (d_data_reg << 1) | ((in[count++]) & 0x01);
+
+                        d_size_index = 0;
+                        while (d_size_index < NGHAM_SIZES) {
+                            uint32_t wrong_bits = 0;
+                            uint32_t nwrong = 1; 
+
+                            // FIXME make the conversion from byte array to long prettier
+                            access_code = 0;
+                            for (j=0; j<NGHAM_SIZE_TAG_SIZE; j++) { 
+                                access_code = (access_code << 8) | (NGHAM_SIZE_TAG[d_size_index][j] & 0xff);
+                            }
+                            wrong_bits = ((d_data_reg & 0xffffff) ^ access_code);
+
+                            volk_32u_popcnt(&nwrong, wrong_bits);
+                            if (nwrong <= 0) {
+                            //if (ngham_tag_check(access_code, d_data_reg & 0xffffff)){
+                                PRINT1("\tsize tag found! size %i\n", d_size_index);
+                                enter_codeword();
+                                break;
+                            }
+                            d_size_index++;
+                        }
+                    }
+                    break;
+                case STATE_CODEWORD:
+                    while (count < noutput_items) {
+                        //out[count] = in[count]; // don't propagate anything here, 
+                        d_codeword[d_codeword_length] = (d_codeword[d_codeword_length] << 1) | (in[count++] & 0x01);
+                        d_bit_counter++;
+                        if (d_bit_counter == 8) {
+                            d_codeword_length++;
+                            d_bit_counter = 0;    
+                        }
                     
-                    uint32_t wrong_bits = 0;
-                    uint32_t nwrong = 1; // TODO threshold
+                        if (d_codeword_length == NGHAM_CODEWORD_SIZE[d_size_index]) {
+                            enter_decode();
+                            PRINT2("\tlength (%i,%i)\n", NGHAM_PL_SIZE_FULL[d_size_index], NGHAM_CODEWORD_SIZE[d_size_index]); 
+                            break;
+                        }
+                    }
+                    break;
+                case STATE_DECODE:
+                    enter_preamble();
 
-                    // FIXME make the conversion from byte array to long prettier
-                    for (j=0; j<NGHAM_PREAMBLE_SIZE; j++) {
-                      access_code = (access_code << 8) | (NGHAM_PREAMBLE[j] & 0xff);
+                    // descramble data
+                    if (d_descramble) {
+                        PRINT("\tdescrambling\n");
+                        for (j=0; j<d_codeword_length; j++) d_codeword[j] ^= ccsds_poly[j];
+                    }
+                
+                    // decode parity data
+                    int nerrors = 0;
+                    if (d_rs_decode) {
+                        PRINT("\tdecoding parity data\n");
+                        nerrors = decode_rs_char(&rs_cb_rx[d_size_index], d_codeword, 0, 0);
+                        PRINT1("\tnumber of errors %i\n", nerrors);
                     }
 
-                    wrong_bits = (d_data_reg ^ access_code);
-                    
-                    volk_32u_popcnt(&nwrong, wrong_bits);
-                    if (nwrong <= 0) {
-                      printf("preamble found!\n");
-                      enter_sync();
-                      break;
-                    }
-                  }
-                  break;
-              case STATE_SYNC:
-                  while (count < noutput_items) {
-                    out[count] = 0;//in[count]; // dont propagate sync
-                    d_data_reg = (d_data_reg << 1) | ((in[count++]) & 0x01);
-                    
-                    uint32_t wrong_bits = 0;
-                    uint32_t nwrong = 1; 
-
-                    // FIXME make the conversion from byte array to long prettier
-                    for (j=0; j<NGHAM_SYNC_SIZE; j++) {
-                      access_code = (access_code << 8) | (NGHAM_SYNC[j] & 0xff);
-                    }
-
-                    wrong_bits = (d_data_reg ^ access_code);
-                    
-                    volk_32u_popcnt(&nwrong, wrong_bits);
-                    if (nwrong <= 0) {
-                      printf("sync found!\n");
-                      enter_size_tag();
-                      break;
-                    }
-                  }
-                  break;
-              case STATE_SIZE_TAG:
-                  // FIXME leave this state in a proper way
-                  while (d_decoder_state == STATE_SIZE_TAG && count < noutput_items) {
-                    out[count] = 0;//in[count]; // dont propagate size tag
-                    d_data_reg = (d_data_reg << 1) | ((in[count++]) & 0x01);
-                    
-                    d_size_index = 0;
-                    while (d_size_index < NGHAM_SIZES) {
-                      uint32_t wrong_bits = 0;
-                      uint32_t nwrong = 1; 
-
-                      // FIXME make the conversion from byte array to long prettier
-                      access_code = 0;
-                      for (j=0; j<NGHAM_SIZE_TAG_SIZE; j++) { 
-                        access_code = (access_code << 8) | (NGHAM_SIZE_TAG[d_size_index][j] & 0xff);
-                      }
-                      wrong_bits = ((d_data_reg & 0xffffff) ^ access_code);
-                    
-                      volk_32u_popcnt(&nwrong, wrong_bits);
-                      if (nwrong <= 0) {
-                      //if (ngham_tag_check(access_code, d_data_reg & 0xffffff)){
-                        printf("size tag found! size %i\n", d_size_index);
-                        enter_codeword();
+                    // check if packet is decodable
+                    if (nerrors == -1) {
+                        printf("\tcould not decode packet\n");
                         break;
-                      }
-                      d_size_index++;
+                    }
 
+                    // calculate payload length
+                    int pl_len = NGHAM_PL_SIZE[d_size_index] - (d_codeword[0] & 0x1f);
+
+                    // calculate crc
+                    unsigned int crc = 0xffff;
+                    for (j=0; j<pl_len+1; j++){
+                        crc = ((crc >> 8) & 0xff) ^ crc_ccitt_table[(crc ^ d_codeword[j]) & 0xff];
+                    }
+                    crc ^= 0xffff;
+
+                    // check crc
+                    if ( crc == ( (d_codeword[pl_len+1]<<8) | d_codeword[pl_len+2] ) ) {
+                        PRINT("\tCRC OK\n");
+                    } else {
+                        PRINT("\tCRC Failed\n");
+                        break;
                     }
                     
-                    
-                  }
-                  break;
-              case STATE_CODEWORD:
-                  while (count < noutput_items) {
-                    out[count] = in[count];
-
-                    
-                      d_codeword[d_codeword_length] = (d_codeword[d_codeword_length] << 1) | (in[count++] & 0x01);
-                      d_bit_counter++;
-                      if (d_bit_counter == 8) {
-                        d_codeword_length++;
-                        d_bit_counter = 0;    
-                      }
-                    
-                    if (d_codeword_length == NGHAM_CODEWORD_SIZE[d_size_index]) {
-                      enter_decode();
-                      printf("codeword length %i\n", d_codeword_length);
-                      break;
+                    // print codeword if tests were passed
+                    if (d_printing) {
+                        for (j=0; j<d_codeword_length; j+=4) {
+                            for (k=0; k<4; k++) { 
+                                if (j+k<d_codeword_length)
+                                    printf("0x%x%x ", (d_codeword[j+k] >> 4) & 0x0f, d_codeword[j+k] & 0x0f);
+                                else 
+                                    printf("\t");
+                                //printf("%#*2x ",2, d_codeword[j+k]);
+                            }
+                            printf("\t");
+                            for (k=0; k<4 && j+k<d_codeword_length; k++) {
+                                if (d_codeword[j+k] > 32 && d_codeword[j+k] < 128)
+                                    printf("%c ", d_codeword[j+k]);
+                                else
+                                    printf(". ");
+                            }
+                            printf("\n");
+                        }
                     }
-                  }
-                  break;
-              case STATE_DECODE:
-               // descramble data
-               if (d_descramble) 
-                 for (j=0; j<d_codeword_length; j++) d_codeword[j] ^= ccsds_poly[j];
-                
-                
-               int nerrors = 0;
-               if (d_rs_decode)
-                nerrors = decode_rs_char(&rs_cb_rx[d_size_index], d_codeword, 0, 0);       
-               int pl_len = NGHAM_PL_SIZE[d_size_index] - (d_codeword[0] & 0x1f);
 
-               if (d_printing)
-                 for (j=0; j<d_codeword_length; j++) 
-                   printf("0x%x%x ", (d_codeword[j] >> 4) & 0x0f, d_codeword[j] & 0x0f);fflush(stdout);
-               enter_preamble();
-               break;
-          }
 
-          
-      }
-      // Do <+signal processing+>
-      // Tell runtime system how many input items we consumed on
-      // each input stream.
-      consume_each (noutput_items);
+                    // propagate the payload of tests were passed
+                    for (j=0; j<pl_len;j++) {
+                        out[count+j] = d_codeword[j];    
+                    }
+                    
+                    break;
+            }
+        }
+        // Tell runtime system how many input items we consumed on
+        // each input stream.
+        consume_each (noutput_items);
 
-      // Tell runtime system how many output items we produced.
-      return noutput_items;
+        // Tell runtime system how many output items we produced.
+        return noutput_items;
     }
     
     

@@ -34,8 +34,20 @@
 #include "fec-3.0.1/rs-common.h"
 
 #include "ngham.h"
-#include "crc_ccitt.h"
-#include "ccsds_scrambler.h"
+//#include "crc_ccitt.h"
+//#include "ccsds_scrambler.h"
+
+#define DEBUG
+
+#ifdef DEBUG
+#define PRINT(str) (printf(str))
+#define PRINT1(str,arg) (printf(str,arg))
+#define PRINT2(str,arg,arg1) (printf(str,arg,arg1))
+#else
+#define PRINT(str)
+#define PRINT1(str,arg)
+#define PRINT2(str,arg,arg1)
+#endif
 
 namespace gr {
   namespace nuts {
@@ -161,7 +173,14 @@ namespace gr {
       for (j=0; j<pl_len; j++) d[d_len++] = in[j];
 
       // calculate and insert crc
-      const int crc = crc_ccitt(&d[codeword_start], pl_len+1);
+//      const int crc = crc_ccitt(&d[codeword_start], pl_len+1);
+      
+      unsigned int crc = 0xffff;
+      for (j=0; j<pl_len+1; j++){
+        crc = ((crc >> 8) & 0xff) ^ crc_ccitt_table[(crc ^ d[codeword_start+j]) & 0xff];
+      }
+      crc ^= 0xffff;
+
       d[d_len++] = (crc >> 8) & 0xff;
       d[d_len++] = crc & 0xff;
 
@@ -176,32 +195,14 @@ namespace gr {
 
       // print packet before scrambling
       if (d_printing) {
-        //GR_LOG_INFO(d_logger, "NGHAM Encoder\n");
-        //printf("NGHAM Encoder\n"); fflush(stdout);
-        std::cout << "NGHAM Encoder" << std::endl;
-        //printf("d_len %i\n", d_len);fflush(stdout);
-        std::cout << "d_len " << d_len << std::endl;
-
-        std::stringstream packet;
-        for (j=codeword_start; j<d_len; j++) {
-          //packet << d[j];
-          //std::cout << d[j] << " ";
-          printf("0x%x%x ", (d[j] >> 4) & 0x0f, d[j] & 0x0f);fflush(stdout);
-          //std::cout << j << " ";
-          //for (k=0; k<4; k++) {
-            //if (k+j < d_len) {
-              //std::cerr << d[j+k] << "\t";
-            //} else {
-              //std::cerr << "\t\t";
-            //}
-          //}
-          //for (k=0; k<4 && k+j<d_len;k++) {
-          //  printf("%c ", d[j+k]);
-          //}
-          
-        }
-        std::cout /*<< packet.str()*/ << std::endl;
-        
+        printf("NGHAM Encoder\n");
+        PRINT2("\tlength (%i,%i)\n", NGHAM_PL_SIZE_FULL[size_index], NGHAM_CODEWORD_SIZE[size_index]); 
+        for (j=codeword_start; j<d_len; j+=4) {
+            for (k=0; k<4 && j+k<d_len; k++) { 
+                printf("0x%x%x ", (d[j+k] >> 4) & 0x0f, d[j+k] & 0x0f);fflush(stdout);
+            }
+            printf("\n");
+        }        
       }
 
       // scramble data
