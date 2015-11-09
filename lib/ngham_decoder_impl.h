@@ -43,6 +43,7 @@ namespace gr {
       void enter_sync();
       void enter_size_tag();
       void enter_codeword();
+      void enter_decode();
 
      public:
       ngham_decoder_impl(bool rs_decode, bool descramble, bool printing);

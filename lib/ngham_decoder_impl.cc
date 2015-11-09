@@ -32,15 +32,15 @@
 #include "fec-3.0.1/rs-common.h"
 
 #include "ngham.h"
-//#include "crc_ccitt.h"
-//#include "ccsds_scrambler.h"
+#include "crc_ccitt.h"
+#include "ccsds_scrambler.h"
 
 
 #define STATE_PREAMBLE 0
 #define STATE_SYNC 1
 #define STATE_SIZE_TAG 2
 #define STATE_CODEWORD 3
-#define STATE_CODEWORD_DONE 4
+#define STATE_DECODE 4
 
 
 namespace gr {
@@ -53,6 +53,7 @@ namespace gr {
         (new ngham_decoder_impl(rs_decode, descramble, printing));
     }
 
+    struct rs rs_cb[NGHAM_SIZES];
     /*
      * The private constructor
      */
@@ -68,7 +69,7 @@ namespace gr {
         d_size_index(0),
         d_bit_counter(0)
     {
-/*      // initialize rs tables
+      // initialize rs tables
       struct rs* rs_32 = (struct rs*)init_rs_char(8, 0x187, 112, 11, 32, 0);
       memcpy( (void*)&rs_cb[6], (void*)rs_32, sizeof(rs_cb[6]) );     
       memcpy( (void*)&rs_cb[5], (void*)rs_32, sizeof(rs_cb[5]) );     
@@ -90,7 +91,7 @@ namespace gr {
 
       delete rs_32;
       delete rs_16;
-*/
+
     }
 
     /*
@@ -98,14 +99,14 @@ namespace gr {
      */
     ngham_decoder_impl::~ngham_decoder_impl()
     { 
-/*      
+      
       delete [] rs_cb[6].alpha_to;
       delete [] rs_cb[6].index_of;
       delete [] rs_cb[6].genpoly;
       delete [] rs_cb[0].alpha_to;
       delete [] rs_cb[0].index_of;
       delete [] rs_cb[0].genpoly;
-*/
+
     }
 /*
     void
@@ -137,6 +138,9 @@ namespace gr {
       d_decoder_state = STATE_CODEWORD;
       d_codeword_length = 0;
       d_bit_counter = 0;
+    }
+    void ngham_decoder_impl::enter_decode() {
+      d_decoder_state = STATE_DECODE;
     }
 
     uint8_t ngham_tag_check(uint32_t x, uint32_t y){
@@ -262,29 +266,32 @@ namespace gr {
                         d_codeword_length++;
                         d_bit_counter = 0;    
                       }
-                      
-                    
-                    
                     
                     if (d_codeword_length == NGHAM_CODEWORD_SIZE[d_size_index]) {
-                      enter_preamble();
+                      enter_decode();
                       printf("codeword length %i\n", d_codeword_length);
-                      for (j=0; j<d_codeword_length; j++) {
-                        //printf("%i ", d_codeword[j]);
-                        printf("0x%x%x ", (d_codeword[j] >> 4) & 0x0f, d_codeword[j] & 0x0f);fflush(stdout);
-                      }
-                      printf("\n");
-
                       break;
                     }
                   }
-
-                  // TODO decode packet
-
-                  
-                  
                   break;
+              case STATE_DECODE:
+               // descramble data
+               if (d_descramble) 
+                 for (j=0; j<d_codeword_length; j++) d_codeword[j] ^= ccsds_poly[j];
+                
+                
+               int nerrors = 0;
+               if (d_rs_decode)
+                nerrors = decode_rs_char(&rs_cb[d_size_index], d_codeword, 0, 0);       
+               int pl_len = NGHAM_PL_SIZE[d_size_index] - (d_codeword[0] & 0x1f);
+
+               if (d_printing)
+                 for (j=0; j<d_codeword_length; j++) 
+                   printf("0x%x%x ", (d_codeword[j] >> 4) & 0x0f, d_codeword[j] & 0x0f);fflush(stdout);
+               enter_preamble();
+               break;
           }
+
           
       }
       // Do <+signal processing+>

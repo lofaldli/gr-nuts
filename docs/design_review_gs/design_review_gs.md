@@ -22,7 +22,7 @@ The RF-frontend consists of an antenna with a PA for uplink and an LNA for downl
 
 ### GNU Radio (v3.7.8)
 
-GNU Radio is a free software development toolkit that provides signal procesing blocks to implement SDRs and signal processing systems. It communicates with the hardware over ethernet using raw I/Q samples. These samples are processed using module blocks written in either Python or C++, and converted to and from a meaningful bitstream of data. 
+GNU Radio is a free software development toolkit that provides signal processing blocks to implement SDRs and signal processing systems. It communicates with the hardware over ethernet using raw I/Q samples. These samples are processed using module blocks written in either Python or C++, and converted to and from a meaningful bitstream of data. 
 
 The blocks used in this system include:
 
@@ -38,39 +38,42 @@ The blocks used in this system include:
 
 These figures are screenshots from the GNU Radio Companion, a graphical tool used to generate flowgraphs. The top one shows a simple implementation of the uplink design and the bottom one shows the downlink design. 
 
-The vector source and sink would be replaced with other blocks for sending commands and processing received data. UDP may be the best solution for this, as is is already a part of GNU Radio.
+An advantage to this design is that the coding and modulation blocks can be easily replaced for communicating with other satellites using different protocols.
+
+The vector source and sink would be replaced with other blocks for sending commands and processing received data. UDP may be the best solution for this, as it is already a part of GNU Radio.
 
 ### USRP
 
-The USRP is a Software Defined Radio meaning that the usual components of a radio (mixers, filters, amps, etc.) are all implemented in software. The USRP has an FPGA which converts real analog signals to complex baseband signals in the digital domain. These are transferred to the host computer running GNU Radio via an ethernet cable.
-
-It should have a frontend allowing multiple antenna inputs for circularly polarized signals.
+The USRP is a Software Defined Radio, which implies that the usual components of a radio (mixers, filters, amps, etc.) are all implemented in software. The USRP has an FPGA which converts real analog signals to complex baseband signals in the digital domain. These are transferred to the host computer running GNU Radio via an ethernet cable.
 
 ### RF-Frontend
 
-- LNA/PA
-- Antenna: circultarly polarized
+- PA/LNA see [https://www.ntnu.no/wiki/display/nuts/Ground+station](https://www.ntnu.no/wiki/display/nuts/Ground+station)
+- Antenna
+    - circultarly polarized
 
-### Gpredict
+### Gpredict and FLYBY
 
-used for calculating pass times and positions to control the antenna, also doppler shift which must be corrected by the ground station
+used for calculating pass times and positions to control the antenna and calculating the doppler shift which must be corrected by the ground station
 
 ## What is done
 
 - The NGHAM encoder block is complete and decoder block is almost done (at the time of writing).
-- Communication between USRP and the OWL VHF radio module is successful, and messages of different lengths decode correctly. Communicating with UHF radio module should be trivial (?).
+- Communication between USRP and the OWL VHF radio module is successful, and messages of different lengths decode correctly. Communicating with UHF radio module should be trivial (?!).
+
+With this the network layer communication between the ground station will be complete. Which contribute to completing all requirements labeled NGH.
 
 ## TODO
 
 - Finish NGHAM decoder block!
 - Handle errors in the non-FEC encoded parts of the packet (preamble, sync word and size tag)
 - Find a way to handle doppler shifts
-    - currently this is calculated by the HAM radio 
+    - currently this is calculated by FLYBY software and HAM radio
     - one possible way is to run the decoder on an interval of frequencies, like a gps receiver does
-    - another is to find out how to use the Clock Recovery MM block in a clever way (it is integrated in the GMSK Demod block, but it may not work for large frequency offsets)
-- cw signal, useful blocks probably already exist in GNU Radio
-
-
+![corr](corr.png "gps correlator")
+    - another is to find out how to use the Clock Recovery MM block in a clever way (it is integrated in the GMSK Demod block, but it may not work for large frequency offsets).
+- CW signal, useful blocks probably already exist in GNU Radio (Requirements labeled CW).
+- Implement a higher level communication protocol for transferring meaningful data between ground station and satellite
 
 ## Abbreviations
 
@@ -83,6 +86,7 @@ used for calculating pass times and positions to control the antenna, also doppl
 - PA: Power Amplifier
 - RF: Radio Frequency
 - RS: Reed-Solomon
+- RX/TX: Receive/Transmit
 - SDR: Software Defined Radio
 - UHF: Ultra high frequency
 - USRP: Universal Soft Radio Peripheral
