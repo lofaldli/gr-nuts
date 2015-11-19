@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Uhd Tx
-# Generated: Mon Nov  9 13:43:17 2015
+# Generated: Sun Nov 15 17:26:56 2015
 ##################################################
 
 if __name__ == '__main__':
@@ -309,6 +309,7 @@ class uhd_tx(gr.top_block, Qt.QWidget):
         self.blocks_vector_source_x_0_0 = blocks.vector_source_b(data, True, 1, [length_tag])
         self.blocks_unpack_k_bits_bb_0_0_0 = blocks.unpack_k_bits_bb(8)
         self.blocks_tagged_stream_align_0 = blocks.tagged_stream_align(gr.sizeof_char*1, "packet_len")
+        self.blocks_null_sink_0 = blocks.null_sink(gr.sizeof_gr_complex*1)
         self.blocks_char_to_float_0_0_0 = blocks.char_to_float(1, 1)
 
         ##################################################
@@ -322,6 +323,7 @@ class uhd_tx(gr.top_block, Qt.QWidget):
         self.connect((self.digital_gmsk_mod_0, 0), (self.rational_resampler_xxx_1, 0))    
         self.connect((self.nuts_ngham_encoder_0, 0), (self.blocks_tagged_stream_align_0, 0))    
         self.connect((self.nuts_ngham_encoder_0, 0), (self.blocks_unpack_k_bits_bb_0_0_0, 0))    
+        self.connect((self.rational_resampler_xxx_1, 0), (self.blocks_null_sink_0, 0))    
         self.connect((self.rational_resampler_xxx_1, 0), (self.qtgui_freq_sink_x_0, 0))    
         self.connect((self.rational_resampler_xxx_1, 0), (self.uhd_usrp_sink_0_0, 0))    
 

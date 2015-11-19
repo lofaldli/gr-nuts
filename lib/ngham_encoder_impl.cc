@@ -26,7 +26,6 @@
 #include <iostream>
 #include <string>
 #include <gnuradio/io_signature.h>
-//#include <gnuradio/logger.h>
 #include "ngham_encoder_impl.h"
 
 #include "fec-3.0.1/fec.h"
@@ -34,8 +33,6 @@
 #include "fec-3.0.1/rs-common.h"
 
 #include "ngham.h"
-//#include "crc_ccitt.h"
-//#include "ccsds_scrambler.h"
 
 #define DEBUG
 
@@ -163,18 +160,15 @@ namespace gr {
       for (j=0; j<NGHAM_SYNC_SIZE; j++)     d[d_len++] = NGHAM_SYNC[j];
       for (j=0; j<NGHAM_SIZE_TAG_SIZE; j++) d[d_len++] = NGHAM_SIZE_TAG[size_index][j];
       
-      // calculate and insert padding size 
+      // calculate and insert padding size and ngham flags
       unsigned char padding_size = (NGHAM_PL_SIZE[size_index] - pl_len) & 0x1f; // 0001 1111
-      // TODO NGHAM flags
-      unsigned char ngham_flags = (0x00 << 5) & 0xe0;
+      unsigned char ngham_flags = (0x00 << 5) & 0xe0;// TODO implement NGHAM flags
       d[d_len++] = (ngham_flags | padding_size);
 
       // insert input elements
       for (j=0; j<pl_len; j++) d[d_len++] = in[j];
 
       // calculate and insert crc
-//      const int crc = crc_ccitt(&d[codeword_start], pl_len+1);
-      
       unsigned int crc = 0xffff;
       for (j=0; j<pl_len+1; j++){
         crc = ((crc >> 8) & 0xff) ^ crc_ccitt_table[(crc ^ d[codeword_start+j]) & 0xff];
@@ -199,7 +193,7 @@ namespace gr {
         PRINT2("\tlength (%i,%i)\n", NGHAM_PL_SIZE_FULL[size_index], NGHAM_CODEWORD_SIZE[size_index]); 
         for (j=codeword_start; j<d_len; j+=4) {
             for (k=0; k<4 && j+k<d_len; k++) { 
-                printf("0x%x%x ", (d[j+k] >> 4) & 0x0f, d[j+k] & 0x0f);fflush(stdout);
+                printf("0x%x%x ", (d[j+k] >> 4) & 0x0f, d[j+k] & 0x0f);
             }
             printf("\n");
         }        

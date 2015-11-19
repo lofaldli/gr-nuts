@@ -194,7 +194,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>"LA1NGS message"</value>
+      <value>"test"</value>
     </param>
   </block>
   <block>
@@ -789,7 +789,7 @@
     </param>
     <param>
       <key>descramble</key>
-      <value>True</value>
+      <value>False</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -872,7 +872,7 @@
     </param>
     <param>
       <key>printing</key>
-      <value>False</value>
+      <value>True</value>
     </param>
     <param>
       <key>rs_encode</key>
@@ -880,7 +880,7 @@
     </param>
     <param>
       <key>scramble</key>
-      <value>True</value>
+      <value>False</value>
     </param>
   </block>
   <block>
@@ -907,7 +907,7 @@
     </param>
     <param>
       <key>entags</key>
-      <value>True</value>
+      <value>False</value>
     </param>
     <param>
       <key>_enabled</key>

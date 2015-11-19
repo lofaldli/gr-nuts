@@ -33,7 +33,7 @@
 
 #include "ngham.h"
 
-#define DEBUG
+//#define DEBUG
 
 #ifdef DEBUG
 #define PRINT(str) (printf(str))
@@ -122,6 +122,8 @@ namespace gr {
     void
     ngham_decoder_impl::forecast (int noutput_items, gr_vector_int &ninput_items_required)
     {
+      ninput_items_required[0] = noutput_items;
+/*    
       switch (d_decoder_state) {
           case STATE_PREAMBLE:
               ninput_items_required[0] = noutput_items;
@@ -138,6 +140,7 @@ namespace gr {
           case STATE_DECODE:
               ninput_items_required[0] = noutput_items / 8;
       }
+*/
     }
 
     void ngham_decoder_impl::enter_preamble() {
@@ -269,7 +272,7 @@ namespace gr {
                     break;
                 case STATE_CODEWORD:
                     while (count < noutput_items) {
-                        //out[count] = in[count]; // don't propagate anything here, 
+                        out[count] = in[count]; // don't propagate anything here, 
                         d_codeword[d_codeword_length] = (d_codeword[d_codeword_length] << 1) | (in[count++] & 0x01);
                         d_bit_counter++;
                         if (d_bit_counter == 8) {
@@ -348,9 +351,9 @@ namespace gr {
 
 
                     // propagate the payload of tests were passed
-                    for (j=0; j<pl_len;j++) {
-                        out[count+j] = d_codeword[j];    
-                    }
+//                    for (j=0; j<pl_len;j++) {
+//                        out[count+j] = d_codeword[j];    
+//                    }
                     
                     break;
             }

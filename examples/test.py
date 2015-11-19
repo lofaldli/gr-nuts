@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Test
-# Generated: Mon Nov  9 18:19:23 2015
+# Generated: Mon Nov 16 20:16:16 2015
 ##################################################
 
 if __name__ == '__main__':
@@ -59,7 +59,7 @@ class test(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.message = message = "LA1NGS message"
+        self.message = message = "test"
         self.data = data = [ord(x) for x in message]
         self.sps = sps = 10
         self.samp_rate = samp_rate = 96000
@@ -175,7 +175,7 @@ class test(gr.top_block, Qt.QWidget):
         
         self.qtgui_time_sink_x_0.set_y_label("", "")
         
-        self.qtgui_time_sink_x_0.enable_tags(-1, True)
+        self.qtgui_time_sink_x_0.enable_tags(-1, False)
         self.qtgui_time_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_TAG, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "packet_len")
         self.qtgui_time_sink_x_0.enable_autoscale(False)
         self.qtgui_time_sink_x_0.enable_grid(False)
@@ -210,8 +210,8 @@ class test(gr.top_block, Qt.QWidget):
         
         self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.pyqwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_time_sink_x_0_win)
-        self.nuts_ngham_encoder_0 = nuts.ngham_encoder("packet_len", True, True, True, False)
-        self.nuts_ngham_decoder_0 = nuts.ngham_decoder(True, True, True)
+        self.nuts_ngham_encoder_0 = nuts.ngham_encoder("packet_len", True, False, True, True)
+        self.nuts_ngham_decoder_0 = nuts.ngham_decoder(True, False, True)
         self.digital_gmsk_mod_0 = digital.gmsk_mod(
         	samples_per_symbol=sps,
         	bt=0.35,
@@ -272,8 +272,8 @@ class test(gr.top_block, Qt.QWidget):
 
     def set_data(self, data):
         self.data = data
-        self.blocks_vector_source_x_0.set_data(self.data, [self.length_tag])
         self.set_length_tag(gr.tag_utils.python_to_tag((0, pmt.intern("packet_len"), pmt.from_long(len(self.data)), pmt.intern("src"))))
+        self.blocks_vector_source_x_0.set_data(self.data, [self.length_tag])
 
     def get_sps(self):
         return self.sps
