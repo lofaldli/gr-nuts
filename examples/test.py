@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Test
-# Generated: Mon Nov 16 20:16:16 2015
+# Generated: Sun Nov 22 19:40:49 2015
 ##################################################
 
 if __name__ == '__main__':
@@ -210,7 +210,7 @@ class test(gr.top_block, Qt.QWidget):
         
         self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.pyqwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_time_sink_x_0_win)
-        self.nuts_ngham_encoder_0 = nuts.ngham_encoder("packet_len", True, False, True, True)
+        self.nuts_ngham_encoder_0 = nuts.ngham_encoder("packet_len", True, False, True, False)
         self.nuts_ngham_decoder_0 = nuts.ngham_decoder(True, False, True)
         self.digital_gmsk_mod_0 = digital.gmsk_mod(
         	samples_per_symbol=sps,
@@ -301,8 +301,8 @@ class test(gr.top_block, Qt.QWidget):
     def set_data_rate(self, data_rate):
         self.data_rate = data_rate
         self.blocks_throttle_0.set_sample_rate(self.data_rate)
-        self.qtgui_time_sink_x_0_0.set_samp_rate(self.data_rate)
         self.qtgui_time_sink_x_0.set_samp_rate(self.data_rate)
+        self.qtgui_time_sink_x_0_0.set_samp_rate(self.data_rate)
 
 
 def main(top_block_cls=test, options=None):

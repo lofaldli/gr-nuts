@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Rtl Rx
-# Generated: Wed Nov 18 11:20:06 2015
+# Generated: Sat Nov 21 20:16:37 2015
 ##################################################
 
 if __name__ == '__main__':
@@ -362,8 +362,8 @@ class rtl_rx(gr.top_block, Qt.QWidget):
     def set_tuner(self, tuner):
         self.tuner = tuner
         self.freq_xlating_fir_filter_xxx_0.set_center_freq(self.tuner)
-        self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
         self.freq_xlating_fir_filter_xxx_0_0.set_center_freq(self.tuner)
+        self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
 
     def get_samp_rate(self):
         return self.samp_rate
@@ -371,10 +371,10 @@ class rtl_rx(gr.top_block, Qt.QWidget):
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
         self.freq_xlating_fir_filter_xxx_0.set_taps((firdes.low_pass(1, self.samp_rate, self.xlat_bandwidth/2, 1000)))
-        self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
-        self.rtl2832_source_0.set_sample_rate(self.samp_rate)
         self.freq_xlating_fir_filter_xxx_0_0.set_taps((firdes.low_pass(1, self.samp_rate, self.samp_rate/2, 1000)))
+        self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
         self.qtgui_waterfall_sink_x_0.set_frequency_range(self.freq, self.samp_rate)
+        self.rtl2832_source_0.set_sample_rate(self.samp_rate)
 
     def get_ngham_rate(self):
         return self.ngham_rate
@@ -390,8 +390,8 @@ class rtl_rx(gr.top_block, Qt.QWidget):
     def set_freq(self, freq):
         self.freq = freq
         self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
-        self.rtl2832_source_0.set_frequency(self.freq)
         self.qtgui_waterfall_sink_x_0.set_frequency_range(self.freq, self.samp_rate)
+        self.rtl2832_source_0.set_frequency(self.freq)
 
 
 def main(top_block_cls=rtl_rx, options=None):
