@@ -1,17 +1,17 @@
 /* -*- c++ -*- */
-/* 
+/*
  * Copyright 2015 <+YOU OR YOUR COMPANY+>.
- * 
+ *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3, or (at your option)
  * any later version.
- * 
+ *
  * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this software; see the file COPYING.  If not, write to
  * the Free Software Foundation, Inc., 51 Franklin Street,
@@ -81,15 +81,15 @@ namespace gr {
     {
         // initialize rs tables
         struct rs* rs_32 = (struct rs*)init_rs_char(8, 0x187, 112, 11, 32, 0);
-        memcpy( (void*)&rs_cb_rx[6], (void*)rs_32, sizeof(rs_cb_rx[6]) );     
-        memcpy( (void*)&rs_cb_rx[5], (void*)rs_32, sizeof(rs_cb_rx[5]) );     
-        memcpy( (void*)&rs_cb_rx[4], (void*)rs_32, sizeof(rs_cb_rx[4]) );     
-        memcpy( (void*)&rs_cb_rx[3], (void*)rs_32, sizeof(rs_cb_rx[3]) );     
+        memcpy( (void*)&rs_cb_rx[6], (void*)rs_32, sizeof(rs_cb_rx[6]) );
+        memcpy( (void*)&rs_cb_rx[5], (void*)rs_32, sizeof(rs_cb_rx[5]) );
+        memcpy( (void*)&rs_cb_rx[4], (void*)rs_32, sizeof(rs_cb_rx[4]) );
+        memcpy( (void*)&rs_cb_rx[3], (void*)rs_32, sizeof(rs_cb_rx[3]) );
 
         struct rs* rs_16 = (struct rs*)init_rs_char(8, 0x187, 112, 11, 16, 0);
-        memcpy( (void*)&rs_cb_rx[2], (void*)rs_16, sizeof(rs_cb_rx[2]) );     
-        memcpy( (void*)&rs_cb_rx[1], (void*)rs_16, sizeof(rs_cb_rx[1]) );     
-        memcpy( (void*)&rs_cb_rx[0], (void*)rs_16, sizeof(rs_cb_rx[0]) );     
+        memcpy( (void*)&rs_cb_rx[2], (void*)rs_16, sizeof(rs_cb_rx[2]) );
+        memcpy( (void*)&rs_cb_rx[1], (void*)rs_16, sizeof(rs_cb_rx[1]) );
+        memcpy( (void*)&rs_cb_rx[0], (void*)rs_16, sizeof(rs_cb_rx[0]) );
 
         rs_cb_rx[6].pad = 255-NGHAM_CODEWORD_SIZE[6];
         rs_cb_rx[5].pad = 255-NGHAM_CODEWORD_SIZE[5];
@@ -108,8 +108,8 @@ namespace gr {
      * Our virtual destructor.
      */
     ngham_decoder_impl::~ngham_decoder_impl()
-    { 
-      
+    {
+ 
       delete [] rs_cb_rx[6].alpha_to;
       delete [] rs_cb_rx[6].index_of;
       delete [] rs_cb_rx[6].genpoly;
@@ -123,7 +123,7 @@ namespace gr {
     ngham_decoder_impl::forecast (int noutput_items, gr_vector_int &ninput_items_required)
     {
       ninput_items_required[0] = noutput_items;
-/*    
+/*
       switch (d_decoder_state) {
           case STATE_PREAMBLE:
               ninput_items_required[0] = noutput_items;
@@ -189,6 +189,7 @@ namespace gr {
 
         int count = 0;
         int j,k;
+        uint32_t wrong_bits, nwrong;
         unsigned long access_code;
 
         while (count < noutput_items) {
@@ -196,12 +197,12 @@ namespace gr {
             switch (d_decoder_state) {
                 case STATE_PREAMBLE:
 
-                    while (count < noutput_items) {
+ //                   while (count < noutput_items) {
                         out[count] = 0;//in[count]; // don't propagate preamble
                         d_data_reg = (d_data_reg << 1) | ((in[count++]) & 0x01);
 
-                        uint32_t wrong_bits = 0;
-                        uint32_t nwrong = 1; // TODO threshold
+                        wrong_bits = 0;
+                        nwrong = 6; // TODO threshold
 
                         // FIXME make the conversion from byte array to long prettier
                         for (j=0; j<NGHAM_PREAMBLE_SIZE; j++) {
@@ -214,17 +215,17 @@ namespace gr {
                         if (nwrong <= 0) {
                             PRINT("\tpreamble found!\n");
                             enter_sync();
-                            break;
+//                            break;
                         }
-                    }
+ //                   }
                     break;
                 case STATE_SYNC:
-                    while (count < noutput_items) {
+ //                   while (count < noutput_items) {
                         out[count] = 0;//in[count]; // don't propagate sync
                         d_data_reg = (d_data_reg << 1) | ((in[count++]) & 0x01);
 
-                        uint32_t wrong_bits = 0;
-                        uint32_t nwrong = 1; 
+                        wrong_bits = 0;
+                        nwrong = 6; 
 
                         // FIXME make the conversion from byte array to long prettier
                         for (j=0; j<NGHAM_SYNC_SIZE; j++) {
@@ -237,20 +238,20 @@ namespace gr {
                         if (nwrong <= 0) {
                             PRINT("\tsync found!\n");
                             enter_size_tag();
-                            break;
+//                            break;
                         }
-                    }
+ //                   }
                     break;
                 case STATE_SIZE_TAG:
                     // FIXME leave this state in a proper way
-                    while (d_decoder_state == STATE_SIZE_TAG && count < noutput_items) {
+//                    while (d_decoder_state == STATE_SIZE_TAG && count < noutput_items) {
                         out[count] = 0;//in[count]; // dont propagate size tag
                         d_data_reg = (d_data_reg << 1) | ((in[count++]) & 0x01);
 
                         d_size_index = 0;
                         while (d_size_index < NGHAM_SIZES) {
-                            uint32_t wrong_bits = 0;
-                            uint32_t nwrong = 1; 
+                            wrong_bits = 0;
+                            nwrong = 6; 
 
                             // FIXME make the conversion from byte array to long prettier
                             access_code = 0;
@@ -268,24 +269,23 @@ namespace gr {
                             }
                             d_size_index++;
                         }
-                    }
+//                    }
                     break;
                 case STATE_CODEWORD:
-                    while (count < noutput_items) {
-                        out[count] = in[count]; // don't propagate anything here, 
+//                    while (count < noutput_items) {
+                        out[count] = in[count]; // don't propagate anything here,
                         d_codeword[d_codeword_length] = (d_codeword[d_codeword_length] << 1) | (in[count++] & 0x01);
                         d_bit_counter++;
                         if (d_bit_counter == 8) {
                             d_codeword_length++;
-                            d_bit_counter = 0;    
+                            d_bit_counter = 0;
                         }
-                    
                         if (d_codeword_length == NGHAM_CODEWORD_SIZE[d_size_index]) {
                             enter_decode();
                             PRINT2("\tlength (%i,%i)\n", NGHAM_PL_SIZE_FULL[d_size_index], NGHAM_CODEWORD_SIZE[d_size_index]); 
-                            break;
+//                            break;
                         }
-                    }
+//                    }
                     break;
                 case STATE_DECODE:
                     enter_preamble();
@@ -295,7 +295,7 @@ namespace gr {
                         PRINT("\tdescrambling\n");
                         for (j=0; j<d_codeword_length; j++) d_codeword[j] ^= ccsds_poly[j];
                     }
-                
+ 
                     // decode parity data
                     int nerrors = 0;
                     if (d_rs_decode) {
@@ -327,14 +327,14 @@ namespace gr {
                         PRINT("\tCRC Failed\n");
                         break;
                     }
-                    
+ 
                     // print codeword if tests were passed
                     if (d_printing) {
                         for (j=0; j<d_codeword_length; j+=4) {
-                            for (k=0; k<4; k++) { 
+                            for (k=0; k<4; k++) {
                                 if (j+k<d_codeword_length)
                                     printf("0x%x%x ", (d_codeword[j+k] >> 4) & 0x0f, d_codeword[j+k] & 0x0f);
-                                else 
+                                else
                                     printf("\t");
                                 //printf("%#*2x ",2, d_codeword[j+k]);
                             }
@@ -352,9 +352,8 @@ namespace gr {
 
                     // propagate the payload of tests were passed
 //                    for (j=0; j<pl_len;j++) {
-//                        out[count+j] = d_codeword[j];    
+//                        out[count+j] = d_codeword[j];
 //                    }
-                    
                     break;
             }
         }
@@ -365,8 +364,5 @@ namespace gr {
         // Tell runtime system how many output items we produced.
         return noutput_items;
     }
-    
-    
   } /* namespace nuts */
 } /* namespace gr */
-
