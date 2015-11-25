@@ -33,7 +33,7 @@
 
 #include "ngham.h"
 
-//#define DEBUG
+#define DEBUG
 
 #ifdef DEBUG
 #define PRINT(str) (printf(str))
@@ -64,6 +64,7 @@ namespace gr {
     }
 
     struct rs rs_cb_rx[NGHAM_SIZES];
+    uint32_t preamble, sync_word, size_tag[NGHAM_SIZES];
     /*
      * The private constructor
      */
@@ -79,6 +80,25 @@ namespace gr {
         d_size_index(0),
         d_bit_counter(0)
     {
+        int j,k;
+
+        preamble = 0;
+        for (j=0; j<NGHAM_PREAMBLE_SIZE; j++) {
+            preamble = (preamble << 8) | (NGHAM_PREAMBLE[j] & 0xff);
+        }
+        
+        sync_word = 0;
+        for (j=0; j<NGHAM_SYNC_SIZE; j++) {
+            sync_word = (sync_word << 8) | (NGHAM_SYNC[j] & 0xff);
+        }
+        
+        for (k=0; k<NGHAM_SIZES; k++) {
+            size_tag[k] = 0;
+            for (j=0; j<NGHAM_SIZE_TAG_SIZE; j++) { 
+                size_tag[k] = (size_tag[k] << 8) | (NGHAM_SIZE_TAG[k][j] & 0xff);
+            }
+        }
+
         // initialize rs tables
         struct rs* rs_32 = (struct rs*)init_rs_char(8, 0x187, 112, 11, 32, 0);
         memcpy( (void*)&rs_cb_rx[6], (void*)rs_32, sizeof(rs_cb_rx[6]) );
@@ -161,6 +181,7 @@ namespace gr {
         d_decoder_state = STATE_DECODE;
     }
 
+/*
     uint8_t ngham_tag_check(uint32_t x, uint32_t y){
       uint8_t j, distance;
       uint32_t diff;
@@ -177,7 +198,7 @@ namespace gr {
       }
       return 1;
     }
-
+*/
     int
     ngham_decoder_impl::general_work (int noutput_items,
                        gr_vector_int &ninput_items,
@@ -197,54 +218,36 @@ namespace gr {
             switch (d_decoder_state) {
                 case STATE_PREAMBLE:
 
- //                   while (count < noutput_items) {
                         out[count] = 0;//in[count]; // don't propagate preamble
                         d_data_reg = (d_data_reg << 1) | ((in[count++]) & 0x01);
 
                         wrong_bits = 0;
                         nwrong = 6; // TODO threshold
 
-                        // FIXME make the conversion from byte array to long prettier
-                        for (j=0; j<NGHAM_PREAMBLE_SIZE; j++) {
-                            access_code = (access_code << 8) | (NGHAM_PREAMBLE[j] & 0xff);
-                        }
-
-                        wrong_bits = (d_data_reg ^ access_code);
+                        wrong_bits = (d_data_reg ^ preamble);
 
                         volk_32u_popcnt(&nwrong, wrong_bits);
                         if (nwrong <= 0) {
                             PRINT("\tpreamble found!\n");
                             enter_sync();
-//                            break;
                         }
- //                   }
                     break;
                 case STATE_SYNC:
- //                   while (count < noutput_items) {
                         out[count] = 0;//in[count]; // don't propagate sync
                         d_data_reg = (d_data_reg << 1) | ((in[count++]) & 0x01);
 
                         wrong_bits = 0;
                         nwrong = 6; 
-
-                        // FIXME make the conversion from byte array to long prettier
-                        for (j=0; j<NGHAM_SYNC_SIZE; j++) {
-                            access_code = (access_code << 8) | (NGHAM_SYNC[j] & 0xff);
-                        }
-
-                        wrong_bits = (d_data_reg ^ access_code);
+                        wrong_bits = (d_data_reg ^ sync_word);
 
                         volk_32u_popcnt(&nwrong, wrong_bits);
                         if (nwrong <= 0) {
                             PRINT("\tsync found!\n");
                             enter_size_tag();
-//                            break;
                         }
- //                   }
+                        // FIXME what should happen if sync word isn't found ?
                     break;
                 case STATE_SIZE_TAG:
-                    // FIXME leave this state in a proper way
-//                    while (d_decoder_state == STATE_SIZE_TAG && count < noutput_items) {
                         out[count] = 0;//in[count]; // dont propagate size tag
                         d_data_reg = (d_data_reg << 1) | ((in[count++]) & 0x01);
 
@@ -253,12 +256,7 @@ namespace gr {
                             wrong_bits = 0;
                             nwrong = 6; 
 
-                            // FIXME make the conversion from byte array to long prettier
-                            access_code = 0;
-                            for (j=0; j<NGHAM_SIZE_TAG_SIZE; j++) { 
-                                access_code = (access_code << 8) | (NGHAM_SIZE_TAG[d_size_index][j] & 0xff);
-                            }
-                            wrong_bits = ((d_data_reg & 0xffffff) ^ access_code);
+                            wrong_bits = ((d_data_reg & 0xffffff) ^ size_tag[d_size_index]);
 
                             volk_32u_popcnt(&nwrong, wrong_bits);
                             if (nwrong <= 0) {
@@ -269,10 +267,8 @@ namespace gr {
                             }
                             d_size_index++;
                         }
-//                    }
                     break;
                 case STATE_CODEWORD:
-//                    while (count < noutput_items) {
                         out[count] = in[count]; // don't propagate anything here,
                         d_codeword[d_codeword_length] = (d_codeword[d_codeword_length] << 1) | (in[count++] & 0x01);
                         d_bit_counter++;
@@ -283,9 +279,7 @@ namespace gr {
                         if (d_codeword_length == NGHAM_CODEWORD_SIZE[d_size_index]) {
                             enter_decode();
                             PRINT2("\tlength (%i,%i)\n", NGHAM_PL_SIZE_FULL[d_size_index], NGHAM_CODEWORD_SIZE[d_size_index]); 
-//                            break;
                         }
-//                    }
                     break;
                 case STATE_DECODE:
                     enter_preamble();

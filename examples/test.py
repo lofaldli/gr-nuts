@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Test
-# Generated: Tue Nov 24 18:12:56 2015
+# Generated: Wed Nov 25 20:41:38 2015
 ##################################################
 
 if __name__ == '__main__':
@@ -273,7 +273,7 @@ class test(gr.top_block, Qt.QWidget):
         self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.pyqwidget(), Qt.QWidget)
         self.top_grid_layout.addWidget(self._qtgui_time_sink_x_0_win, 0,0,1,1)
         self.nuts_ngham_encoder_0 = nuts.ngham_encoder("packet_len", True, True, True, False)
-        self.nuts_ngham_decoder_0 = nuts.ngham_decoder(True, True, False)
+        self.nuts_ngham_decoder_0 = nuts.ngham_decoder(True, True, True)
         self.digital_gmsk_mod_0 = digital.gmsk_mod(
         	samples_per_symbol=sps,
         	bt=0.35,
