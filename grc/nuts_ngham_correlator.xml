@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<block>
+  <name>NGHAM Correlator</name>
+  <key>nuts_ngham_correlator</key>
+  <category>nuts</category>
+  <import>import nuts</import>
+  <make>nuts.ngham_correlator($len_tag_key, $threshold)</make>
+  <param>
+    <name>Length tag key</name>
+    <key>len_tag_key</key>
+    <value>packet_len</value>
+    <type>string</type>
+  </param>
+  <param>
+    <name>Threshold</name>
+    <key>threshold</key>
+    <value>0</value>
+    <type>int</type>
+  </param>
+  <sink>
+    <name>in</name>
+    <type>byte</type>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>byte</type>
+  </source>
+</block>

@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Uhd Rx
-# Generated: Mon Nov  9 18:23:42 2015
+# Generated: Thu Nov 26 15:01:42 2015
 ##################################################
 
 if __name__ == '__main__':
@@ -271,7 +271,7 @@ class uhd_rx(gr.top_block, Qt.QWidget):
         
         self._qtgui_freq_sink_x_0_win = sip.wrapinstance(self.qtgui_freq_sink_x_0.pyqwidget(), Qt.QWidget)
         self.qtgui_layout_2.addWidget(self._qtgui_freq_sink_x_0_win)
-        self.nuts_ngham_decoder_0 = nuts.ngham_decoder(True, True, True)
+        self.nuts_ngham_decoder_0 = nuts.ngham_decoder("packet_len", True, True, True, True)
         self._gain_label_tool_bar = Qt.QToolBar(self)
         
         if None:
@@ -346,9 +346,9 @@ class uhd_rx(gr.top_block, Qt.QWidget):
     def set_tuner(self, tuner):
         self.tuner = tuner
         self.set_freq_label(self._freq_label_formatter(self.freq+self.tuner))
-        self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
         self.freq_xlating_fir_filter_xxx_0.set_center_freq(self.tuner)
         self.freq_xlating_fir_filter_xxx_0_0.set_center_freq(self.tuner)
+        self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
 
     def get_gain(self):
         return self.gain
@@ -392,10 +392,10 @@ class uhd_rx(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
         self.freq_xlating_fir_filter_xxx_0.set_taps((firdes.low_pass(1, self.samp_rate, self.xlat_bandwidth/2, 1000)))
-        self.uhd_usrp_source_0.set_samp_rate(self.samp_rate)
         self.freq_xlating_fir_filter_xxx_0_0.set_taps((firdes.low_pass(1, self.samp_rate, self.samp_rate/2, 1000)))
+        self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
+        self.uhd_usrp_source_0.set_samp_rate(self.samp_rate)
 
     def get_ngham_rate(self):
         return self.ngham_rate

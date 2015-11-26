@@ -18,48 +18,35 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_NUTS_NGHAM_DECODER_IMPL_H
-#define INCLUDED_NUTS_NGHAM_DECODER_IMPL_H
+#ifndef INCLUDED_NUTS_NGHAM_CORRELATOR_IMPL_H
+#define INCLUDED_NUTS_NGHAM_CORRELATOR_IMPL_H
 
-#include <nuts/ngham_decoder.h>
+#include <nuts/ngham_correlator.h>
 
 namespace gr {
   namespace nuts {
 
-    class ngham_decoder_impl : public ngham_decoder
+    class ngham_correlator_impl : public ngham_correlator
     {
      private:
-      bool d_rs_decode;
-      bool d_descramble;
-      bool d_printing;
-      int d_decoder_state;
       unsigned long d_data_reg;
-      int d_size_index;
-      int d_codeword_length;
-      unsigned char d_codeword[255]; // FIXME NGHAM_MAX_CODEWORD_SIZE
-      char d_bit_counter;
 
-      void enter_preamble();
-      void enter_sync();
-      void enter_size_tag();
-      void enter_codeword();
-      void enter_decode();
+      unsigned int d_threshold, d_len;
+
+      pmt::pmt_t d_key, d_me;
 
      public:
-      ngham_decoder_impl(bool rs_decode, bool descramble, bool printing);
-      ~ngham_decoder_impl();
+      ngham_correlator_impl(const std::string len_tag_key, int threshold);
+      ~ngham_correlator_impl();
 
       // Where all the action really happens
-      void forecast (int noutput_items, gr_vector_int &ninput_items_required);
-
-      int general_work(int noutput_items,
-           gr_vector_int &ninput_items,
-           gr_vector_const_void_star &input_items,
-           gr_vector_void_star &output_items);
+      int work(int noutput_items,
+         gr_vector_const_void_star &input_items,
+         gr_vector_void_star &output_items);
     };
 
   } // namespace nuts
 } // namespace gr
 
-#endif /* INCLUDED_NUTS_NGHAM_DECODER_IMPL_H */
+#endif /* INCLUDED_NUTS_NGHAM_CORRELATOR_IMPL_H */
 

@@ -19,11 +19,11 @@
  */
 
 
-#ifndef INCLUDED_NUTS_NGHAM_DECODER_H
-#define INCLUDED_NUTS_NGHAM_DECODER_H
+#ifndef INCLUDED_NUTS_NGHAM_CORRELATOR_H
+#define INCLUDED_NUTS_NGHAM_CORRELATOR_H
 
 #include <nuts/api.h>
-#include <gnuradio/block.h>
+#include <gnuradio/sync_block.h>
 
 namespace gr {
   namespace nuts {
@@ -33,24 +33,24 @@ namespace gr {
      * \ingroup nuts
      *
      */
-    class NUTS_API ngham_decoder : virtual public gr::block
+    class NUTS_API ngham_correlator : virtual public gr::sync_block
     {
      public:
-      typedef boost::shared_ptr<ngham_decoder> sptr;
+      typedef boost::shared_ptr<ngham_correlator> sptr;
 
       /*!
-       * \brief Return a shared_ptr to a new instance of nuts::ngham_decoder.
+       * \brief Return a shared_ptr to a new instance of nuts::ngham_correlator.
        *
-       * To avoid accidental use of raw pointers, nuts::ngham_decoder's
+       * To avoid accidental use of raw pointers, nuts::ngham_correlator's
        * constructor is in a private implementation
-       * class. nuts::ngham_decoder::make is the public interface for
+       * class. nuts::ngham_correlator::make is the public interface for
        * creating new instances.
        */
-      static sptr make(bool rs_decode=true, bool descramble=true, bool printing=false);
+      static sptr make(const std::string len_tag_key="packet_len", int threshold=0);
     };
 
   } // namespace nuts
 } // namespace gr
 
-#endif /* INCLUDED_NUTS_NGHAM_DECODER_H */
+#endif /* INCLUDED_NUTS_NGHAM_CORRELATOR_H */
 

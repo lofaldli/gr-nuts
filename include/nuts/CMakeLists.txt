@@ -23,5 +23,6 @@
 install(FILES
     api.h
     ngham_encoder.h
-    ngham_decoder.h DESTINATION include/nuts
+    ngham_correlator.h
+    DESTINATION include/nuts
 )
