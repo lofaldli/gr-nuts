@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<block>
+  <name>NGHAM Decoder</name>
+  <key>nuts_ngham_decoder</key>
+  <category>nuts</category>
+  <import>import nuts</import>
+  <make>nuts.ngham_decoder($len_tag_key, $rs_decode, $descramble, $printing)</make>
+  <param>
+    <name>Length tag key</name>
+    <key>len_tag_key</key>
+    <value>packet_len</value>
+    <type>string</type>
+  </param>
+  <param>
+    <name>RS Decode</name>
+    <key>rs_decode</key>
+    <value>True</value>
+    <type>enum</type>
+    <option>
+        <name>Yes</name>
+        <key>True</key>
+    </option>
+    <option>
+        <name>No</name>
+        <key>False</key>
+    </option>
+  </param>
+  <param>
+    <name>Descramble</name>
+    <key>descramble</key>
+    <value>True</value>
+    <type>enum</type>
+    <option>
+        <name>Yes</name>
+        <key>True</key>
+    </option>
+    <option>
+        <name>No</name>
+        <key>False</key>
+    </option>
+  </param>
+  <param>
+    <name>Printing</name>
+    <key>printing</key>
+    <value>False</value>
+    <type>enum</type>
+    <option>
+        <name>Yes</name>
+        <key>True</key>
+    </option>
+    <option>
+        <name>No</name>
+        <key>False</key>
+    </option>
+  </param>
+  <sink>
+    <name>in</name>
+    <type>byte</type>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>message</type>
+    <optional>1</optional>
+  </source>
+</block>

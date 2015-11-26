@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Uhd Rx
-# Generated: Thu Nov 26 15:01:42 2015
+# Generated: Thu Nov 26 18:54:20 2015
 ##################################################
 
 if __name__ == '__main__':
@@ -18,7 +18,6 @@ if __name__ == '__main__':
 
 from PyQt4 import Qt
 from PyQt4.QtCore import QObject, pyqtSlot
-from gnuradio import analog
 from gnuradio import blocks
 from gnuradio import digital
 from gnuradio import eng_notation
@@ -86,7 +85,7 @@ class uhd_rx(gr.top_block, Qt.QWidget):
         self.qtgui_layout_0 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.qtgui_widget_0)
         self.qtgui_grid_layout_0 = Qt.QGridLayout()
         self.qtgui_layout_0.addLayout(self.qtgui_grid_layout_0)
-        self.qtgui.addTab(self.qtgui_widget_0, "encoded")
+        self.qtgui.addTab(self.qtgui_widget_0, "demodulated")
         self.qtgui_widget_1 = Qt.QWidget()
         self.qtgui_layout_1 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.qtgui_widget_1)
         self.qtgui_grid_layout_1 = Qt.QGridLayout()
@@ -97,6 +96,11 @@ class uhd_rx(gr.top_block, Qt.QWidget):
         self.qtgui_grid_layout_2 = Qt.QGridLayout()
         self.qtgui_layout_2.addLayout(self.qtgui_grid_layout_2)
         self.qtgui.addTab(self.qtgui_widget_2, "fft")
+        self.qtgui_widget_3 = Qt.QWidget()
+        self.qtgui_layout_3 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.qtgui_widget_3)
+        self.qtgui_grid_layout_3 = Qt.QGridLayout()
+        self.qtgui_layout_3.addLayout(self.qtgui_grid_layout_3)
+        self.qtgui.addTab(self.qtgui_widget_3, "waterfall")
         self.top_grid_layout.addWidget(self.qtgui, 0,0,1,1)
         self._freq_options = (145.98e6, 437.305e6, )
         self._freq_labels = ("vhf", "uhf", )
@@ -135,6 +139,41 @@ class uhd_rx(gr.top_block, Qt.QWidget):
                 taps=None,
                 fractional_bw=None,
         )
+        self.qtgui_waterfall_sink_x_0 = qtgui.waterfall_sink_c(
+        	1024, #size
+        	firdes.WIN_BLACKMAN_hARRIS, #wintype
+        	freq+tuner, #fc
+        	samp_rate, #bw
+        	"", #name
+                1 #number of inputs
+        )
+        self.qtgui_waterfall_sink_x_0.set_update_time(0.10)
+        self.qtgui_waterfall_sink_x_0.enable_grid(False)
+        
+        if not True:
+          self.qtgui_waterfall_sink_x_0.disable_legend()
+        
+        if "complex" == "float" or "complex" == "msg_float":
+          self.qtgui_waterfall_sink_x_0.set_plot_pos_half(not True)
+        
+        labels = ["", "", "", "", "",
+                  "", "", "", "", ""]
+        colors = [0, 0, 0, 0, 0,
+                  0, 0, 0, 0, 0]
+        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
+                  1.0, 1.0, 1.0, 1.0, 1.0]
+        for i in xrange(1):
+            if len(labels[i]) == 0:
+                self.qtgui_waterfall_sink_x_0.set_line_label(i, "Data {0}".format(i))
+            else:
+                self.qtgui_waterfall_sink_x_0.set_line_label(i, labels[i])
+            self.qtgui_waterfall_sink_x_0.set_color_map(i, colors[i])
+            self.qtgui_waterfall_sink_x_0.set_line_alpha(i, alphas[i])
+        
+        self.qtgui_waterfall_sink_x_0.set_intensity_range(-140, 10)
+        
+        self._qtgui_waterfall_sink_x_0_win = sip.wrapinstance(self.qtgui_waterfall_sink_x_0.pyqwidget(), Qt.QWidget)
+        self.qtgui_layout_3.addWidget(self._qtgui_waterfall_sink_x_0_win)
         self.qtgui_time_sink_x_1_0 = qtgui.time_sink_f(
         	1000, #size
         	ngham_rate, #samp_rate
@@ -147,7 +186,7 @@ class uhd_rx(gr.top_block, Qt.QWidget):
         self.qtgui_time_sink_x_1_0.set_y_label("", "")
         
         self.qtgui_time_sink_x_1_0.enable_tags(-1, True)
-        self.qtgui_time_sink_x_1_0.set_trigger_mode(qtgui.TRIG_MODE_TAG, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "ngham_preamble")
+        self.qtgui_time_sink_x_1_0.set_trigger_mode(qtgui.TRIG_MODE_TAG, qtgui.TRIG_SLOPE_POS, 0.5, 0.005, 0, "ngham_preamble")
         self.qtgui_time_sink_x_1_0.enable_autoscale(False)
         self.qtgui_time_sink_x_1_0.enable_grid(False)
         self.qtgui_time_sink_x_1_0.enable_control_panel(True)
@@ -271,7 +310,8 @@ class uhd_rx(gr.top_block, Qt.QWidget):
         
         self._qtgui_freq_sink_x_0_win = sip.wrapinstance(self.qtgui_freq_sink_x_0.pyqwidget(), Qt.QWidget)
         self.qtgui_layout_2.addWidget(self._qtgui_freq_sink_x_0_win)
-        self.nuts_ngham_decoder_0 = nuts.ngham_decoder("packet_len", True, True, True, True)
+        self.nuts_ngham_decoder_0 = nuts.ngham_decoder("packet_len", True, True, False)
+        self.nuts_ngham_correlator_0 = nuts.ngham_correlator("packet_len", 0)
         self._gain_label_tool_bar = Qt.QToolBar(self)
         
         if None:
@@ -312,24 +352,24 @@ class uhd_rx(gr.top_block, Qt.QWidget):
         )
         self.digital_correlate_access_code_tag_bb_1 = digital.correlate_access_code_tag_bb("1011101111001100010101001111110", 0, "ngham_sync")
         self.digital_correlate_access_code_tag_bb_0 = digital.correlate_access_code_tag_bb("10101010101010101010101010101010", 0, "ngham_preamble")
-        self.blocks_null_sink_0 = blocks.null_sink(gr.sizeof_char*1)
+        self.blocks_message_debug_0 = blocks.message_debug()
         self.blocks_char_to_float_0 = blocks.char_to_float(1, 1)
-        self.analog_pwr_squelch_xx_0 = analog.pwr_squelch_cc(-50, 1e-4, 0, False)
 
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.analog_pwr_squelch_xx_0, 0), (self.digital_gmsk_demod_0, 0))    
+        self.msg_connect((self.nuts_ngham_decoder_0, 'out'), (self.blocks_message_debug_0, 'print'))    
         self.connect((self.blocks_char_to_float_0, 0), (self.qtgui_time_sink_x_1_0, 0))    
         self.connect((self.digital_correlate_access_code_tag_bb_0, 0), (self.digital_correlate_access_code_tag_bb_1, 0))    
         self.connect((self.digital_correlate_access_code_tag_bb_1, 0), (self.blocks_char_to_float_0, 0))    
-        self.connect((self.digital_gmsk_demod_0, 0), (self.digital_correlate_access_code_tag_bb_0, 0))    
-        self.connect((self.digital_gmsk_demod_0, 0), (self.nuts_ngham_decoder_0, 0))    
+        self.connect((self.digital_gmsk_demod_0, 0), (self.nuts_ngham_correlator_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.qtgui_freq_sink_x_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.rational_resampler_xxx_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0_0, 0), (self.qtgui_freq_sink_x_0, 1))    
-        self.connect((self.nuts_ngham_decoder_0, 0), (self.blocks_null_sink_0, 0))    
-        self.connect((self.rational_resampler_xxx_0, 0), (self.analog_pwr_squelch_xx_0, 0))    
+        self.connect((self.freq_xlating_fir_filter_xxx_0_0, 0), (self.qtgui_waterfall_sink_x_0, 0))    
+        self.connect((self.nuts_ngham_correlator_0, 0), (self.digital_correlate_access_code_tag_bb_0, 0))    
+        self.connect((self.nuts_ngham_correlator_0, 0), (self.nuts_ngham_decoder_0, 0))    
+        self.connect((self.rational_resampler_xxx_0, 0), (self.digital_gmsk_demod_0, 0))    
         self.connect((self.rational_resampler_xxx_0, 0), (self.qtgui_time_sink_x_1, 0))    
         self.connect((self.uhd_usrp_source_0, 0), (self.freq_xlating_fir_filter_xxx_0, 0))    
         self.connect((self.uhd_usrp_source_0, 0), (self.freq_xlating_fir_filter_xxx_0_0, 0))    
@@ -349,6 +389,7 @@ class uhd_rx(gr.top_block, Qt.QWidget):
         self.freq_xlating_fir_filter_xxx_0.set_center_freq(self.tuner)
         self.freq_xlating_fir_filter_xxx_0_0.set_center_freq(self.tuner)
         self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
+        self.qtgui_waterfall_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate)
 
     def get_gain(self):
         return self.gain
@@ -366,6 +407,7 @@ class uhd_rx(gr.top_block, Qt.QWidget):
         self.set_freq_label(self._freq_label_formatter(self.freq+self.tuner))
         self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
         self.uhd_usrp_source_0.set_center_freq(self.freq, 0)
+        self.qtgui_waterfall_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate)
 
     def get_xlat_decim(self):
         return self.xlat_decim
@@ -396,6 +438,7 @@ class uhd_rx(gr.top_block, Qt.QWidget):
         self.freq_xlating_fir_filter_xxx_0_0.set_taps((firdes.low_pass(1, self.samp_rate, self.samp_rate/2, 1000)))
         self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
         self.uhd_usrp_source_0.set_samp_rate(self.samp_rate)
+        self.qtgui_waterfall_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate)
 
     def get_ngham_rate(self):
         return self.ngham_rate

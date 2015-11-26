@@ -10,6 +10,7 @@
 %{
 #include "nuts/ngham_encoder.h"
 #include "nuts/ngham_correlator.h"
+#include "nuts/ngham_decoder.h"
 %}
 
 %include "nuts/ngham_encoder.h"
@@ -18,3 +19,5 @@ GR_SWIG_BLOCK_MAGIC2(nuts, ngham_encoder);
 %include "nuts/ngham_correlator.h"
 GR_SWIG_BLOCK_MAGIC2(nuts, ngham_correlator);
 
+%include "nuts/ngham_decoder.h"
+GR_SWIG_BLOCK_MAGIC2(nuts, ngham_decoder);

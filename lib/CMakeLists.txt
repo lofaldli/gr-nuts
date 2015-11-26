@@ -32,7 +32,7 @@ list(APPEND nuts_sources
     #ccsds_scrambler.c
     #crc_ccitt.c
     ngham_correlator_impl.cc
-    )
+    ngham_decoder_impl.cc )
 
 set(nuts_sources "${nuts_sources}" PARENT_SCOPE)
 if(NOT nuts_sources)

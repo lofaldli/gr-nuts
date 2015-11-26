@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Test
-# Generated: Thu Nov 26 16:01:18 2015
+# Generated: Thu Nov 26 19:00:26 2015
 ##################################################
 
 if __name__ == '__main__':
@@ -227,6 +227,7 @@ class test(gr.top_block, Qt.QWidget):
         self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.pyqwidget(), Qt.QWidget)
         self.top_grid_layout.addWidget(self._qtgui_time_sink_x_0_win, 0,0,1,1)
         self.nuts_ngham_encoder_0 = nuts.ngham_encoder("packet_len", True, True, True, False)
+        self.nuts_ngham_decoder_0 = nuts.ngham_decoder("packet_len", True, True, False)
         self.nuts_ngham_correlator_0 = nuts.ngham_correlator("packet_len", 0)
         self.digital_gmsk_mod_0 = digital.gmsk_mod(
         	samples_per_symbol=sps,
@@ -248,6 +249,7 @@ class test(gr.top_block, Qt.QWidget):
         self.blocks_unpack_k_bits_bb_0 = blocks.unpack_k_bits_bb(8)
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, data_rate,True)
         self.blocks_tag_gate_0 = blocks.tag_gate(gr.sizeof_gr_complex * 1, False)
+        self.blocks_message_debug_0 = blocks.message_debug()
         self.blocks_char_to_float_0_1 = blocks.char_to_float(1, 1)
         self.blocks_char_to_float_0_0 = blocks.char_to_float(1, 1)
         self.blocks_char_to_float_0 = blocks.char_to_float(1, 1)
@@ -257,6 +259,7 @@ class test(gr.top_block, Qt.QWidget):
         ##################################################
         # Connections
         ##################################################
+        self.msg_connect((self.nuts_ngham_decoder_0, 'out'), (self.blocks_message_debug_0, 'print'))    
         self.connect((self.analog_noise_source_x_0, 0), (self.blocks_add_xx_0, 0))    
         self.connect((self.blocks_add_xx_0, 0), (self.rational_resampler_xxx_0, 0))    
         self.connect((self.blocks_char_to_float_0, 0), (self.qtgui_time_sink_x_0, 0))    
@@ -271,6 +274,7 @@ class test(gr.top_block, Qt.QWidget):
         self.connect((self.digital_gmsk_demod_0, 0), (self.nuts_ngham_correlator_0, 0))    
         self.connect((self.digital_gmsk_mod_0, 0), (self.rational_resampler_xxx_1, 0))    
         self.connect((self.nuts_ngham_correlator_0, 0), (self.blocks_char_to_float_0_0, 0))    
+        self.connect((self.nuts_ngham_correlator_0, 0), (self.nuts_ngham_decoder_0, 0))    
         self.connect((self.nuts_ngham_encoder_0, 0), (self.blocks_unpack_k_bits_bb_0, 0))    
         self.connect((self.nuts_ngham_encoder_0, 0), (self.digital_gmsk_mod_0, 0))    
         self.connect((self.rational_resampler_xxx_0, 0), (self.digital_gmsk_demod_0, 0))    
