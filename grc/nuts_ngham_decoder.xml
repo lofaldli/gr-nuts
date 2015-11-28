@@ -4,12 +4,18 @@
   <key>nuts_ngham_decoder</key>
   <category>nuts</category>
   <import>import nuts</import>
-  <make>nuts.ngham_decoder($len_tag_key, $rs_decode, $descramble, $printing)</make>
+  <make>nuts.ngham_decoder($len_tag_key, $threshold, $rs_decode, $descramble, $printing)</make>
   <param>
     <name>Length tag key</name>
     <key>len_tag_key</key>
     <value>packet_len</value>
     <type>string</type>
+  </param>
+  <param>
+    <name>Threshold</name>
+    <key>threshold</key>
+    <value>0</value>
+    <type>int</type>
   </param>
   <param>
     <name>RS Decode</name>

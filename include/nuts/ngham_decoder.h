@@ -46,7 +46,7 @@ namespace gr {
        * class. nuts::ngham_decoder::make is the public interface for
        * creating new instances.
        */
-      static sptr make(const std::string& len_tag_key="packet_len", bool rs_decode=true, bool descramble=true, bool printing=false);
+      static sptr make(const std::string& len_tag_key="packet_len", int threshold=0, bool rs_decode=true, bool descramble=true, bool printing=false);
     };
 
   } // namespace nuts

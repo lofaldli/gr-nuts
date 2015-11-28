@@ -43,9 +43,9 @@ namespace gr {
   namespace nuts {
 
     ngham_decoder::sptr
-    ngham_decoder::make(const std::string& len_tag_key, bool rs_decode, bool descramble, bool printing)
+    ngham_decoder::make(const std::string& len_tag_key, int threshold, bool rs_decode, bool descramble, bool printing)
     {
-      return gnuradio::get_initial_sptr(new ngham_decoder_impl(len_tag_key, rs_decode, descramble, printing));
+      return gnuradio::get_initial_sptr(new ngham_decoder_impl(len_tag_key, threshold, rs_decode, descramble, printing));
     }
 
     struct rs rs_cb_rx[NGHAM_SIZES];
@@ -54,11 +54,12 @@ namespace gr {
     /*
      * The private constructor
      */
-    ngham_decoder_impl::ngham_decoder_impl(const std::string& len_tag_key, bool rs_decode, bool descramble, bool printing)
+    ngham_decoder_impl::ngham_decoder_impl(const std::string& len_tag_key, int threshold, bool rs_decode, bool descramble, bool printing)
       : gr::sync_block("ngham_decoder",
               gr::io_signature::make(1, 1, sizeof(uint8_t)),
               gr::io_signature::make(0, 0, 0)),
       d_len_tag_key(pmt::string_to_symbol(len_tag_key)),
+      d_threshold(threshold),
       d_rs_decode(rs_decode),
       d_descramble(descramble),
       d_printing(printing),
@@ -169,14 +170,14 @@ namespace gr {
                     d_data_reg = (d_data_reg << 1) | ((in[count++]) & 0x01);
 
                     wrong_bits = 0;
-                    nwrong = 1; 
+                    nwrong = d_threshold + 1; 
 
                     // compare data register to sync word
                     wrong_bits = (d_data_reg ^ sync_word);
                     volk_32u_popcnt(&nwrong, wrong_bits);
 
                     // go to next state if sync word is found
-                    if (nwrong <= 0) {
+                    if (nwrong <= d_threshold) {
                         enter_load_size_tag();
                     }
                   
@@ -198,14 +199,14 @@ namespace gr {
                     for (d_size_index=0; d_size_index<NGHAM_SIZES; d_size_index++) {
                         
                         wrong_bits = 0;
-                        nwrong  = 1;
+                        nwrong  = d_threshold + 1;
                         wrong_bits = ((d_data_reg & 0xffffff) ^ size_tag[d_size_index]);
 
                         volk_32u_popcnt(&nwrong, wrong_bits);
 
                         printf("\tcomparing %x and %x, %i bits are different\n", d_data_reg & 0xffffff, size_tag[d_size_index], nwrong);
 
-                        if (nwrong <= 0) {
+                        if (nwrong <= d_threshold) {
                             enter_codeword();
                             break;
                         }
@@ -241,7 +242,7 @@ namespace gr {
                         nerrors = decode_rs_char(&rs_cb_rx[d_size_index], d_codeword, 0, 0);
                     }
 
-                    // check if packet is decodable
+                    // check if packet was decoded correctly
                     if (nerrors == -1) {
                         printf("\tcould not decode packet\n");
                         enter_sync_search();

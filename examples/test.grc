@@ -581,7 +581,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1088, 689)</value>
+      <value>(1096, 705)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1036,7 +1036,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(880, 667)</value>
+      <value>(840, 659)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1045,6 +1045,10 @@
     <param>
       <key>id</key>
       <value>nuts_ngham_decoder_0</value>
+    </param>
+    <param>
+      <key>len_tag_key</key>
+      <value>packet_len</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -1061,6 +1065,10 @@
     <param>
       <key>rs_decode</key>
       <value>True</value>
+    </param>
+    <param>
+      <key>threshold</key>
+      <value>5</value>
     </param>
   </block>
   <block>
