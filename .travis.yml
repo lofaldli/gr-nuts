@@ -3,7 +3,7 @@ language:
 python:
     - "2.7"
 install:
-    - sudo apt-get install gnuradio
+    #- sudo apt-get install gnuradio
     - mkdir build
     - cd build
     - cmake ..
