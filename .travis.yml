@@ -1,13 +1,19 @@
 language: 
     python
+    
 python:
     - "2.7"
+    
 install:
-    #- sudo apt-get install gnuradio
+    - git clone --recursive git://github.com/pybombs/pybombs
+    - cd pybombs
+    - ./pybombs install gnuradio
+    - cd
     - mkdir build
     - cd build
     - cmake ..
     - make
+    
 script:
     - cd ./build/
     - make test
