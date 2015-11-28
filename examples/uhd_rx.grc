@@ -543,7 +543,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(848, 547)</value>
+      <value>(856, 627)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -625,7 +625,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(792, 379)</value>
+      <value>(800, 459)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -676,7 +676,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(792, 459)</value>
+      <value>(800, 539)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -908,7 +908,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(824, 299)</value>
+      <value>(824, 387)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1783,7 +1783,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(832, 595)</value>
+      <value>(840, 675)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -3492,6 +3492,12 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
+    <source_block_id>digital_gmsk_demod_0</source_block_id>
+    <sink_block_id>nuts_ngham_decoder_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
     <source_block_id>freq_xlating_fir_filter_xxx_0</source_block_id>
     <sink_block_id>qtgui_freq_sink_x_0</sink_block_id>
     <source_key>0</source_key>
@@ -3518,12 +3524,6 @@
   <connection>
     <source_block_id>nuts_ngham_correlator_0</source_block_id>
     <sink_block_id>digital_correlate_access_code_tag_bb_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>nuts_ngham_correlator_0</source_block_id>
-    <sink_block_id>nuts_ngham_decoder_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

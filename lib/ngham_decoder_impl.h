@@ -40,9 +40,9 @@ namespace gr {
       unsigned char d_codeword[255]; // FIXME NGHAM_MAX_CODEWORD_SIZE
       char d_bit_counter;
 
-      void enter_preamble();
-      void enter_sync();
-      void enter_size_tag();
+      void enter_sync_search();
+      void enter_load_size_tag();
+      void enter_size_tag_compare();
       void enter_codeword();
       void enter_decode();
       void parse_length_tags(const std::vector<std::vector<tag_t> > &tags, gr_vector_int &packet_lengths);

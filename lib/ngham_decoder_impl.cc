@@ -33,9 +33,9 @@
 
 #include "ngham.h"
 
-#define STATE_PREAMBLE 0
-#define STATE_SYNC 1
-#define STATE_SIZE_TAG 2
+#define STATE_SYNC_SEARCH 0
+#define STATE_LOAD_SIZE_TAG 1
+#define STATE_SIZE_TAG_COMPARE 2
 #define STATE_CODEWORD 3
 #define STATE_DECODE 4
 
@@ -49,7 +49,8 @@ namespace gr {
     }
 
     struct rs rs_cb_rx[NGHAM_SIZES];
-    uint32_t preamble, sync_word, size_tag[NGHAM_SIZES];
+    uint32_t sync_word, size_tag[NGHAM_SIZES];
+
     /*
      * The private constructor
      */
@@ -61,23 +62,21 @@ namespace gr {
       d_rs_decode(rs_decode),
       d_descramble(descramble),
       d_printing(printing),
-      d_decoder_state(STATE_SIZE_TAG),
       d_data_reg(0),
       d_size_index(0),
       d_bit_counter(0)
     {
       message_port_register_out(pmt::mp("out"));
 
-      preamble = 0;
-      for (int j=0; j<NGHAM_PREAMBLE_SIZE; j++) {
-          preamble = (preamble << 8) | (NGHAM_PREAMBLE[j] & 0xff);
-      }
-      
+      enter_sync_search();
+
+      // load sync word into a 32 bit variable
       sync_word = 0;
       for (int j=0; j<NGHAM_SYNC_SIZE; j++) {
           sync_word = (sync_word << 8) | (NGHAM_SYNC[j] & 0xff);
       }
       
+      // load size tags into array of 32 bit variables
       for (int size_index=0; size_index<NGHAM_SIZES; size_index++) {
           size_tag[size_index] = 0;
           for (int j=0; j<NGHAM_SIZE_TAG_SIZE; j++) { 
@@ -105,6 +104,7 @@ namespace gr {
       rs_cb_rx[1].pad = 255-NGHAM_CODEWORD_SIZE[1];
       rs_cb_rx[0].pad = 255-NGHAM_CODEWORD_SIZE[0];
 
+      // free temporary rs tables
       delete rs_32;
       delete rs_16;
     }
@@ -114,6 +114,7 @@ namespace gr {
      */
     ngham_decoder_impl::~ngham_decoder_impl()
     {
+      // free rs tables
       delete [] rs_cb_rx[6].alpha_to;
       delete [] rs_cb_rx[6].index_of;
       delete [] rs_cb_rx[6].genpoly;
@@ -122,184 +123,181 @@ namespace gr {
       delete [] rs_cb_rx[0].genpoly;
     }
 
-    void ngham_decoder_impl::enter_preamble() {
-        //printf("enter_preamble\n");
-        d_decoder_state = STATE_PREAMBLE;
+    void ngham_decoder_impl::enter_sync_search() {
+        printf("enter_sync_search\n");
+        d_decoder_state = STATE_SYNC_SEARCH;
     }
-    void ngham_decoder_impl::enter_sync() {
-        //printf("enter_sync\n");
-        d_decoder_state = STATE_SYNC;
+    void ngham_decoder_impl::enter_load_size_tag() {
+        printf("enter_load_size_tag\n");
+        d_decoder_state = STATE_LOAD_SIZE_TAG;
+        d_bit_counter = 0;
     }
-    void ngham_decoder_impl::enter_size_tag() {
-        //printf("enter_size_tag\n");
-        d_decoder_state = STATE_SIZE_TAG;
+    void ngham_decoder_impl::enter_size_tag_compare() {
+        printf("enter_size_tag_compare\n");
+        d_decoder_state = STATE_SIZE_TAG_COMPARE;
     }
     void ngham_decoder_impl::enter_codeword() {
-        //printf("enter_codeword\n");
+        printf("enter_codeword\n");
         d_decoder_state = STATE_CODEWORD;
         d_codeword_length = 0;
         d_bit_counter = 0;
     }
     void ngham_decoder_impl::enter_decode() {
-        //printf("enter_decode\n");
+        printf("enter_decode\n");
         d_decoder_state = STATE_DECODE;
     }
-
-    void ngham_decoder_impl::parse_length_tags(const std::vector<std::vector<tag_t> > &tags, gr_vector_int &packet_lengths) {
-      for (int i=0; i<tags.size(); i++) {
-        for (int k=0; k<tags[i].size(); k++) {
-          if (tags[i][k].key == d_len_tag_key) {
-            packet_lengths[i] = pmt::to_long(tags[i][k].value);
-            remove_item_tag(i, tags[i][k]);
-          }
-        }
-      }
-    }    
 
     int
     ngham_decoder_impl::work(int noutput_items,
         gr_vector_const_void_star &input_items,
         gr_vector_void_star &output_items)
     {
-      const uint8_t *in = (const uint8_t *) input_items[0];
+        const uint8_t *in = (const uint8_t *) input_items[0];
 
-      int count = 0;
-      int j,k;
-      uint32_t wrong_bits, nwrong;
+        // count input items
+        int count = 0;
 
+        uint32_t wrong_bits, nwrong;
 
-      while (count < noutput_items) {
+        while (count < noutput_items) {
 
-          switch (d_decoder_state) {
+            switch (d_decoder_state) {
 
-              case STATE_PREAMBLE:
-                  enter_sync();
-/*                      d_data_reg = (d_data_reg << 1) | ((in[count++]) & 0x01);
+                case STATE_SYNC_SEARCH:
 
-                      wrong_bits = 0;
-                      nwrong = 6; // TODO threshold
+                    // shift in new data bit
+                    d_data_reg = (d_data_reg << 1) | ((in[count++]) & 0x01);
 
-                      wrong_bits = (d_data_reg ^ preamble);
+                    wrong_bits = 0;
+                    nwrong = 1; 
 
-                      volk_32u_popcnt(&nwrong, wrong_bits);
-                      if (nwrong <= 0) {
-                          enter_sync();
-                      }*/
-                  break;
-              case STATE_SYNC:
-                      d_data_reg = (d_data_reg << 1) | ((in[count++]) & 0x01);
+                    // compare data register to sync word
+                    wrong_bits = (d_data_reg ^ sync_word);
+                    volk_32u_popcnt(&nwrong, wrong_bits);
 
-                      wrong_bits = 0;
-                      nwrong = 6; 
-                      wrong_bits = (d_data_reg ^ sync_word);
-
-                      volk_32u_popcnt(&nwrong, wrong_bits);
-                      if (nwrong <= 0) {
-                          enter_size_tag();
-                      }
-                      // FIXME what should happen if sync word isn't found ?
-                  break;
-              case STATE_SIZE_TAG:
-                      d_data_reg = (d_data_reg << 1) | ((in[count++]) & 0x01);
-
-                      d_size_index = 0;
-                      while (d_size_index < NGHAM_SIZES) {
-                          wrong_bits = 0;
-                          nwrong = 6; 
-
-                          wrong_bits = ((d_data_reg & 0xffffff) ^ size_tag[d_size_index]);
-
-                          volk_32u_popcnt(&nwrong, wrong_bits);
-                          if (nwrong <= 0) {
-                              enter_codeword();
-                              break;
-                          }
-                          d_size_index++;
-                      }
-                  break;
-
-              case STATE_CODEWORD:
-                      d_codeword[d_codeword_length] = (d_codeword[d_codeword_length] << 1) | (in[count++] & 0x01);
-                      d_bit_counter++;
-                      if (d_bit_counter == 8) {
-                          d_codeword_length++;
-                          d_bit_counter = 0;
-                      }
-                      if (d_codeword_length == NGHAM_CODEWORD_SIZE[d_size_index]) {
-                          enter_decode();
-                      }
-                  break;
-              case STATE_DECODE:
-                  enter_preamble();
+                    // go to next state if sync word is found
+                    if (nwrong <= 0) {
+                        enter_load_size_tag();
+                    }
                   
+                    break;
+                case STATE_LOAD_SIZE_TAG:
+                    
+                    // shift in new data bit
+                    d_data_reg = (d_data_reg << 1) | ((in[count++]) & 0x01);
+                    d_bit_counter++;
 
-                  // descramble data
-                  if (d_descramble) {
-                      for (j=0; j<d_codeword_length; j++) d_codeword[j] ^= ccsds_poly[j];
-                  }
+                    // go to next state when the whole size tag is in the data register
+                    if (d_bit_counter == NGHAM_SIZE_TAG_SIZE * 8) {
+                        enter_size_tag_compare();
+                    }
+                    break;
+                case STATE_SIZE_TAG_COMPARE:
 
-                  // decode parity data
-                  int nerrors = 0;
-                  if (d_rs_decode) {
-                      nerrors = decode_rs_char(&rs_cb_rx[d_size_index], d_codeword, 0, 0);
-                  }
+                    // check data register against all size tags
+                    for (d_size_index=0; d_size_index<NGHAM_SIZES; d_size_index++) {
+                        
+                        wrong_bits = 0;
+                        nwrong  = 1;
+                        wrong_bits = ((d_data_reg & 0xffffff) ^ size_tag[d_size_index]);
 
-                  // check if packet is decodable
-                  if (nerrors == -1) {
-                      printf("\tcould not decode packet\n");
-                      break;
-                  }
+                        volk_32u_popcnt(&nwrong, wrong_bits);
 
-                  // calculate payload length
-                  int pl_len = NGHAM_PL_SIZE[d_size_index] - (d_codeword[0] & 0x1f);
+                        printf("\tcomparing %x and %x, %i bits are different\n", d_data_reg & 0xffffff, size_tag[d_size_index], nwrong);
 
-                  // calculate crc
-                  unsigned int crc = 0xffff;
-                  for (j=0; j<pl_len+1; j++){
-                      crc = ((crc >> 8) & 0xff) ^ crc_ccitt_table[(crc ^ d_codeword[j]) & 0xff];
-                  }
-                  crc ^= 0xffff;
+                        if (nwrong <= 0) {
+                            enter_codeword();
+                            break;
+                        }
+                    }
 
-                  // check crc
-                  if ( crc != ( (d_codeword[pl_len+1]<<8) | d_codeword[pl_len+2] ) ) {
-                      break;
-                  }
+                    // size tag was not found TODO try all sizes???
+                    if (d_size_index == NGHAM_SIZES)
+                        enter_sync_search();
+                    break;
 
-                  pmt::pmt_t pdu(pmt::cons(pmt::PMT_NIL, pmt::make_blob(d_codeword+1, pl_len)));
-                  message_port_pub(pmt::mp("out"), pdu);
+                case STATE_CODEWORD:
+                    d_codeword[d_codeword_length] = (d_codeword[d_codeword_length] << 1) | (in[count++] & 0x01);
+                    d_bit_counter++;
+                    if (d_bit_counter == 8) {
+                        d_codeword_length++;
+                        d_bit_counter = 0;
+                    }
+                    if (d_codeword_length == NGHAM_CODEWORD_SIZE[d_size_index]) {
+                        printf("\tloaded codeword of length %i\n", d_codeword_length);
+                        enter_decode();
+                    }
+                    break;
+                case STATE_DECODE:
+                
+                    // descramble data
+                    if (d_descramble) {
+                        for (int i=0; i<d_codeword_length; i++) d_codeword[i] ^= ccsds_poly[i];
+                    }
 
-                  // print codeword if tests were passed
-                  if (d_printing) {
-                      for (j=0; j<d_codeword_length; j+=4) {
-                          for (k=0; k<4; k++) {
-                              if (j+k<d_codeword_length)
-                                  printf("0x%x%x ", (d_codeword[j+k] >> 4) & 0x0f, d_codeword[j+k] & 0x0f);
-                              else
-                                  printf("\t");
-                              //printf("%#*2x ",2, d_codeword[j+k]);
-                          }
-                          printf("\t");
-                          for (k=0; k<4 && j+k<d_codeword_length; k++) {
-                              if (d_codeword[j+k] > 32 && d_codeword[j+k] < 128)
-                                  printf("%c ", d_codeword[j+k]);
-                              else
-                                  printf(". ");
-                          }
-                          printf("\n");
-                      }
-                  }
+                    // decode parity data
+                    int nerrors = 0;
+                    if (d_rs_decode) {
+                        nerrors = decode_rs_char(&rs_cb_rx[d_size_index], d_codeword, 0, 0);
+                    }
 
+                    // check if packet is decodable
+                    if (nerrors == -1) {
+                        printf("\tcould not decode packet\n");
+                        enter_sync_search();
+                        break;
+                    } else {
+                        printf("\tdecoded packet with %i errors\n", nerrors);
+                    }
 
-                  // propagate the payload of tests were passed
-//                    for (j=0; j<pl_len;j++) {
-//                        out[count+j] = d_codeword[j];
-//                    }
-                  break;
-          }
+                    // calculate payload length
+                    int pl_len = NGHAM_PL_SIZE[d_size_index] - (d_codeword[0] & 0x1f);
+
+                    // calculate crc
+                    unsigned int crc = 0xffff;
+                    for (int i=0; i<pl_len+1; i++){
+                        crc = ((crc >> 8) & 0xff) ^ crc_ccitt_table[(crc ^ d_codeword[i]) & 0xff];
+                    }
+                    crc ^= 0xffff;
+
+                    // check crc
+                    if ( crc != ( (d_codeword[pl_len+1]<<8) | d_codeword[pl_len+2] ) ) {
+                        printf("crc failed\n");
+                        enter_sync_search();
+                        break;
+                    }
+
+                    // post payload data to message queue
+                    pmt::pmt_t pdu(pmt::cons(pmt::PMT_NIL, pmt::make_blob(d_codeword+1, pl_len)));
+                    message_port_pub(pmt::mp("out"), pdu);
+
+                    // print codeword if tests were passed
+                    if (d_printing) {
+                        for (int i=0; i<d_codeword_length; i+=4) {
+                            for (int j=0; j<4; j++) {
+                                if (i+j<d_codeword_length)
+                                    printf("0x%x%x ", (d_codeword[i+j] >> 4) & 0x0f, d_codeword[i+j] & 0x0f);
+                                else
+                                    printf("\t");
+                            }
+                            printf("\t");
+                            for (int j=0; j<4 && i+j<d_codeword_length; j++) {
+                                if (d_codeword[i+j] > 32 && d_codeword[i+j] < 128)
+                                    printf("%c ", d_codeword[i+j]);
+                                else
+                                    printf(". ");
+                            }
+                            printf("\n");
+                        }
+                    }
+
+                    enter_sync_search();
+                    break;
+            }
       }
 
-
       return noutput_items;
+
     }
 
   } /* namespace nuts */

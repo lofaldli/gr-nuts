@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Uhd Rx
-# Generated: Thu Nov 26 18:54:20 2015
+# Generated: Sat Nov 28 12:40:44 2015
 ##################################################
 
 if __name__ == '__main__':
@@ -363,12 +363,12 @@ class uhd_rx(gr.top_block, Qt.QWidget):
         self.connect((self.digital_correlate_access_code_tag_bb_0, 0), (self.digital_correlate_access_code_tag_bb_1, 0))    
         self.connect((self.digital_correlate_access_code_tag_bb_1, 0), (self.blocks_char_to_float_0, 0))    
         self.connect((self.digital_gmsk_demod_0, 0), (self.nuts_ngham_correlator_0, 0))    
+        self.connect((self.digital_gmsk_demod_0, 0), (self.nuts_ngham_decoder_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.qtgui_freq_sink_x_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.rational_resampler_xxx_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0_0, 0), (self.qtgui_freq_sink_x_0, 1))    
         self.connect((self.freq_xlating_fir_filter_xxx_0_0, 0), (self.qtgui_waterfall_sink_x_0, 0))    
         self.connect((self.nuts_ngham_correlator_0, 0), (self.digital_correlate_access_code_tag_bb_0, 0))    
-        self.connect((self.nuts_ngham_correlator_0, 0), (self.nuts_ngham_decoder_0, 0))    
         self.connect((self.rational_resampler_xxx_0, 0), (self.digital_gmsk_demod_0, 0))    
         self.connect((self.rational_resampler_xxx_0, 0), (self.qtgui_time_sink_x_1, 0))    
         self.connect((self.uhd_usrp_source_0, 0), (self.freq_xlating_fir_filter_xxx_0, 0))    
@@ -406,8 +406,8 @@ class uhd_rx(gr.top_block, Qt.QWidget):
         self._freq_callback(self.freq)
         self.set_freq_label(self._freq_label_formatter(self.freq+self.tuner))
         self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
-        self.uhd_usrp_source_0.set_center_freq(self.freq, 0)
         self.qtgui_waterfall_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate)
+        self.uhd_usrp_source_0.set_center_freq(self.freq, 0)
 
     def get_xlat_decim(self):
         return self.xlat_decim
@@ -437,8 +437,8 @@ class uhd_rx(gr.top_block, Qt.QWidget):
         self.freq_xlating_fir_filter_xxx_0.set_taps((firdes.low_pass(1, self.samp_rate, self.xlat_bandwidth/2, 1000)))
         self.freq_xlating_fir_filter_xxx_0_0.set_taps((firdes.low_pass(1, self.samp_rate, self.samp_rate/2, 1000)))
         self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
-        self.uhd_usrp_source_0.set_samp_rate(self.samp_rate)
         self.qtgui_waterfall_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate)
+        self.uhd_usrp_source_0.set_samp_rate(self.samp_rate)
 
     def get_ngham_rate(self):
         return self.ngham_rate
