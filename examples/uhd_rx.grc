@@ -543,7 +543,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(856, 627)</value>
+      <value>(560, 563)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -590,7 +590,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1088, 385)</value>
+      <value>(808, 385)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -625,7 +625,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(800, 459)</value>
+      <value>(496, 403)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -676,7 +676,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(800, 539)</value>
+      <value>(504, 483)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -727,7 +727,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(624, 275)</value>
+      <value>(512, 275)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -798,7 +798,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(184, 283)</value>
+      <value>(48, 283)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -857,7 +857,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(168, 387)</value>
+      <value>(48, 387)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -889,53 +889,6 @@
     </param>
   </block>
   <block>
-    <key>nuts_ngham_correlator</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(824, 387)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>nuts_ngham_correlator_0</value>
-    </param>
-    <param>
-      <key>len_tag_key</key>
-      <value>packet_len</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>threshold</key>
-      <value>0</value>
-    </param>
-  </block>
-  <block>
     <key>nuts_ngham_decoder</key>
     <param>
       <key>alias</key>
@@ -959,7 +912,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1056, 283)</value>
+      <value>(776, 283)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1149,7 +1102,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(160, 577)</value>
+      <value>(40, 577)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -1424,7 +1377,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(400, 195)</value>
+      <value>(280, 195)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -1783,7 +1736,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(840, 675)</value>
+      <value>(552, 611)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -2142,7 +2095,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(160, 491)</value>
+      <value>(40, 491)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -2357,7 +2310,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(432, 283)</value>
+      <value>(312, 283)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3487,7 +3440,7 @@
   </connection>
   <connection>
     <source_block_id>digital_gmsk_demod_0</source_block_id>
-    <sink_block_id>nuts_ngham_correlator_0</sink_block_id>
+    <sink_block_id>digital_correlate_access_code_tag_bb_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
@@ -3518,12 +3471,6 @@
   <connection>
     <source_block_id>freq_xlating_fir_filter_xxx_0_0</source_block_id>
     <sink_block_id>qtgui_waterfall_sink_x_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>nuts_ngham_correlator_0</source_block_id>
-    <sink_block_id>digital_correlate_access_code_tag_bb_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

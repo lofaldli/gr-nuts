@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Rtl Rx
-# Generated: Sat Nov 21 20:16:37 2015
+# Generated: Sun Nov 29 20:19:14 2015
 ##################################################
 
 if __name__ == '__main__':
@@ -17,7 +17,6 @@ if __name__ == '__main__':
             print "Warning: failed to XInitThreads()"
 
 from PyQt4 import Qt
-from gnuradio import analog
 from gnuradio import blocks
 from gnuradio import digital
 from gnuradio import eng_notation
@@ -122,7 +121,7 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         
         self.rtl2832_source_0.set_auto_gain_mode(False)
         self.rtl2832_source_0.set_relative_gain(True)
-        self.rtl2832_source_0.set_gain(0)
+        self.rtl2832_source_0.set_gain(30)
           
         self.rational_resampler_xxx_0 = filter.rational_resampler_ccc(
                 interpolation=ngham_rate*10,
@@ -134,7 +133,7 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         	1024, #size
         	firdes.WIN_BLACKMAN_hARRIS, #wintype
         	freq, #fc
-        	samp_rate, #bw
+        	samp_rate/xlat_decim, #bw
         	"", #name
                 1 #number of inputs
         )
@@ -301,7 +300,7 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         
         self._qtgui_freq_sink_x_0_win = sip.wrapinstance(self.qtgui_freq_sink_x_0.pyqwidget(), Qt.QWidget)
         self.qtgui_layout_2.addWidget(self._qtgui_freq_sink_x_0_win)
-        self.nuts_ngham_decoder_0 = nuts.ngham_decoder(True, True, True)
+        self.nuts_ngham_decoder_0 = nuts.ngham_decoder("packet_len", True, True, False)
         self.freq_xlating_fir_filter_xxx_0_0 = filter.freq_xlating_fir_filter_ccc(8, (firdes.low_pass(1, samp_rate, samp_rate/2, 1000)), tuner, samp_rate)
         self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_ccc(xlat_decim, (firdes.low_pass(1, samp_rate, xlat_bandwidth/2, 1000)), tuner, samp_rate)
         self.digital_gmsk_demod_0 = digital.gmsk_demod(
@@ -315,12 +314,13 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         )
         self.digital_correlate_access_code_tag_bb_1 = digital.correlate_access_code_tag_bb("1011101111001100010101001111110", 0, "ngham_sync")
         self.digital_correlate_access_code_tag_bb_0 = digital.correlate_access_code_tag_bb("10101010101010101010101010101010", 0, "ngham_preamble")
-        self.blocks_null_sink_0 = blocks.null_sink(gr.sizeof_char*1)
+        self.blocks_message_debug_0 = blocks.message_debug()
         self.blocks_char_to_float_0 = blocks.char_to_float(1, 1)
 
         ##################################################
         # Connections
         ##################################################
+        self.msg_connect((self.nuts_ngham_decoder_0, 'out'), (self.blocks_message_debug_0, 'print'))    
         self.connect((self.blocks_char_to_float_0, 0), (self.qtgui_time_sink_x_1_0, 0))    
         self.connect((self.digital_correlate_access_code_tag_bb_0, 0), (self.digital_correlate_access_code_tag_bb_1, 0))    
         self.connect((self.digital_correlate_access_code_tag_bb_1, 0), (self.blocks_char_to_float_0, 0))    
@@ -330,7 +330,6 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.rational_resampler_xxx_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0_0, 0), (self.qtgui_freq_sink_x_0, 1))    
         self.connect((self.freq_xlating_fir_filter_xxx_0_0, 0), (self.qtgui_waterfall_sink_x_0, 0))    
-        self.connect((self.nuts_ngham_decoder_0, 0), (self.blocks_null_sink_0, 0))    
         self.connect((self.rational_resampler_xxx_0, 0), (self.digital_gmsk_demod_0, 0))    
         self.connect((self.rational_resampler_xxx_0, 0), (self.qtgui_time_sink_x_1, 0))    
         self.connect((self.rtl2832_source_0, 0), (self.freq_xlating_fir_filter_xxx_0, 0))    
@@ -348,6 +347,7 @@ class rtl_rx(gr.top_block, Qt.QWidget):
     def set_xlat_decim(self, xlat_decim):
         self.xlat_decim = xlat_decim
         self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
+        self.qtgui_waterfall_sink_x_0.set_frequency_range(self.freq, self.samp_rate/self.xlat_decim)
 
     def get_xlat_bandwidth(self):
         return self.xlat_bandwidth
@@ -373,8 +373,8 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         self.freq_xlating_fir_filter_xxx_0.set_taps((firdes.low_pass(1, self.samp_rate, self.xlat_bandwidth/2, 1000)))
         self.freq_xlating_fir_filter_xxx_0_0.set_taps((firdes.low_pass(1, self.samp_rate, self.samp_rate/2, 1000)))
         self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
-        self.qtgui_waterfall_sink_x_0.set_frequency_range(self.freq, self.samp_rate)
         self.rtl2832_source_0.set_sample_rate(self.samp_rate)
+        self.qtgui_waterfall_sink_x_0.set_frequency_range(self.freq, self.samp_rate/self.xlat_decim)
 
     def get_ngham_rate(self):
         return self.ngham_rate
@@ -390,8 +390,8 @@ class rtl_rx(gr.top_block, Qt.QWidget):
     def set_freq(self, freq):
         self.freq = freq
         self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
-        self.qtgui_waterfall_sink_x_0.set_frequency_range(self.freq, self.samp_rate)
         self.rtl2832_source_0.set_frequency(self.freq)
+        self.qtgui_waterfall_sink_x_0.set_frequency_range(self.freq, self.samp_rate/self.xlat_decim)
 
 
 def main(top_block_cls=rtl_rx, options=None):

@@ -276,65 +276,6 @@
     </param>
   </block>
   <block>
-    <key>analog_pwr_squelch_xx</key>
-    <param>
-      <key>alpha</key>
-      <value>1e-4</value>
-    </param>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>2</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(760, 267)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>gate</key>
-      <value>False</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>analog_pwr_squelch_xx_0</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>ramp</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>threshold</key>
-      <value>-50</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>complex</value>
-    </param>
-  </block>
-  <block>
     <key>blocks_char_to_float</key>
     <param>
       <key>alias</key>
@@ -354,7 +295,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1032, 699)</value>
+      <value>(544, 603)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -382,14 +323,10 @@
     </param>
   </block>
   <block>
-    <key>blocks_null_sink</key>
+    <key>blocks_message_debug</key>
     <param>
       <key>alias</key>
       <value></value>
-    </param>
-    <param>
-      <key>bus_conns</key>
-      <value>[[0,],]</value>
     </param>
     <param>
       <key>comment</key>
@@ -405,27 +342,15 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1192, 376)</value>
+      <value>(872, 441)</value>
     </param>
     <param>
       <key>_rotation</key>
-      <value>0</value>
+      <value>180</value>
     </param>
     <param>
       <key>id</key>
-      <value>blocks_null_sink_0</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>byte</value>
-    </param>
-    <param>
-      <key>num_inputs</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
+      <value>blocks_message_debug_0</value>
     </param>
   </block>
   <block>
@@ -452,11 +377,11 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(968, 435)</value>
+      <value>(488, 443)</value>
     </param>
     <param>
       <key>_rotation</key>
-      <value>0</value>
+      <value>180</value>
     </param>
     <param>
       <key>id</key>
@@ -503,7 +428,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(968, 563)</value>
+      <value>(488, 523)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -554,7 +479,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(936, 259)</value>
+      <value>(512, 331)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -625,7 +550,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(248, 267)</value>
+      <value>(48, 339)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -684,7 +609,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(248, 371)</value>
+      <value>(48, 435)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -739,7 +664,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1144, 224)</value>
+      <value>(848, 339)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -748,6 +673,10 @@
     <param>
       <key>id</key>
       <value>nuts_ngham_decoder_0</value>
+    </param>
+    <param>
+      <key>len_tag_key</key>
+      <value>packet_len</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -759,7 +688,7 @@
     </param>
     <param>
       <key>printing</key>
-      <value>True</value>
+      <value>False</value>
     </param>
     <param>
       <key>rs_decode</key>
@@ -925,7 +854,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(536, 363)</value>
+      <value>(40, 609)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -933,7 +862,7 @@
     </param>
     <param>
       <key>_rotation</key>
-      <value>0</value>
+      <value>180</value>
     </param>
     <param>
       <key>grid</key>
@@ -1200,7 +1129,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(752, 179)</value>
+      <value>(288, 243)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -1208,7 +1137,7 @@
     </param>
     <param>
       <key>_rotation</key>
-      <value>0</value>
+      <value>180</value>
     </param>
     <param>
       <key>grid</key>
@@ -1559,7 +1488,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1016, 747)</value>
+      <value>(528, 651)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -1890,7 +1819,7 @@
     <key>qtgui_waterfall_sink_x</key>
     <param>
       <key>bw</key>
-      <value>samp_rate</value>
+      <value>samp_rate/xlat_decim</value>
     </param>
     <param>
       <key>alias</key>
@@ -1918,7 +1847,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(528, 475)</value>
+      <value>(40, 531)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -1926,7 +1855,7 @@
     </param>
     <param>
       <key>_rotation</key>
-      <value>0</value>
+      <value>180</value>
     </param>
     <param>
       <key>grid</key>
@@ -2133,7 +2062,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(552, 267)</value>
+      <value>(312, 339)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2224,11 +2153,11 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(0, 251)</value>
+      <value>(40, 211)</value>
     </param>
     <param>
       <key>_rotation</key>
-      <value>0</value>
+      <value>180</value>
     </param>
     <param>
       <key>gain_mode</key>
@@ -2236,7 +2165,7 @@
     </param>
     <param>
       <key>gain</key>
-      <value>0</value>
+      <value>30</value>
     </param>
     <param>
       <key>id</key>
@@ -2283,12 +2212,6 @@
       <value>0</value>
     </param>
   </block>
-  <connection>
-    <source_block_id>analog_pwr_squelch_xx_0</source_block_id>
-    <sink_block_id>digital_gmsk_demod_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
   <connection>
     <source_block_id>blocks_char_to_float_0</source_block_id>
     <sink_block_id>qtgui_time_sink_x_1_0</sink_block_id>
@@ -2345,13 +2268,13 @@
   </connection>
   <connection>
     <source_block_id>nuts_ngham_decoder_0</source_block_id>
-    <sink_block_id>blocks_null_sink_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
+    <sink_block_id>blocks_message_debug_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>print</sink_key>
   </connection>
   <connection>
     <source_block_id>rational_resampler_xxx_0</source_block_id>
-    <sink_block_id>analog_pwr_squelch_xx_0</sink_block_id>
+    <sink_block_id>digital_gmsk_demod_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
