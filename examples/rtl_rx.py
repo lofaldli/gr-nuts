@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Rtl Rx
-# Generated: Sun Nov 29 20:19:14 2015
+# Generated: Mon Nov 30 18:39:51 2015
 ##################################################
 
 if __name__ == '__main__':
@@ -300,7 +300,7 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         
         self._qtgui_freq_sink_x_0_win = sip.wrapinstance(self.qtgui_freq_sink_x_0.pyqwidget(), Qt.QWidget)
         self.qtgui_layout_2.addWidget(self._qtgui_freq_sink_x_0_win)
-        self.nuts_ngham_decoder_0 = nuts.ngham_decoder("packet_len", True, True, False)
+        self.nuts_ngham_decoder_0 = nuts.ngham_decoder("packet_len", 0, True, True, False)
         self.freq_xlating_fir_filter_xxx_0_0 = filter.freq_xlating_fir_filter_ccc(8, (firdes.low_pass(1, samp_rate, samp_rate/2, 1000)), tuner, samp_rate)
         self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_ccc(xlat_decim, (firdes.low_pass(1, samp_rate, xlat_bandwidth/2, 1000)), tuner, samp_rate)
         self.digital_gmsk_demod_0 = digital.gmsk_demod(
@@ -373,8 +373,8 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         self.freq_xlating_fir_filter_xxx_0.set_taps((firdes.low_pass(1, self.samp_rate, self.xlat_bandwidth/2, 1000)))
         self.freq_xlating_fir_filter_xxx_0_0.set_taps((firdes.low_pass(1, self.samp_rate, self.samp_rate/2, 1000)))
         self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
-        self.rtl2832_source_0.set_sample_rate(self.samp_rate)
         self.qtgui_waterfall_sink_x_0.set_frequency_range(self.freq, self.samp_rate/self.xlat_decim)
+        self.rtl2832_source_0.set_sample_rate(self.samp_rate)
 
     def get_ngham_rate(self):
         return self.ngham_rate
@@ -390,8 +390,8 @@ class rtl_rx(gr.top_block, Qt.QWidget):
     def set_freq(self, freq):
         self.freq = freq
         self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
-        self.rtl2832_source_0.set_frequency(self.freq)
         self.qtgui_waterfall_sink_x_0.set_frequency_range(self.freq, self.samp_rate/self.xlat_decim)
+        self.rtl2832_source_0.set_frequency(self.freq)
 
 
 def main(top_block_cls=rtl_rx, options=None):
