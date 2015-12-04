@@ -125,26 +125,32 @@ namespace gr {
     }
 
     void ngham_decoder_impl::enter_sync_search() {
-        printf("enter_sync_search\n");
+        if (d_printing)
+            printf("enter_sync_search\n");
         d_decoder_state = STATE_SYNC_SEARCH;
+        d_data_reg = 0;
     }
     void ngham_decoder_impl::enter_load_size_tag() {
-        printf("enter_load_size_tag\n");
+        if (d_printing)
+            printf("enter_load_size_tag\n");
         d_decoder_state = STATE_LOAD_SIZE_TAG;
         d_bit_counter = 0;
     }
     void ngham_decoder_impl::enter_size_tag_compare() {
-        printf("enter_size_tag_compare\n");
+        if (d_printing)
+            printf("enter_size_tag_compare\n");
         d_decoder_state = STATE_SIZE_TAG_COMPARE;
     }
     void ngham_decoder_impl::enter_codeword() {
-        printf("enter_codeword\n");
+        if (d_printing)
+            printf("enter_codeword\n");
         d_decoder_state = STATE_CODEWORD;
         d_codeword_length = 0;
         d_bit_counter = 0;
     }
     void ngham_decoder_impl::enter_decode() {
-        printf("enter_decode\n");
+        if (d_printing)
+            printf("enter_decode\n");
         d_decoder_state = STATE_DECODE;
     }
 
@@ -204,7 +210,8 @@ namespace gr {
 
                         volk_32u_popcnt(&nwrong, wrong_bits);
 
-                        printf("\tcomparing %x and %x, %i bits are different\n", d_data_reg & 0xffffff, size_tag[d_size_index], nwrong);
+                        if (d_printing)
+                            printf("\tcomparing %x and %x, %i bits are different\n", d_data_reg & 0xffffff, size_tag[d_size_index], nwrong);
 
                         if (nwrong <= d_threshold) {
                             enter_codeword();
@@ -225,7 +232,8 @@ namespace gr {
                         d_bit_counter = 0;
                     }
                     if (d_codeword_length == NGHAM_CODEWORD_SIZE[d_size_index]) {
-                        printf("\tloaded codeword of length %i\n", d_codeword_length);
+                        if (d_printing)
+                            printf("\tloaded codeword of length %i\n", d_codeword_length);
                         enter_decode();
                     }
                     break;
@@ -244,11 +252,13 @@ namespace gr {
 
                     // check if packet was decoded correctly
                     if (nerrors == -1) {
-                        printf("\tcould not decode packet\n");
+                        if (d_printing)
+                            printf("\tcould not decode packet\n");
                         enter_sync_search();
                         break;
                     } else {
-                        printf("\tdecoded packet with %i errors\n", nerrors);
+                        if (d_printing)
+                            printf("\tdecoded packet with %i errors\n", nerrors);
                     }
 
                     // calculate payload length
@@ -263,7 +273,8 @@ namespace gr {
 
                     // check crc
                     if ( crc != ( (d_codeword[pl_len+1]<<8) | d_codeword[pl_len+2] ) ) {
-                        printf("crc failed\n");
+                        if (d_printing)
+                            printf("crc failed\n");
                         enter_sync_search();
                         break;
                     }

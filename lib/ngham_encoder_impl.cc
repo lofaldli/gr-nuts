@@ -154,11 +154,10 @@ namespace gr {
       // calc beginning of rs codeword
       int codeword_start = NGHAM_PREAMBLE_SIZE + NGHAM_SYNC_SIZE + NGHAM_SIZE_TAG_SIZE;
 
-      int j,k;
       // insert preamble, sync and size tag
-      for (j=0; j<NGHAM_PREAMBLE_SIZE; j++) d[d_len++] = NGHAM_PREAMBLE[j];
-      for (j=0; j<NGHAM_SYNC_SIZE; j++)     d[d_len++] = NGHAM_SYNC[j];
-      for (j=0; j<NGHAM_SIZE_TAG_SIZE; j++) d[d_len++] = NGHAM_SIZE_TAG[size_index][j];
+      for (int i=0; i<NGHAM_PREAMBLE_SIZE; i++) d[d_len++] = NGHAM_PREAMBLE[i];
+      for (int i=0; i<NGHAM_SYNC_SIZE; i++)     d[d_len++] = NGHAM_SYNC[i];
+      for (int i=0; i<NGHAM_SIZE_TAG_SIZE; i++) d[d_len++] = NGHAM_SIZE_TAG[size_index][i];
       
       // calculate and insert padding size and ngham flags
       unsigned char padding_size = (NGHAM_PL_SIZE[size_index] - pl_len) & 0x1f; // 0001 1111
@@ -166,12 +165,12 @@ namespace gr {
       d[d_len++] = (ngham_flags | padding_size);
 
       // insert input elements
-      for (j=0; j<pl_len; j++) d[d_len++] = in[j];
+      for (int i=0; i<pl_len; i++) d[d_len++] = in[i];
 
       // calculate and insert crc
       unsigned int crc = 0xffff;
-      for (j=0; j<pl_len+1; j++){
-        crc = ((crc >> 8) & 0xff) ^ crc_ccitt_table[(crc ^ d[codeword_start+j]) & 0xff];
+      for (int i=0; i<pl_len+1; i++){
+        crc = ((crc >> 8) & 0xff) ^ crc_ccitt_table[(crc ^ d[codeword_start+i]) & 0xff];
       }
       crc ^= 0xffff;
 
@@ -179,7 +178,7 @@ namespace gr {
       d[d_len++] = crc & 0xff;
 
       // insert padding
-      for (j=0; j<padding_size; j++) d[d_len++] = 0;
+      for (int i=0; i<padding_size; i++) d[d_len++] = 0;
 
       // encode parity data and update packet length
       if (d_rs_encode) {
@@ -191,9 +190,9 @@ namespace gr {
       if (d_printing) {
         printf("NGHAM Encoder\n");
         PRINT2("\tlength (%i,%i)\n", NGHAM_PL_SIZE_FULL[size_index], NGHAM_CODEWORD_SIZE[size_index]); 
-        for (j=codeword_start; j<d_len; j+=4) {
-            for (k=0; k<4 && j+k<d_len; k++) { 
-                printf("0x%x%x ", (d[j+k] >> 4) & 0x0f, d[j+k] & 0x0f);
+        for (int i=codeword_start; i<d_len; i+=4) {
+            for (int j=0; j<4 && i+j<d_len; j++) { 
+                printf("0x%x%x ", (d[i+j] >> 4) & 0x0f, d[i+j] & 0x0f);
             }
             printf("\n");
         }        
@@ -201,7 +200,7 @@ namespace gr {
 
       // scramble data
       if (d_scramble) 
-        for (j=0; j<d_len; j++) d[codeword_start + j] ^= ccsds_poly[j];
+        for (int i=0; i<d_len; i++) d[codeword_start + i] ^= ccsds_poly[i];
 
 
       // make sure packet is multiple of 128 bytes
@@ -210,7 +209,7 @@ namespace gr {
         while (d_len > total_padded_length) total_padded_length += 128;
 
         int usrp_padding_size = total_padded_length - (d_len % 128);
-        for (j=0; j<usrp_padding_size; j++) d[d_len++] = 0;
+        for (int i=0; i<usrp_padding_size; i++) d[d_len++] = 0;
       }
 
       memcpy(out, d, d_len);

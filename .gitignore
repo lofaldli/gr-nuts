@@ -1,4 +1,4 @@
 build/
 *.py[co]
 *~
-
+*.swp
