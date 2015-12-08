@@ -581,7 +581,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1096, 705)</value>
+      <value>(1096, 737)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -612,7 +612,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(912, 363)</value>
+      <value>(856, 363)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -934,7 +934,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(736, 283)</value>
+      <value>(680, 283)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1115,7 +1115,7 @@
     </param>
     <param>
       <key>pad_for_usrp</key>
-      <value>False</value>
+      <value>True</value>
     </param>
     <param>
       <key>printing</key>
@@ -2294,7 +2294,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(904, 267)</value>
+      <value>(856, 267)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2337,7 +2337,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(912, 411)</value>
+      <value>(856, 411)</value>
     </param>
     <param>
       <key>_rotation</key>

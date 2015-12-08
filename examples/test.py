@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Test
-# Generated: Sun Nov 29 15:38:42 2015
+# Generated: Mon Dec  7 18:32:50 2015
 ##################################################
 
 if __name__ == '__main__':
@@ -76,12 +76,6 @@ class test(gr.top_block, Qt.QWidget):
         self._noise_range = Range(0, 1, 0.1, 0, 200)
         self._noise_win = RangeWidget(self._noise_range, self.set_noise, "noise", "counter_slider", float)
         self.top_layout.addWidget(self._noise_win)
-        self.rational_resampler_xxx_2 = filter.rational_resampler_ccc(
-                interpolation=1,
-                decimation=1,
-                taps=None,
-                fractional_bw=None,
-        )
         self.rational_resampler_xxx_1 = filter.rational_resampler_ccc(
                 interpolation=samp_rate,
                 decimation=data_rate*sps,
@@ -232,47 +226,7 @@ class test(gr.top_block, Qt.QWidget):
         
         self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.pyqwidget(), Qt.QWidget)
         self.top_grid_layout.addWidget(self._qtgui_time_sink_x_0_win, 0,0,1,1)
-        self.qtgui_const_sink_x_0 = qtgui.const_sink_c(
-        	1024, #size
-        	"", #name
-        	1 #number of inputs
-        )
-        self.qtgui_const_sink_x_0.set_update_time(0.10)
-        self.qtgui_const_sink_x_0.set_y_axis(-2, 2)
-        self.qtgui_const_sink_x_0.set_x_axis(-2, 2)
-        self.qtgui_const_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, "")
-        self.qtgui_const_sink_x_0.enable_autoscale(False)
-        self.qtgui_const_sink_x_0.enable_grid(False)
-        
-        if not True:
-          self.qtgui_const_sink_x_0.disable_legend()
-        
-        labels = ["", "", "", "", "",
-                  "", "", "", "", ""]
-        widths = [1, 1, 1, 1, 1,
-                  1, 1, 1, 1, 1]
-        colors = ["blue", "red", "red", "red", "red",
-                  "red", "red", "red", "red", "red"]
-        styles = [0, 0, 0, 0, 0,
-                  0, 0, 0, 0, 0]
-        markers = [0, 0, 0, 0, 0,
-                   0, 0, 0, 0, 0]
-        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
-                  1.0, 1.0, 1.0, 1.0, 1.0]
-        for i in xrange(1):
-            if len(labels[i]) == 0:
-                self.qtgui_const_sink_x_0.set_line_label(i, "Data {0}".format(i))
-            else:
-                self.qtgui_const_sink_x_0.set_line_label(i, labels[i])
-            self.qtgui_const_sink_x_0.set_line_width(i, widths[i])
-            self.qtgui_const_sink_x_0.set_line_color(i, colors[i])
-            self.qtgui_const_sink_x_0.set_line_style(i, styles[i])
-            self.qtgui_const_sink_x_0.set_line_marker(i, markers[i])
-            self.qtgui_const_sink_x_0.set_line_alpha(i, alphas[i])
-        
-        self._qtgui_const_sink_x_0_win = sip.wrapinstance(self.qtgui_const_sink_x_0.pyqwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_const_sink_x_0_win)
-        self.nuts_ngham_encoder_0 = nuts.ngham_encoder("packet_len", True, True, False, False)
+        self.nuts_ngham_encoder_0 = nuts.ngham_encoder("packet_len", True, True, True, False)
         self.nuts_ngham_decoder_0 = nuts.ngham_decoder("packet_len", 5, True, True, False)
         self.nuts_ngham_correlator_0 = nuts.ngham_correlator("packet_len", 0)
         self.digital_gmsk_mod_0 = digital.gmsk_mod(
@@ -295,6 +249,7 @@ class test(gr.top_block, Qt.QWidget):
         self.blocks_unpack_k_bits_bb_0 = blocks.unpack_k_bits_bb(8)
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, data_rate,True)
         self.blocks_tag_gate_0 = blocks.tag_gate(gr.sizeof_gr_complex * 1, False)
+        self.blocks_message_debug_0 = blocks.message_debug()
         self.blocks_char_to_float_0_1 = blocks.char_to_float(1, 1)
         self.blocks_char_to_float_0_0 = blocks.char_to_float(1, 1)
         self.blocks_char_to_float_0 = blocks.char_to_float(1, 1)
@@ -304,6 +259,7 @@ class test(gr.top_block, Qt.QWidget):
         ##################################################
         # Connections
         ##################################################
+        self.msg_connect((self.nuts_ngham_decoder_0, 'out'), (self.blocks_message_debug_0, 'print'))    
         self.connect((self.analog_noise_source_x_0, 0), (self.blocks_add_xx_0, 0))    
         self.connect((self.blocks_add_xx_0, 0), (self.rational_resampler_xxx_0, 0))    
         self.connect((self.blocks_char_to_float_0, 0), (self.qtgui_time_sink_x_0, 0))    
@@ -322,9 +278,7 @@ class test(gr.top_block, Qt.QWidget):
         self.connect((self.nuts_ngham_encoder_0, 0), (self.blocks_unpack_k_bits_bb_0, 0))    
         self.connect((self.nuts_ngham_encoder_0, 0), (self.digital_gmsk_mod_0, 0))    
         self.connect((self.rational_resampler_xxx_0, 0), (self.digital_gmsk_demod_0, 0))    
-        self.connect((self.rational_resampler_xxx_0, 0), (self.rational_resampler_xxx_2, 0))    
         self.connect((self.rational_resampler_xxx_1, 0), (self.blocks_tag_gate_0, 0))    
-        self.connect((self.rational_resampler_xxx_2, 0), (self.qtgui_const_sink_x_0, 0))    
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "test")
