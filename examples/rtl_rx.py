@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Rtl Rx
-# Generated: Mon Dec  7 18:30:04 2015
+# Generated: Tue Dec  8 15:46:36 2015
 ##################################################
 
 if __name__ == '__main__':
@@ -315,6 +315,8 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         self.digital_correlate_access_code_tag_bb_1 = digital.correlate_access_code_tag_bb("1011101111001100010101001111110", 0, "ngham_sync")
         self.digital_correlate_access_code_tag_bb_0 = digital.correlate_access_code_tag_bb("10101010101010101010101010101010", 0, "ngham_preamble")
         self.blocks_message_debug_0 = blocks.message_debug()
+        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_gr_complex*1, "ngham_packets", False)
+        self.blocks_file_sink_0.set_unbuffered(False)
         self.blocks_char_to_float_0 = blocks.char_to_float(1, 1)
 
         ##################################################
@@ -326,6 +328,7 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         self.connect((self.digital_correlate_access_code_tag_bb_1, 0), (self.blocks_char_to_float_0, 0))    
         self.connect((self.digital_gmsk_demod_0, 0), (self.digital_correlate_access_code_tag_bb_0, 0))    
         self.connect((self.digital_gmsk_demod_0, 0), (self.nuts_ngham_decoder_0, 0))    
+        self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.blocks_file_sink_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.qtgui_freq_sink_x_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.rational_resampler_xxx_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0_0, 0), (self.qtgui_freq_sink_x_0, 1))    
@@ -361,20 +364,20 @@ class rtl_rx(gr.top_block, Qt.QWidget):
 
     def set_tuner(self, tuner):
         self.tuner = tuner
-        self.freq_xlating_fir_filter_xxx_0.set_center_freq(self.tuner)
         self.freq_xlating_fir_filter_xxx_0_0.set_center_freq(self.tuner)
         self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
+        self.freq_xlating_fir_filter_xxx_0.set_center_freq(self.tuner)
 
     def get_samp_rate(self):
         return self.samp_rate
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.freq_xlating_fir_filter_xxx_0.set_taps((firdes.low_pass(1, self.samp_rate, self.xlat_bandwidth/2, 1000)))
         self.freq_xlating_fir_filter_xxx_0_0.set_taps((firdes.low_pass(1, self.samp_rate, self.samp_rate/2, 1000)))
         self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
         self.qtgui_waterfall_sink_x_0.set_frequency_range(self.freq, self.samp_rate/self.xlat_decim)
         self.rtl2832_source_0.set_sample_rate(self.samp_rate)
+        self.freq_xlating_fir_filter_xxx_0.set_taps((firdes.low_pass(1, self.samp_rate, self.xlat_bandwidth/2, 1000)))
 
     def get_ngham_rate(self):
         return self.ngham_rate
