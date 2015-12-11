@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Test
-# Generated: Mon Dec  7 18:32:50 2015
+# Generated: Fri Dec 11 10:14:20 2015
 ##################################################
 
 if __name__ == '__main__':
@@ -17,6 +17,7 @@ if __name__ == '__main__':
             print "Warning: failed to XInitThreads()"
 
 from PyQt4 import Qt
+from baz import baudline
 from gnuradio import analog
 from gnuradio import blocks
 from gnuradio import digital
@@ -249,18 +250,38 @@ class test(gr.top_block, Qt.QWidget):
         self.blocks_unpack_k_bits_bb_0 = blocks.unpack_k_bits_bb(8)
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, data_rate,True)
         self.blocks_tag_gate_0 = blocks.tag_gate(gr.sizeof_gr_complex * 1, False)
-        self.blocks_message_debug_0 = blocks.message_debug()
         self.blocks_char_to_float_0_1 = blocks.char_to_float(1, 1)
         self.blocks_char_to_float_0_0 = blocks.char_to_float(1, 1)
         self.blocks_char_to_float_0 = blocks.char_to_float(1, 1)
         self.blocks_add_xx_0 = blocks.add_vcc(1)
+        self.baudline_sink_0_0 = baudline.baudline_sink(
+        		fmt='le32f',
+        		item_size=8,
+        		is_complex=True,
+        		channels=2,
+        		sample_rate=samp_rate,
+        		aggregate_channel_count=1,
+        		baseband_freq=0,
+        		decimation=1,
+        		scale=1.0,
+        		overlap=0,
+        		slide_size=0,
+        		fft_size=0,
+        		x_slip=0,
+        		jump_step=0,
+        		mode='pipe',
+        		buffered=True,
+        		kill_on_del=True,
+        		memory=0,
+        		peak_hold=False,
+        		**{})
         self.analog_noise_source_x_0 = analog.noise_source_c(analog.GR_GAUSSIAN, noise, 0)
 
         ##################################################
         # Connections
         ##################################################
-        self.msg_connect((self.nuts_ngham_decoder_0, 'out'), (self.blocks_message_debug_0, 'print'))    
         self.connect((self.analog_noise_source_x_0, 0), (self.blocks_add_xx_0, 0))    
+        self.connect((self.blocks_add_xx_0, 0), (self.baudline_sink_0_0, 0))    
         self.connect((self.blocks_add_xx_0, 0), (self.rational_resampler_xxx_0, 0))    
         self.connect((self.blocks_char_to_float_0, 0), (self.qtgui_time_sink_x_0, 0))    
         self.connect((self.blocks_char_to_float_0_0, 0), (self.qtgui_time_sink_x_0_0, 0))    
