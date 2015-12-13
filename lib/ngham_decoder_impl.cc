@@ -43,9 +43,9 @@ namespace gr {
   namespace nuts {
 
     ngham_decoder::sptr
-    ngham_decoder::make(const std::string& len_tag_key, int threshold, bool rs_decode, bool descramble, bool printing)
+    ngham_decoder::make(const std::string& len_tag_key, int threshold, bool rs_decode, bool descramble, bool printing, bool verbose)
     {
-      return gnuradio::get_initial_sptr(new ngham_decoder_impl(len_tag_key, threshold, rs_decode, descramble, printing));
+      return gnuradio::get_initial_sptr(new ngham_decoder_impl(len_tag_key, threshold, rs_decode, descramble, printing, verbose));
     }
 
     struct rs rs_cb_rx[NGHAM_SIZES];
@@ -54,7 +54,7 @@ namespace gr {
     /*
      * The private constructor
      */
-    ngham_decoder_impl::ngham_decoder_impl(const std::string& len_tag_key, int threshold, bool rs_decode, bool descramble, bool printing)
+    ngham_decoder_impl::ngham_decoder_impl(const std::string& len_tag_key, int threshold, bool rs_decode, bool descramble, bool printing, bool verbose)
       : gr::sync_block("ngham_decoder",
               gr::io_signature::make(1, 1, sizeof(uint8_t)),
               gr::io_signature::make(0, 0, 0)),
@@ -63,9 +63,11 @@ namespace gr {
       d_rs_decode(rs_decode),
       d_descramble(descramble),
       d_printing(printing),
+      d_verbose(verbose),
       d_data_reg(0),
       d_size_index(0),
-      d_bit_counter(0)
+      d_bit_counter(0),
+      d_num_packets(0)
     {
       message_port_register_out(pmt::mp("out"));
 
@@ -125,32 +127,27 @@ namespace gr {
     }
 
     void ngham_decoder_impl::enter_sync_search() {
-        if (d_printing)
-            printf("enter_sync_search\n");
+        if (d_verbose) printf("enter_sync_search\n");
         d_decoder_state = STATE_SYNC_SEARCH;
         d_data_reg = 0;
     }
     void ngham_decoder_impl::enter_load_size_tag() {
-        if (d_printing)
-            printf("enter_load_size_tag\n");
+        if (d_verbose) printf("enter_load_size_tag\n");
         d_decoder_state = STATE_LOAD_SIZE_TAG;
         d_bit_counter = 0;
     }
     void ngham_decoder_impl::enter_size_tag_compare() {
-        if (d_printing)
-            printf("enter_size_tag_compare\n");
+        if (d_verbose) printf("enter_size_tag_compare\n");
         d_decoder_state = STATE_SIZE_TAG_COMPARE;
     }
     void ngham_decoder_impl::enter_codeword() {
-        if (d_printing)
-            printf("enter_codeword\n");
+        if (d_verbose) printf("enter_codeword\n");
         d_decoder_state = STATE_CODEWORD;
         d_codeword_length = 0;
         d_bit_counter = 0;
     }
     void ngham_decoder_impl::enter_decode() {
-        if (d_printing)
-            printf("enter_decode\n");
+        if (d_verbose) printf("enter_decode\n");
         d_decoder_state = STATE_DECODE;
     }
 
@@ -210,7 +207,7 @@ namespace gr {
 
                         volk_32u_popcnt(&nwrong, wrong_bits);
 
-                        if (d_printing)
+                        if (d_verbose)
                             printf("\tcomparing %x and %x, %i bits are different\n", d_data_reg & 0xffffff, size_tag[d_size_index], nwrong);
 
                         if (nwrong <= d_threshold) {
@@ -232,7 +229,7 @@ namespace gr {
                         d_bit_counter = 0;
                     }
                     if (d_codeword_length == NGHAM_CODEWORD_SIZE[d_size_index]) {
-                        if (d_printing)
+                        if (d_verbose)
                             printf("\tloaded codeword of length %i\n", d_codeword_length);
                         enter_decode();
                     }
@@ -252,12 +249,12 @@ namespace gr {
 
                     // check if packet was decoded correctly
                     if (nerrors == -1) {
-                        if (d_printing)
+                        if (d_verbose)
                             printf("\tcould not decode packet\n");
                         enter_sync_search();
                         break;
                     } else {
-                        if (d_printing)
+                        if (d_verbose)
                             printf("\tdecoded packet with %i errors\n", nerrors);
                     }
 
@@ -273,7 +270,7 @@ namespace gr {
 
                     // check crc
                     if ( crc != ( (d_codeword[pl_len+1]<<8) | d_codeword[pl_len+2] ) ) {
-                        if (d_printing)
+                        if (d_verbose)
                             printf("crc failed\n");
                         enter_sync_search();
                         break;
@@ -282,18 +279,24 @@ namespace gr {
                     // post payload data to message queue
                     pmt::pmt_t pdu(pmt::cons(pmt::PMT_NIL, pmt::make_blob(d_codeword+1, pl_len)));
                     message_port_pub(pmt::mp("out"), pdu);
-
+                    
+                    d_num_packets++;
                     // print codeword if tests were passed
                     if (d_printing) {
-                        for (int i=0; i<d_codeword_length; i+=4) {
-                            for (int j=0; j<4; j++) {
+                        
+                        printf("number of packets received %i\n", d_num_packets);
+                        printf("decoded data:\n");
+
+                        for (int i=0; i<d_codeword_length; i+=8) {
+                            printf("\t");
+                            for (int j=0; j<8; j++) {
                                 if (i+j<d_codeword_length)
                                     printf("0x%x%x ", (d_codeword[i+j] >> 4) & 0x0f, d_codeword[i+j] & 0x0f);
                                 else
                                     printf("\t");
                             }
                             printf("\t");
-                            for (int j=0; j<4 && i+j<d_codeword_length; j++) {
+                            for (int j=0; j<8 && i+j<d_codeword_length; j++) {
                                 if (d_codeword[i+j] > 32 && d_codeword[i+j] < 128)
                                     printf("%c ", d_codeword[i+j]);
                                 else

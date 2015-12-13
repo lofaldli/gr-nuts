@@ -34,12 +34,14 @@ namespace gr {
       bool d_rs_decode;
       bool d_descramble;
       bool d_printing;
+      bool d_verbose;
       int d_decoder_state;
       unsigned long d_data_reg;
       int d_size_index;
       int d_codeword_length;
       unsigned char d_codeword[255]; // FIXME NGHAM_MAX_CODEWORD_SIZE
       char d_bit_counter;
+      int d_num_packets;
 
       void enter_sync_search();
       void enter_load_size_tag();
@@ -49,7 +51,7 @@ namespace gr {
       void parse_length_tags(const std::vector<std::vector<tag_t> > &tags, gr_vector_int &packet_lengths);
 
      public:
-      ngham_decoder_impl(const std::string& len_tag_key, int threshold, bool rs_decode, bool descramble, bool printing);
+      ngham_decoder_impl(const std::string& len_tag_key, int threshold, bool rs_decode, bool descramble, bool printing, bool verbose);
       ~ngham_decoder_impl();
 
       // Where all the action really happens
