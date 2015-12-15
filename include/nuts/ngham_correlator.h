@@ -46,7 +46,7 @@ namespace gr {
        * class. nuts::ngham_correlator::make is the public interface for
        * creating new instances.
        */
-      static sptr make(const std::string len_tag_key="packet_len", int threshold=0);
+      static sptr make(const std::string len_tag_key="packet_len", int threshold=0, bool verbose=false);
     };
 
   } // namespace nuts

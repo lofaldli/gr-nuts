@@ -30,7 +30,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(8, 8)</value>
+      <value>(8, 11)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -78,14 +78,10 @@
     </param>
   </block>
   <block>
-    <key>variable_qtgui_chooser</key>
+    <key>variable</key>
     <param>
       <key>comment</key>
       <value></value>
-    </param>
-    <param>
-      <key>value</key>
-      <value>145.98e6</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -93,11 +89,34 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(712, 11)</value>
+      <value>(280, 11)</value>
     </param>
     <param>
-      <key>gui_hint</key>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>data_rate</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>9600</value>
+    </param>
+  </block>
+  <block>
+    <key>variable</key>
+    <param>
+      <key>comment</key>
       <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(264, 83)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -108,72 +127,8 @@
       <value>freq</value>
     </param>
     <param>
-      <key>label0</key>
-      <value>vhf</value>
-    </param>
-    <param>
-      <key>label1</key>
-      <value>uhf</value>
-    </param>
-    <param>
-      <key>label2</key>
-      <value></value>
-    </param>
-    <param>
-      <key>label3</key>
-      <value></value>
-    </param>
-    <param>
-      <key>label4</key>
-      <value></value>
-    </param>
-    <param>
-      <key>label</key>
-      <value>frequency select</value>
-    </param>
-    <param>
-      <key>labels</key>
-      <value>[]</value>
-    </param>
-    <param>
-      <key>num_opts</key>
-      <value>2</value>
-    </param>
-    <param>
-      <key>option0</key>
-      <value>145.98e6</value>
-    </param>
-    <param>
-      <key>option1</key>
-      <value>437.305e6</value>
-    </param>
-    <param>
-      <key>option2</key>
-      <value>2</value>
-    </param>
-    <param>
-      <key>option3</key>
-      <value>3</value>
-    </param>
-    <param>
-      <key>option4</key>
-      <value>4</value>
-    </param>
-    <param>
-      <key>options</key>
-      <value>[0, 1, 2]</value>
-    </param>
-    <param>
-      <key>orient</key>
-      <value>Qt.QHBoxLayout</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>real</value>
-    </param>
-    <param>
-      <key>widget</key>
-      <value>radio_buttons</value>
+      <key>value</key>
+      <value>int(145.98e6)</value>
     </param>
   </block>
   <block>
@@ -188,7 +143,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>0</value>
     </param>
     <param>
       <key>formatter</key>
@@ -196,7 +151,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(864, 11)</value>
+      <value>(1040, 11)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -220,10 +175,14 @@
     </param>
   </block>
   <block>
-    <key>variable</key>
+    <key>variable_qtgui_range</key>
     <param>
       <key>comment</key>
       <value></value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>10</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -231,7 +190,11 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(280, 11)</value>
+      <value>(608, 11)</value>
+    </param>
+    <param>
+      <key>gui_hint</key>
+      <value></value>
     </param>
     <param>
       <key>_rotation</key>
@@ -239,11 +202,39 @@
     </param>
     <param>
       <key>id</key>
-      <value>ngham_rate</value>
+      <value>gain</value>
     </param>
     <param>
-      <key>value</key>
-      <value>9600</value>
+      <key>label</key>
+      <value></value>
+    </param>
+    <param>
+      <key>min_len</key>
+      <value>200</value>
+    </param>
+    <param>
+      <key>orient</key>
+      <value>Qt.Horizontal</value>
+    </param>
+    <param>
+      <key>start</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>step</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>stop</key>
+      <value>50</value>
+    </param>
+    <param>
+      <key>rangeType</key>
+      <value>float</value>
+    </param>
+    <param>
+      <key>widget</key>
+      <value>counter_slider</value>
     </param>
   </block>
   <block>
@@ -258,7 +249,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(184, 11)</value>
+      <value>(176, 11)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -285,7 +276,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(384, 11)</value>
+      <value>(192, 83)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -316,7 +307,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(584, 11)</value>
+      <value>(488, 11)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -375,7 +366,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1008, 99)</value>
+      <value>(368, 83)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -402,7 +393,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1008, 171)</value>
+      <value>(384, 11)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -433,11 +424,11 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(560, 563)</value>
+      <value>(696, 499)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -480,11 +471,11 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(816, 401)</value>
+      <value>(904, 305)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -515,11 +506,11 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(496, 403)</value>
+      <value>(632, 339)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -566,11 +557,11 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(504, 483)</value>
+      <value>(640, 419)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -621,7 +612,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(512, 275)</value>
+      <value>(480, 147)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -657,7 +648,7 @@
     </param>
     <param>
       <key>samples_per_symbol</key>
-      <value>10</value>
+      <value>sps</value>
     </param>
     <param>
       <key>verbose</key>
@@ -692,7 +683,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(48, 283)</value>
+      <value>(56, 227)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -747,11 +738,11 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(48, 387)</value>
+      <value>(56, 323)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -806,7 +797,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(784, 275)</value>
+      <value>(688, 139)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -840,6 +831,10 @@
       <key>threshold</key>
       <value>0</value>
     </param>
+    <param>
+      <key>verbose</key>
+      <value>False</value>
+    </param>
   </block>
   <block>
     <key>qtgui_tab_widget</key>
@@ -853,11 +848,11 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(8, 75)</value>
+      <value>(896, 11)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -992,7 +987,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>fftsize</key>
@@ -1000,7 +995,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(40, 577)</value>
+      <value>(48, 513)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -1271,11 +1266,11 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(280, 195)</value>
+      <value>(448, 291)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -1551,7 +1546,7 @@
     </param>
     <param>
       <key>srate</key>
-      <value>ngham_rate*10</value>
+      <value>data_rate*sps</value>
     </param>
     <param>
       <key>tr_chan</key>
@@ -1630,11 +1625,11 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(552, 611)</value>
+      <value>(688, 547)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -1910,7 +1905,7 @@
     </param>
     <param>
       <key>srate</key>
-      <value>ngham_rate</value>
+      <value>data_rate</value>
     </param>
     <param>
       <key>tr_chan</key>
@@ -1985,7 +1980,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>0</value>
     </param>
     <param>
       <key>fftsize</key>
@@ -1993,7 +1988,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(40, 491)</value>
+      <value>(48, 427)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -2208,7 +2203,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(312, 283)</value>
+      <value>(304, 155)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2220,7 +2215,7 @@
     </param>
     <param>
       <key>interp</key>
-      <value>ngham_rate*10</value>
+      <value>data_rate*sps</value>
     </param>
     <param>
       <key>maxoutbuf</key>
@@ -3167,11 +3162,11 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(40, 195)</value>
+      <value>(16, 123)</value>
     </param>
     <param>
       <key>_rotation</key>
-      <value>180</value>
+      <value>0</value>
     </param>
     <param>
       <key>id</key>

@@ -29,14 +29,18 @@ namespace gr {
     class ngham_correlator_impl : public ngham_correlator
     {
      private:
-      unsigned long d_data_reg;
-
-      unsigned int d_threshold, d_len;
+      unsigned long d_data_reg, d_size_tags[7], d_sync_word;
+      bool d_verbose;
+      unsigned int d_threshold, d_len, d_state, d_bit_counter;
 
       pmt::pmt_t d_key, d_me;
+      
+      void enter_sync_search();
+      void enter_load_size_tag();
+      void enter_size_tag_compare();
 
      public:
-      ngham_correlator_impl(const std::string len_tag_key, int threshold);
+      ngham_correlator_impl(const std::string len_tag_key, int threshold, bool verbose);
       ~ngham_correlator_impl();
 
       // Where all the action really happens

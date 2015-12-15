@@ -4,7 +4,7 @@
   <key>nuts_ngham_correlator</key>
   <category>nuts</category>
   <import>import nuts</import>
-  <make>nuts.ngham_correlator($len_tag_key, $threshold)</make>
+  <make>nuts.ngham_correlator($len_tag_key, $threshold, $verbose)</make>
   <param>
     <name>Length tag key</name>
     <key>len_tag_key</key>
@@ -16,6 +16,20 @@
     <key>threshold</key>
     <value>0</value>
     <type>int</type>
+  </param>
+  <param>
+    <name>Verbose</name>
+    <key>verbose</key>
+    <value>False</value>
+    <type>enum</type>
+    <option>
+        <name>Yes</name>
+        <key>True</key>
+    </option>
+    <option>
+        <name>No</name>
+        <key>False</key>
+    </option>
   </param>
   <sink>
     <name>in</name>
