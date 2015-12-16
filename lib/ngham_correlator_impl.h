@@ -29,9 +29,9 @@ namespace gr {
     class ngham_correlator_impl : public ngham_correlator
     {
      private:
-      unsigned long d_data_reg, d_size_tags[7], d_sync_word;
+      unsigned int d_data_reg, d_size_tags[7], d_sync_word;
       bool d_verbose;
-      unsigned int d_threshold, d_len, d_state, d_bit_counter;
+      unsigned int d_threshold, d_state, d_bit_counter;
 
       pmt::pmt_t d_key, d_me;
       

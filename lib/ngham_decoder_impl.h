@@ -1,5 +1,5 @@
 /* -*- c++ -*- */
-/* 
+/*
  * Copyright 2015 André Løfaldli.
  * 
  * This is free software; you can redistribute it and/or modify

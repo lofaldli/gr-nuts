@@ -108,9 +108,9 @@ namespace gr {
       const unsigned char *in = (const unsigned char *) input_items[0];
       unsigned char *out = (unsigned char *) output_items[0];
 
-      uint64_t abs_out_sample_cnt = nitems_written(0);
+      unsigned long abs_out_sample_cnt = nitems_written(0);
 
-      uint32_t wrong_bits, nwrong;
+      unsigned int wrong_bits, nwrong;
       for (int i=0; i<noutput_items; i++) {
 
         switch (d_state) {
@@ -149,13 +149,15 @@ namespace gr {
                     wrong_bits = ((d_data_reg & 0xffffff) ^ d_size_tags[size_index]);
                     volk_32u_popcnt(&nwrong, wrong_bits);
                     
-                    if (d_verbose) printf("\tcomparing %x and %x, %i bits are different\n", d_data_reg & 0xffffff, d_size_tags[size_index], nwrong);
+                    if (d_verbose) 
+                        printf("\tcomparing %x and %x, %i bits are different\n", d_data_reg & 0xffffff,
+                               d_size_tags[size_index], nwrong);
 
                     if (nwrong <= d_threshold) {
                         add_item_tag(0,  // stream id
                                 abs_out_sample_cnt + i, // sample no
                                 d_key, // frame info
-                                pmt::from_long(NGHAM_CODEWORD_SIZE[size_index]*8*sizeof(unsigned char)), // packet length (unpacked bytes)
+                                pmt::from_long(NGHAM_CODEWORD_SIZE[size_index]*8), // packet length (unpacked bytes)
                                 d_me // block source id
                                 );
                         break;
