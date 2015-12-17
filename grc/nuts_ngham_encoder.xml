@@ -54,7 +54,7 @@
     </option>
   </param>
   <param>
-    <name>Printing</name>
+    <name>Print packets</name>
     <key>printing</key>
     <value>False</value>
     <type>enum</type>

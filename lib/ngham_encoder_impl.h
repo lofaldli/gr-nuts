@@ -33,6 +33,7 @@ namespace gr {
       bool d_scramble;
       bool d_pad_for_usrp;
       bool d_printing;
+      int d_num_packets;
       
 
      protected:

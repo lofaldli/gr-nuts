@@ -67,7 +67,8 @@ namespace gr {
       d_rs_encode(rs_encode),
       d_scramble(scramble),
       d_pad_for_usrp(pad_for_usrp),
-      d_printing(printing)
+      d_printing(printing),
+      d_num_packets(0)
     {
       // initialize rs tables
       struct rs* rs_32 = (struct rs*)init_rs_char(8, 0x187, 112, 11, 32, 0);
@@ -186,17 +187,31 @@ namespace gr {
         d_len += NGHAM_PAR_SIZE[size_index];
       }
 
+      d_num_packets++;
       // print packet before scrambling
       if (d_printing) {
-        printf("NGHAM Encoder\n");
-        PRINT2("\tlength (%i,%i)\n", NGHAM_PL_SIZE_FULL[size_index], NGHAM_CODEWORD_SIZE[size_index]); 
-        for (int i=codeword_start; i<d_len; i+=4) {
-            for (int j=0; j<4 && i+j<d_len; j++) { 
-                printf("0x%x%x ", (d[i+j] >> 4) & 0x0f, d[i+j] & 0x0f);
-            }
-            printf("\n");
-        }        
-      }
+                      
+          printf("number of packets sent %i\n", d_num_packets);
+          printf("encoded data:\n");
+
+          for (int i=codeword_start; i<d_len; i+=8) {
+              printf("\t");
+              for (int j=0; j<8; j++) {
+              if (i+j<d_len)
+                  printf("0x%x%x ", (d[i+j] >> 4) & 0x0f, d[i+j] & 0x0f);
+              else
+                  printf("\t");
+              }
+              printf("\t");
+              for (int j=0; j<8 && i+j<d_len; j++) {
+                  if (d[i+j] > 32 && d[i+j] < 128)
+                      printf("%c ", d[i+j]);
+                  else
+                      printf(". ");
+                  }
+                  printf("\n");
+              }
+           }
 
       // scramble data
       if (d_scramble) 
