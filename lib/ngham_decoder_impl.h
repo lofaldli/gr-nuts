@@ -30,34 +30,35 @@ namespace gr {
     {
      private:
       pmt::pmt_t d_len_tag_key;
-      int d_threshold;
+      uint8_t d_threshold;
       bool d_rs_decode;
       bool d_descramble;
       bool d_printing;
       bool d_verbose;
-      int d_decoder_state;
-      unsigned long d_data_reg;
-      int d_size_index;
-      int d_codeword_length;
-      unsigned char d_codeword[255]; // FIXME NGHAM_MAX_CODEWORD_SIZE
-      char d_bit_counter;
-      int d_num_packets;
+      uint8_t d_decoder_state;
+      uint32_t d_data_reg;
+      uint8_t d_size_index;
+      uint8_t d_codeword_length;
+      uint8_t d_codeword[255]; 
+      uint8_t d_bit_counter;
+      uint16_t d_num_packets;
+      uint8_t d_payload_len;
 
       void enter_sync_search();
       void enter_load_size_tag();
       void enter_size_tag_compare();
       void enter_codeword();
-      void enter_decode();
-      void parse_length_tags(const std::vector<std::vector<tag_t> > &tags, gr_vector_int &packet_lengths);
+
+      uint32_t correlate_32u(uint32_t x, uint32_t y, uint32_t mask);
+      bool decode_packet();
+      void print_packet();
 
      public:
       ngham_decoder_impl(const std::string& len_tag_key, int threshold, bool rs_decode, bool descramble, bool printing, bool verbose);
       ~ngham_decoder_impl();
 
       // Where all the action really happens
-      int work(int noutput_items,
-         gr_vector_const_void_star &input_items,
-         gr_vector_void_star &output_items);
+      int work(int noutput_items, gr_vector_const_void_star &input_items, gr_vector_void_star &output_items);
     };
 
   } // namespace nuts

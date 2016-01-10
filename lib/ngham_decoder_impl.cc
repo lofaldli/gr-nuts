@@ -37,7 +37,6 @@
 #define STATE_LOAD_SIZE_TAG 1
 #define STATE_SIZE_TAG_COMPARE 2
 #define STATE_CODEWORD 3
-#define STATE_DECODE 4
 
 namespace gr {
   namespace nuts {
@@ -115,8 +114,7 @@ namespace gr {
     /*
      * Our virtual destructor.
      */
-    ngham_decoder_impl::~ngham_decoder_impl()
-    {
+    ngham_decoder_impl::~ngham_decoder_impl() {
       // free rs tables
       delete [] rs_cb_rx[6].alpha_to;
       delete [] rs_cb_rx[6].index_of;
@@ -146,76 +144,114 @@ namespace gr {
         d_codeword_length = 0;
         d_bit_counter = 0;
     }
-    void ngham_decoder_impl::enter_decode() {
-        if (d_verbose) printf("enter_decode\n");
-        d_decoder_state = STATE_DECODE;
+
+    uint32_t ngham_decoder_impl::correlate_32u(uint32_t x, uint32_t y, uint32_t mask) {
+        uint32_t ndifferent;
+        uint32_t different_bits = (x ^ y) & mask;
+        volk_32u_popcnt(&ndifferent, different_bits);
+
+        return ndifferent;
     }
 
-    int
-    ngham_decoder_impl::work(int noutput_items,
-        gr_vector_const_void_star &input_items,
-        gr_vector_void_star &output_items)
-    {
+    bool ngham_decoder_impl::decode_packet() {
+        // descramble data
+        if (d_descramble) {
+           for (int i=0; i<d_codeword_length; i++) d_codeword[i] ^= ccsds_poly[i];
+        }
+
+        // decode parity data
+        int nerrors = 0;
+        if (d_rs_decode) {
+            nerrors = decode_rs_char(&rs_cb_rx[d_size_index], d_codeword, 0, 0);
+        }
+
+        // check if packet was decoded correctly
+        if (nerrors == -1) {
+            if (d_verbose)
+                printf("\tcould not decode reed solomon\n");
+            return false;
+        } 
+        
+        if (d_verbose)
+            printf("\tdecoded reed solomon with %i errors\n", nerrors);
+
+        d_payload_len = NGHAM_PL_SIZE[d_size_index] - (d_codeword[0] & 0x1f);
+
+        // calculate crc
+        uint16_t crc = 0xffff;
+        for (int i=0; i< d_payload_len+1; i++){
+            crc = ((crc >> 8) & 0xff) ^ crc_ccitt_table[(crc ^ d_codeword[i]) & 0xff];
+        }
+        crc ^= 0xffff;
+
+        // check crc
+        if ( crc != ( (d_codeword[d_payload_len+1]<<8) | d_codeword[d_payload_len+2] ) ) {
+            if (d_verbose)
+                printf("crc failed\n");
+            return false;
+        }
+        
+        // packet was succesfully decoded
+        d_num_packets++;
+        return true;
+    }
+    
+    void ngham_decoder_impl::print_packet() {
+        printf("number of packets received %i\n", d_num_packets);
+        printf("decoded data:\n");
+        for (int i=0; i<d_codeword_length; i+=8) {
+            printf("\t");
+            for (int j=0; j<8; j++) {
+                if (i+j<d_codeword_length)
+                    printf("0x%x%x ", (d_codeword[i+j] >> 4) & 0x0f, d_codeword[i+j] & 0x0f);
+                else
+                    printf("\t");
+            }
+            printf("\t");
+            for (int j=0; j<8 && i+j<d_codeword_length; j++) {
+                if (d_codeword[i+j] > 32 && d_codeword[i+j] < 128)
+                    printf("%c ", d_codeword[i+j]);
+                else
+                    printf(". ");
+            }
+            printf("\n");
+        }
+    }
+
+    int ngham_decoder_impl::work(int noutput_items, gr_vector_const_void_star &input_items, gr_vector_void_star &output_items) {
         const uint8_t *in = (const uint8_t *) input_items[0];
-
-        // count input items
         int count = 0;
-
-        uint32_t wrong_bits, nwrong;
-
+        uint32_t nwrong;
         while (count < noutput_items) {
 
             switch (d_decoder_state) {
 
                 case STATE_SYNC_SEARCH:
-
-                    // shift in new data bit
                     d_data_reg = (d_data_reg << 1) | ((in[count++]) & 0x01);
-
-                    wrong_bits = 0;
-                    nwrong = d_threshold + 1; 
-
-                    // compare data register to sync word
-                    wrong_bits = (d_data_reg ^ sync_word);
-                    volk_32u_popcnt(&nwrong, wrong_bits);
-
-                    // go to next state if sync word is found
+                    nwrong = correlate_32u(d_data_reg, sync_word, 0xffffffff);
                     if (nwrong <= d_threshold) {
                         enter_load_size_tag();
                     }
-                  
                     break;
+
                 case STATE_LOAD_SIZE_TAG:
-                    
-                    // shift in new data bit
                     d_data_reg = (d_data_reg << 1) | ((in[count++]) & 0x01);
                     d_bit_counter++;
-
-                    // go to next state when the whole size tag is in the data register
                     if (d_bit_counter == NGHAM_SIZE_TAG_SIZE * 8) {
                         enter_size_tag_compare();
                     }
                     break;
+
                 case STATE_SIZE_TAG_COMPARE:
-
-                    // check data register against all size tags
                     for (d_size_index=0; d_size_index<NGHAM_SIZES; d_size_index++) {
-                        
-                        wrong_bits = 0;
-                        nwrong  = d_threshold + 1;
-                        wrong_bits = ((d_data_reg & 0xffffff) ^ size_tag[d_size_index]);
-
-                        volk_32u_popcnt(&nwrong, wrong_bits);
-
+                        nwrong = correlate_32u(d_data_reg, size_tag[d_size_index], 0x00ffffff);
                         if (d_verbose)
-                            printf("\tcomparing %x and %x, %i bits are different\n", d_data_reg & 0xffffff, size_tag[d_size_index], nwrong);
-
+                            printf("\tcomparing %x and %x, %i bits are different\n", d_data_reg & 0x00ffffff, size_tag[d_size_index], nwrong);
                         if (nwrong <= d_threshold) {
                             enter_codeword();
                             break;
                         }
                     }
-
                     // size tag was not found TODO try all sizes???
                     if (d_size_index == NGHAM_SIZES)
                         enter_sync_search();
@@ -231,83 +267,19 @@ namespace gr {
                     if (d_codeword_length == NGHAM_CODEWORD_SIZE[d_size_index]) {
                         if (d_verbose)
                             printf("\tloaded codeword of length %i\n", d_codeword_length);
-                        enter_decode();
-                    }
-                    break;
-                case STATE_DECODE:
-                
-                    // descramble data
-                    if (d_descramble) {
-                        for (int i=0; i<d_codeword_length; i++) d_codeword[i] ^= ccsds_poly[i];
-                    }
-
-                    // decode parity data
-                    int nerrors = 0;
-                    if (d_rs_decode) {
-                        nerrors = decode_rs_char(&rs_cb_rx[d_size_index], d_codeword, 0, 0);
-                    }
-
-                    // check if packet was decoded correctly
-                    if (nerrors == -1) {
-                        if (d_verbose)
-                            printf("\tcould not decode packet\n");
-                        enter_sync_search();
-                        break;
-                    } else {
-                        if (d_verbose)
-                            printf("\tdecoded packet with %i errors\n", nerrors);
-                    }
-
-                    // calculate payload length
-                    int pl_len = NGHAM_PL_SIZE[d_size_index] - (d_codeword[0] & 0x1f);
-
-                    // calculate crc
-                    unsigned int crc = 0xffff;
-                    for (int i=0; i<pl_len+1; i++){
-                        crc = ((crc >> 8) & 0xff) ^ crc_ccitt_table[(crc ^ d_codeword[i]) & 0xff];
-                    }
-                    crc ^= 0xffff;
-
-                    // check crc
-                    if ( crc != ( (d_codeword[pl_len+1]<<8) | d_codeword[pl_len+2] ) ) {
-                        if (d_verbose)
-                            printf("crc failed\n");
-                        enter_sync_search();
-                        break;
-                    }
-
-                    // post payload data to message queue
-                    pmt::pmt_t pdu(pmt::cons(pmt::PMT_NIL, pmt::make_blob(d_codeword+1, pl_len)));
-                    message_port_pub(pmt::mp("out"), pdu);
-                    
-                    d_num_packets++;
-                    // print codeword if tests were passed
-                    if (d_printing) {
                         
-                        printf("number of packets received %i\n", d_num_packets);
-                        printf("decoded data:\n");
+                        bool success = decode_packet();
+                        if (success) {
+                            // post payload data to message queue
+                            pmt::pmt_t pdu(pmt::cons(pmt::PMT_NIL, pmt::make_blob(d_codeword+1, d_payload_len)));
+                            message_port_pub(pmt::mp("out"), pdu);
 
-                        for (int i=0; i<d_codeword_length; i+=8) {
-                            printf("\t");
-                            for (int j=0; j<8; j++) {
-                                if (i+j<d_codeword_length)
-                                    printf("0x%x%x ", (d_codeword[i+j] >> 4) & 0x0f, d_codeword[i+j] & 0x0f);
-                                else
-                                    printf("\t");
-                            }
-                            printf("\t");
-                            for (int j=0; j<8 && i+j<d_codeword_length; j++) {
-                                if (d_codeword[i+j] > 32 && d_codeword[i+j] < 128)
-                                    printf("%c ", d_codeword[i+j]);
-                                else
-                                    printf(". ");
-                            }
-                            printf("\n");
+                            if (d_printing)
+                                print_packet();
                         }
+                        enter_sync_search();
+                        break;
                     }
-
-                    enter_sync_search();
-                    break;
             }
       }
 

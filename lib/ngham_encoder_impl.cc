@@ -23,6 +23,7 @@
 #endif
 
 #include <stdio.h>
+#include <stdint.h>
 #include <iostream>
 #include <string>
 #include <gnuradio/io_signature.h>
@@ -61,8 +62,8 @@ namespace gr {
      */
     ngham_encoder_impl::ngham_encoder_impl(const std::string& len_tag_key, bool rs_encode, bool scramble, bool pad_for_usrp, bool printing)
       : gr::tagged_stream_block("ngham_encoder",
-              gr::io_signature::make(1, 1, sizeof(unsigned char)),
-              gr::io_signature::make(1, 1, sizeof(unsigned char)), 
+              gr::io_signature::make(1, 1, sizeof(uint8_t)),
+              gr::io_signature::make(1, 1, sizeof(uint8_t)), 
               len_tag_key),
       d_rs_encode(rs_encode),
       d_scramble(scramble),
@@ -136,16 +137,13 @@ namespace gr {
                        gr_vector_void_star &output_items)
     {
       // pointer to input elements
-      const unsigned char *in = (const unsigned char *) input_items[0];
+      const uint8_t *in = (const uint8_t *) input_items[0];
 
       // pointer to output elements
-      unsigned char *out = (unsigned char *) output_items[0];
+      uint8_t *out = (uint8_t *) output_items[0];
       
       // initialize number of output items
-      noutput_items = 0;
-
-      unsigned char d[NGHAM_MAX_TOTAL_SIZE];
-      int d_len = 0;
+      uint8_t count = 0;
 
       // calculate size index
       const int pl_len = ninput_items[0];
@@ -156,35 +154,35 @@ namespace gr {
       int codeword_start = NGHAM_PREAMBLE_SIZE + NGHAM_SYNC_SIZE + NGHAM_SIZE_TAG_SIZE;
 
       // insert preamble, sync and size tag
-      for (int i=0; i<NGHAM_PREAMBLE_SIZE; i++) d[d_len++] = NGHAM_PREAMBLE[i];
-      for (int i=0; i<NGHAM_SYNC_SIZE; i++)     d[d_len++] = NGHAM_SYNC[i];
-      for (int i=0; i<NGHAM_SIZE_TAG_SIZE; i++) d[d_len++] = NGHAM_SIZE_TAG[size_index][i];
+      for (int i=0; i<NGHAM_PREAMBLE_SIZE; i++) out[count++] = NGHAM_PREAMBLE[i];
+      for (int i=0; i<NGHAM_SYNC_SIZE; i++)     out[count++] = NGHAM_SYNC[i];
+      for (int i=0; i<NGHAM_SIZE_TAG_SIZE; i++) out[count++] = NGHAM_SIZE_TAG[size_index][i];
       
       // calculate and insert padding size and ngham flags
-      unsigned char padding_size = (NGHAM_PL_SIZE[size_index] - pl_len) & 0x1f; // 0001 1111
-      unsigned char ngham_flags = (0x00 << 5) & 0xe0;// TODO implement NGHAM flags
-      d[d_len++] = (ngham_flags | padding_size);
+      uint8_t padding_size = (NGHAM_PL_SIZE[size_index] - pl_len) & 0x1f; // 0001 1111
+      uint8_t ngham_flags = (0x00 << 5) & 0xe0;// TODO implement NGHAM flags
+      out[count++] = (ngham_flags | padding_size);
 
       // insert input elements
-      for (int i=0; i<pl_len; i++) d[d_len++] = in[i];
+      for (int i=0; i<pl_len; i++) out[count++] = in[i];
 
       // calculate and insert crc
-      unsigned int crc = 0xffff;
+      uint16_t crc = 0xffff;
       for (int i=0; i<pl_len+1; i++){
-        crc = ((crc >> 8) & 0xff) ^ crc_ccitt_table[(crc ^ d[codeword_start+i]) & 0xff];
+        crc = ((crc >> 8) & 0xff) ^ crc_ccitt_table[(crc ^ out[codeword_start+i]) & 0xff];
       }
       crc ^= 0xffff;
 
-      d[d_len++] = (crc >> 8) & 0xff;
-      d[d_len++] = crc & 0xff;
+      out[count++] = (crc >> 8) & 0xff;
+      out[count++] = crc & 0xff;
 
       // insert padding
-      for (int i=0; i<padding_size; i++) d[d_len++] = 0;
+      for (int i=0; i<padding_size; i++) out[count++] = 0;
 
       // encode parity data and update packet length
       if (d_rs_encode) {
-        encode_rs_char(&rs_cb[size_index], &d[codeword_start], &d[d_len]);
-        d_len += NGHAM_PAR_SIZE[size_index];
+        encode_rs_char(&rs_cb[size_index], &out[codeword_start], &out[count]);
+        count += NGHAM_PAR_SIZE[size_index];
       }
 
       d_num_packets++;
@@ -194,18 +192,18 @@ namespace gr {
           printf("number of packets sent %i\n", d_num_packets);
           printf("encoded data:\n");
 
-          for (int i=codeword_start; i<d_len; i+=8) {
+          for (int i=codeword_start; i<count; i+=8) {
               printf("\t");
               for (int j=0; j<8; j++) {
-              if (i+j<d_len)
-                  printf("0x%x%x ", (d[i+j] >> 4) & 0x0f, d[i+j] & 0x0f);
+              if (i+j<count)
+                  printf("0x%x%x ", (out[i+j] >> 4) & 0x0f, out[i+j] & 0x0f);
               else
                   printf("\t");
               }
               printf("\t");
-              for (int j=0; j<8 && i+j<d_len; j++) {
-                  if (d[i+j] > 32 && d[i+j] < 128)
-                      printf("%c ", d[i+j]);
+              for (int j=0; j<8 && i+j<count; j++) {
+                  if (out[i+j] > 32 && out[i+j] < 128)
+                      printf("%c ", out[i+j]);
                   else
                       printf(". ");
                   }
@@ -215,22 +213,19 @@ namespace gr {
 
       // scramble data
       if (d_scramble) 
-        for (int i=0; i<d_len; i++) d[codeword_start + i] ^= ccsds_poly[i];
-
+        for (int i=0; i<count; i++) out[codeword_start + i] ^= ccsds_poly[i];
 
       // make sure packet is multiple of 128 bytes
       if (d_pad_for_usrp) {
         int total_padded_length = 128;
-        while (d_len > total_padded_length) total_padded_length += 128;
+        while (count > total_padded_length) total_padded_length += 128;
 
-        int usrp_padding_size = total_padded_length - (d_len % 128);
-        for (int i=0; i<usrp_padding_size; i++) d[d_len++] = 0;
+        int usrp_padding_size = total_padded_length - (count % 128);
+        for (int i=0; i<usrp_padding_size; i++) out[count++] = 0;
       }
 
-      memcpy(out, d, d_len);
-
       // tell runtime system how many output items we produced.
-      noutput_items = d_len;
+      noutput_items = count;
       return noutput_items;
     }
 

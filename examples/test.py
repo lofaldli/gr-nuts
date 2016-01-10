@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Test
-# Generated: Fri Dec 11 10:14:20 2015
+# Generated: Sun Jan 10 23:34:08 2016
 ##################################################
 
 if __name__ == '__main__':
@@ -17,7 +17,6 @@ if __name__ == '__main__':
             print "Warning: failed to XInitThreads()"
 
 from PyQt4 import Qt
-from baz import baudline
 from gnuradio import analog
 from gnuradio import blocks
 from gnuradio import digital
@@ -228,8 +227,8 @@ class test(gr.top_block, Qt.QWidget):
         self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.pyqwidget(), Qt.QWidget)
         self.top_grid_layout.addWidget(self._qtgui_time_sink_x_0_win, 0,0,1,1)
         self.nuts_ngham_encoder_0 = nuts.ngham_encoder("packet_len", True, True, True, False)
-        self.nuts_ngham_decoder_0 = nuts.ngham_decoder("packet_len", 5, True, True, False)
-        self.nuts_ngham_correlator_0 = nuts.ngham_correlator("packet_len", 0)
+        self.nuts_ngham_decoder_0 = nuts.ngham_decoder("packet_len", 3, True, True, True, True)
+        self.nuts_ngham_correlator_0 = nuts.ngham_correlator("packet_len", 0, False)
         self.digital_gmsk_mod_0 = digital.gmsk_mod(
         	samples_per_symbol=sps,
         	bt=0.35,
@@ -254,34 +253,12 @@ class test(gr.top_block, Qt.QWidget):
         self.blocks_char_to_float_0_0 = blocks.char_to_float(1, 1)
         self.blocks_char_to_float_0 = blocks.char_to_float(1, 1)
         self.blocks_add_xx_0 = blocks.add_vcc(1)
-        self.baudline_sink_0_0 = baudline.baudline_sink(
-        		fmt='le32f',
-        		item_size=8,
-        		is_complex=True,
-        		channels=2,
-        		sample_rate=samp_rate,
-        		aggregate_channel_count=1,
-        		baseband_freq=0,
-        		decimation=1,
-        		scale=1.0,
-        		overlap=0,
-        		slide_size=0,
-        		fft_size=0,
-        		x_slip=0,
-        		jump_step=0,
-        		mode='pipe',
-        		buffered=True,
-        		kill_on_del=True,
-        		memory=0,
-        		peak_hold=False,
-        		**{})
         self.analog_noise_source_x_0 = analog.noise_source_c(analog.GR_GAUSSIAN, noise, 0)
 
         ##################################################
         # Connections
         ##################################################
         self.connect((self.analog_noise_source_x_0, 0), (self.blocks_add_xx_0, 0))    
-        self.connect((self.blocks_add_xx_0, 0), (self.baudline_sink_0_0, 0))    
         self.connect((self.blocks_add_xx_0, 0), (self.rational_resampler_xxx_0, 0))    
         self.connect((self.blocks_char_to_float_0, 0), (self.qtgui_time_sink_x_0, 0))    
         self.connect((self.blocks_char_to_float_0_0, 0), (self.qtgui_time_sink_x_0_0, 0))    

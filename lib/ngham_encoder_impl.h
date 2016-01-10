@@ -22,6 +22,7 @@
 #define INCLUDED_NUTS_NGHAM_ENCODER_IMPL_H
 
 #include <nuts/ngham_encoder.h>
+#include <stdint.h>
 
 namespace gr {
   namespace nuts {
@@ -33,7 +34,7 @@ namespace gr {
       bool d_scramble;
       bool d_pad_for_usrp;
       bool d_printing;
-      int d_num_packets;
+      uint8_t d_num_packets;
       
 
      protected:
