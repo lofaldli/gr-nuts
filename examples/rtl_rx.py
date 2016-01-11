@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Rtl Rx
-# Generated: Tue Dec 15 11:46:05 2015
+# Generated: Mon Jan 11 22:53:47 2016
 ##################################################
 
 if __name__ == '__main__':
@@ -415,8 +415,8 @@ class rtl_rx(gr.top_block, Qt.QWidget):
 
     def set_samples_per_symbol(self, samples_per_symbol):
         self.samples_per_symbol = samples_per_symbol
-        self.qtgui_time_sink_x_1.set_samp_rate(self.ngham_rate*self.samples_per_symbol)
         self.digital_clock_recovery_mm_xx_0.set_omega(self.samples_per_symbol*(1+0.0))
+        self.qtgui_time_sink_x_1.set_samp_rate(self.ngham_rate*self.samples_per_symbol)
 
     def get_samp_rate(self):
         return self.samp_rate
