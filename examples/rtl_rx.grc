@@ -765,10 +765,6 @@
       <value>nuts_ngham_decoder_0</value>
     </param>
     <param>
-      <key>len_tag_key</key>
-      <value>packet_len</value>
-    </param>
-    <param>
       <key>maxoutbuf</key>
       <value>0</value>
     </param>
@@ -786,11 +782,11 @@
     </param>
     <param>
       <key>threshold</key>
-      <value>0</value>
+      <value>5</value>
     </param>
     <param>
       <key>verbose</key>
-      <value>False</value>
+      <value>True</value>
     </param>
   </block>
   <block>

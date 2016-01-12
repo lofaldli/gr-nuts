@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Rtl Rx
-# Generated: Mon Jan 11 22:53:47 2016
+# Generated: Tue Jan 12 14:30:51 2016
 ##################################################
 
 if __name__ == '__main__':
@@ -346,7 +346,7 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         
         self._qtgui_const_sink_x_0_win = sip.wrapinstance(self.qtgui_const_sink_x_0.pyqwidget(), Qt.QWidget)
         self.qtgui_layout_4.addWidget(self._qtgui_const_sink_x_0_win)
-        self.nuts_ngham_decoder_0 = nuts.ngham_decoder("packet_len", 0, True, True, True, False)
+        self.nuts_ngham_decoder_0 = nuts.ngham_decoder("packet_len", 5, True, True, True, True)
         self.nuts_ngham_correlator_0 = nuts.ngham_correlator("packet_len", 0, False)
         self.freq_xlating_fir_filter_xxx_0_0 = filter.freq_xlating_fir_filter_ccc(8, (firdes.low_pass(1, samp_rate, samp_rate/2, 1000)), tuner, samp_rate)
         self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_ccc(xlat_decim, (firdes.low_pass(1, samp_rate, xlat_bandwidth/2, 1000)), tuner, samp_rate)
