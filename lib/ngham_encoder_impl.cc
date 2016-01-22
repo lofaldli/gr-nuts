@@ -1,17 +1,17 @@
 /* -*- c++ -*- */
-/* 
+/*
  * Copyright 2015 André Løfaldli.
- * 
+ *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3, or (at your option)
  * any later version.
- * 
+ *
  * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this software; see the file COPYING.  If not, write to
  * the Free Software Foundation, Inc., 51 Franklin Street,
@@ -35,18 +35,6 @@
 
 #include "ngham.h"
 
-#define DEBUG
-
-#ifdef DEBUG
-#define PRINT(str) (printf(str))
-#define PRINT1(str,arg) (printf(str,arg))
-#define PRINT2(str,arg,arg1) (printf(str,arg,arg1))
-#else
-#define PRINT(str)
-#define PRINT1(str,arg)
-#define PRINT2(str,arg,arg1)
-#endif
-
 namespace gr {
   namespace nuts {
 
@@ -62,26 +50,29 @@ namespace gr {
      */
     ngham_encoder_impl::ngham_encoder_impl(const std::string& len_tag_key, bool rs_encode, bool scramble, bool pad_for_usrp, bool printing)
       : gr::tagged_stream_block("ngham_encoder",
+              gr::io_signature::make(0, 0, 0),
               gr::io_signature::make(1, 1, sizeof(uint8_t)),
-              gr::io_signature::make(1, 1, sizeof(uint8_t)), 
               len_tag_key),
       d_rs_encode(rs_encode),
       d_scramble(scramble),
       d_pad_for_usrp(pad_for_usrp),
       d_printing(printing),
-      d_num_packets(0)
+      d_num_packets(0),
+      d_curr_len(0)
     {
+      message_port_register_in(PDU_PORT_ID);
+
       // initialize rs tables
       struct rs* rs_32 = (struct rs*)init_rs_char(8, 0x187, 112, 11, 32, 0);
-      memcpy( (void*)&rs_cb[6], (void*)rs_32, sizeof(rs_cb[6]) );     
-      memcpy( (void*)&rs_cb[5], (void*)rs_32, sizeof(rs_cb[5]) );     
-      memcpy( (void*)&rs_cb[4], (void*)rs_32, sizeof(rs_cb[4]) );     
-      memcpy( (void*)&rs_cb[3], (void*)rs_32, sizeof(rs_cb[3]) );     
-    
+      memcpy( (void*)&rs_cb[6], (void*)rs_32, sizeof(rs_cb[6]) ); 
+      memcpy( (void*)&rs_cb[5], (void*)rs_32, sizeof(rs_cb[5]) );
+      memcpy( (void*)&rs_cb[4], (void*)rs_32, sizeof(rs_cb[4]) );
+      memcpy( (void*)&rs_cb[3], (void*)rs_32, sizeof(rs_cb[3]) );
+ 
       struct rs* rs_16 = (struct rs*)init_rs_char(8, 0x187, 112, 11, 16, 0);
-      memcpy( (void*)&rs_cb[2], (void*)rs_16, sizeof(rs_cb[2]) );     
-      memcpy( (void*)&rs_cb[1], (void*)rs_16, sizeof(rs_cb[1]) );     
-      memcpy( (void*)&rs_cb[0], (void*)rs_16, sizeof(rs_cb[0]) );     
+      memcpy( (void*)&rs_cb[2], (void*)rs_16, sizeof(rs_cb[2]) );
+      memcpy( (void*)&rs_cb[1], (void*)rs_16, sizeof(rs_cb[1]) );
+      memcpy( (void*)&rs_cb[0], (void*)rs_16, sizeof(rs_cb[0]) );
 
       rs_cb[6].pad = 255-NGHAM_CODEWORD_SIZE[6];
       rs_cb[5].pad = 255-NGHAM_CODEWORD_SIZE[5];
@@ -112,8 +103,24 @@ namespace gr {
     int
     ngham_encoder_impl::calculate_output_stream_length(const gr_vector_int &ninput_items)
     {
+      if (d_curr_len == 0) {
+        // NOTE: this part is copied from gr-blocks/lib/pdu_to_tagged_stream_impl.cc 
+        pmt::pmt_t msg(delete_head_blocking(PDU_PORT_ID, 100));
+        if (msg.get() == NULL) {
+          return 0;
+        }
+
+        if (!pmt::is_pair(msg))
+          throw std::runtime_error("received a malformed pdu message");
+
+        d_curr_meta = pmt::car(msg);
+        d_curr_vect = pmt::cdr(msg);
+        d_curr_len = pmt::length(d_curr_vect);
+      }
+
+      // calculate total packet length based on payload length
       int header_size = NGHAM_PREAMBLE_SIZE + NGHAM_SYNC_SIZE + NGHAM_SIZE_TAG_SIZE;
-      const int pl_len = ninput_items[0];
+      const int pl_len = d_curr_len;
 
       int size_index = 0;
       while (pl_len > NGHAM_PL_SIZE[size_index]) size_index++;
@@ -126,6 +133,7 @@ namespace gr {
 
         noutput_items = total_padded_length;
       }
+      printf();
 
       return noutput_items;
     }
@@ -136,17 +144,43 @@ namespace gr {
                        gr_vector_const_void_star &input_items,
                        gr_vector_void_star &output_items)
     {
-      // pointer to input elements
-      const uint8_t *in = (const uint8_t *) input_items[0];
-
       // pointer to output elements
       uint8_t *out = (uint8_t *) output_items[0];
+
+      // ==========================
+      // NOTE: this part is also from gr-blocks/lib/pdu_to_tagged_stream_impl.cc
+      if (d_curr_len == 0) {
+          return 0;
+      }
+      // work() should only be called if the current PDU fits entirely
+      // into the output buffer.
+      assert(noutput_items >= d_curr_len);
+          
+      // Copy vector output
+      size_t nout = d_curr_len;
+      size_t io(0);
+      const uint8_t* in = (const uint8_t*) uniform_vector_elements(d_curr_vect, io);
+
+      // Copy tags
+      if (!pmt::eq(d_curr_meta, pmt::PMT_NIL) ) {
+        printf("copying tags\n");
+        pmt::pmt_t klist(pmt::dict_keys(d_curr_meta));
+        for (size_t i = 0; i < pmt::length(klist); i++) {
+          pmt::pmt_t k(pmt::nth(i, klist));
+          pmt::pmt_t v(pmt::dict_ref(d_curr_meta, k, pmt::PMT_NIL));
+          add_item_tag(0, nitems_written(0), k, v, alias_pmt());
+        }
+      }
+
+      const int pl_len = d_curr_len; 
+      // Reset state
+      d_curr_len = 0;
+      //==============================
       
       // initialize number of output items
       uint8_t count = 0;
 
       // calculate size index
-      const int pl_len = ninput_items[0];
       int size_index = 0;
       while (pl_len > NGHAM_PL_SIZE[size_index]) size_index++;
 
@@ -157,7 +191,7 @@ namespace gr {
       for (int i=0; i<NGHAM_PREAMBLE_SIZE; i++) out[count++] = NGHAM_PREAMBLE[i];
       for (int i=0; i<NGHAM_SYNC_SIZE; i++)     out[count++] = NGHAM_SYNC[i];
       for (int i=0; i<NGHAM_SIZE_TAG_SIZE; i++) out[count++] = NGHAM_SIZE_TAG[size_index][i];
-      
+ 
       // calculate and insert padding size and ngham flags
       uint8_t padding_size = (NGHAM_PL_SIZE[size_index] - pl_len) & 0x1f; // 0001 1111
       uint8_t ngham_flags = (0x00 << 5) & 0xe0;// TODO implement NGHAM flags
@@ -172,7 +206,6 @@ namespace gr {
         crc = ((crc >> 8) & 0xff) ^ crc_ccitt_table[(crc ^ out[codeword_start+i]) & 0xff];
       }
       crc ^= 0xffff;
-
       out[count++] = (crc >> 8) & 0xff;
       out[count++] = crc & 0xff;
 
@@ -188,7 +221,7 @@ namespace gr {
       d_num_packets++;
       // print packet before scrambling
       if (d_printing) {
-                      
+ 
           printf("number of packets sent %i\n", d_num_packets);
           printf("encoded data:\n");
 
@@ -212,7 +245,7 @@ namespace gr {
            }
 
       // scramble data
-      if (d_scramble) 
+      if (d_scramble)
         for (int i=0; i<count; i++) out[codeword_start + i] ^= ccsds_poly[i];
 
       // make sure packet is multiple of 128 bytes
@@ -225,8 +258,7 @@ namespace gr {
       }
 
       // tell runtime system how many output items we produced.
-      noutput_items = count;
-      return noutput_items;
+      return count;
     }
 
   } /* namespace nuts */

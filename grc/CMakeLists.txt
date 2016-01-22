@@ -19,5 +19,6 @@
 install(FILES
     nuts_ngham_encoder.xml
     nuts_ngham_correlator.xml
-    nuts_ngham_decoder.xml DESTINATION share/gnuradio/grc/blocks
+    nuts_ngham_decoder.xml
+    DESTINATION share/gnuradio/grc/blocks
 )

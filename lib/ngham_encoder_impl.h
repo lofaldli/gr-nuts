@@ -24,6 +24,8 @@
 #include <nuts/ngham_encoder.h>
 #include <stdint.h>
 
+#define PDU_PORT_ID pmt::mp("in")
+
 namespace gr {
   namespace nuts {
 
@@ -34,8 +36,14 @@ namespace gr {
       bool d_scramble;
       bool d_pad_for_usrp;
       bool d_printing;
+
       uint8_t d_num_packets;
-      
+
+      //const size_t         d_itemsize;
+      //pdu::vector_type     d_type;
+      pmt::pmt_t           d_curr_meta;
+      pmt::pmt_t           d_curr_vect;
+      size_t               d_curr_len;
 
      protected:
       int calculate_output_stream_length(const gr_vector_int &ninput_items);

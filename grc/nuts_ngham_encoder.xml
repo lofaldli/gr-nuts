@@ -69,7 +69,7 @@
   </param>
   <sink>
     <name>in</name>
-    <type>byte</type>
+    <type>message</type>
   </sink>
   <source>
     <name>out</name>
