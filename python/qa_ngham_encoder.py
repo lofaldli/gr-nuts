@@ -31,33 +31,8 @@ class qa_ngham_encoder (gr_unittest.TestCase):
     def tearDown (self):
         self.tb = None
 
-    def test_001_scramble (self):
-
-        src_data = ( ord("t"),ord("e"),ord("s"),ord("t"),)
-
-        src = blocks.vector_source_b(src_data)
-        s2ts = blocks.stream_to_tagged_stream(gr.sizeof_char, 1, len(src_data), self.tsb_key)
-
-        enc = nuts.ngham_encoder(len_tag_key=self.tsb_key, scramble=False)
-
-        sink = blocks.tsb_vector_sink_b(tsb_key=self.tsb_key)
-
-        self.tb.connect(src, s2ts, enc, sink)
-
-        self.tb.run ()
-
-        sink_data = sink.data()[0]
-
-        print "=========================="
-        for j in range(0,len(sink_data),4):
-            line = "%i: \t" % j
-            for k in range(0,4):
-                if j+k < len(sink_data):
-                    line += "%i\t" % sink_data[j+k]
-                else:
-                    line += "    \t"
-            print line
-
+    def test_001 (self):
+        pass
 
 
 if __name__ == '__main__':

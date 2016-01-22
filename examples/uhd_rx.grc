@@ -428,7 +428,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(696, 499)</value>
+      <value>(584, 427)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -456,6 +456,65 @@
     </param>
   </block>
   <block>
+    <key>blocks_socket_pdu</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(992, 155)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>host</key>
+      <value>127.0.0.1</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_socket_pdu_0</value>
+    </param>
+    <param>
+      <key>mtu</key>
+      <value>10000</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>port</key>
+      <value>5006</value>
+    </param>
+    <param>
+      <key>tcp_no_delay</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>"UDP_CLIENT"</value>
+    </param>
+  </block>
+  <block>
     <key>digital_correlate_access_code_tag_bb</key>
     <param>
       <key>access_code</key>
@@ -479,7 +538,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(632, 339)</value>
+      <value>(520, 267)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -530,7 +589,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(640, 419)</value>
+      <value>(528, 347)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -581,7 +640,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(480, 147)</value>
+      <value>(520, 147)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -766,7 +825,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(688, 139)</value>
+      <value>(800, 147)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1235,7 +1294,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(448, 291)</value>
+      <value>(288, 267)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -1594,7 +1653,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(688, 547)</value>
+      <value>(576, 475)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -3331,6 +3390,12 @@
     <sink_block_id>qtgui_waterfall_sink_x_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>nuts_ngham_decoder_0</source_block_id>
+    <sink_block_id>blocks_socket_pdu_0</sink_block_id>
+    <source_key>out</source_key>
+    <sink_key>pdus</sink_key>
   </connection>
   <connection>
     <source_block_id>rational_resampler_xxx_0</source_block_id>
