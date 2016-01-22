@@ -133,7 +133,6 @@ namespace gr {
 
         noutput_items = total_padded_length;
       }
-      printf();
 
       return noutput_items;
     }
