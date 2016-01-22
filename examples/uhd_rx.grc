@@ -151,7 +151,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1040, 11)</value>
+      <value>(864, 11)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -453,37 +453,6 @@
     <param>
       <key>vlen</key>
       <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_message_debug</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(904, 305)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>180</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_message_debug_0</value>
     </param>
   </block>
   <block>
@@ -808,10 +777,6 @@
       <value>nuts_ngham_decoder_0</value>
     </param>
     <param>
-      <key>len_tag_key</key>
-      <value>packet_len</value>
-    </param>
-    <param>
       <key>maxoutbuf</key>
       <value>0</value>
     </param>
@@ -852,7 +817,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(896, 11)</value>
+      <value>(728, 11)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -3366,12 +3331,6 @@
     <sink_block_id>qtgui_waterfall_sink_x_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>nuts_ngham_decoder_0</source_block_id>
-    <sink_block_id>blocks_message_debug_0</sink_block_id>
-    <source_key>out</source_key>
-    <sink_key>print</sink_key>
   </connection>
   <connection>
     <source_block_id>rational_resampler_xxx_0</source_block_id>
