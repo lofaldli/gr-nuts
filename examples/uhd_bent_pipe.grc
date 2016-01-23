@@ -756,7 +756,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(808, 275)</value>
+      <value>(816, 283)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -777,10 +777,6 @@
     <param>
       <key>minoutbuf</key>
       <value>0</value>
-    </param>
-    <param>
-      <key>pad_for_usrp</key>
-      <value>False</value>
     </param>
     <param>
       <key>printing</key>

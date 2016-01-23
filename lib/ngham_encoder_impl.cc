@@ -64,11 +64,11 @@ namespace gr {
 
       // initialize rs tables
       struct rs* rs_32 = (struct rs*)init_rs_char(8, 0x187, 112, 11, 32, 0);
-      memcpy( (void*)&rs_cb[6], (void*)rs_32, sizeof(rs_cb[6]) ); 
+      memcpy( (void*)&rs_cb[6], (void*)rs_32, sizeof(rs_cb[6]) );
       memcpy( (void*)&rs_cb[5], (void*)rs_32, sizeof(rs_cb[5]) );
       memcpy( (void*)&rs_cb[4], (void*)rs_32, sizeof(rs_cb[4]) );
       memcpy( (void*)&rs_cb[3], (void*)rs_32, sizeof(rs_cb[3]) );
- 
+
       struct rs* rs_16 = (struct rs*)init_rs_char(8, 0x187, 112, 11, 16, 0);
       memcpy( (void*)&rs_cb[2], (void*)rs_16, sizeof(rs_cb[2]) );
       memcpy( (void*)&rs_cb[1], (void*)rs_16, sizeof(rs_cb[1]) );
@@ -104,7 +104,7 @@ namespace gr {
     ngham_encoder_impl::calculate_output_stream_length(const gr_vector_int &ninput_items)
     {
       if (d_curr_len == 0) {
-        // NOTE: this part is copied from gr-blocks/lib/pdu_to_tagged_stream_impl.cc 
+        // NOTE this part is copied from gr-blocks/lib/pdu_to_tagged_stream_impl.cc
         pmt::pmt_t msg(delete_head_blocking(PDU_PORT_ID, 100));
         if (msg.get() == NULL) {
           return 0;
@@ -146,15 +146,14 @@ namespace gr {
       // pointer to output elements
       uint8_t *out = (uint8_t *) output_items[0];
 
-      // ==========================
-      // NOTE: this part is also from gr-blocks/lib/pdu_to_tagged_stream_impl.cc
+      // NOTE this part is also from gr-blocks/lib/pdu_to_tagged_stream_impl.cc
       if (d_curr_len == 0) {
           return 0;
       }
       // work() should only be called if the current PDU fits entirely
       // into the output buffer.
       assert(noutput_items >= d_curr_len);
-          
+
       // Copy vector output
       size_t nout = d_curr_len;
       size_t io(0);
@@ -171,13 +170,12 @@ namespace gr {
         }
       }
 
-      const int pl_len = d_curr_len; 
+      const int pl_len = d_curr_len;
       // Reset state
       d_curr_len = 0;
-      //==============================
-      
+
       // initialize number of output items
-      uint8_t count = 0;
+      uint16_t count = 0;
 
       // calculate size index
       int size_index = 0;
@@ -190,7 +188,7 @@ namespace gr {
       for (int i=0; i<NGHAM_PREAMBLE_SIZE; i++) out[count++] = NGHAM_PREAMBLE[i];
       for (int i=0; i<NGHAM_SYNC_SIZE; i++)     out[count++] = NGHAM_SYNC[i];
       for (int i=0; i<NGHAM_SIZE_TAG_SIZE; i++) out[count++] = NGHAM_SIZE_TAG[size_index][i];
- 
+
       // calculate and insert padding size and ngham flags
       uint8_t padding_size = (NGHAM_PL_SIZE[size_index] - pl_len) & 0x1f; // 0001 1111
       uint8_t ngham_flags = (0x00 << 5) & 0xe0;// TODO implement NGHAM flags
@@ -220,7 +218,7 @@ namespace gr {
       d_num_packets++;
       // print packet before scrambling
       if (d_printing) {
- 
+
           printf("number of packets sent %i\n", d_num_packets);
           printf("encoded data:\n");
 

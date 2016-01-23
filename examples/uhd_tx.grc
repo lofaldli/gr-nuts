@@ -105,10 +105,14 @@
     </param>
   </block>
   <block>
-    <key>variable</key>
+    <key>variable_qtgui_chooser</key>
     <param>
       <key>comment</key>
       <value></value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>145.98e6</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -116,7 +120,11 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(528, 11)</value>
+      <value>(520, 11)</value>
+    </param>
+    <param>
+      <key>gui_hint</key>
+      <value></value>
     </param>
     <param>
       <key>_rotation</key>
@@ -127,8 +135,72 @@
       <value>freq</value>
     </param>
     <param>
-      <key>value</key>
-      <value>int(145.98e6)</value>
+      <key>label0</key>
+      <value></value>
+    </param>
+    <param>
+      <key>label1</key>
+      <value></value>
+    </param>
+    <param>
+      <key>label2</key>
+      <value></value>
+    </param>
+    <param>
+      <key>label3</key>
+      <value></value>
+    </param>
+    <param>
+      <key>label4</key>
+      <value></value>
+    </param>
+    <param>
+      <key>label</key>
+      <value></value>
+    </param>
+    <param>
+      <key>labels</key>
+      <value>[]</value>
+    </param>
+    <param>
+      <key>num_opts</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>option0</key>
+      <value>145.98e6</value>
+    </param>
+    <param>
+      <key>option1</key>
+      <value>437.305e6</value>
+    </param>
+    <param>
+      <key>option2</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>option3</key>
+      <value>3</value>
+    </param>
+    <param>
+      <key>option4</key>
+      <value>4</value>
+    </param>
+    <param>
+      <key>options</key>
+      <value>[0, 1, 2]</value>
+    </param>
+    <param>
+      <key>orient</key>
+      <value>Qt.QVBoxLayout</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>real</value>
+    </param>
+    <param>
+      <key>widget</key>
+      <value>radio_buttons</value>
     </param>
   </block>
   <block>
@@ -143,7 +215,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>formatter</key>
@@ -151,7 +223,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(752, 11)</value>
+      <value>(760, 11)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -190,7 +262,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(632, 11)</value>
+      <value>(648, 11)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -249,7 +321,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>formatter</key>
@@ -257,7 +329,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(904, 11)</value>
+      <value>(912, 11)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -398,6 +470,105 @@
     </param>
   </block>
   <block>
+    <key>variable_qtgui_chooser</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1080, 11)</value>
+    </param>
+    <param>
+      <key>gui_hint</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>variable_qtgui_chooser_0</value>
+    </param>
+    <param>
+      <key>label0</key>
+      <value></value>
+    </param>
+    <param>
+      <key>label1</key>
+      <value></value>
+    </param>
+    <param>
+      <key>label2</key>
+      <value></value>
+    </param>
+    <param>
+      <key>label3</key>
+      <value></value>
+    </param>
+    <param>
+      <key>label4</key>
+      <value></value>
+    </param>
+    <param>
+      <key>label</key>
+      <value></value>
+    </param>
+    <param>
+      <key>labels</key>
+      <value>[]</value>
+    </param>
+    <param>
+      <key>num_opts</key>
+      <value>3</value>
+    </param>
+    <param>
+      <key>option0</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>option1</key>
+      <value>1</value>
+    </param>
+    <param>
+      <key>option2</key>
+      <value>2</value>
+    </param>
+    <param>
+      <key>option3</key>
+      <value>3</value>
+    </param>
+    <param>
+      <key>option4</key>
+      <value>4</value>
+    </param>
+    <param>
+      <key>options</key>
+      <value>[0, 1, 2]</value>
+    </param>
+    <param>
+      <key>orient</key>
+      <value>Qt.QVBoxLayout</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>int</value>
+    </param>
+    <param>
+      <key>widget</key>
+      <value>combo_box</value>
+    </param>
+  </block>
+  <block>
     <key>analog_random_source_x</key>
     <param>
       <key>alias</key>
@@ -413,7 +584,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -523,7 +694,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -566,11 +737,11 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(72, 99)</value>
+      <value>(56, 115)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -578,11 +749,11 @@
     </param>
     <param>
       <key>host</key>
-      <value>127.0.0.1</value>
+      <value>129.241.3.255</value>
     </param>
     <param>
       <key>id</key>
-      <value>blocks_socket_pdu_0</value>
+      <value>blocks_socket_pdu_0_0</value>
     </param>
     <param>
       <key>mtu</key>
@@ -625,7 +796,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -680,7 +851,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>1</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -727,7 +898,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -905,10 +1076,6 @@
     <param>
       <key>minoutbuf</key>
       <value>0</value>
-    </param>
-    <param>
-      <key>pad_for_usrp</key>
-      <value>True</value>
     </param>
     <param>
       <key>printing</key>
@@ -2770,7 +2937,7 @@
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -2934,7 +3101,7 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_socket_pdu_0</source_block_id>
+    <source_block_id>blocks_socket_pdu_0_0</source_block_id>
     <sink_block_id>nuts_ngham_encoder_0</sink_block_id>
     <source_key>pdus</source_key>
     <sink_key>in</sink_key>

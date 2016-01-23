@@ -4,7 +4,8 @@
   <key>nuts_ngham_encoder</key>
   <category>nuts</category>
   <import>import nuts</import>
-  <make>nuts.ngham_encoder($len_tag_key, $rs_encode, $scramble, $pad_for_usrp, $printing)</make>
+  <!--<make>nuts.ngham_encoder($len_tag_key, $rs_encode, $scramble, $pad_for_usrp, $printing)</make>-->
+  <make>nuts.ngham_encoder($len_tag_key, $rs_encode, $scramble, False, $printing)</make>
   <param>
     <name>Length Tag Key</name>
     <key>len_tag_key</key>
@@ -39,6 +40,7 @@
         <key>False</key>
     </option>
   </param>
+  <!--
   <param>
     <name>Pad for USRP</name>
     <key>pad_for_usrp</key>
@@ -53,6 +55,7 @@
         <key>False</key>
     </option>
   </param>
+  -->
   <param>
     <name>Print packets</name>
     <key>printing</key>

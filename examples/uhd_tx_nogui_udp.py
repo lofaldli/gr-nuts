@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Uhd Tx Nogui Udp
-# Generated: Fri Jan 22 16:09:46 2016
+# Generated: Sat Jan 23 16:32:36 2016
 ##################################################
 
 from gnuradio import blocks
@@ -28,9 +28,9 @@ class uhd_tx_nogui_udp(gr.top_block):
         # Variables
         ##################################################
         self.sps = sps = 10
-        self.samp_rate = samp_rate = 1000000
-        self.gain = gain = 30
-        self.freq = freq = int(145.98e6)
+        self.samp_rate = samp_rate = 500000
+        self.gain = gain = 0
+        self.freq = freq = 0*int(145.98e6) + int(437.305e6)
         self.data_rate = data_rate = 9600
 
         ##################################################
@@ -52,7 +52,7 @@ class uhd_tx_nogui_udp(gr.top_block):
                 taps=None,
                 fractional_bw=None,
         )
-        self.nuts_ngham_encoder_0 = nuts.ngham_encoder("packet_len", True, True, True, False)
+        self.nuts_ngham_encoder_0 = nuts.ngham_encoder("packet_len", True, True, False, True)
         self.digital_gmsk_mod_0 = digital.gmsk_mod(
         	samples_per_symbol=sps,
         	bt=0.35,

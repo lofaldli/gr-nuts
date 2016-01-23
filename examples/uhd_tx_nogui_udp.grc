@@ -128,7 +128,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>int(145.98e6)</value>
+      <value>0*int(145.98e6) + int(437.305e6)</value>
     </param>
   </block>
   <block>
@@ -155,7 +155,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>30</value>
+      <value>0</value>
     </param>
   </block>
   <block>
@@ -182,7 +182,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>1000000</value>
+      <value>500000</value>
     </param>
   </block>
   <block>
@@ -232,7 +232,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(32, 171)</value>
+      <value>(32, 115)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -295,7 +295,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(400, 187)</value>
+      <value>(408, 131)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -346,7 +346,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(192, 163)</value>
+      <value>(200, 115)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -369,12 +369,8 @@
       <value>0</value>
     </param>
     <param>
-      <key>pad_for_usrp</key>
-      <value>True</value>
-    </param>
-    <param>
       <key>printing</key>
-      <value>False</value>
+      <value>True</value>
     </param>
     <param>
       <key>rs_encode</key>
@@ -413,7 +409,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(568, 171)</value>
+      <value>(576, 115)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1116,7 +1112,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(792, 171)</value>
+      <value>(784, 115)</value>
     </param>
     <param>
       <key>_rotation</key>
