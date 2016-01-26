@@ -1,17 +1,17 @@
 /* -*- c++ -*- */
 /*
  * Copyright 2015 André Løfaldli.
- * 
+ *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3, or (at your option)
  * any later version.
- * 
+ *
  * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this software; see the file COPYING.  If not, write to
  * the Free Software Foundation, Inc., 51 Franklin Street,
@@ -77,11 +77,11 @@ namespace gr {
       for (int j=0; j<NGHAM_SYNC_SIZE; j++) {
           sync_word = (sync_word << 8) | (NGHAM_SYNC[j] & 0xff);
       }
-      
+
       // load size tags into array of 32 bit variables
       for (int size_index=0; size_index<NGHAM_SIZES; size_index++) {
           size_tag[size_index] = 0;
-          for (int j=0; j<NGHAM_SIZE_TAG_SIZE; j++) { 
+          for (int j=0; j<NGHAM_SIZE_TAG_SIZE; j++) {
               size_tag[size_index] = (size_tag[size_index] << 8) | (NGHAM_SIZE_TAG[size_index][j] & 0xff);
           }
       }
@@ -170,8 +170,8 @@ namespace gr {
             if (d_verbose)
                 printf("\tcould not decode reed solomon\n");
             return false;
-        } 
-        
+        }
+
         if (d_verbose)
             printf("\tdecoded reed solomon with %i errors\n", nerrors);
 
@@ -190,12 +190,12 @@ namespace gr {
                 printf("crc failed\n");
             return false;
         }
-        
+
         // packet was succesfully decoded
         d_num_packets++;
         return true;
     }
-    
+
     void ngham_decoder_impl::print_packet() {
         printf("number of packets received %i\n", d_num_packets);
         printf("decoded data:\n");
@@ -209,7 +209,7 @@ namespace gr {
             }
             printf("\t");
             for (int j=0; j<8 && i+j<d_codeword_length; j++) {
-                if (d_codeword[i+j] > 32 && d_codeword[i+j] < 128)
+                if (d_codeword[i+j] > 31 && d_codeword[i+j] < 127)
                     printf("%c ", d_codeword[i+j]);
                 else
                     printf(". ");
@@ -230,6 +230,8 @@ namespace gr {
                     d_data_reg = (d_data_reg << 1) | ((in[count++]) & 0x01);
                     nwrong = correlate_32u(d_data_reg, sync_word, 0xffffffff);
                     if (nwrong <= d_threshold) {
+                        if (d_verbose)
+                            printf("received sync word %x, %i bits are wrong\n", d_data_reg, nwrong);
                         enter_load_size_tag();
                     }
                     break;
@@ -267,7 +269,7 @@ namespace gr {
                     if (d_codeword_length == NGHAM_CODEWORD_SIZE[d_size_index]) {
                         if (d_verbose)
                             printf("\tloaded codeword of length %i\n", d_codeword_length);
-                        
+
                         bool success = decode_packet();
                         if (success) {
                             // post payload data to message queue

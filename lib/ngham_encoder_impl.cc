@@ -232,7 +232,7 @@ namespace gr {
               }
               printf("\t");
               for (int j=0; j<8 && i+j<count; j++) {
-                  if (out[i+j] > 32 && out[i+j] < 128)
+                  if (out[i+j] > 31 && out[i+j] < 127)
                       printf("%c ", out[i+j]);
                   else
                       printf(". ");
