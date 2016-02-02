@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Uhd Bent Pipe
-# Generated: Fri Jan 22 18:33:44 2016
+# Generated: Tue Jan 26 18:06:47 2016
 ##################################################
 
 from gnuradio import digital
@@ -28,14 +28,14 @@ class uhd_bent_pipe(gr.top_block):
         ##################################################
         self.xlat_bandwidth = xlat_bandwidth = 10000
         self.samp_rate_rx = samp_rate_rx = int(2e6)
+        self.freq_rx = freq_rx = int(145.98e6)
         self.xlat_taps = xlat_taps = firdes.low_pass(1, samp_rate_rx, xlat_bandwidth/2, 1000)
         self.xlat_decim = xlat_decim = 8
         self.tuner = tuner = 0
         self.sps_tx = sps_tx = 10
         self.sps_rx = sps_rx = 10
-        self.samp_rate_tx = samp_rate_tx = int(1e6)
-        self.freq_tx = freq_tx = int(146.18e6)
-        self.freq_rx = freq_rx = int(145.98e6)
+        self.samp_rate_tx = samp_rate_tx = int(2e6)
+        self.freq_tx = freq_tx = int(146.18e6)*0 + freq_rx
         self.data_rate = data_rate = 9600
 
         ##################################################
@@ -51,6 +51,7 @@ class uhd_bent_pipe(gr.top_block):
         self.uhd_usrp_source_0.set_samp_rate(samp_rate_rx)
         self.uhd_usrp_source_0.set_center_freq(freq_rx, 0)
         self.uhd_usrp_source_0.set_gain(50, 0)
+        self.uhd_usrp_source_0.set_antenna("RX2", 0)
         self.uhd_usrp_sink_0 = uhd.usrp_sink(
         	",".join(("", "")),
         	uhd.stream_args(
@@ -122,6 +123,14 @@ class uhd_bent_pipe(gr.top_block):
         self.freq_xlating_fir_filter_xxx_0_1.set_taps((firdes.low_pass(1, self.samp_rate_rx, self.xlat_bandwidth/2, 1000)))
         self.uhd_usrp_source_0.set_samp_rate(self.samp_rate_rx)
 
+    def get_freq_rx(self):
+        return self.freq_rx
+
+    def set_freq_rx(self, freq_rx):
+        self.freq_rx = freq_rx
+        self.uhd_usrp_source_0.set_center_freq(self.freq_rx, 0)
+        self.set_freq_tx(int(146.18e6)*0 + self.freq_rx)
+
     def get_xlat_taps(self):
         return self.xlat_taps
 
@@ -166,13 +175,6 @@ class uhd_bent_pipe(gr.top_block):
     def set_freq_tx(self, freq_tx):
         self.freq_tx = freq_tx
         self.uhd_usrp_sink_0.set_center_freq(self.freq_tx, 0)
-
-    def get_freq_rx(self):
-        return self.freq_rx
-
-    def set_freq_rx(self, freq_rx):
-        self.freq_rx = freq_rx
-        self.uhd_usrp_source_0.set_center_freq(self.freq_rx, 0)
 
     def get_data_rate(self):
         return self.data_rate

@@ -155,7 +155,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>int(146.18e6)</value>
+      <value>int(146.18e6)*0 + freq_rx</value>
     </param>
   </block>
   <block>
@@ -209,7 +209,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>int(1e6)</value>
+      <value>int(2e6)</value>
     </param>
   </block>
   <block>

@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Uhd Rx
-# Generated: Sat Jan 23 18:53:22 2016
+# Generated: Thu Jan 28 17:21:14 2016
 ##################################################
 
 if __name__ == '__main__':
@@ -63,9 +63,9 @@ class uhd_rx(gr.top_block, Qt.QWidget):
         # Variables
         ##################################################
         self.tuner = tuner = 0
-        self.freq = freq = int(145.98e6)
+        self.freq = freq = int(145.98e6)*0 + int(437.305e6)
         self.xlat_decim = xlat_decim = 8
-        self.xlat_bandwidth = xlat_bandwidth = 10000
+        self.xlat_bandwidth = xlat_bandwidth = 10e3
         self.sps = sps = 10
         self.samp_rate = samp_rate = 1000000
         self.gain = gain = 10
@@ -75,7 +75,10 @@ class uhd_rx(gr.top_block, Qt.QWidget):
         ##################################################
         # Blocks
         ##################################################
-        self._tuner_range = Range(-20000, 20000, 1000, 0, 200)
+        self._xlat_bandwidth_range = Range(1e3, 30e3, 1e3, 10e3, 200)
+        self._xlat_bandwidth_win = RangeWidget(self._xlat_bandwidth_range, self.set_xlat_bandwidth, "xlat_bandwidth", "counter_slider", float)
+        self.top_layout.addWidget(self._xlat_bandwidth_win)
+        self._tuner_range = Range(-20000, 20000, 100, 0, 200)
         self._tuner_win = RangeWidget(self._tuner_range, self.set_tuner, "tuner", "counter_slider", float)
         self.top_layout.addWidget(self._tuner_win)
         self.qtgui = Qt.QTabWidget()
@@ -99,6 +102,11 @@ class uhd_rx(gr.top_block, Qt.QWidget):
         self.qtgui_grid_layout_3 = Qt.QGridLayout()
         self.qtgui_layout_3.addLayout(self.qtgui_grid_layout_3)
         self.qtgui.addTab(self.qtgui_widget_3, "waterfall")
+        self.qtgui_widget_4 = Qt.QWidget()
+        self.qtgui_layout_4 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.qtgui_widget_4)
+        self.qtgui_grid_layout_4 = Qt.QGridLayout()
+        self.qtgui_layout_4.addLayout(self.qtgui_grid_layout_4)
+        self.qtgui.addTab(self.qtgui_widget_4, "constellation")
         self.top_grid_layout.addWidget(self.qtgui, 0,0,1,1)
         self.uhd_usrp_source_0 = uhd.usrp_source(
         	",".join(("", "")),
@@ -287,7 +295,47 @@ class uhd_rx(gr.top_block, Qt.QWidget):
         
         self._qtgui_freq_sink_x_0_win = sip.wrapinstance(self.qtgui_freq_sink_x_0.pyqwidget(), Qt.QWidget)
         self.qtgui_layout_2.addWidget(self._qtgui_freq_sink_x_0_win)
-        self.nuts_ngham_decoder_0 = nuts.ngham_decoder("packet_len", 0, True, True, False, False)
+        self.qtgui_const_sink_x_0 = qtgui.const_sink_c(
+        	1024, #size
+        	"", #name
+        	1 #number of inputs
+        )
+        self.qtgui_const_sink_x_0.set_update_time(0.10)
+        self.qtgui_const_sink_x_0.set_y_axis(-2, 2)
+        self.qtgui_const_sink_x_0.set_x_axis(-2, 2)
+        self.qtgui_const_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, "")
+        self.qtgui_const_sink_x_0.enable_autoscale(False)
+        self.qtgui_const_sink_x_0.enable_grid(False)
+        
+        if not True:
+          self.qtgui_const_sink_x_0.disable_legend()
+        
+        labels = ["", "", "", "", "",
+                  "", "", "", "", ""]
+        widths = [1, 1, 1, 1, 1,
+                  1, 1, 1, 1, 1]
+        colors = ["blue", "red", "red", "red", "red",
+                  "red", "red", "red", "red", "red"]
+        styles = [0, 0, 0, 0, 0,
+                  0, 0, 0, 0, 0]
+        markers = [0, 0, 0, 0, 0,
+                   0, 0, 0, 0, 0]
+        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
+                  1.0, 1.0, 1.0, 1.0, 1.0]
+        for i in xrange(1):
+            if len(labels[i]) == 0:
+                self.qtgui_const_sink_x_0.set_line_label(i, "Data {0}".format(i))
+            else:
+                self.qtgui_const_sink_x_0.set_line_label(i, labels[i])
+            self.qtgui_const_sink_x_0.set_line_width(i, widths[i])
+            self.qtgui_const_sink_x_0.set_line_color(i, colors[i])
+            self.qtgui_const_sink_x_0.set_line_style(i, styles[i])
+            self.qtgui_const_sink_x_0.set_line_marker(i, markers[i])
+            self.qtgui_const_sink_x_0.set_line_alpha(i, alphas[i])
+        
+        self._qtgui_const_sink_x_0_win = sip.wrapinstance(self.qtgui_const_sink_x_0.pyqwidget(), Qt.QWidget)
+        self.qtgui_layout_4.addWidget(self._qtgui_const_sink_x_0_win)
+        self.nuts_ngham_decoder_0 = nuts.ngham_decoder("packet_len", 0, True, True, False, True)
         self._gain_range = Range(0, 50, 1, 10, 200)
         self._gain_win = RangeWidget(self._gain_range, self.set_gain, "gain", "counter_slider", float)
         self.top_layout.addWidget(self._gain_win)
@@ -316,7 +364,8 @@ class uhd_rx(gr.top_block, Qt.QWidget):
         )
         self.digital_correlate_access_code_tag_bb_1 = digital.correlate_access_code_tag_bb("1011101111001100010101001111110", 0, "ngham_sync")
         self.digital_correlate_access_code_tag_bb_0 = digital.correlate_access_code_tag_bb("10101010101010101010101010101010", 0, "ngham_preamble")
-        self.blocks_socket_pdu_0 = blocks.socket_pdu("UDP_CLIENT", "127.0.0.1", "5006", 10000, False)
+        self.digital_clock_recovery_mm_xx_0 = digital.clock_recovery_mm_cc(sps, 0.25*0.175*0.175, 0.5, 0.175, 0.005)
+        self.blocks_socket_pdu_0 = blocks.socket_pdu("UDP_CLIENT", "127.0.0.1", "5005", 10000, False)
         self.blocks_char_to_float_0 = blocks.char_to_float(1, 1)
 
         ##################################################
@@ -324,6 +373,7 @@ class uhd_rx(gr.top_block, Qt.QWidget):
         ##################################################
         self.msg_connect((self.nuts_ngham_decoder_0, 'out'), (self.blocks_socket_pdu_0, 'pdus'))    
         self.connect((self.blocks_char_to_float_0, 0), (self.qtgui_time_sink_x_1_0, 0))    
+        self.connect((self.digital_clock_recovery_mm_xx_0, 0), (self.qtgui_const_sink_x_0, 0))    
         self.connect((self.digital_correlate_access_code_tag_bb_0, 0), (self.digital_correlate_access_code_tag_bb_1, 0))    
         self.connect((self.digital_correlate_access_code_tag_bb_1, 0), (self.blocks_char_to_float_0, 0))    
         self.connect((self.digital_gmsk_demod_0, 0), (self.digital_correlate_access_code_tag_bb_0, 0))    
@@ -332,6 +382,7 @@ class uhd_rx(gr.top_block, Qt.QWidget):
         self.connect((self.freq_xlating_fir_filter_xxx_0, 0), (self.rational_resampler_xxx_0, 0))    
         self.connect((self.freq_xlating_fir_filter_xxx_0_0, 0), (self.qtgui_freq_sink_x_0, 1))    
         self.connect((self.freq_xlating_fir_filter_xxx_0_0, 0), (self.qtgui_waterfall_sink_x_0, 0))    
+        self.connect((self.rational_resampler_xxx_0, 0), (self.digital_clock_recovery_mm_xx_0, 0))    
         self.connect((self.rational_resampler_xxx_0, 0), (self.digital_gmsk_demod_0, 0))    
         self.connect((self.rational_resampler_xxx_0, 0), (self.qtgui_time_sink_x_1, 0))    
         self.connect((self.uhd_usrp_source_0, 0), (self.freq_xlating_fir_filter_xxx_0, 0))    
@@ -348,21 +399,21 @@ class uhd_rx(gr.top_block, Qt.QWidget):
 
     def set_tuner(self, tuner):
         self.tuner = tuner
+        self.set_freq_label(self._freq_label_formatter(self.freq+self.tuner))
+        self.freq_xlating_fir_filter_xxx_0.set_center_freq(self.tuner)
         self.freq_xlating_fir_filter_xxx_0_0.set_center_freq(self.tuner)
         self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
         self.qtgui_waterfall_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate)
-        self.freq_xlating_fir_filter_xxx_0.set_center_freq(self.tuner)
-        self.set_freq_label(self._freq_label_formatter(self.freq+self.tuner))
 
     def get_freq(self):
         return self.freq
 
     def set_freq(self, freq):
         self.freq = freq
+        self.set_freq_label(self._freq_label_formatter(self.freq+self.tuner))
         self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
         self.qtgui_waterfall_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate)
         self.uhd_usrp_source_0.set_center_freq(self.freq, 0)
-        self.set_freq_label(self._freq_label_formatter(self.freq+self.tuner))
 
     def get_xlat_decim(self):
         return self.xlat_decim
@@ -383,6 +434,7 @@ class uhd_rx(gr.top_block, Qt.QWidget):
 
     def set_sps(self, sps):
         self.sps = sps
+        self.digital_clock_recovery_mm_xx_0.set_omega(self.sps)
         self.qtgui_time_sink_x_1.set_samp_rate(self.data_rate*self.sps)
 
     def get_samp_rate(self):
@@ -390,11 +442,11 @@ class uhd_rx(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
+        self.freq_xlating_fir_filter_xxx_0.set_taps((firdes.low_pass(1, self.samp_rate, self.xlat_bandwidth/2, 1000)))
         self.freq_xlating_fir_filter_xxx_0_0.set_taps((firdes.low_pass(1, self.samp_rate, self.samp_rate/2, 1000)))
         self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
         self.qtgui_waterfall_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate)
         self.uhd_usrp_source_0.set_samp_rate(self.samp_rate)
-        self.freq_xlating_fir_filter_xxx_0.set_taps((firdes.low_pass(1, self.samp_rate, self.xlat_bandwidth/2, 1000)))
 
     def get_gain(self):
         return self.gain
@@ -414,8 +466,8 @@ class uhd_rx(gr.top_block, Qt.QWidget):
 
     def set_data_rate(self, data_rate):
         self.data_rate = data_rate
-        self.qtgui_time_sink_x_1_0.set_samp_rate(self.data_rate)
         self.qtgui_time_sink_x_1.set_samp_rate(self.data_rate*self.sps)
+        self.qtgui_time_sink_x_1_0.set_samp_rate(self.data_rate)
 
 
 def main(top_block_cls=uhd_rx, options=None):
