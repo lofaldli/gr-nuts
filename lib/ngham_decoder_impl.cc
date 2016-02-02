@@ -176,6 +176,7 @@ namespace gr {
             printf("\tdecoded reed solomon with %i errors\n", nerrors);
 
         d_payload_len = NGHAM_PL_SIZE[d_size_index] - (d_codeword[0] & 0x1f);
+//        uint8_t ngham_flags = d_codeword[0] & 0xe0; TODO
 
         // calculate crc
         uint16_t crc = 0xffff;

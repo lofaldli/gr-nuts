@@ -245,6 +245,7 @@ namespace gr {
       if (d_scramble)
         for (int i=0; i<count; i++) out[codeword_start + i] ^= ccsds_poly[i];
 
+
       // make sure packet is multiple of 128 bytes
       if (d_pad_for_usrp) {
         int total_padded_length = 128;
