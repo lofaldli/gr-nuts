@@ -21,21 +21,53 @@
 
 from gnuradio import gr, gr_unittest
 from gnuradio import blocks
+import time, pmt
 import nuts_swig as nuts
+
+enable_vw_testing = False
 
 class qa_ngham_decoder (gr_unittest.TestCase):
 
     def setUp (self):
         self.tb = gr.top_block ()
+        self.tsb_key = "packet_len"
 
     def tearDown (self):
         self.tb = None
 
-    def test_001_t (self):
-        # set up fg
-        self.tb.run ()
-        # check data
+    def test_000 (self):
+        if enable_vw_testing:
+            return
 
+        print "test_000"
+        payload_sizes = [28, 60, 92, 124, 156, 188, 220]
+        codeword_sizes = [47, 79, 111, 159, 191, 223 ,255]
+
+        enc = nuts.ngham_encoder(self.tsb_key)
+        dec = nuts.ngham_decoder(verbose=True)
+        dbg = blocks.message_debug()
+        self.tb.connect(enc,dec)
+        self.tb.msg_connect(dec, "out", dbg, "store")
+        port_in = pmt.intern("in")
+
+        print "starting up"
+        self.tb.start()
+        i = 0
+        #for i in range(len(payload_sizes)*0 + 1):
+        src_data = [x for x in range(payload_sizes[i])]
+        src_vec = pmt.init_u8vector(len(src_data), src_data)
+        msg = pmt.cons(pmt.PMT_NIL, src_vec)
+        print "posting msg"
+        enc.to_basic_block()._post(port_in, msg)
+        #while dbg.num_messages() < 1:
+            #print "waiting..."
+        time.sleep(1)
+        self.tb.stop()
+        self.tb.wait()
+        result_msg = dbg.get_message(0)
+        vector = pmt.u8vector_elements(pmt.cdr(result_msg))
+        print metadata
+        print vector
 
 if __name__ == '__main__':
     gr_unittest.run(qa_ngham_decoder, "qa_ngham_decoder.xml")
