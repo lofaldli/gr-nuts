@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Uhd Tx
-# Generated: Sat Jan 23 18:50:51 2016
+# Generated: Mon Feb  8 16:41:10 2016
 ##################################################
 
 if __name__ == '__main__':
@@ -65,8 +65,7 @@ class uhd_tx(gr.top_block, Qt.QWidget):
         ##################################################
         self.tuner = tuner = 0
         self.gain = gain = 10
-        self.freq = freq = 145.98e6
-        self.variable_qtgui_chooser_0 = variable_qtgui_chooser_0 = 0
+        self.freq = freq = 437.305e6
         self.sps = sps = 10
         self.samp_rate = samp_rate = 2000000
         self.gain_label = gain_label = gain
@@ -120,18 +119,6 @@ class uhd_tx(gr.top_block, Qt.QWidget):
         self._freq_button_group.buttonClicked[int].connect(
         	lambda i: self.set_freq(self._freq_options[i]))
         self.top_layout.addWidget(self._freq_group_box)
-        self._variable_qtgui_chooser_0_options = (0, 1, 2, )
-        self._variable_qtgui_chooser_0_labels = (str(self._variable_qtgui_chooser_0_options[0]), str(self._variable_qtgui_chooser_0_options[1]), str(self._variable_qtgui_chooser_0_options[2]), )
-        self._variable_qtgui_chooser_0_tool_bar = Qt.QToolBar(self)
-        self._variable_qtgui_chooser_0_tool_bar.addWidget(Qt.QLabel("variable_qtgui_chooser_0"+": "))
-        self._variable_qtgui_chooser_0_combo_box = Qt.QComboBox()
-        self._variable_qtgui_chooser_0_tool_bar.addWidget(self._variable_qtgui_chooser_0_combo_box)
-        for label in self._variable_qtgui_chooser_0_labels: self._variable_qtgui_chooser_0_combo_box.addItem(label)
-        self._variable_qtgui_chooser_0_callback = lambda i: Qt.QMetaObject.invokeMethod(self._variable_qtgui_chooser_0_combo_box, "setCurrentIndex", Qt.Q_ARG("int", self._variable_qtgui_chooser_0_options.index(i)))
-        self._variable_qtgui_chooser_0_callback(self.variable_qtgui_chooser_0)
-        self._variable_qtgui_chooser_0_combo_box.currentIndexChanged.connect(
-        	lambda i: self.set_variable_qtgui_chooser_0(self._variable_qtgui_chooser_0_options[i]))
-        self.top_layout.addWidget(self._variable_qtgui_chooser_0_tool_bar)
         self.uhd_usrp_sink_0_0 = uhd.usrp_sink(
         	",".join(("", "")),
         	uhd.stream_args(
@@ -343,18 +330,18 @@ class uhd_tx(gr.top_block, Qt.QWidget):
 
     def set_tuner(self, tuner):
         self.tuner = tuner
-        self.set_freq_label(self._freq_label_formatter(self.freq+self.tuner))
         self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate)
         self.uhd_usrp_sink_0_0.set_center_freq(self.freq+self.tuner, 0)
+        self.set_freq_label(self._freq_label_formatter(self.freq+self.tuner))
 
     def get_gain(self):
         return self.gain
 
     def set_gain(self, gain):
         self.gain = gain
-        self.set_gain_label(self._gain_label_formatter(self.gain))
         self.uhd_usrp_sink_0_0.set_gain(self.gain, 0)
         	
+        self.set_gain_label(self._gain_label_formatter(self.gain))
 
     def get_freq(self):
         return self.freq
@@ -362,16 +349,9 @@ class uhd_tx(gr.top_block, Qt.QWidget):
     def set_freq(self, freq):
         self.freq = freq
         self._freq_callback(self.freq)
-        self.set_freq_label(self._freq_label_formatter(self.freq+self.tuner))
         self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate)
         self.uhd_usrp_sink_0_0.set_center_freq(self.freq+self.tuner, 0)
-
-    def get_variable_qtgui_chooser_0(self):
-        return self.variable_qtgui_chooser_0
-
-    def set_variable_qtgui_chooser_0(self, variable_qtgui_chooser_0):
-        self.variable_qtgui_chooser_0 = variable_qtgui_chooser_0
-        self._variable_qtgui_chooser_0_callback(self.variable_qtgui_chooser_0)
+        self.set_freq_label(self._freq_label_formatter(self.freq+self.tuner))
 
     def get_sps(self):
         return self.sps
