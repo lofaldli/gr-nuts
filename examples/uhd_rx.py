@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Uhd Rx
-# Generated: Thu Jan 28 17:21:14 2016
+# Generated: Tue Feb 16 18:09:26 2016
 ##################################################
 
 if __name__ == '__main__':
@@ -63,7 +63,7 @@ class uhd_rx(gr.top_block, Qt.QWidget):
         # Variables
         ##################################################
         self.tuner = tuner = 0
-        self.freq = freq = int(145.98e6)*0 + int(437.305e6)
+        self.freq = freq = int(145.98e6) + int(437.305e6)*0
         self.xlat_decim = xlat_decim = 8
         self.xlat_bandwidth = xlat_bandwidth = 10e3
         self.sps = sps = 10
@@ -335,7 +335,7 @@ class uhd_rx(gr.top_block, Qt.QWidget):
         
         self._qtgui_const_sink_x_0_win = sip.wrapinstance(self.qtgui_const_sink_x_0.pyqwidget(), Qt.QWidget)
         self.qtgui_layout_4.addWidget(self._qtgui_const_sink_x_0_win)
-        self.nuts_ngham_decoder_0 = nuts.ngham_decoder("packet_len", 0, True, True, False, True)
+        self.nuts_ngham_decoder_0 = nuts.ngham_decoder("packet_len", 0, True, True, True, True)
         self._gain_range = Range(0, 50, 1, 10, 200)
         self._gain_win = RangeWidget(self._gain_range, self.set_gain, "gain", "counter_slider", float)
         self.top_layout.addWidget(self._gain_win)
@@ -365,13 +365,11 @@ class uhd_rx(gr.top_block, Qt.QWidget):
         self.digital_correlate_access_code_tag_bb_1 = digital.correlate_access_code_tag_bb("1011101111001100010101001111110", 0, "ngham_sync")
         self.digital_correlate_access_code_tag_bb_0 = digital.correlate_access_code_tag_bb("10101010101010101010101010101010", 0, "ngham_preamble")
         self.digital_clock_recovery_mm_xx_0 = digital.clock_recovery_mm_cc(sps, 0.25*0.175*0.175, 0.5, 0.175, 0.005)
-        self.blocks_socket_pdu_0 = blocks.socket_pdu("UDP_CLIENT", "127.0.0.1", "5005", 10000, False)
         self.blocks_char_to_float_0 = blocks.char_to_float(1, 1)
 
         ##################################################
         # Connections
         ##################################################
-        self.msg_connect((self.nuts_ngham_decoder_0, 'out'), (self.blocks_socket_pdu_0, 'pdus'))    
         self.connect((self.blocks_char_to_float_0, 0), (self.qtgui_time_sink_x_1_0, 0))    
         self.connect((self.digital_clock_recovery_mm_xx_0, 0), (self.qtgui_const_sink_x_0, 0))    
         self.connect((self.digital_correlate_access_code_tag_bb_0, 0), (self.digital_correlate_access_code_tag_bb_1, 0))    

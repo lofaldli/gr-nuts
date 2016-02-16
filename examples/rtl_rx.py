@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Rtl Rx
-# Generated: Tue Feb  9 11:05:51 2016
+# Generated: Tue Feb 16 18:11:28 2016
 ##################################################
 
 if __name__ == '__main__':
@@ -78,7 +78,7 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         self.samples_per_symbol = samples_per_symbol = 8
         self.samp_rate = samp_rate = 1000000
         self.ngham_rate = ngham_rate = 9600
-        self.freq = freq = 144980000 + 0*437305000
+        self.freq = freq = 145980000 + 0*437305000
 
         ##################################################
         # Blocks
@@ -360,7 +360,7 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         
         self._qtgui_const_sink_x_0_win = sip.wrapinstance(self.qtgui_const_sink_x_0.pyqwidget(), Qt.QWidget)
         self.qtgui_layout_4.addWidget(self._qtgui_const_sink_x_0_win)
-        self.nuts_ngham_decoder_0 = nuts.ngham_decoder("packet_len", 0, True, True, True, True)
+        self.nuts_ngham_decoder_0 = nuts.ngham_decoder("packet_len", 1, True, True, True, True)
         self.nuts_ngham_correlator_0 = nuts.ngham_correlator("packet_len", 0, False)
         self.freq_xlating_fir_filter_xxx_0_0 = filter.freq_xlating_fir_filter_ccc(8, (firdes.low_pass(1, samp_rate, samp_rate/2, 1000)), tuner, samp_rate)
         self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_ccc(xlat_decim, (firdes.low_pass(1, samp_rate, xlat_bandwidth/2, 1000)), tuner, samp_rate)
@@ -426,28 +426,28 @@ class rtl_rx(gr.top_block, Qt.QWidget):
 
     def set_xlat_bandwidth(self, xlat_bandwidth):
         self.xlat_bandwidth = xlat_bandwidth
-        self.freq_xlating_fir_filter_xxx_0.set_taps((firdes.low_pass(1, self.samp_rate, self.xlat_bandwidth/2, 1000)))
         self._xlat_bandwidth_config_config = ConfigParser.ConfigParser()
         self._xlat_bandwidth_config_config.read("rtl_rx.conf")
         if not self._xlat_bandwidth_config_config.has_section("main"):
         	self._xlat_bandwidth_config_config.add_section("main")
         self._xlat_bandwidth_config_config.set("main", "xlat_bandwidth", str(self.xlat_bandwidth))
         self._xlat_bandwidth_config_config.write(open("rtl_rx.conf", 'w'))
+        self.freq_xlating_fir_filter_xxx_0.set_taps((firdes.low_pass(1, self.samp_rate, self.xlat_bandwidth/2, 1000)))
 
     def get_tuner(self):
         return self.tuner
 
     def set_tuner(self, tuner):
         self.tuner = tuner
-        self.freq_xlating_fir_filter_xxx_0.set_center_freq(self.tuner)
-        self.freq_xlating_fir_filter_xxx_0_0.set_center_freq(self.tuner)
-        self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
         self._tuner_config_config = ConfigParser.ConfigParser()
         self._tuner_config_config.read("rtl_rx.conf")
         if not self._tuner_config_config.has_section("main"):
         	self._tuner_config_config.add_section("main")
         self._tuner_config_config.set("main", "tuner", str(self.tuner))
         self._tuner_config_config.write(open("rtl_rx.conf", 'w'))
+        self.freq_xlating_fir_filter_xxx_0.set_center_freq(self.tuner)
+        self.freq_xlating_fir_filter_xxx_0_0.set_center_freq(self.tuner)
+        self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
 
     def get_samples_per_symbol(self):
         return self.samples_per_symbol
