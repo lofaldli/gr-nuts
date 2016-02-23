@@ -32,6 +32,7 @@
 #include "fec-3.0.1/rs-common.h"
 
 #include "ngham.h"
+#include "reed_solomon.h"
 
 #define STATE_SYNC_SEARCH 0
 #define STATE_LOAD_SIZE_TAG 1
@@ -63,9 +64,6 @@ namespace gr {
       d_descramble(descramble),
       d_printing(printing),
       d_verbose(verbose),
-      d_data_reg(0),
-      d_size_index(0),
-      d_bit_counter(0),
       d_num_packets(0)
     {
       message_port_register_out(pmt::mp("out"));
@@ -87,41 +85,18 @@ namespace gr {
       }
 
       // initialize rs tables
-      struct rs* rs_32 = (struct rs*)init_rs_char(8, 0x187, 112, 11, 32, 0);
-      memcpy( (void*)&rs_cb_rx[6], (void*)rs_32, sizeof(rs_cb_rx[6]) );
-      memcpy( (void*)&rs_cb_rx[5], (void*)rs_32, sizeof(rs_cb_rx[5]) );
-      memcpy( (void*)&rs_cb_rx[4], (void*)rs_32, sizeof(rs_cb_rx[4]) );
-      memcpy( (void*)&rs_cb_rx[3], (void*)rs_32, sizeof(rs_cb_rx[3]) );
-
-      struct rs* rs_16 = (struct rs*)init_rs_char(8, 0x187, 112, 11, 16, 0);
-      memcpy( (void*)&rs_cb_rx[2], (void*)rs_16, sizeof(rs_cb_rx[2]) );
-      memcpy( (void*)&rs_cb_rx[1], (void*)rs_16, sizeof(rs_cb_rx[1]) );
-      memcpy( (void*)&rs_cb_rx[0], (void*)rs_16, sizeof(rs_cb_rx[0]) );
-
-      rs_cb_rx[6].pad = 255-NGHAM_CODEWORD_SIZE[6];
-      rs_cb_rx[5].pad = 255-NGHAM_CODEWORD_SIZE[5];
-      rs_cb_rx[4].pad = 255-NGHAM_CODEWORD_SIZE[4];
-      rs_cb_rx[3].pad = 255-NGHAM_CODEWORD_SIZE[3];
-      rs_cb_rx[2].pad = 255-NGHAM_CODEWORD_SIZE[2];
-      rs_cb_rx[1].pad = 255-NGHAM_CODEWORD_SIZE[1];
-      rs_cb_rx[0].pad = 255-NGHAM_CODEWORD_SIZE[0];
-
-      // free temporary rs tables
-      delete rs_32;
-      delete rs_16;
+      for (uint8_t i=0; i<NGHAM_SIZES; i++) {
+          d_rs[i] = new reed_solomon(NGHAM_RS_PARITY_SIZE[i], 255-NGHAM_RS_CODEWORD_SIZE[i]);
+      }
     }
 
     /*
      * Our virtual destructor.
      */
     ngham_decoder_impl::~ngham_decoder_impl() {
-      // free rs tables
-      delete [] rs_cb_rx[6].alpha_to;
-      delete [] rs_cb_rx[6].index_of;
-      delete [] rs_cb_rx[6].genpoly;
-      delete [] rs_cb_rx[0].alpha_to;
-      delete [] rs_cb_rx[0].index_of;
-      delete [] rs_cb_rx[0].genpoly;
+        for (uint8_t i=0; i<NGHAM_SIZES; i++) {
+            delete d_rs[i];
+        }
     }
 
     void ngham_decoder_impl::enter_sync_search() {
@@ -162,7 +137,7 @@ namespace gr {
         // decode parity data
         int nerrors = 0;
         if (d_rs_decode) {
-            nerrors = decode_rs_char(&rs_cb_rx[d_size_index], d_codeword, 0, 0);
+            nerrors = d_rs[d_size_index]->decode(d_codeword);
         }
 
         // check if packet was decoded correctly
@@ -175,48 +150,21 @@ namespace gr {
         if (d_verbose)
             printf("\tdecoded reed solomon with %i errors\n", nerrors);
 
-        d_payload_len = NGHAM_PL_SIZE[d_size_index] - (d_codeword[0] & 0x1f);
-//        uint8_t ngham_flags = d_codeword[0] & 0xe0; TODO
+        uint8_t padding_size = d_codeword[0] & NGHAM_PADDING_SIZE_MASK;
+//        uint8_t ngham_flags = d_codeword[0] & NGHAM_FLAGS_MASK; TODO
+        d_payload_len = NGHAM_RS_DATA_SIZE[d_size_index] - padding_size;
 
-        // calculate crc
-        uint16_t crc = 0xffff;
-        for (int i=0; i< d_payload_len+1; i++){
-            crc = ((crc >> 8) & 0xff) ^ crc_ccitt_table[(crc ^ d_codeword[i]) & 0xff];
-        }
-        crc ^= 0xffff;
 
         // check crc
-        if ( crc != ( (d_codeword[d_payload_len+1]<<8) | d_codeword[d_payload_len+2] ) ) {
+        uint16_t received_crc = (d_codeword[d_payload_len+1] << 8) | d_codeword[d_payload_len+2];
+        uint16_t calculated_crc = calc_crc(d_codeword, d_payload_len+1);
+        if (calculated_crc != received_crc) {
             if (d_verbose)
                 printf("crc failed\n");
             return false;
         }
 
-        // packet was succesfully decoded
-        d_num_packets++;
         return true;
-    }
-
-    void ngham_decoder_impl::print_packet() {
-        printf("number of packets received %i\n", d_num_packets);
-        printf("decoded data:\n");
-        for (int i=0; i<d_codeword_length; i+=8) {
-            printf("\t");
-            for (int j=0; j<8; j++) {
-                if (i+j<d_codeword_length)
-                    printf("0x%x%x ", (d_codeword[i+j] >> 4) & 0x0f, d_codeword[i+j] & 0x0f);
-                else
-                    printf("\t");
-            }
-            printf("\t");
-            for (int j=0; j<8 && i+j<d_codeword_length; j++) {
-                if (d_codeword[i+j] > 31 && d_codeword[i+j] < 127)
-                    printf("%c ", d_codeword[i+j]);
-                else
-                    printf(". ");
-            }
-            printf("\n");
-        }
     }
 
     int ngham_decoder_impl::work(int noutput_items, gr_vector_const_void_star &input_items, gr_vector_void_star &output_items) {
@@ -267,7 +215,7 @@ namespace gr {
                         d_codeword_length++;
                         d_bit_counter = 0;
                     }
-                    if (d_codeword_length == NGHAM_CODEWORD_SIZE[d_size_index]) {
+                    if (d_codeword_length == NGHAM_RS_CODEWORD_SIZE[d_size_index]) {
                         if (d_verbose)
                             printf("\tloaded codeword of length %i\n", d_codeword_length);
 
@@ -277,19 +225,17 @@ namespace gr {
                             pmt::pmt_t pdu(pmt::cons(pmt::PMT_NIL, pmt::make_blob(d_codeword+1, d_payload_len)));
                             message_port_pub(pmt::mp("out"), pdu);
 
+                            d_num_packets++;
                             if (d_printing)
-                                print_packet();
+                                print_bytes(d_codeword, d_codeword_length);
                         }
                         enter_sync_search();
                         break;
                     }
             }
-      }
-
-      return noutput_items;
-
+        }
+        return noutput_items;
     }
-
   } /* namespace nuts */
 } /* namespace gr */
 

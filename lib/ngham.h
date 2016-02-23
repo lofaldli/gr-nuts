@@ -7,22 +7,28 @@
 #define NGHAM_PREAMBLE_SIZE 4
 #define NGHAM_SYNC_SIZE 4
 #define NGHAM_SIZE_TAG_SIZE 3
+#define NGHAM_HEADER_SIZE (NGHAM_PREAMBLE_SIZE + NGHAM_SYNC_SIZE + NGHAM_SIZE_TAG_SIZE)
+#define NGHAM_RS_HEADER_SIZE 1
+#define NGHAM_CRC_SIZE 2
 #define NGHAM_MAX_CODEWORD_SIZE 255
-#define NGHAM_MAX_TOTAL_SIZE (NGHAM_PREAMBLE_SIZE + NGHAM_SYNC_SIZE + NGHAM_SIZE_TAG_SIZE + NGHAM_MAX_CODEWORD_SIZE)
+#define NGHAM_MAX_TOTAL_SIZE (NGHAM_HEADER_SIZE + NGHAM_MAX_CODEWORD_SIZE)
+
+
+#define NGHAM_FLAGS_MASK 0xe0
+#define NGHAM_PADDING_SIZE_MASK 0x1f
 
 #define NGHAM_SIZES 7
-
 #define NGHAM_SIZE_TAG_MAX_ERROR 6
 namespace gr {
     namespace nuts {
-        const unsigned char NGHAM_PL_SIZE[NGHAM_SIZES]          = {28, 60, 92, 124, 156, 188, 220};
-        const unsigned char NGHAM_PL_SIZE_FULL[NGHAM_SIZES]     = {31, 63, 95, 127, 159, 191, 223};
-        const unsigned char NGHAM_CODEWORD_SIZE[NGHAM_SIZES]    = {47, 79, 111, 159, 191, 223, 255};
-        const unsigned char NGHAM_PAR_SIZE[NGHAM_SIZES]         = {16, 16, 16, 32, 32, 32, 32};
+        const uint8_t NGHAM_RS_DATA_SIZE[NGHAM_SIZES]          = {28, 60, 92, 124, 156, 188, 220};
+        const uint8_t NGHAM_RS_DATA_SIZE_FULL[NGHAM_SIZES]     = {31, 63, 95, 127, 159, 191, 223};
+        const uint8_t NGHAM_RS_PARITY_SIZE[NGHAM_SIZES]        = {16, 16, 16, 32, 32, 32, 32};
+        const uint8_t NGHAM_RS_CODEWORD_SIZE[NGHAM_SIZES]      = {47, 79, 111, 159, 191, 223, 255};
 
-        const unsigned char NGHAM_PREAMBLE[NGHAM_PREAMBLE_SIZE] = {0xaa, 0xaa, 0xaa, 0xaa};
-        const unsigned char NGHAM_SYNC[NGHAM_SYNC_SIZE]         = {0x5d, 0xe6, 0x2a, 0x7e};
-        const unsigned char NGHAM_SIZE_TAG[NGHAM_SIZES][NGHAM_SIZE_TAG_SIZE] = {
+        const uint8_t NGHAM_PREAMBLE[NGHAM_PREAMBLE_SIZE] = {0xaa, 0xaa, 0xaa, 0xaa};
+        const uint8_t NGHAM_SYNC[NGHAM_SYNC_SIZE]         = {0x5d, 0xe6, 0x2a, 0x7e};
+        const uint8_t NGHAM_SIZE_TAG[NGHAM_SIZES][NGHAM_SIZE_TAG_SIZE] = {
             {0x3b, 0x49, 0xcd},
             {0x4d, 0xda, 0x57},
             {0x76, 0x93, 0x9a},
@@ -88,8 +94,45 @@ namespace gr {
             0xf78f, 0xe606, 0xd49d, 0xc514, 0xb1ab, 0xa022, 0x92b9, 0x8330,
             0x7bc7, 0x6a4e, 0x58d5, 0x495c, 0x3de3, 0x2c6a, 0x1ef1, 0x0f78
         };
-        
+
+        inline void print_bytes(uint8_t *data, uint32_t length) {
+            const uint8_t items_per_row = 10;
+            for (uint32_t i=0; i<length; i+=items_per_row) {
+                // print hex...
+                printf("    %4i: ", i);
+                for (uint8_t j=0; j<items_per_row; j++) {
+                    if (i+j < length) {
+                        printf("%x%x ", data[i+j] >> 4 & 0x0f, data[i+j] & 0x0f);
+                    } else {
+                        printf("    ");
+                    }
+                }
+                // ...and ascii
+                printf("  ");
+                for (uint8_t j=0; j<items_per_row && i+j<length; j++) {
+                    if (data[i+j] > 31 && data[i+j] < 127) {
+                        printf("%c", data[i+j]);
+                    } else {
+                        printf(".");
+                    }
+                }
+                printf("\n");
+            }
+        }
+        inline uint16_t calc_crc(uint8_t *data, uint8_t length) {
+            uint16_t crc = 0xffff;
+            for (uint8_t i=0; i<length; i++){
+                crc = ((crc >> 8) & 0xff) ^ crc_ccitt_table[(crc ^ data[i]) & 0xff];
+            }
+            crc ^= 0xffff;
+            return crc;
+        }
+
+        inline void scramble(uint8_t *data, uint8_t length) {
+            for (int i=0; i<length; i++)
+                data[i] ^= ccsds_poly[i];
+        }
     }
 }
 #endif
- 
+

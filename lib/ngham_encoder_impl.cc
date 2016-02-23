@@ -34,6 +34,7 @@
 #include "fec-3.0.1/rs-common.h"
 
 #include "ngham.h"
+#include "reed_solomon.h"
 
 namespace gr {
   namespace nuts {
@@ -44,10 +45,7 @@ namespace gr {
       return gnuradio::get_initial_sptr
         (new ngham_encoder_impl(len_tag_key, rs_encode, scramble, pad_for_usrp, printing));
     }
-    struct rs rs_cb[NGHAM_SIZES];
-    /*
-     * The private constructor
-     */
+
     ngham_encoder_impl::ngham_encoder_impl(const std::string& len_tag_key, bool rs_encode, bool scramble, bool pad_for_usrp, bool printing)
       : gr::tagged_stream_block("ngham_encoder",
               gr::io_signature::make(0, 0, 0),
@@ -63,78 +61,49 @@ namespace gr {
       message_port_register_in(PDU_PORT_ID);
 
       // initialize rs tables
-      struct rs* rs_32 = (struct rs*)init_rs_char(8, 0x187, 112, 11, 32, 0);
-      memcpy( (void*)&rs_cb[6], (void*)rs_32, sizeof(rs_cb[6]) );
-      memcpy( (void*)&rs_cb[5], (void*)rs_32, sizeof(rs_cb[5]) );
-      memcpy( (void*)&rs_cb[4], (void*)rs_32, sizeof(rs_cb[4]) );
-      memcpy( (void*)&rs_cb[3], (void*)rs_32, sizeof(rs_cb[3]) );
+      for (uint8_t i=0; i<NGHAM_SIZES; i++)
+          d_rs[i] = new reed_solomon(NGHAM_RS_PARITY_SIZE[i], 255-NGHAM_RS_CODEWORD_SIZE[i]);
 
-      struct rs* rs_16 = (struct rs*)init_rs_char(8, 0x187, 112, 11, 16, 0);
-      memcpy( (void*)&rs_cb[2], (void*)rs_16, sizeof(rs_cb[2]) );
-      memcpy( (void*)&rs_cb[1], (void*)rs_16, sizeof(rs_cb[1]) );
-      memcpy( (void*)&rs_cb[0], (void*)rs_16, sizeof(rs_cb[0]) );
-
-      rs_cb[6].pad = 255-NGHAM_CODEWORD_SIZE[6];
-      rs_cb[5].pad = 255-NGHAM_CODEWORD_SIZE[5];
-      rs_cb[4].pad = 255-NGHAM_CODEWORD_SIZE[4];
-      rs_cb[3].pad = 255-NGHAM_CODEWORD_SIZE[3];
-      rs_cb[2].pad = 255-NGHAM_CODEWORD_SIZE[2];
-      rs_cb[1].pad = 255-NGHAM_CODEWORD_SIZE[1];
-      rs_cb[0].pad = 255-NGHAM_CODEWORD_SIZE[0];
-
-      delete rs_32;
-      delete rs_16;
-    }
-
-
-    /*
-     * Our virtual destructor.
-     */
-    ngham_encoder_impl::~ngham_encoder_impl()
-    {
-      delete [] rs_cb[6].alpha_to;
-      delete [] rs_cb[6].index_of;
-      delete [] rs_cb[6].genpoly;
-      delete [] rs_cb[0].alpha_to;
-      delete [] rs_cb[0].index_of;
-      delete [] rs_cb[0].genpoly;
+      // initialize constant part of header
+      memcpy(d_header, NGHAM_PREAMBLE, NGHAM_PREAMBLE_SIZE);
+      memcpy(&d_header[NGHAM_PREAMBLE_SIZE], NGHAM_SYNC, NGHAM_SYNC_SIZE);
     }
 
     int
     ngham_encoder_impl::calculate_output_stream_length(const gr_vector_int &ninput_items)
     {
-      if (d_curr_len == 0) {
-        // NOTE this part is copied from gr-blocks/lib/pdu_to_tagged_stream_impl.cc
-        pmt::pmt_t msg(delete_head_blocking(PDU_PORT_ID, 100));
-        if (msg.get() == NULL) {
-          return 0;
-        }
+      if (d_curr_len == 0) return 0;
 
-        if (!pmt::is_pair(msg))
+      // NOTE this part is copied from gr-blocks/lib/pdu_to_tagged_stream_impl.cc
+      pmt::pmt_t msg(delete_head_blocking(PDU_PORT_ID, 100));
+      if (msg.get() == NULL) {
+          return 0;
+      }
+
+      if (!pmt::is_pair(msg))
           throw std::runtime_error("received a malformed pdu message");
 
-        d_curr_meta = pmt::car(msg);
-        d_curr_vect = pmt::cdr(msg);
-        d_curr_len = pmt::length(d_curr_vect);
-      }
+      d_curr_meta = pmt::car(msg);
+      d_curr_vect = pmt::cdr(msg);
+      d_curr_len = pmt::length(d_curr_vect);
 
-      // calculate total packet length based on payload length
-      int header_size = NGHAM_PREAMBLE_SIZE + NGHAM_SYNC_SIZE + NGHAM_SIZE_TAG_SIZE;
-      const int pl_len = d_curr_len;
 
-      int size_index = 0;
-      while (pl_len > NGHAM_PL_SIZE[size_index]) size_index++;
+      d_size_index = 0;
+      while (d_curr_len > NGHAM_RS_DATA_SIZE[d_size_index]) d_size_index++;
 
-      int noutput_items = header_size + NGHAM_PL_SIZE[size_index];
+      return NGHAM_HEADER_SIZE + NGHAM_RS_CODEWORD_SIZE[d_size_index];
+    }
 
-      if (d_pad_for_usrp) {
-        int total_padded_length = 128;
-        while (noutput_items > total_padded_length) total_padded_length += 128;
-
-        noutput_items = total_padded_length;
-      }
-
-      return noutput_items;
+    void ngham_encoder_impl::copy_stream_tags() {
+        if (!pmt::eq(d_curr_meta, pmt::PMT_NIL) ) {
+            printf("copying tags\n");
+            pmt::pmt_t klist(pmt::dict_keys(d_curr_meta));
+            for (size_t i = 0; i < pmt::length(klist); i++) {
+                pmt::pmt_t k(pmt::nth(i, klist));
+                pmt::pmt_t v(pmt::dict_ref(d_curr_meta, k, pmt::PMT_NIL));
+                add_item_tag(0, nitems_written(0), k, v, alias_pmt());
+            }
+        }
     }
 
     int
@@ -143,122 +112,58 @@ namespace gr {
                        gr_vector_const_void_star &input_items,
                        gr_vector_void_star &output_items)
     {
-      // pointer to output elements
-      uint8_t *out = (uint8_t *) output_items[0];
+      // see if there is anything to be done
+      if (d_curr_len == 0) return 0;
 
-      // NOTE this part is also from gr-blocks/lib/pdu_to_tagged_stream_impl.cc
-      if (d_curr_len == 0) {
-          return 0;
-      }
-      // work() should only be called if the current PDU fits entirely
-      // into the output buffer.
-      assert(noutput_items >= d_curr_len);
 
-      // Copy vector output
-      size_t nout = d_curr_len;
-      size_t io(0);
-      const uint8_t* in = (const uint8_t*) uniform_vector_elements(d_curr_vect, io);
+      // insert size tag in header
+      memcpy(&d_header[NGHAM_PREAMBLE_SIZE + NGHAM_SYNC_SIZE], NGHAM_SIZE_TAG[d_size_index], NGHAM_SIZE_TAG_SIZE);
 
-      // Copy tags
-      if (!pmt::eq(d_curr_meta, pmt::PMT_NIL) ) {
-        printf("copying tags\n");
-        pmt::pmt_t klist(pmt::dict_keys(d_curr_meta));
-        for (size_t i = 0; i < pmt::length(klist); i++) {
-          pmt::pmt_t k(pmt::nth(i, klist));
-          pmt::pmt_t v(pmt::dict_ref(d_curr_meta, k, pmt::PMT_NIL));
-          add_item_tag(0, nitems_written(0), k, v, alias_pmt());
-        }
-      }
+      uint8_t padding_size = (NGHAM_RS_DATA_SIZE[d_size_index] - d_curr_len);
+      uint8_t ngham_flags = (0x00 << 5);
+      d_rs_codeword[0] = (ngham_flags  & NGHAM_FLAGS_MASK | padding_size & NGHAM_PADDING_SIZE_MASK);
 
-      const int pl_len = d_curr_len;
-      // Reset state
-      d_curr_len = 0;
-
-      // initialize number of output items
-      uint16_t count = 0;
-
-      // calculate size index
-      int size_index = 0;
-      while (pl_len > NGHAM_PL_SIZE[size_index]) size_index++;
-
-      // calc beginning of rs codeword
-      int codeword_start = NGHAM_PREAMBLE_SIZE + NGHAM_SYNC_SIZE + NGHAM_SIZE_TAG_SIZE;
-
-      // insert preamble, sync and size tag
-      for (int i=0; i<NGHAM_PREAMBLE_SIZE; i++) out[count++] = NGHAM_PREAMBLE[i];
-      for (int i=0; i<NGHAM_SYNC_SIZE; i++)     out[count++] = NGHAM_SYNC[i];
-      for (int i=0; i<NGHAM_SIZE_TAG_SIZE; i++) out[count++] = NGHAM_SIZE_TAG[size_index][i];
-
-      // calculate and insert padding size and ngham flags
-      uint8_t padding_size = (NGHAM_PL_SIZE[size_index] - pl_len) & 0x1f; // 0001 1111
-      uint8_t ngham_flags = (0x00 << 5) & 0xe0;// TODO implement NGHAM flags
-      out[count++] = (ngham_flags | padding_size);
-
-      // insert input elements
-      for (int i=0; i<pl_len; i++) out[count++] = in[i];
+      // copy vector output and insert data in codeword
+      size_t len(0);
+      const uint8_t* in = (const uint8_t*) uniform_vector_elements(d_curr_vect, len);
+      copy_stream_tags();
+      memcpy(&d_rs_codeword[1], in, d_curr_len);
 
       // calculate and insert crc
-      uint16_t crc = 0xffff;
-      for (int i=0; i<pl_len+1; i++){
-        crc = ((crc >> 8) & 0xff) ^ crc_ccitt_table[(crc ^ out[codeword_start+i]) & 0xff];
-      }
-      crc ^= 0xffff;
-      out[count++] = (crc >> 8) & 0xff;
-      out[count++] = crc & 0xff;
+      uint16_t crc = calc_crc(d_rs_codeword, d_curr_len + 1);
+      d_rs_codeword[1 + d_curr_len] = (crc >> 8) & 0xff;
+      d_rs_codeword[1 + d_curr_len + 1] = crc & 0xff;
 
       // insert padding
-      for (int i=0; i<padding_size; i++) out[count++] = 0;
+      memset(&d_rs_codeword[1 + d_curr_len + 2], 0, padding_size);
 
       // encode parity data and update packet length
       if (d_rs_encode) {
-        encode_rs_char(&rs_cb[size_index], &out[codeword_start], &out[count]);
-        count += NGHAM_PAR_SIZE[size_index];
+          d_rs[d_size_index]->encode(d_rs_codeword, &d_rs_codeword[NGHAM_RS_DATA_SIZE_FULL[d_size_index]]);
+      } else {
+          memset(&d_rs_codeword[NGHAM_RS_DATA_SIZE_FULL[d_size_index]], 0, NGHAM_RS_PARITY_SIZE[d_size_index]);
       }
 
-      d_num_packets++;
       // print packet before scrambling
       if (d_printing) {
-
-          printf("number of packets sent %i\n", d_num_packets);
-          printf("encoded data:\n");
-
-          for (int i=codeword_start; i<count; i+=8) {
-              printf("\t");
-              for (int j=0; j<8; j++) {
-              if (i+j<count)
-                  printf("0x%x%x ", (out[i+j] >> 4) & 0x0f, out[i+j] & 0x0f);
-              else
-                  printf("\t");
-              }
-              printf("\t");
-              for (int j=0; j<8 && i+j<count; j++) {
-                  if (out[i+j] > 31 && out[i+j] < 127)
-                      printf("%c ", out[i+j]);
-                  else
-                      printf(". ");
-                  }
-                  printf("\n");
-              }
-           }
+          print_bytes(d_rs_codeword, NGHAM_RS_CODEWORD_SIZE[d_size_index]);
+      }
 
       // scramble data
       if (d_scramble)
-        for (int i=0; i<count; i++) out[codeword_start + i] ^= ccsds_poly[i];
+          scramble(d_rs_codeword, NGHAM_RS_CODEWORD_SIZE[d_size_index]);
 
+      // copy frame into output array
+      uint8_t *out = (uint8_t *) output_items[0];
+      memcpy(out, d_header, NGHAM_HEADER_SIZE);
+      memcpy(&out[NGHAM_HEADER_SIZE], d_rs_codeword, NGHAM_RS_CODEWORD_SIZE[d_size_index]);
 
-      // make sure packet is multiple of 128 bytes
-      if (d_pad_for_usrp) {
-        int total_padded_length = 128;
-        while (count > total_padded_length) total_padded_length += 128;
-
-        int usrp_padding_size = total_padded_length - (count % 128);
-        for (int i=0; i<usrp_padding_size; i++) out[count++] = 0;
-      }
+      // reset state
+      d_curr_len = 0;
 
       // tell runtime system how many output items we produced.
-      return count;
+      return noutput_items;
     }
 
   } /* namespace nuts */
 } /* namespace gr */
-

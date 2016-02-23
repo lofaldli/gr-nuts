@@ -23,6 +23,8 @@
 
 #include <nuts/ngham_encoder.h>
 #include <stdint.h>
+#include "ngham.h"
+#include "reed_solomon.h"
 
 #define PDU_PORT_ID pmt::mp("in")
 
@@ -37,6 +39,12 @@ namespace gr {
       bool d_pad_for_usrp;
       bool d_printing;
 
+      reed_solomon* d_rs[NGHAM_SIZES];
+
+      uint8_t d_header[NGHAM_HEADER_SIZE];
+      uint8_t d_rs_codeword[NGHAM_MAX_CODEWORD_SIZE];
+
+      uint8_t d_size_index;
       uint16_t d_num_packets;
 
       //const size_t         d_itemsize;
@@ -44,6 +52,8 @@ namespace gr {
       pmt::pmt_t           d_curr_meta;
       pmt::pmt_t           d_curr_vect;
       size_t               d_curr_len;
+
+      void copy_stream_tags();
 
      protected:
       int calculate_output_stream_length(const gr_vector_int &ninput_items);

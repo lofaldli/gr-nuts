@@ -1,17 +1,17 @@
 /* -*- c++ -*- */
 /*
  * Copyright 2015 André Løfaldli.
- * 
+ *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3, or (at your option)
  * any later version.
- * 
+ *
  * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this software; see the file COPYING.  If not, write to
  * the Free Software Foundation, Inc., 51 Franklin Street,
@@ -22,6 +22,8 @@
 #define INCLUDED_NUTS_NGHAM_DECODER_IMPL_H
 
 #include <nuts/ngham_decoder.h>
+#include "ngham.h"
+#include "reed_solomon.h"
 
 namespace gr {
   namespace nuts {
@@ -39,10 +41,11 @@ namespace gr {
       uint32_t d_data_reg;
       uint8_t d_size_index;
       uint8_t d_codeword_length;
-      uint8_t d_codeword[255]; 
+      uint8_t d_codeword[NGHAM_MAX_CODEWORD_SIZE];
       uint8_t d_bit_counter;
       uint16_t d_num_packets;
       uint8_t d_payload_len;
+      reed_solomon *d_rs[NGHAM_SIZES];
 
       void enter_sync_search();
       void enter_load_size_tag();

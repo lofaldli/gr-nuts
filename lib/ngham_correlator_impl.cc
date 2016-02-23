@@ -1,17 +1,17 @@
 /* -*- c++ -*- */
-/* 
+/*
  * Copyright 2015 André Løfaldli.
- * 
+ *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3, or (at your option)
  * any later version.
- * 
+ *
  * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this software; see the file COPYING.  If not, write to
  * the Free Software Foundation, Inc., 51 Franklin Street,
@@ -62,13 +62,13 @@ namespace gr {
         str << name() << unique_id();
         d_me = pmt::string_to_symbol(str.str());
         d_key = pmt::string_to_symbol(len_tag_key);
-        
+
         d_sync_word = 0;
         for (int i=0; i<NGHAM_SYNC_SIZE; i++) {
             d_sync_word = (d_sync_word << 8) | (NGHAM_SYNC[i] & 0xff);
         }
 
-        for (int size_index=0; size_index<NGHAM_SIZES; size_index++) { 
+        for (int size_index=0; size_index<NGHAM_SIZES; size_index++) {
             d_size_tags[size_index] = 0;
             for (int i=0; i<NGHAM_SIZE_TAG_SIZE; i++) {
                 d_size_tags[size_index] = (d_size_tags[size_index] << 8) | (NGHAM_SIZE_TAG[size_index][i] & 0xff);
@@ -118,7 +118,7 @@ namespace gr {
             case STATE_SYNC_SEARCH:
                 out[i] = in[i];
                 d_data_reg = (d_data_reg << 1) | (in[i] & 0x01);
-           
+
                 wrong_bits = 0;
                 nwrong = d_threshold + 1;
 
@@ -144,12 +144,12 @@ namespace gr {
                 for (int size_index=0; size_index<NGHAM_SIZES; size_index++) {
                     wrong_bits = 0;
                     nwrong = d_threshold + 1;
-    
+
                     // the size tag is only 3 bytes, so the data register needs to be masked
                     wrong_bits = ((d_data_reg & 0xffffff) ^ d_size_tags[size_index]);
                     volk_32u_popcnt(&nwrong, wrong_bits);
-                    
-                    if (d_verbose) 
+
+                    if (d_verbose)
                         printf("\tcomparing %x and %x, %i bits are different\n", d_data_reg & 0xffffff,
                                d_size_tags[size_index], nwrong);
 
@@ -157,7 +157,7 @@ namespace gr {
                         add_item_tag(0,  // stream id
                                 abs_out_sample_cnt + i, // sample no
                                 d_key, // frame info
-                                pmt::from_long(NGHAM_CODEWORD_SIZE[size_index]*8), // packet length (unpacked bytes)
+                                pmt::from_long(NGHAM_RS_CODEWORD_SIZE[size_index]*8), // packet length (unpacked bytes)
                                 d_me // block source id
                                 );
                         break;
