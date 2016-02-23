@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Rtl Rx
-# Generated: Tue Feb 16 18:11:28 2016
+# Generated: Wed Feb 17 11:32:06 2016
 ##################################################
 
 if __name__ == '__main__':
@@ -62,18 +62,18 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
+        self._xlat_bandwidth_config_config = ConfigParser.ConfigParser()
+        self._xlat_bandwidth_config_config.read("rtl_rx.conf")
+        try: xlat_bandwidth_config = self._xlat_bandwidth_config_config.getfloat("main", "xlat_bandwidth")
+        except: xlat_bandwidth_config = 10000
+        self.xlat_bandwidth_config = xlat_bandwidth_config
         self._tuner_config_config = ConfigParser.ConfigParser()
         self._tuner_config_config.read("rtl_rx.conf")
         try: tuner_config = self._tuner_config_config.getfloat("main", "tuner")
         except: tuner_config = -10000
         self.tuner_config = tuner_config
         self.xlat_decim = xlat_decim = 8
-        self._xlat_bandwidth_config_config = ConfigParser.ConfigParser()
-        self._xlat_bandwidth_config_config.read("rtl_rx.conf")
-        try: xlat_bandwidth_config = self._xlat_bandwidth_config_config.getfloat("main", "xlat_bandwidth")
-        except: xlat_bandwidth_config = 10000
-        self.xlat_bandwidth_config = xlat_bandwidth_config
-        self.xlat_bandwidth = xlat_bandwidth = 10000
+        self.xlat_bandwidth = xlat_bandwidth = xlat_bandwidth_config
         self.tuner = tuner = tuner_config
         self.samples_per_symbol = samples_per_symbol = 8
         self.samp_rate = samp_rate = 1000000
@@ -83,7 +83,7 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         ##################################################
         # Blocks
         ##################################################
-        self._xlat_bandwidth_range = Range(1000, 50000, 1000, 10000, 200)
+        self._xlat_bandwidth_range = Range(1000, 50000, 1000, xlat_bandwidth_config, 200)
         self._xlat_bandwidth_win = RangeWidget(self._xlat_bandwidth_range, self.set_xlat_bandwidth, "xlat_bandwidth", "counter_slider", float)
         self.top_layout.addWidget(self._xlat_bandwidth_win)
         self._tuner_range = Range(-20000*4, 20000*4, 500, tuner_config, 200)
@@ -141,7 +141,7 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         
         self.rtl2832_source_0.set_auto_gain_mode(False)
         self.rtl2832_source_0.set_relative_gain(True)
-        self.rtl2832_source_0.set_gain(30)
+        self.rtl2832_source_0.set_gain(49)
           
         self.rational_resampler_xxx_0 = filter.rational_resampler_ccc(
                 interpolation=ngham_rate*samples_per_symbol,
@@ -360,7 +360,7 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         
         self._qtgui_const_sink_x_0_win = sip.wrapinstance(self.qtgui_const_sink_x_0.pyqwidget(), Qt.QWidget)
         self.qtgui_layout_4.addWidget(self._qtgui_const_sink_x_0_win)
-        self.nuts_ngham_decoder_0 = nuts.ngham_decoder("packet_len", 1, True, True, True, True)
+        self.nuts_ngham_decoder_0 = nuts.ngham_decoder("packet_len", 1, True, True, True, False)
         self.nuts_ngham_correlator_0 = nuts.ngham_correlator("packet_len", 0, False)
         self.freq_xlating_fir_filter_xxx_0_0 = filter.freq_xlating_fir_filter_ccc(8, (firdes.low_pass(1, samp_rate, samp_rate/2, 1000)), tuner, samp_rate)
         self.freq_xlating_fir_filter_xxx_0 = filter.freq_xlating_fir_filter_ccc(xlat_decim, (firdes.low_pass(1, samp_rate, xlat_bandwidth/2, 1000)), tuner, samp_rate)
@@ -400,6 +400,13 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         event.accept()
 
 
+    def get_xlat_bandwidth_config(self):
+        return self.xlat_bandwidth_config
+
+    def set_xlat_bandwidth_config(self, xlat_bandwidth_config):
+        self.xlat_bandwidth_config = xlat_bandwidth_config
+        self.set_xlat_bandwidth(self.xlat_bandwidth_config)
+
     def get_tuner_config(self):
         return self.tuner_config
 
@@ -414,12 +421,6 @@ class rtl_rx(gr.top_block, Qt.QWidget):
         self.xlat_decim = xlat_decim
         self.qtgui_freq_sink_x_0.set_frequency_range(self.freq+self.tuner, self.samp_rate/self.xlat_decim)
         self.qtgui_waterfall_sink_x_0.set_frequency_range(self.freq, self.samp_rate/self.xlat_decim)
-
-    def get_xlat_bandwidth_config(self):
-        return self.xlat_bandwidth_config
-
-    def set_xlat_bandwidth_config(self, xlat_bandwidth_config):
-        self.xlat_bandwidth_config = xlat_bandwidth_config
 
     def get_xlat_bandwidth(self):
         return self.xlat_bandwidth

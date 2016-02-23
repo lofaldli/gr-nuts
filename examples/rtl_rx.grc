@@ -303,7 +303,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>10000</value>
+      <value>xlat_bandwidth_config</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -916,7 +916,7 @@
     </param>
     <param>
       <key>verbose</key>
-      <value>True</value>
+      <value>False</value>
     </param>
   </block>
   <block>
@@ -2720,7 +2720,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(40, 211)</value>
+      <value>(48, 211)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2732,7 +2732,7 @@
     </param>
     <param>
       <key>gain</key>
-      <value>30</value>
+      <value>49</value>
     </param>
     <param>
       <key>id</key>
