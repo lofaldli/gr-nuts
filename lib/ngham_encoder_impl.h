@@ -37,20 +37,17 @@ namespace gr {
       bool d_pad_for_usrp;
       bool d_printing;
 
+      ngham_tx_pkt pkt;
       reed_solomon* d_rs[NGHAM_SIZES];
-
-      uint8_t d_header[NGHAM_HEADER_SIZE];
-      uint8_t d_rs_codeword[NGHAM_MAX_CODEWORD_SIZE];
 
       uint8_t d_size_index;
       uint16_t d_num_packets;
 
-      //const size_t         d_itemsize;
-      //pdu::vector_type     d_type;
       pmt::pmt_t           d_curr_meta;
       pmt::pmt_t           d_curr_vect;
       size_t               d_curr_len;
 
+      bool get_msg();
       void copy_stream_tags();
 
      protected:

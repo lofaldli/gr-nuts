@@ -21,6 +21,14 @@
 #define NGHAM_SIZE_TAG_MAX_ERROR 6
 namespace gr {
     namespace nuts {
+
+        struct ngham_tx_pkt {
+            uint8_t preamble[NGHAM_PREAMBLE_SIZE];
+            uint8_t sync_word[NGHAM_SYNC_SIZE];
+            uint8_t size_tag[NGHAM_SIZE_TAG_SIZE];
+            uint8_t rs_codeword[NGHAM_MAX_CODEWORD_SIZE];
+        }__attribute__((packed));
+
         const uint8_t NGHAM_RS_DATA_SIZE[NGHAM_SIZES]          = {28, 60, 92, 124, 156, 188, 220};
         const uint8_t NGHAM_RS_DATA_SIZE_FULL[NGHAM_SIZES]     = {31, 63, 95, 127, 159, 191, 223};
         const uint8_t NGHAM_RS_PARITY_SIZE[NGHAM_SIZES]        = {16, 16, 16, 32, 32, 32, 32};
