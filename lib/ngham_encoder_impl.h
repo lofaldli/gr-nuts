@@ -26,8 +26,6 @@
 #include "ngham.h"
 #include "reed_solomon.h"
 
-#define PDU_PORT_ID pmt::mp("in")
-
 namespace gr {
   namespace nuts {
 

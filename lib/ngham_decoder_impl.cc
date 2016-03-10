@@ -39,6 +39,8 @@
 #define STATE_SIZE_TAG_COMPARE 2
 #define STATE_CODEWORD 3
 
+#define PDU_PORT_OUT pmt::mp("out")
+
 namespace gr {
   namespace nuts {
 
@@ -51,9 +53,6 @@ namespace gr {
     struct rs rs_cb_rx[NGHAM_SIZES];
     uint32_t sync_word, size_tag[NGHAM_SIZES];
 
-    /*
-     * The private constructor
-     */
     ngham_decoder_impl::ngham_decoder_impl(const std::string& len_tag_key, int threshold, bool rs_decode, bool descramble, bool printing, bool verbose)
       : gr::sync_block("ngham_decoder",
               gr::io_signature::make(1, 1, sizeof(uint8_t)),
@@ -66,7 +65,7 @@ namespace gr {
       d_verbose(verbose),
       d_num_packets(0)
     {
-      message_port_register_out(pmt::mp("out"));
+      message_port_register_out(PDU_PORT_OUT);
 
       enter_sync_search();
 
@@ -90,9 +89,6 @@ namespace gr {
       }
     }
 
-    /*
-     * Our virtual destructor.
-     */
     ngham_decoder_impl::~ngham_decoder_impl() {
         for (uint8_t i=0; i<NGHAM_SIZES; i++) {
             delete d_rs[i];
@@ -223,7 +219,7 @@ namespace gr {
                         if (success) {
                             // post payload data to message queue
                             pmt::pmt_t pdu(pmt::cons(pmt::PMT_NIL, pmt::make_blob(d_codeword+1, d_payload_len)));
-                            message_port_pub(pmt::mp("out"), pdu);
+                            message_port_pub(PDU_PORT_OUT, pdu);
 
                             d_num_packets++;
                             if (d_printing)

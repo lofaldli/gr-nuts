@@ -29,12 +29,10 @@
 #include <gnuradio/io_signature.h>
 #include "ngham_encoder_impl.h"
 
-#include "fec-3.0.1/fec.h"
-#include "fec-3.0.1/char.h"
-#include "fec-3.0.1/rs-common.h"
-
 #include "ngham.h"
 #include "reed_solomon.h"
+
+#define PDU_PORT_IN pmt::mp("in")
 
 namespace gr {
   namespace nuts {
@@ -58,7 +56,7 @@ namespace gr {
       d_num_packets(0),
       d_curr_len(0)
     {
-      message_port_register_in(PDU_PORT_ID);
+      message_port_register_in(PDU_PORT_IN);
 
       // initialize rs tables
       for (uint8_t i=0; i<NGHAM_SIZES; i++)
@@ -69,13 +67,19 @@ namespace gr {
       memcpy(&d_header[NGHAM_PREAMBLE_SIZE], NGHAM_SYNC, NGHAM_SYNC_SIZE);
     }
 
+    ngham_encoder_impl::~ngham_encoder_impl() {
+        for (uint8_t i=0; i<NGHAM_SIZES; i++) {
+            delete d_rs[i];
+        }
+    }
+
     int
     ngham_encoder_impl::calculate_output_stream_length(const gr_vector_int &ninput_items)
     {
-      if (d_curr_len == 0) return 0;
+      if (d_curr_len != 0) return 0;
 
       // NOTE this part is copied from gr-blocks/lib/pdu_to_tagged_stream_impl.cc
-      pmt::pmt_t msg(delete_head_blocking(PDU_PORT_ID, 100));
+      pmt::pmt_t msg(delete_head_blocking(PDU_PORT_IN, 100));
       if (msg.get() == NULL) {
           return 0;
       }
