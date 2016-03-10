@@ -209,7 +209,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(80, 203)</value>
+      <value>(48, 195)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -264,7 +264,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(80, 267)</value>
+      <value>(48, 259)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -311,7 +311,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(552, 267)</value>
+      <value>(520, 259)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -347,6 +347,49 @@
     </param>
   </block>
   <block>
+    <key>blocks_unpack_k_bits_bb</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(680, 259)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blocks_unpack_k_bits_bb_0</value>
+    </param>
+    <param>
+      <key>k</key>
+      <value>8</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+  </block>
+  <block>
     <key>blocks_vector_source_x</key>
     <param>
       <key>alias</key>
@@ -366,7 +409,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(152, 123)</value>
+      <value>(120, 115)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -402,7 +445,7 @@
     </param>
     <param>
       <key>vector</key>
-      <value>data*2</value>
+      <value>data</value>
     </param>
   </block>
   <block>
@@ -429,7 +472,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(720, 235)</value>
+      <value>(832, 227)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -461,7 +504,7 @@
     </param>
     <param>
       <key>verbose</key>
-      <value>False</value>
+      <value>True</value>
     </param>
   </block>
   <block>
@@ -484,7 +527,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(336, 243)</value>
+      <value>(304, 235)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -533,6 +576,12 @@
   </connection>
   <connection>
     <source_block_id>blocks_throttle_0</source_block_id>
+    <sink_block_id>blocks_unpack_k_bits_bb_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_unpack_k_bits_bb_0</source_block_id>
     <sink_block_id>nuts_ngham_decoder_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
