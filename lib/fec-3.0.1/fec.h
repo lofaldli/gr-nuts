@@ -8,8 +8,6 @@
 #ifndef _FEC_H_
 #define _FEC_H_
 
-extern "C" {
-
 /* General purpose RS codec, 8-bit symbols */
 void encode_rs_char(void *rs,unsigned char *data,unsigned char *parity);
 int decode_rs_char(void *rs,unsigned char *data,int *eras_pos,
@@ -19,10 +17,4 @@ void *init_rs_char(int symsize,int gfpoly,
 		   int pad);
 void free_rs_char(void *rs);
 
-
-
-}
 #endif /* _FEC_H_ */
-
-
-

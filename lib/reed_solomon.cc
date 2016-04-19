@@ -3,9 +3,11 @@
 #include <stdio.h>
 #include "ngham.h"
 
+extern "C" {
 #include "fec-3.0.1/fec.h"
 #include "fec-3.0.1/char.h"
 #include "fec-3.0.1/rs-common.h"
+}
 
 #define RS_BITS_PER_SYM 8
 #define RS_GFPOLY 0x187
@@ -18,8 +20,8 @@ namespace gr {
         reed_solomon::reed_solomon(uint8_t parity_len, uint8_t padding_len)
         {
             // TODO parity_len must be 16 or 32
-            d_rs = init_rs_char(RS_BITS_PER_SYM, RS_GFPOLY, RS_FCR, RS_PRIM, parity_len, 0);
-            ((struct rs*)d_rs)->pad = padding_len; // eww..
+            d_rs = init_rs_char(RS_BITS_PER_SYM, RS_GFPOLY, RS_FCR, RS_PRIM, parity_len, padding_len);
+            //((struct rs*)d_rs)->pad = padding_len; // eww..
         }
         reed_solomon::~reed_solomon()
         {
