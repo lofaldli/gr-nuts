@@ -63,7 +63,8 @@ namespace gr {
       d_descramble(descramble),
       d_printing(printing),
       d_verbose(verbose),
-      d_num_packets(0)
+      d_num_frames_received(0),
+      d_num_frames_decoded(0)
     {
       message_port_register_out(PDU_PORT_OUT);
 
@@ -195,6 +196,7 @@ namespace gr {
                         if (d_verbose)
                             printf("\tcomparing %x and %x, %i bits are different\n", d_data_reg & 0x00ffffff, size_tag[d_size_index], nwrong);
                         if (nwrong <= d_threshold) {
+                            d_num_frames_received++;
                             enter_codeword();
                             break;
                         }
@@ -221,9 +223,9 @@ namespace gr {
                             pmt::pmt_t pdu(pmt::cons(pmt::PMT_NIL, pmt::make_blob(d_codeword+1, d_payload_len)));
                             message_port_pub(PDU_PORT_OUT, pdu);
 
-                            d_num_packets++;
-                            if (d_printing)
-                                print_bytes(d_codeword, d_codeword_length);
+                            d_num_frames_decoded++;
+                            if (d_verbose) printf("frames received %li\nframes decoded %li\n", d_num_frames_received, d_num_frames_decoded);
+                            if (d_printing) print_bytes(d_codeword, d_codeword_length);
                         }
                         enter_sync_search();
                         break;

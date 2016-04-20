@@ -43,7 +43,8 @@ namespace gr {
       uint8_t d_codeword_length;
       uint8_t d_codeword[NGHAM_MAX_CODEWORD_SIZE];
       uint8_t d_bit_counter;
-      uint16_t d_num_packets;
+      uint64_t d_num_frames_received;
+      uint64_t d_num_frames_decoded;
       uint8_t d_payload_len;
       reed_solomon *d_rs[NGHAM_SIZES];
 
