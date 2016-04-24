@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2015 André Løfaldli.
+ * Copyright 2015, 2016 André Løfaldli.
  *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

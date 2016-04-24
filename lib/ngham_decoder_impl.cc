@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2015 André Løfaldli.
+ * Copyright 2015, 2016 André Løfaldli.
  *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -156,9 +156,10 @@ namespace gr {
         uint16_t received_crc = (d_codeword[d_payload_len+1] << 8) | d_codeword[d_payload_len+2];
         uint16_t calculated_crc = calc_crc(d_codeword, d_payload_len+1);
         if (calculated_crc != received_crc) {
-            if (d_verbose)
-                printf("crc failed\n");
+            if (d_verbose) printf("\tcrc failed\n");
             return false;
+        } else {
+            if (d_verbose) printf("\tcrc ok\n")
         }
 
         return true;
