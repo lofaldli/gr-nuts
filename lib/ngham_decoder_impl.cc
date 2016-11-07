@@ -159,7 +159,7 @@ namespace gr {
             if (d_verbose) printf("\tcrc failed\n");
             return false;
         } else {
-            if (d_verbose) printf("\tcrc ok\n")
+            if (d_verbose) printf("\tcrc ok\n");
         }
 
         return true;
